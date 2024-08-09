@@ -2,10 +2,10 @@
 With Flakes, Home-manager, Lanzaboot, nixos-hardware and nh (nix-helper).
 
 ## Components
-|                          | Promethium                         | Zirconium                          |
+|                          | Promethium                         | Zirconium (🚧in build)            |
 |--------------------------|------------------------------------|------------------------------------|
 | **Hardware**             | Framework Laptop 13" AMD           | Custom tower                       |
-| **Hardware**             | BTRFS Pool                          | BTRFS Pool                         |
+| **Hardware**             | BTRFS Pool                         | BTRFS Pool                         |
 | **Secure boot**          | Lanzaboot                          | Lanzaboot                          |
 | **Kernel**               | Zen Linux                          | Linux                              |
 | **Window Manager**       | Hyprland                           | Hyprland                           |
@@ -28,13 +28,6 @@ With Flakes, Home-manager, Lanzaboot, nixos-hardware and nh (nix-helper).
 | **Cursor**               | Bibata cursors (Bibata-Modern-Ice) | Bibata cursors (Bibata-Modern-Ice) |
 
 ## Installation:
-### Temporary network setup:
-  - ```add_network```
-  - ```set_network 0 ssid "myhomenetwork"```
-  - ```set_network 0 psk "mypassword"```
-  - ```set_network 0 key_mgmt WPA-PSK```
-  - ```enable_network 0```
-
 ### Volumes creation with Disko
 - ```curl https://raw.githubusercontent.com/Enkre7/nixos-config/main/tools/disko.nix -o /tmp/disko.nix```
 - ```lsblk``` to find the disk path
