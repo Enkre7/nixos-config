@@ -2,7 +2,7 @@
 With Flakes, Home-manager, Lanzaboot, nixos-hardware and nh (nix-helper).
 
 ## Components
-|                          | Promethium                         | Zirconium (🚧in build)            |
+|                          | Promethium (🚧in build)            | Zirconium (🚧in build)            |
 |--------------------------|------------------------------------|------------------------------------|
 | **Hardware**             | Framework Laptop 13" AMD           | Custom tower                       |
 | **Hardware**             | BTRFS Pool                         | BTRFS Pool                         |
