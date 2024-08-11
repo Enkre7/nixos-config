@@ -53,7 +53,7 @@ _Set keyboard language: ```sudo loadkeys LANGUAGE_ISO3166-1```_
 - ```nix
   sudo nix --experimental-features "nix-command flakes" \
   run github:nix-community/disko -- \
-  --mode disko /tmp/disko.nix \
+  --mode disko /tmp/nixos/tools/disko.nix \
   --arg device '"/dev/$DISKNAME"'
   ```
 - ```lsblk /dev/$DISKNAME --fs``` to show disk formated with filesystem
