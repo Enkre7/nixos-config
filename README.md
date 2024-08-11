@@ -75,11 +75,12 @@ _Ask for password twice, first is for root second for specified user._
 
 ## After installation:
 ### Setup the config on the machine
-***To use the fingerprint sensor:*** ```sudo fprintd-enroll <user> & fprintd-verify```
+***To use the fingerprint sensor:*** ```sudo fprintd-enroll USERNAME && fprintd-verify```
 
 ***To use lanzaboot:***
-  - Uncomment lanzaboot.nix in /nixos/host/HOSTNAME/config/default.nix
   - ```sudo sbctl create-keys```
+  - Uncomment lanzaboot.nix in /nixos/host/HOSTNAME/config/default.nix
+  - Rebuild configuration
   - ```sudo sbctl enroll-keys --microsoft```
   - reboot
   -  ```bootctl status```
@@ -87,3 +88,4 @@ _Ask for password twice, first is for root second for specified user._
 ***To use impermanence:***
   - Uncomment impermanence.nix in /nixos/host/HOSTNAME/config/default.nix
   - Uncomment also impermanence.nix in /nixos/host/HOSTNAME/home/default.nix
+  - Rebuild configuration
