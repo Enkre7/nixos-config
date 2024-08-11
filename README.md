@@ -30,11 +30,13 @@ With Flakes, Home-manager, Lanzaboot, nixos-hardware and nh (nix-helper).
 ## Installation:
 You need to boot the minimal nixos iso.
 
+_Set keyboard language: ```sudo loadkeys LANGUAGE_ISO3166-1```
+
 ***1. Setup network:***
 
 - A - Use an ethenet cable
 - B - Setup a wifi interface:
-  - ```ifconfig``` to list the disponibles interfaces (ex: wlp0s1)
+  - ```ifconfig``` to list the disponibles interfaces (ex: wlp1s0)
   - ```bash
     read -p "Enter wifi interface: " INTERFACE
     read -p "Enter wifi SSID: " WIFI_SSID
