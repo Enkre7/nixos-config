@@ -4,7 +4,7 @@
   imports = [
     inputs.hyprland.homeManagerModules.default
     ../variables.nix
-    ./impermanence.nix
+    #./impermanence.nix
     ./wlogout.nix
     ./waybar.nix
     ./light.nix
