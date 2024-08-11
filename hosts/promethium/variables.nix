@@ -15,7 +15,7 @@
     hostname = "promethium";
     user = "enkre";
     flakePath = "/etc/nixos";
-    dotfilesPath = "${config.flakePath}/.dotfiles";
+    dotfilesPath = "${config.flakePath}/dotfiles";
     wallpaper = "${config.dotfilesPath}/wallpapers/nord-light-mountains.png"; # only png
     stylePolarity = "light";
     gitUsername = "Enkre7";
