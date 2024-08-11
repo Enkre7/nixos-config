@@ -5,7 +5,7 @@
     ../variables.nix
     ./hardware.nix
     ./battery.nix
-    ./lanzaboot.nix
+    #./lanzaboot.nix
     ./networking.nix
     #./impermanence.nix
     ./virtualisation.nix
