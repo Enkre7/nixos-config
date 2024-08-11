@@ -7,7 +7,7 @@
     ./battery.nix
     ./lanzaboot.nix
     ./networking.nix
-    ./impermanence.nix
+    #./impermanence.nix
     ./virtualisation.nix
     ./locale.nix
     ./sound.nix
