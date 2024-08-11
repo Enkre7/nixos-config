@@ -81,8 +81,9 @@ _Ask for password twice, first is for root second for specified user._
   - ```sudo sbctl create-keys```
   - Uncomment lanzaboot.nix in /nixos/host/HOSTNAME/config/default.nix
   - Rebuild configuration
+  - reboot and erase precedent boot settings
   - ```sudo sbctl enroll-keys --microsoft```
-  - reboot
+  - reboot and force secureboot
   -  ```bootctl status```
 
 ***To use impermanence:***
