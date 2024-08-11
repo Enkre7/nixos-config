@@ -83,5 +83,5 @@ _Ask for password twice, first is for root second for specified user._
   -  ```bootctl status```
 
 ***To use impermanence:***
-Uncomment impermanence.nix in /nixos/host/HOSTNAME/config/default.nix
-Uncomment impermanence.nix in /nixos/host/HOSTNAME/home/default.nix
+  - Uncomment impermanence.nix in /nixos/host/HOSTNAME/config/default.nix
+  - Uncomment also impermanence.nix in /nixos/host/HOSTNAME/home/default.nix
