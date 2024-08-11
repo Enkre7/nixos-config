@@ -30,7 +30,7 @@ With Flakes, Home-manager, Lanzaboot, nixos-hardware and nh (nix-helper).
 ## Installation:
 You need to boot the minimal nixos iso.
 
-_Set keyboard language: ```sudo loadkeys LANGUAGE_ISO3166-1```
+_Set keyboard language: ```sudo loadkeys LANGUAGE_ISO3166-1```_
 
 ***1. Setup network:***
 
