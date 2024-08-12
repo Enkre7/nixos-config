@@ -3,9 +3,7 @@
 {
   programs.firefox = {
     enable = true;
-    languagePacks = [ "fr" ];
     policies = {
-      RequestedLocales = "fr,en_US";
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
       DontCheckDefaultBrowser = true;
@@ -67,6 +65,8 @@
         return-youtube-dislikes
        ];
       settings = {
+        "intl.locale.requested" = "fr,en_US";
+        
         # Disable first-run stuff
         "browser.aboutConfig.showWarning" = false;
         "browser.disableResetPrompt" = true;

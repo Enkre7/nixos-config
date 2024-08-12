@@ -1,10 +1,6 @@
 { lib, pkgs, inputs, ... }:
 
 {
-  imports = [
-    inputs.impermanence.nixosModules.home-manager.impermanence
-  ];
-
   # Clean boot script
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     mkdir /btrfs_tmp
@@ -39,16 +35,36 @@
   environment.persistence."/persist/system" = {
     hideMounts = true;
     directories = [
-      "/etc/nixos"
-      "/var/log"
-      "/var/lib/bluetooth"
-      "/var/lib/nixos"
-      "/var/lib/systemd/coredump"
-      "/etc/NetworkManager/system-connections"
-      { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
+      { directory = "/nixos"; user = "root"; group = "root"; mode = "0755"; }
+      { directory = "/var/lib/nixos"; user = "root"; group = "root"; mode = "0755"; }
+      { directory = "/var/log"; user = "root"; group = "root"; mode = "0755"; }
+      { directory = "/var/lib/systemd"; user = "root"; group = "root"; mode = "0755"; }
+      { directory = "/var/tmp"; user = "root"; group = "root"; mode = "1777"; }
+      { directory = "/var/spool"; user = "root"; group = "root"; mode = "0777"; }
+      { directory = "/tmp"; user = "root"; group = "root"; mode = "1777"; }      
+      
+      # Mullvad
+      { directory = "/etc/mullvad-vpn"; user = "root"; group = "root"; mode = "0700"; }
+      { directory = "/var/cache/mullvad-vpn"; user = "root"; group = "root"; mode = "0755"; }
+
+      # libvirt / Quemu
+      { directory = "/var/lib/libvirt"; user = "root"; group = "root"; mode = "0755"; }
+      { directory = "/var/lib/swtpm-localca"; user = "root"; group = "root"; mode = "0750"; }
+      
+      # DHCP
+      { directory = "/var/db/dhcpcd"; user = "root"; group = "root"; mode = "0755"; }
+      
+      # Printing
+      { directory = "/var/lib/cups"; user = "root"; group = "root"; mode = "0755"; }
+
+      # Sudo
+      { directory = "/var/db/sudo/lectured"; user = "root"; group = "root"; mode = "0700"; }
     ];
     files = [
       "/etc/machine-id"
+      "/etc/adjtime"
+      #{ file = "/etc/machine-id"; parentDirectory = { mode = "u=r,g=r,o=r"; }; }
+      #{ file = "/etc/adjtime"; parentDirectory = { mode = "u=rw,g=r,o=r"; }; }
       { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
   };

@@ -23,24 +23,6 @@
   };
   services.fwupd.enable = true; #bios upgrade
 
-  /*##########
-  # To remove with disko implementation
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/de20b016-e630-4840-b250-b6a1fd5a4e06";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/D615-0F95";
-    fsType = "vfat";
-    options = [ "fmask=0022" "dmask=0022" ];
-  };
-  
-  swapDevices = [];
-  # compresses half the ram for use as swap
-  zramSwap.enable = true;
-  ##########*/
-
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

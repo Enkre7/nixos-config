@@ -14,7 +14,7 @@
   config = {
     hostname = "promethium";
     user = "enkre";
-    flakePath = "/etc/nixos";
+    flakePath = "/persist/system/nixos";
     dotfilesPath = "${config.flakePath}/dotfiles";
     wallpaper = "${config.dotfilesPath}/wallpapers/nord-light-mountains.png"; # only png
     stylePolarity = "light";
