@@ -18,6 +18,7 @@
       ".ssh"
       ".nixops"
       ".local"
+      ".config"
       ".mozilla" # To modify
       {
         directory = ".local/share/Steam";

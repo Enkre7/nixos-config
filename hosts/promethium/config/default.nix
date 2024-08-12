@@ -5,7 +5,7 @@
     ../variables.nix
     ./hardware.nix
     ./battery.nix
-    #./lanzaboot.nix
+    ./lanzaboot.nix
     ./networking.nix
     #./impermanence.nix
     ./virtualisation.nix
@@ -46,8 +46,6 @@
     clean.extraArgs = "--keep-since 5d --keep 3";
     flake = config.flakePath; # Flake location
   };
-  
-  programs.firefox.languagePacks = [ "fr"];
 
   # Tools & libs
   environment.systemPackages = with pkgs; [
