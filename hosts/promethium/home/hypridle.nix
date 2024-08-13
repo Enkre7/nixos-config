@@ -14,7 +14,7 @@
       listener = [ 
         # Screenlock
         {
-          timeout = 180; # in seconds
+          timeout = 240; # in seconds
           on-timeout = "hyprlock"; # command to run when timeout has passed
         }
         
