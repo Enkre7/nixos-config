@@ -1,8 +1,9 @@
 # My personnal NixOS config
 With Flakes, Home-manager, Lanzaboot, nixos-hardware and nh (nix-helper).
+Contain also a custom minimal ISO of nixos to facilitate installation via predefined alias.
 
 ## Components
-|                          | Promethium (🚧in build)            | Zirconium (🚧in build)            |
+|                          | Promethium (🚧in build)            | Zirconium (🚧in build)             |
 |--------------------------|------------------------------------|------------------------------------|
 | **Hardware**             | Framework Laptop 13" AMD           | Custom tower                       |
 | **Hardware**             | BTRFS Pool                         | BTRFS Pool                         |
