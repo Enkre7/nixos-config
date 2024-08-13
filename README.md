@@ -90,3 +90,8 @@ _Ask for password twice, first is for root second for specified user._
   - Uncomment impermanence.nix in /nixos/host/HOSTNAME/config/default.nix
   - Uncomment also impermanence.nix in /nixos/host/HOSTNAME/home/default.nix
   - Rebuild configuration
+
+***To use git:***
+  - Copy the pubilc and private ssh keys in ~/.ssh
+  - Reload the sshd service
+  - ```git remote set-url origin git@github.com:Enkre7/nixos-config.git``` in nixos directory

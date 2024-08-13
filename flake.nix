@@ -53,6 +53,13 @@
           inputs.impermanence.nixosModules.impermanence
         ];
       };
+      # Custom ISO image
+      customIso = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/customIso/configuration.nix
+        ];
+      };
     };
   };
 }
