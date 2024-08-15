@@ -35,7 +35,7 @@
       zirconium = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/zirconium/config/default.nix
+          ./hosts/zirconium/config.nix
 
           # Hardware configuration
           inputs.disko.nixosModules.default
@@ -56,7 +56,7 @@
       promethium = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/promethium/config/default.nix
+          ./hosts/promethium/config.nix
           
           # Hardware configuration
           inputs.disko.nixosModules.default

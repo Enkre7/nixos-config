@@ -4,7 +4,7 @@
    stylix = {
     enable = true;
     autoEnable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/nord-light.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.styleTheme}.yaml";
     image = config.wallpaper;
     polarity = config.stylePolarity;
     cursor = {
