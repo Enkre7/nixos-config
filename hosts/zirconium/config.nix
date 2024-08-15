@@ -32,6 +32,14 @@
     extraSpecialArgs = { inherit inputs; };
     users.${config.user} = import ./home.nix;
   };
+  
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "thunderbolt"
+    "usb_storage"
+    "sd_mod"  
+  ];
 
   # Tools & libs
   environment.systemPackages = with pkgs; [

@@ -21,31 +21,30 @@
       wpa_passphrase '$WIFI_SSID' '$WIFI_PASSWORD' | sudo wpa_supplicant -B -i $INTERFACE -c /dev/stdin
     '';
     
-    setup-repo = ''
-      nix-shell -p git --command "git clone https://github.com/Enkre7/nixos-config /tmp/nixos"
-    '';
+    setup-repo = "git clone https://github.com/Enkre7/nixos-config /tmp/nixos";
     
     setup-disk = ''
       lsblk && \
       read -p "Enter DISKNAME to format: " DISKNAME && \
+      DISKPATH="/dev/$DISKNAME" && \
       sudo nix --experimental-features "nix-command flakes" \
         run github:nix-community/disko -- \
         --mode disko /tmp/nixos/tools/disko.nix \
-        --arg device '"/dev/$DISKNAME"' && \
-      sleep 0.2s && \
-      lsblk /dev/$DISKNAME --fs
-    ''; # need to fix diskname variable not being passed to disko command
+        --argstr device $DISKPATH && \
+      lsblk $DISKPATH --fs
+    '';
     
     setup-dir = ''
       sudo mkdir -p /mnt/persist/system && \
       sudo mkdir -p /mnt/persist/home && \
-      sudo cp -r /tmp/nixos /mnt/persist/system/
+      sudo cp -r /tmp/nixos /mnt/persist/system/ && \
+      ls -lR /mnt/persist/system
     '';
     
     setup-nixos = ''
       read -p "Enter flake's config hostname: " HOSTNAME && \
-      read -p "Enter username: " USERNAME && \
-      nix-shell -p git --command "sudo nixos-install --flake /mnt/persist/system/nixos#$HOSTNAME" && \
+      read -p "Enter lowercase username: " USERNAME && \
+      sudo nixos-install --flake /mnt/persist/system/nixos#$HOSTNAME && \
       passwd $USERNAME
     '';
   }; 
