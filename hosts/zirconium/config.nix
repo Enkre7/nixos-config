@@ -2,6 +2,7 @@
 
 {
   imports = [
+    inputs.home-manager.nixosModules.default
     ../../global-variables.nix
     ../../configModules/nixos.nix
     ../../configModules/hardware.nix
@@ -14,7 +15,6 @@
     ../../configModules/sound.nix
     ../../configModules/graphics.nix
     ../../configModules/hyprland.nix
-    ../../configModules/home-manager.nix
     ../../configModules/users.nix
     ../../configModules/shell.nix
     ../../configModules/terminal.nix
@@ -27,6 +27,11 @@
     ../../configModules/printing.nix
     ../../configModules/games.nix
   ];
+
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users.${config.user} = import ./home.nix;
+  };
 
   # Tools & libs
   environment.systemPackages = with pkgs; [
