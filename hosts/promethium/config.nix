@@ -2,6 +2,7 @@
 
 {
   imports = [
+    inputs.home-manager.nixosModules.default
     ../../global-variables.nix
     ../../configModules/nixos.nix
     ../../configModules/hardware.nix
@@ -14,8 +15,6 @@
     ../../configModules/sound.nix
     ../../configModules/graphics.nix
     ../../configModules/hyprland.nix
-    inputs.home-manager.nixosModules.default
-    ../../configModules/home-manager.nix
     ../../configModules/users.nix
     ../../configModules/shell.nix
     ../../configModules/terminal.nix
