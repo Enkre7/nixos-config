@@ -39,7 +39,7 @@
 
           # Hardware configuration
           inputs.disko.nixosModules.default
-          (import ./tools/disko.nix { device = "/dev/nvme0n1"; };
+          (import ./tools/disko.nix { device = "/dev/nvme0n1"; })
           inputs.nixos-hardware.nixosModules.common-cpu-amd
           inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
           inputs.nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
