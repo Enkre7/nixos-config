@@ -2,25 +2,24 @@
 
 {
   imports = [
-    inputs.hyprland.homeManagerModules.default
-    ../variables.nix
-    #./impermanence.nix
-    ./wlogout.nix
-    ./waybar.nix
-    ./light.nix
-    ./nix-index.nix
-    ./notification.nix
-    ./capture.nix
-    ./hyprland.nix
-    ./hyprlock.nix
-    ./hypridle.nix
-    ./firefox.nix
-    ./git.nix
-    ./vscode.nix
-    ./shell.nix
-    ./terminal.nix
-    ./kdeconnect.nix
-    ./wofi.nix
+    ../../global-variables.nix
+    #../../homeModules/impermanence.nix
+    ../../homeModules/wlogout.nix
+    ../../homeModules/waybar.nix
+    ../../homeModules/light.nix
+    ../../homeModules/nix-index.nix
+    ../../homeModules/notification.nix
+    ../../homeModules/capture.nix
+    ../../homeModules/hyprland.nix
+    ../../homeModules/hyprlock.nix
+    ../../homeModules/hypridle.nix
+    ../../homeModules/firefox.nix
+    ../../homeModules/git.nix
+    ../../homeModules/vscode.nix
+    ../../homeModules/shell.nix
+    ../../homeModules/terminal.nix
+    ../../homeModules/kdeconnect.nix
+    ../../homeModules/wofi.nix
   ];
 
   home.username = config.user;
@@ -32,9 +31,9 @@
   stylix.targets.kde.enable = false;
   stylix.targets.wofi.enable = false;
     
-  programs = {
-    home-manager.enable = true;
-    mpv = {
+  programs.home-manager.enable = true;
+  
+  programs.mpv = {
       enable = true;
       scripts = [pkgs.mpvScripts.mpris];
     };

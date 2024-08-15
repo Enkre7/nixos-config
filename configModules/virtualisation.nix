@@ -4,7 +4,8 @@
   # System Management Tool
   programs.dconf.enable = true;
 
-  # Qemu
+  # Libvirtd
+  boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
   virtualisation = {
     libvirtd = {
       enable = true;

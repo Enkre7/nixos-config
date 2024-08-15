@@ -12,15 +12,16 @@
       efi.canTouchEfiVariables = true;
     };
     kernelPackages = pkgs.linuxPackages_zen;
-    kernelModules = [ "kvm-amd" ];
     kernelParams = [];
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
     extraModulePackages = [];
     consoleLogLevel = 3;
   };
-  services.fwupd.enable = true; #bios upgrade
+  # Bios upgrade
+  services.fwupd.enable = true;
 
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
