@@ -11,7 +11,6 @@
   };
   
   # Graphics
-  #services.xserver.videoDrivers = ["amgpu"];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;

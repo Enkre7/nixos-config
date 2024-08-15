@@ -14,6 +14,7 @@
     ../../configModules/sound.nix
     ../../configModules/graphics.nix
     ../../configModules/hyprland.nix
+    inputs.home-manager.nixosModules.default
     ../../configModules/home-manager.nix
     ../../configModules/users.nix
     ../../configModules/shell.nix
@@ -27,6 +28,11 @@
     ../../configModules/printing.nix
     ../../configModules/games.nix
   ];
+
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users.${config.user} = import ./home.nix;
+  };
 
   # Tools & libs
   environment.systemPackages = with pkgs; [

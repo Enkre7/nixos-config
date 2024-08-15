@@ -27,7 +27,7 @@
     umount /btrfs_tmp
   '';
 
-  # Permit impermanence to home-manager directories
+  # Allow impermanence to home-manager directories
   programs.fuse.userAllowOther = true;
 
   # Persistance on dirs & files

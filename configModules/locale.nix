@@ -1,10 +1,13 @@
 { ... }:
 
 {
+  # Geoloaction
   location.provider = "geoclue2";
   services.geoclue2.enable = true;
   services.geoclue2.enableWifi = true;
+  
   time.timeZone = "Europe/Paris";
+  
   i18n.defaultLocale = "fr_FR.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "fr_FR.UTF-8";

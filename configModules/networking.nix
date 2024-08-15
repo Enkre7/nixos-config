@@ -1,10 +1,14 @@
 { config, pkgs, ... }: 
 
 {
-  networking.hostName = config.hostname;
-  networking.networkmanager = {
-    enable = true;
-    wifi.powersave = false;
+  networking = {
+    hostName = config.hostname;
+    networkmanager = {
+      enable = true;
+      wifi.powersave = false;
+    };
+    useDHCP = lib.mkDefault true;
+    # interfaces.wlp1s0.useDHCP = lib.mkDefault true;
   };
   
   # Network discovery
@@ -28,7 +32,8 @@
   services.resolved.enable = true;
 
   services.tailscale.enable = true; 
- 
+  
+   
   # SSH
   services.openssh = {
     enable = true;
