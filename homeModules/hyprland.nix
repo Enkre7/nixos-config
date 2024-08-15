@@ -166,7 +166,7 @@ in
 	",XF86AudioLowerVolume, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 | wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
 	# Screen Brightness
 	",XF86MonBrightnessDown, exec, brightnessctl set 10%-"
-	",XF86MonBrightnessUP, exec, brightnessctl set +10%"
+	",XF86MonBrightnessUP, exec, brightnessctl set 10%+"
       ];
       
       bindm = [

@@ -3,7 +3,7 @@
 {
   imports = [
     inputs.home-manager.nixosModules.default
-    ../../global-variables.nix
+    ./variables.nix
     ../../configModules/nixos.nix
     ../../configModules/hardware.nix
     ../../configModules/battery.nix

@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../global-variables.nix
+    ./variables.nix
     #../../homeModules/impermanence.nix
     ../../homeModules/wlogout.nix
     ../../homeModules/waybar.nix
