@@ -1,4 +1,5 @@
 { config, pkgs, lib, inputs, ... }:
+
 let
   stylix = config.lib.stylix.colors.withHashtag;
   betterTransition = "all 0.3s cubic-bezier(.55,-0.68,.48,1.682)";
@@ -104,6 +105,7 @@ with lib;
           tooltip = false;
           format = "";
           on-click = "wlogout";
+          on-click-right = "wofi";
         };
         "idle_inhibitor" = {
           format = "{icon}";
@@ -130,7 +132,7 @@ with lib;
     style = concatStrings [
       ''
         * {
-          font-size: 1rem;
+          font-size: 0.8rem;
           border-radius: 0px;
           border: none;
           font-family: JetBrainsMono Nerd Font Mono;

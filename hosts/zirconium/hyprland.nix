@@ -27,8 +27,8 @@ in
   wayland.windowManager.hyprland = {
     enable = true;    
     settings = {
-      monitor = "eDP-1,highres,auto,2";
-      xwayland.force_zero_scaling = false;
+      monitor = ",highrr,auto,1.333333";
+      #xwayland.force_zero_scaling = false;
 
       "$terminal" = "kitty";
       "$fileManager" = "thunar";
