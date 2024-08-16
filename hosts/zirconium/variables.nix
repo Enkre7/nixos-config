@@ -2,6 +2,7 @@
 
 {
   options = with lib; with types; {
+    version = mkOption { type = str; };
     hostname = mkOption { type = str; };
     user = mkOption { type = str; };
     flakePath = mkOption { type = str; };
@@ -14,6 +15,7 @@
   };
   
   config = {
+    version = "24.11";
     hostname = "zirconium";
     user = "enkre";
     flakePath = "/persist/system/nixos";

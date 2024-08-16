@@ -23,10 +23,10 @@
 
   home.username = config.user;
   home.homeDirectory = "/home/${config.user}";
-  home.stateVersion = "24.05";
+  home.stateVersion = config.version;
   nixpkgs.config.allowUnfreePredicate = _: true;
-  
-  stylix.autoEnable = true;
+  programs.home-manager.enable = true;  
+
   stylix.targets.kde.enable = false;
   stylix.targets.wofi.enable = false;
   
@@ -35,8 +35,8 @@
     general.gaps_in = lib.mkForce 4;
     general.gaps_out = lib.mkForce 7;
   }; 
-    
-  programs.home-manager.enable = true;
+  
+  xsession.numlock.enable = true;
   
   programs.mpv = {
       enable = true;
@@ -47,7 +47,6 @@
     webcord
     meld #git diff/merge tool
     gnome-calculator
-    #calcure # Calendar
     nextcloud-client
     libreoffice-qt
     qimgv

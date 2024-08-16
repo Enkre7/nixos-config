@@ -24,7 +24,7 @@
 
   home.username = config.user;
   home.homeDirectory = "/home/${config.user}";
-  home.stateVersion = "24.05";
+  home.stateVersion = config.version;
   nixpkgs.config.allowUnfreePredicate = _: true;
   
   stylix.autoEnable = true;
@@ -42,7 +42,6 @@
     webcord
     meld #git diff/merge tool
     gnome-calculator
-    #calcure # Calendar
     nextcloud-client
     libreoffice-qt
     qimgv

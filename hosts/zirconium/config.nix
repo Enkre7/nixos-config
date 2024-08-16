@@ -33,7 +33,7 @@
     extraSpecialArgs = { inherit inputs; };
     users.${config.user} = import ./home.nix;
   };
-
+  system.stateVersion = config.version;
   
   boot.initrd.availableKernelModules = [
     "nvme"
@@ -60,7 +60,5 @@
     dirbuster
     dirstalk
   ];
-
-  system.stateVersion = "24.05";
 }
 
