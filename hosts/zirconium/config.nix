@@ -22,6 +22,7 @@
     ../../configModules/style.nix
     ../../configModules/security.nix
     ../../configModules/fingerprint.nix
+    ../../configModules/rgb.nix
     ../../configModules/yubikey.nix
     ../../configModules/file-manager.nix
     ../../configModules/printing.nix
@@ -32,6 +33,7 @@
     extraSpecialArgs = { inherit inputs; };
     users.${config.user} = import ./home.nix;
   };
+
   
   boot.initrd.availableKernelModules = [
     "nvme"
@@ -42,13 +44,6 @@
     "sd_mod"  
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  
-  # Support for Razer peripherals, AIO and RGB devices
-  hardware.openrazer.enable = true
-  services.hardware.openrgb.enable = true;
-  environment.systemPackages = with pkgs; [ openrazer-daemon liquidctl ];
-  users.users.${config.user}.extraGroups = [ "openrazer" ];
-  environment.systemPackages = with pkgs; [ polychromatic ];
 
   
   # Tools & libs
