@@ -14,20 +14,20 @@
       listener = [ 
         # Screenlock
         {
-          timeout = 240; # in seconds
+          timeout = 600; # in seconds
           on-timeout = "hyprlock"; # command to run when timeout has passed
         }
         
         # Brightness
         {
-          timeout = 300;
+          timeout = 540;
           onTimeout = "brightnessctl -s set 0";  # set monitor backlight to minimum, avoid 0 on OLED monitor.
           onResume = "brightnessctl -r";   # monitor backlight restor.
         }
 
         # Suspend
         {
-          timeout = 360; # in seconds
+          timeout = 900; # in seconds
           on-timeout = "systemctl suspend"; # command to run when timeout has passed.
         }
       ];
