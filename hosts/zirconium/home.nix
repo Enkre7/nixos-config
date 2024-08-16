@@ -9,7 +9,7 @@
     ../../homeModules/light.nix
     ../../homeModules/notification.nix
     ../../homeModules/capture.nix
-    ../../homeModules/hyprland.nix
+    ./hyprland.nix
     ../../homeModules/hyprlock.nix
     ../../homeModules/hypridle.nix
     ../../homeModules/firefox.nix
