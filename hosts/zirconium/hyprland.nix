@@ -1,4 +1,5 @@
 { config, lib, pkgs, inputs, ... }:
+
 let
   stylix = config.lib.stylix.colors;
   startupScript = pkgs.writeShellScriptBin "start" ''
@@ -26,7 +27,7 @@ in
   wayland.windowManager.hyprland = {
     enable = true;    
     settings = {
-      monitor = "eDP-1,highres,auto,auto";
+      monitor = "eDP-1,highres,auto,2";
       xwayland.force_zero_scaling = false;
 
       "$terminal" = "kitty";
@@ -38,9 +39,9 @@ in
       exec-once = ''${startupScript}/bin/start'';
       
       general = { 
-        gaps_in = 3;
-        gaps_out = 5;
-        border_size = 2;
+        gaps_in = 4;
+        gaps_out = 10;
+        border_size = 3;
         "col.active_border" = lib.mkForce "rgb(${stylix.base0E}) rgb(${stylix.base0A}) 45deg";
         "col.inactive_border" = lib.mkForce "rgb(${stylix.base03})";
         resize_on_border = false;

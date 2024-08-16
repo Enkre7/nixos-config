@@ -149,7 +149,7 @@ with lib;
     style = concatStrings [
       ''
         * {
-          font-size: 13px;
+          font-size: 18px;
           border-radius: 0px;
           border: none;
           font-family: JetBrainsMono Nerd Font Mono;
