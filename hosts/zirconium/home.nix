@@ -4,12 +4,12 @@
   imports = [
     ./variables.nix
     #../../homeModules/impermanence.nix
-    ./wlogout.nix
+    ../../homeModules/wlogout.nix
     ../../homeModules/waybar.nix
     ../../homeModules/light.nix
     ../../homeModules/notification.nix
     ../../homeModules/capture.nix
-    ./hyprland.nix
+    ../../homeModules/hyprland.nix
     ../../homeModules/hyprlock.nix
     ../../homeModules/hypridle.nix
     ../../homeModules/firefox.nix
@@ -29,6 +29,12 @@
   stylix.autoEnable = true;
   stylix.targets.kde.enable = false;
   stylix.targets.wofi.enable = false;
+  
+  wayland.windowManager.hyprland.settings = {
+    monitor = lib.mkForce ",highrr,auto,1.333333";
+    general.gaps_in = lib.mkForce 4;
+    general.gaps_out = lib.mkForce 7;
+  }; 
     
   programs.home-manager.enable = true;
   

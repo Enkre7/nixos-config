@@ -21,13 +21,13 @@ let
   '';
 in
 {
- imports = [ inputs.hyprland.homeManagerModules.default ]; 
+  imports = [ inputs.hyprland.homeManagerModules.default ]; 
  
   wayland.windowManager.hyprland = {
     enable = true;    
     settings = {
-      monitor = "eDP-1,highres,auto,1.6";
-      xwayland.force_zero_scaling = false;
+      monitor = ",highrr,auto,1.6";
+      xwayland.force_zero_scaling = true;
 
       "$terminal" = "kitty";
       "$fileManager" = "thunar";
