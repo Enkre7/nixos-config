@@ -7,7 +7,7 @@
     ../../configModules/nixos.nix
     ../../configModules/hardware.nix
     ../../configModules/battery.nix
-    ../../configModules/lanzaboot.nix
+    #../../configModules/lanzaboot.nix
     ../../configModules/networking.nix
     #../../configModules/impermanence.nix
     ../../configModules/virtualisation.nix
@@ -36,11 +36,21 @@
   boot.initrd.availableKernelModules = [
     "nvme"
     "xhci_pci"
-    "thunderbolt"
+    "ahci"
     "usb_storage"
+    "usbhid"
     "sd_mod"  
   ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  
+  # Support for Razer peripherals, AIO and RGB devices
+  hardware.openrazer.enable = true
+  services.hardware.openrgb.enable = true;
+  environment.systemPackages = with pkgs; [ openrazer-daemon liquidctl ];
+  users.users.${config.user}.extraGroups = [ "openrazer" ];
+  environment.systemPackages = with pkgs; [ polychromatic ];
 
+  
   # Tools & libs
   environment.systemPackages = with pkgs; [
     tree
