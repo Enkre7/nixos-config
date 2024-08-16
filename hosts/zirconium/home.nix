@@ -4,7 +4,7 @@
   imports = [
     ./variables.nix
     #../../homeModules/impermanence.nix
-    ../../homeModules/wlogout.nix
+    ./wlogout.nix
     ../../homeModules/waybar.nix
     ../../homeModules/light.nix
     ../../homeModules/notification.nix
