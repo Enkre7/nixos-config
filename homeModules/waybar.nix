@@ -24,7 +24,6 @@ with lib;
         ];
         modules-right = [
           #"idle_inhibitor"
-          "custom/notification"
           #"network
           "battery"
           "tray"
@@ -79,6 +78,7 @@ with lib;
 	  tooltip-format-disconnected = "Deconnecté";
         };
         "tray" = {
+          icon-size = 21;
           spacing = 12;
         };
         "pulseaudio" = {
@@ -113,25 +113,6 @@ with lib;
           };
           tooltip-format-activated = "Actif";
           tooltip-format-deactivated = "Désactivé";
-        };
-        "custom/notification" = {
-          tooltip = false;
-          format = "{icon}";
-          format-icons = {
-            notification = "<span foreground='red'><sup></sup></span>";
-            none = "";
-            dnd-notification = "<span foreground='red'><sup></sup></span>";
-            dnd-none = "";
-            inhibited-notification = "<span foreground='red'><sup></sup></span>";
-            inhibited-none = "";
-            dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>";
-            dnd-inhibited-none = "";
-          };
-          #return-type = "json";
-          #exec-if = "which swaync-client";
-          #exec = "swaync-client -swb";
-          #on-click = "sleep 0.1 && task-waybar";
-          escape = true;
         };
         "battery" = {
           interval = 5;
@@ -243,8 +224,7 @@ with lib;
           padding: 0px 25px 0px 15px;
           border-radius: 0px 0px 40px 0px;
         }
-        #network, #battery,
-        #custom-notification, #tray, #idle_inhibitor {
+        #network, #battery, #tray, #idle_inhibitor {
           font-weight: bold;
           background: ${stylix.base01};
           color: ${stylix.base05};

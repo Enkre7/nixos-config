@@ -14,7 +14,7 @@
   };
   
   config = {
-    hostname = "promethium";
+    hostname = "zirconium";
     user = "enkre";
     flakePath = "/persist/system/nixos";
     dotfilesPath = "${config.flakePath}/dotfiles";
