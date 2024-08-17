@@ -209,7 +209,7 @@ with lib;
         tooltip label {
           color: ${stylix.base07};
         }
-        #window, #pulseaudio, #cpu, #memory, #disk {
+        #window, #cpu, #memory, #disk {
           font-weight: bold;
           margin: 4px 0px;
           margin-left: 7px;
@@ -226,7 +226,7 @@ with lib;
           padding: 0px 25px 0px 15px;
           border-radius: 0px 0px 40px 0px;
         }
-        #network, #battery, #tray, #idle_inhibitor {
+        #network, #battery, #pulseaudio, #tray, #idle_inhibitor {
           font-weight: bold;
           background: ${stylix.base01};
           color: ${stylix.base05};
