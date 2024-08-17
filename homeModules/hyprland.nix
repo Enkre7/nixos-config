@@ -190,7 +190,8 @@ in
         # Pavucontrol
         "float, class:(pavucontrol)"
         "center, class:(pavucontrol)"
-        "size 829 325, class:(pavucontrol)"
+        "size 925 318, class:(pavucontrol)"
+        "pin, class:(pavucontrol)"
         # Steam
         "float, title:^(Steam Guard)$"
         "float, title:^(Paramètres Steam)$"

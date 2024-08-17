@@ -17,7 +17,6 @@ with lib;
         modules-center = [ "hyprland/workspaces" ];
         modules-left = [
           "custom/startmenu"
-          "pulseaudio"
           "cpu"
           "memory"
           "disk"
@@ -27,6 +26,7 @@ with lib;
           #"idle_inhibitor"
           #"network
           "battery"
+          "pulseaudio"
           "tray"
           "clock"
         ];
