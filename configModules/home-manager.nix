@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, inputs, ... }:
 
 {
   imports = [ inputs.home-manager.nixosModules.default ];
@@ -7,6 +7,4 @@
     extraSpecialArgs = { inherit inputs; };
     users.${config.user} = import ./home.nix;
   };
-  
-  system.stateVersion = config.version;
 }

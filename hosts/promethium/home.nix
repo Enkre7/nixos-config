@@ -3,7 +3,6 @@
 {
   imports = [
     ./variables.nix
-    ../../homeModules/home-manager.nix
     #../../homeModules/impermanence.nix
     ../../homeModules/wlogout.nix
     ../../homeModules/waybar.nix
@@ -23,6 +22,16 @@
     ../../homeModules/wofi.nix
     ../../homeModules/libreoffice.nix
   ];
+
+  programs.home-manager.enable = true; 
+  home.username = config.user;
+  home.homeDirectory = "/home/${config.user}";
+  home.stateVersion = config.version;
+
+  nixpkgs.config.allowUnfreePredicate = _: true;  
+  
+  stylix.targets.kde.enable = false;
+  stylix.targets.wofi.enable = false;
   
   # Host specific settings
   

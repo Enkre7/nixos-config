@@ -12,7 +12,8 @@
     };*/
   };
   nixpkgs.config.allowUnfree = true;
-  
+  system.stateVersion = config.version;
+    
   # Disable nix inbuild documentation 
   documentation.doc.enable = false;
 
