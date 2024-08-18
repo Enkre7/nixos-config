@@ -3,6 +3,7 @@
 {
   imports = [
     ./variables.nix
+    ../../homeModules/home-manager.nix
     #../../homeModules/impermanence.nix
     ../../homeModules/wlogout.nix
     ../../homeModules/waybar.nix
@@ -22,16 +23,9 @@
     ../../homeModules/wofi.nix
     ../../homeModules/libreoffice.nix
   ];
-
-  home.username = config.user;
-  home.homeDirectory = "/home/${config.user}";
-  home.stateVersion = config.version;
-  nixpkgs.config.allowUnfreePredicate = _: true;
   
-  stylix.autoEnable = true;
-  stylix.targets.kde.enable = false;
-  stylix.targets.wofi.enable = false;
-    
+  # Host specific settings
+  
   programs.home-manager.enable = true;
   
   programs.mpv = {
@@ -44,5 +38,6 @@
     gnome-calculator
     nextcloud-client    
     qimgv
+    ffmpeg-full
   ];
 }

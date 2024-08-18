@@ -3,6 +3,7 @@
 {
   imports = [
     ./variables.nix
+    ../../homeModules/home-manager.nix
     #../../homeModules/impermanence.nix
     ../../homeModules/wlogout.nix
     ../../homeModules/waybar.nix
@@ -22,14 +23,7 @@
     ../../homeModules/libreoffice.nix
   ];
 
-  home.username = config.user;
-  home.homeDirectory = "/home/${config.user}";
-  home.stateVersion = config.version;
-  nixpkgs.config.allowUnfreePredicate = _: true;
-  programs.home-manager.enable = true;  
-
-  stylix.targets.kde.enable = false;
-  stylix.targets.wofi.enable = false;
+  # Host specific settings
   
   wayland.windowManager.hyprland.settings = {
     monitor = lib.mkForce ",highrr,auto,1.333333";
@@ -49,5 +43,6 @@
     gnome-calculator
     nextcloud-client
     qimgv
+    ffmpeg-full
   ];
 }

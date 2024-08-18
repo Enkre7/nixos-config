@@ -2,13 +2,13 @@
 
 {
   imports = [
-    inputs.home-manager.nixosModules.default
     ./variables.nix
     ../../configModules/nixos.nix
+    ../../configModules/home-manager.nix
     ../../configModules/hardware.nix
     ../../configModules/battery.nix
     ../../configModules/lanzaboot.nix
-    ../../configModules/sops.nix
+    #../../configModules/sops.nix
     ../../configModules/networking.nix
     #../../configModules/impermanence.nix
     ../../configModules/virtualisation.nix
@@ -27,14 +27,10 @@
     ../../configModules/thunar.nix
     ../../configModules/printing.nix
     ../../configModules/games.nix
+    ../../configModules/adb.nix
   ];
-
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users.${config.user} = import ./home.nix;
-  };
-  system.stateVersion = config.version;
-
+  
+  # Host specific settings
   
   boot.initrd.availableKernelModules = [
     "nvme"
@@ -47,20 +43,5 @@
   environment.sessionVariables = {
     STEAM_FORCE_DESKTOPUI_SCALING = "1.6";
   };
-    
-  # Tools & libs
-  environment.systemPackages = with pkgs; [
-    tree
-    wget
-    curl
-    iperf
-    nmap
-    netcat
-    ffmpeg-full
-    wev #wayland event viewer
-    dmidecode
-    dirbuster
-    dirstalk
-  ];
 }
 

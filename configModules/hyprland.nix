@@ -10,7 +10,10 @@
   programs.hyprland.enable = true;
   programs.hyprland.xwayland.enable = true;
   programs.waybar.enable = true;
-
+  
+  # Wayland event viewer
+  environment.systemPackages = with pkgs; [ wev ];
+  
   # Resize & electron support
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";

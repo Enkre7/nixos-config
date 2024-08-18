@@ -27,12 +27,18 @@
   networking.firewall.enable = false;
  
   # VPN
-  services.mullvad-vpn.enable = true;
-  services.mullvad-vpn.package = pkgs.mullvad-vpn;
+  services.mullvad-vpn = { 
+    enable = true;
+    package = pkgs.mullvad-vpn;
+  };
   services.resolved.enable = true;
-
-  services.tailscale.enable = true; 
-  
+ 
+  services.tailscale = {
+    enable = true;
+    # use as exit node
+    useRoutingFeatures = "both";
+    extraUpFlags = ["--advertise-exit-node"];
+  };  
    
   # SSH
   services.openssh = {
@@ -46,5 +52,12 @@
     };
   };
   
-  environment.systemPackages = with pkgs; [ networkmanagerapplet ];
+  environment.systemPackages = with pkgs; [
+    wget
+    curl
+    iperf
+    nmap
+    netcat
+    networkmanagerapplet
+  ];
 }
