@@ -34,6 +34,7 @@
     users.${config.user} = import ./home.nix;
   };
   system.stateVersion = config.version;
+
   
   boot.initrd.availableKernelModules = [
     "nvme"
@@ -42,7 +43,11 @@
     "usb_storage"
     "sd_mod"
   ];
-  
+
+  environment.sessionVariables = {
+    STEAM_FORCE_DESKTOPUI_SCALING = "1.6";
+  };
+    
   # Tools & libs
   environment.systemPackages = with pkgs; [
     tree

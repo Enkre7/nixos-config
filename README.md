@@ -3,7 +3,7 @@ With Flakes, Home-manager, Lanzaboot, nixos-hardware and nh (nix-helper).
 Contain also a custom minimal ISO of nixos to facilitate installation via predefined alias.
 
 ## Components
-|                          | Promethium (🚧in build)            | Zirconium (🚧in build)             |
+|                          | Promethium                         | Zirconium (🚧in build)             |
 |--------------------------|------------------------------------|------------------------------------|
 | **Hardware**             | Framework Laptop 13" AMD           | Custom tower                       |
 | **Hardware**             | BTRFS Pool                         | BTRFS Pool                         |
@@ -79,9 +79,10 @@ _Ask for password twice, first is for root second for specified user._
 ***To use the fingerprint sensor:*** ```sudo fprintd-enroll USERNAME && fprintd-verify```
 
 ***To use lanzaboot:***
-  - ```sudo sbctl create-keys```
   - Uncomment lanzaboot.nix in /nixos/host/HOSTNAME/config/default.nix
-  - Rebuild configuration
+  - Rebuild configuration to enable ```sbctl``` command
+  - ```sudo sbctl create-keys```
+  - Rebuild configuration another time
   - reboot and erase precedent boot settings
   - ```sudo sbctl enroll-keys --microsoft```
   - reboot and force secureboot

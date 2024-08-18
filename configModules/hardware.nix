@@ -11,7 +11,7 @@
       systemd-boot.editor = false;
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_latest; #pkgs.linuxPackages_zen
     kernelParams = [];
     extraModulePackages = [];
     consoleLogLevel = 3;

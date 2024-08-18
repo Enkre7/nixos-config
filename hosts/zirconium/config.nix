@@ -7,7 +7,7 @@
     ../../configModules/nixos.nix
     ../../configModules/hardware.nix
     ../../configModules/battery.nix
-    #../../configModules/lanzaboot.nix
+    ../../configModules/lanzaboot.nix
     ../../configModules/networking.nix
     #../../configModules/impermanence.nix
     ../../configModules/virtualisation.nix
@@ -44,7 +44,7 @@
     "sd_mod"  
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-
+  networking.interfaces.enp4s0.wakeOnLan.enable = true;
   
   # Tools & libs
   environment.systemPackages = with pkgs; [
