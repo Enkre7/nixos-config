@@ -24,7 +24,7 @@
     ../../configModules/security.nix
     ../../configModules/fingerprint.nix
     ../../configModules/yubikey.nix
-    ../../configModules/file-manager.nix
+    ../../configModules/thunar.nix
     ../../configModules/printing.nix
     ../../configModules/games.nix
   ];

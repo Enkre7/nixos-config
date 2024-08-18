@@ -20,6 +20,7 @@
     ../../homeModules/terminal.nix
     ../../homeModules/kdeconnect.nix
     ../../homeModules/wofi.nix
+    ../../homeModules/libreoffice.nix
   ];
 
   home.username = config.user;
@@ -40,16 +41,8 @@
 
   home.packages = with pkgs; [
     webcord
-    meld #git diff/merge tool
     gnome-calculator
-    nextcloud-client
-    libreoffice-qt
+    nextcloud-client    
     qimgv
-
-    # Terminal widgets
-    cmatrix
-    pipes-rs
-    rsclock
-    figlet
   ];
 }
