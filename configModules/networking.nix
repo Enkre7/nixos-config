@@ -25,13 +25,6 @@
   
   # Firewall
   networking.firewall.enable = false;
- 
-  # VPN
-  services.mullvad-vpn = { 
-    enable = true;
-    package = pkgs.mullvad-vpn;
-  };
-  services.resolved.enable = true;
     
   # SSH
   services.openssh = {
