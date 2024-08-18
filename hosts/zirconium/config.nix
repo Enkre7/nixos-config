@@ -9,6 +9,7 @@
     ../../configModules/battery.nix
     ../../configModules/lanzaboot.nix
     ../../configModules/networking.nix
+    ../../configModules/tailscale.nix
     #../../configModules/impermanence.nix
     ../../configModules/virtualisation.nix
     ../../configModules/locale.nix

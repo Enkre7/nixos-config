@@ -30,8 +30,8 @@
   nixpkgs.config.allowUnfreePredicate = _: true;
 
   stylix.targets.kde.enable = false;
-  stylix.targets.wofi.enable = false; 
-    
+  stylix.targets.wofi.enable = false;
+
   # Host specific settings
   programs.mpv = {
       enable = true;

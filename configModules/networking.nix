@@ -32,14 +32,7 @@
     package = pkgs.mullvad-vpn;
   };
   services.resolved.enable = true;
- 
-  services.tailscale = {
-    enable = true;
-    # use as exit node
-    useRoutingFeatures = "both";
-    extraUpFlags = ["--advertise-exit-node"];
-  };  
-   
+    
   # SSH
   services.openssh = {
     enable = true;

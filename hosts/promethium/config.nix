@@ -10,6 +10,7 @@
     ../../configModules/lanzaboot.nix
     #../../configModules/sops.nix
     ../../configModules/networking.nix
+    ../../configModules/tailscale.nix
     #../../configModules/impermanence.nix
     ../../configModules/virtualisation.nix
     ../../configModules/locale.nix
