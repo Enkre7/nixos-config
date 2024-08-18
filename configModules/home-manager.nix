@@ -5,6 +5,6 @@
   
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    users.${config.user} = import ./home.nix;
+    users.${config.user} = import ../homeModules/home-manager.nix;
   };
 }
