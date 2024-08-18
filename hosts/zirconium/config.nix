@@ -2,9 +2,9 @@
 
 {
   imports = [
+    inputs.home-manager.nixosModules.default
     ./variables.nix
     ../../configModules/nixos.nix
-    ../../configModules/home-manager.nix
     ../../configModules/hardware.nix
     ../../configModules/battery.nix
     ../../configModules/lanzaboot.nix
@@ -30,8 +30,12 @@
     ../../configModules/adb.nix
   ];
   
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users.${config.user} = import ./home.nix;
+  };  
+  
   # Host specific settings
-    
   boot.initrd.availableKernelModules = [
     "nvme"
     "xhci_pci"
