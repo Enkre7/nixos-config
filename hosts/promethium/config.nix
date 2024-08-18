@@ -8,6 +8,7 @@
     ../../configModules/hardware.nix
     ../../configModules/battery.nix
     ../../configModules/lanzaboot.nix
+    ../../configModules/sops.nix
     ../../configModules/networking.nix
     #../../configModules/impermanence.nix
     ../../configModules/virtualisation.nix
