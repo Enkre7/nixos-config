@@ -29,7 +29,7 @@ Contain also a custom minimal ISO of nixos to facilitate installation via predef
 | **Cursor**               | Bibata cursors (Bibata-Modern-Ice) | Bibata cursors (Bibata-Modern-Ice) |
 
 ## Installation:
-You need to boot the minimal nixos iso after it's creation (See the ISO.md file).
+You need to boot the minimal nixos iso after it's creation (See the [Build_custom_ISO.md](Build_custom_ISO.md) file).
 
 _Set keyboard language: ```sudo loadkeys {{any_ISO3166-1_code}}```_
 
