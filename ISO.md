@@ -2,6 +2,6 @@
 
 ***To build the image:***
 
-```nix run nixpkgs#nixos-generators -- --format iso --flake /persist/system/nixos#customIso -o result```
+```nix run nixpkgs#nixos-generators -- --format iso --flake github:Enkre7/nixos-config#customIso -o result```
 
 _```--format``` can specify other image formats_

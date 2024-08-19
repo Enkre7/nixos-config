@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    fzf
+  ];
+  
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -8,7 +12,8 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      ll = "sudo ls -laR";
+      ll = "sudo ls -laRh";
+      fman = "compgen -c | fzf | xargs man";
       fetch = "${pkgs.fastfetch}/bin/fastfetch --config examples/10.jsonc";
       #rebuild = "sudo nixos-rebuild switch --flake ${config.flakePath}#${config.hostname}";
       rebuild = "nh os switch --hostname ${config.hostname}";
@@ -40,7 +45,8 @@
 
   programs.bash = {
     shellAliases = {
-      ll = "sudo ls -laR";
+      ll = "sudo ls -laRh";
+      fman = "compgen -c | fzf | xargs man";
       fetch = "${pkgs.fastfetch}/bin/fastfetch --config examples/10.jsonc";
       #rebuild = "sudo nixos-rebuild switch --flake ${config.flakePath}#${config.hostname}";
       rebuild = "nh os switch --hostname ${config.hostname}";

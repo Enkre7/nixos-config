@@ -1,37 +1,30 @@
 { pkgs, ...}:
 
 {
+  # Install yubikey packages
+  services.yubikey-agent.enable = true;
+  programs.yubikey-touch-detector.enable = true;
+  services.pcscd.enable = true;  
   services.udev.packages = with pkgs; [ yubikey-personalization ];
-  
-  programs.gnupg.agent = {
+  environment.systemPackages = with pkgs; [ yubikey-personalization-gui yubikey-manager yubikey-manager-qt ];
+
+  security.pam.yubico = {
     enable = true;
-    enableSSHSupport = true;
+    id = "42";
+    mode = "client";
   };
 
+  # Yubikey host authentification
   programs.ssh.startAgent = true;
-
-  # FIXME Don't forget to create an authorization mapping file for your user (https://nixos.wiki/wiki/Yubikey#pam_u2f)
-  security.pam.u2f = {
-    enable = true;
-    settings.cue = true;
-    control = "sufficient";
+  # Need to create an authorization mapping file for the user (https://nixos.wiki/wiki/Yubikey#pam_u2f)
+  security.pam = {
+    u2f.enable = true;
+    u2f.settings.cue = true;
+    u2f.control = "sufficient";
+    services = {
+      greetd.u2fAuth = true;
+      sudo.u2fAuth = true;
+      hyprlock.u2fAuth = true;
+    };
   };
-
-  security.pam.services = {
-    greetd.u2fAuth = true;
-    sudo.u2fAuth = true;
-    hyprlock.u2fAuth = true;
-  };
-
-  environment.systemPackages = with pkgs; [ yubikey-manager yubikey-agent ];
-  
-  # Lock screen if Yubikey unpluged
-  services.udev.extraRules = ''
-      ACTION=="remove",\
-       ENV{ID_BUS}=="usb",\
-       ENV{ID_MODEL_ID}=="0407",\
-       ENV{ID_VENDOR_ID}=="1050",\
-       ENV{ID_VENDOR}=="Yubico",\
-       RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
-  '';
 }
