@@ -17,7 +17,8 @@
       fetch = "${pkgs.fastfetch}/bin/fastfetch --config examples/10.jsonc";
       #rebuild = "sudo nixos-rebuild switch --flake ${config.flakePath}#${config.hostname}";
       rebuild = "nh os switch --hostname ${config.hostname}";
-      backup = "sudo chown -R ${config.user}:users ${config.flakePath} && sudo chmod -R +x ${config.flakePath} && cd ${config.flakePath} && git add . && git commit -m 'Automatic commit' && git push";
+      push = "sudo chown -R ${config.user}:users ${config.flakePath} && sudo chmod -R +x ${config.flakePath} && cd ${config.flakePath} && git add . && git commit -m 'Automatic commit' && git push";
+      pull = "cd ${config.flakePath} && git pull";
       #update = "cd ${config.flakePath} && sudo nix flake update";
       update = "nh os switch --update --hostname ${config.hostname}";
       list-gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
@@ -50,7 +51,8 @@
       fetch = "${pkgs.fastfetch}/bin/fastfetch --config examples/10.jsonc";
       #rebuild = "sudo nixos-rebuild switch --flake ${config.flakePath}#${config.hostname}";
       rebuild = "nh os switch --hostname ${config.hostname}";
-      backup = "sudo chown -R ${config.user}:users ${config.flakePath} && sudo chmod -R +x ${config.flakePath} && cd ${config.flakePath} && git add . && git commit -m 'Automatic commit' && git push";
+      push = "sudo chown -R ${config.user}:users ${config.flakePath} && sudo chmod -R +x ${config.flakePath} && cd ${config.flakePath} && git add . && git commit -m 'Automatic commit' && git push";
+      pull = "cd ${config.flakePath} && git pull";
       #update = "cd ${config.flakePath} && sudo nix flake update";
       update = "nh os switch --update --hostname ${config.hostname}";
       list-gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
