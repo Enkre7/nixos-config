@@ -8,7 +8,10 @@
     ../../configModules/hardware.nix
     ../../configModules/battery.nix
     ../../configModules/lanzaboot.nix
+    #../../configModules/sops.nix
     ../../configModules/networking.nix
+    ../../configModules/tailscale.nix
+    ../../configModules/mullvad-vpn.nix
     #../../configModules/impermanence.nix
     ../../configModules/virtualisation.nix
     ../../configModules/locale.nix
@@ -23,18 +26,18 @@
     ../../configModules/security.nix
     ../../configModules/fingerprint.nix
     ../../configModules/yubikey.nix
-    ../../configModules/file-manager.nix
+    ../../configModules/thunar.nix
     ../../configModules/printing.nix
     ../../configModules/games.nix
+    ../../configModules/adb.nix
   ];
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users.${config.user} = import ./home.nix;
   };
-  system.stateVersion = config.version;
-
   
+  # Host specific settings  
   boot.initrd.availableKernelModules = [
     "nvme"
     "xhci_pci"
@@ -46,20 +49,5 @@
   environment.sessionVariables = {
     STEAM_FORCE_DESKTOPUI_SCALING = "1.6";
   };
-    
-  # Tools & libs
-  environment.systemPackages = with pkgs; [
-    tree
-    wget
-    curl
-    iperf
-    nmap
-    netcat
-    ffmpeg-full
-    wev #wayland event viewer
-    dmidecode
-    dirbuster
-    dirstalk
-  ];
 }
 

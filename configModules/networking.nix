@@ -25,16 +25,9 @@
   
   # Firewall
   networking.firewall.enable = false;
- 
-  # VPN
-  services.mullvad-vpn.enable = true;
-  services.mullvad-vpn.package = pkgs.mullvad-vpn;
-  services.resolved.enable = true;
-
-  services.tailscale.enable = true; 
-  
-   
+    
   # SSH
+  programs.ssh.startAgent = true;
   services.openssh = {
     enable = true;
     settings = {
@@ -46,5 +39,12 @@
     };
   };
   
-  environment.systemPackages = with pkgs; [ networkmanagerapplet ];
+  environment.systemPackages = with pkgs; [
+    wget
+    curl
+    iperf
+    nmap
+    netcat
+    networkmanagerapplet
+  ];
 }

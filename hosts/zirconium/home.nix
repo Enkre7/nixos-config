@@ -19,17 +19,19 @@
     ../../homeModules/terminal.nix
     ../../homeModules/kdeconnect.nix
     ../../homeModules/wofi.nix
+    ../../homeModules/libreoffice.nix
   ];
-
+  
+  programs.home-manager.enable = true;
   home.username = config.user;
   home.homeDirectory = "/home/${config.user}";
   home.stateVersion = config.version;
-  nixpkgs.config.allowUnfreePredicate = _: true;
-  programs.home-manager.enable = true;  
+  nixpkgs.config.allowUnfreePredicate = _: true;  
 
   stylix.targets.kde.enable = false;
-  stylix.targets.wofi.enable = false;
-  
+  stylix.targets.wofi.enable = false; 
+
+  # Host specific settings
   wayland.windowManager.hyprland.settings = {
     monitor = lib.mkForce ",highrr,auto,1.333333";
     general.gaps_in = lib.mkForce 4;
@@ -45,16 +47,9 @@
 
   home.packages = with pkgs; [
     webcord
-    meld #git diff/merge tool
     gnome-calculator
     nextcloud-client
-    libreoffice-qt
     qimgv
-
-    # Terminal widgets
-    cmatrix
-    pipes-rs
-    rsclock
-    figlet
+    ffmpeg-full
   ];
 }

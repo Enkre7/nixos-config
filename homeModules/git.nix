@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
   programs.git = {
@@ -18,4 +18,7 @@
       mergetool.cmd = "meld $LOCAL $MERGED $REMOTE --output $MERGED";
     };
   };
+  
+  # git diff/merge tool
+  home.packages = with pkgs; [ meld ];
 }

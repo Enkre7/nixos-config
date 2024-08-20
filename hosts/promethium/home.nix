@@ -20,19 +20,19 @@
     ../../homeModules/terminal.nix
     ../../homeModules/kdeconnect.nix
     ../../homeModules/wofi.nix
+    ../../homeModules/libreoffice.nix
   ];
 
+  programs.home-manager.enable = true; 
   home.username = config.user;
   home.homeDirectory = "/home/${config.user}";
   home.stateVersion = config.version;
   nixpkgs.config.allowUnfreePredicate = _: true;
-  
-  stylix.autoEnable = true;
+
   stylix.targets.kde.enable = false;
   stylix.targets.wofi.enable = false;
-    
-  programs.home-manager.enable = true;
-  
+
+  # Host specific settings
   programs.mpv = {
       enable = true;
       scripts = [pkgs.mpvScripts.mpris];
@@ -40,16 +40,9 @@
 
   home.packages = with pkgs; [
     webcord
-    meld #git diff/merge tool
     gnome-calculator
-    nextcloud-client
-    libreoffice-qt
+    nextcloud-client    
     qimgv
-
-    # Terminal widgets
-    cmatrix
-    pipes-rs
-    rsclock
-    figlet
+    ffmpeg-full
   ];
 }

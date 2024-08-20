@@ -17,4 +17,12 @@
       confirm_os_window_close = -1;
     };
   };
+
+  # Terminal widgets
+  home.packages = with pkgs; [
+    cmatrix
+    pipes-rs
+    rsclock
+    figlet
+  ];
 }

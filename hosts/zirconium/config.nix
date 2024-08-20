@@ -9,6 +9,8 @@
     ../../configModules/battery.nix
     ../../configModules/lanzaboot.nix
     ../../configModules/networking.nix
+    ../../configModules/tailscale.nix
+    ../../configModules/mullvad-vpn.nix
     #../../configModules/impermanence.nix
     ../../configModules/virtualisation.nix
     ../../configModules/locale.nix
@@ -24,17 +26,18 @@
     ../../configModules/fingerprint.nix
     ../../configModules/rgb.nix
     ../../configModules/yubikey.nix
-    ../../configModules/file-manager.nix
+    ../../configModules/thunar.nix
     ../../configModules/printing.nix
     ../../configModules/games.nix
+    ../../configModules/adb.nix
   ];
-
+  
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users.${config.user} = import ./home.nix;
-  };
-  system.stateVersion = config.version;
+  };  
   
+  # Host specific settings
   boot.initrd.availableKernelModules = [
     "nvme"
     "xhci_pci"
@@ -44,6 +47,7 @@
     "sd_mod"  
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
+<<<<<<< HEAD
   #networking.interfaces.enp4s0.wakeOnLan.enable = true;
   
   # Tools & libs
@@ -60,5 +64,7 @@
     dirbuster
     dirstalk
   ];
+=======
+  networking.interfaces.enp4s0.wakeOnLan.enable = true;
+>>>>>>> 96a0c1ce76f7e7eea345b0d9c3ee994f012e62c8
 }
-

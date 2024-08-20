@@ -1,9 +1,9 @@
 # My personnal NixOS config
-With Flakes, Home-manager, Lanzaboot, nixos-hardware and nh (nix-helper).
-Contain also a custom minimal ISO of nixos to facilitate installation via predefined alias.
+With Flakes, Home-manager, Lanzaboot, nixos-hardware, nh (nix-helper) and Sops-nix.
+Contain also a custom minimal ISO of nixos to facilitate installation via predefined aliases.
 
 ## Components
-|                          | Promethium                         | Zirconium (🚧in build)             |
+|                          | Promethium                         | Zirconium (🚧 in build)            |
 |--------------------------|------------------------------------|------------------------------------|
 | **Hardware**             | Framework Laptop 13" AMD           | Custom tower                       |
 | **Hardware**             | BTRFS Pool                         | BTRFS Pool                         |
@@ -29,9 +29,9 @@ Contain also a custom minimal ISO of nixos to facilitate installation via predef
 | **Cursor**               | Bibata cursors (Bibata-Modern-Ice) | Bibata cursors (Bibata-Modern-Ice) |
 
 ## Installation:
-You need to boot the minimal nixos iso.
+You need to boot the minimal nixos iso after it's creation (See the [Build_custom_ISO.md](Build_custom_ISO.md) file).
 
-_Set keyboard language: ```sudo loadkeys LANGUAGE_ISO3166-1```_
+_Set keyboard language: ```sudo loadkeys {{any_ISO3166-1_code}}```_
 
 ***1. Setup network:***
 
@@ -76,24 +76,35 @@ _Ask for password twice, first is for root second for specified user._
 
 ## After installation:
 ### Setup the config on the machine
-***To use the fingerprint sensor:*** ```sudo fprintd-enroll USERNAME && fprintd-verify```
+***To use the fingerprint sensor:*** ```sudo fprintd-enroll $USER && fprintd-verify```
 
 ***To use lanzaboot:***
-  - Uncomment lanzaboot.nix in /nixos/host/HOSTNAME/config/default.nix
+  - Map lanzaboot.nix in the config.nix file
   - Rebuild configuration to enable ```sbctl``` command
   - ```sudo sbctl create-keys```
-  - Rebuild configuration another time
-  - reboot and erase precedent boot settings
+  - Rebuild configuration another time to enable secure in the OS
+  - Reboot and erase precedent boot settings in BIOS
   - ```sudo sbctl enroll-keys --microsoft```
-  - reboot and force secureboot
+  - Reboot and force secureboot in BIOS
   -  ```bootctl status```
 
 ***To use impermanence:***
-  - Uncomment impermanence.nix in /nixos/host/HOSTNAME/config/default.nix
-  - Uncomment also impermanence.nix in /nixos/host/HOSTNAME/home/default.nix
+  - Map impermanence.nix in the config.nix file
+  - Map impermanence.nix in the home.nix file (if using home-manager)
   - Rebuild configuration
 
 ***To use git:***
-  - Copy the pubilc and private ssh keys in ~/.ssh
+  - Copy the public and private ssh keys in ~/.ssh
   - Reload the sshd service
   - ```git remote set-url origin git@github.com:Enkre7/nixos-config.git``` in nixos directory
+
+***To use Yubikey:***
+  - Map yubikey.nix in the config.nix file 
+  - nix-shell -p pam_u2f
+  - mkdir -p ~/.config/Yubico
+  - pamu2fcfg > ~/.config/Yubico/u2f_keys
+    
+  To test: 
+    - nix-shell -p pamtester
+    - pamtester login $USER authenticate
+    - pamtester sudo $USER authenticate

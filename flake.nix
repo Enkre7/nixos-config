@@ -27,6 +27,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
@@ -46,6 +47,7 @@
           inputs.nixos-hardware.nixosModules.common-pc
           inputs.nixos-hardware.nixosModules.common-pc-ssd
 
+          inputs.sops-nix.nixosModules.sops
           inputs.lanzaboote.nixosModules.lanzaboote
           inputs.home-manager.nixosModules.default
           inputs.stylix.nixosModules.stylix
@@ -63,6 +65,7 @@
           (import ./tools/disko.nix { device = "/dev/nvme0n1"; })
           inputs.nixos-hardware.nixosModules.framework-13-7040-amd
 
+          inputs.sops-nix.nixosModules.sops
           inputs.lanzaboote.nixosModules.lanzaboote
           inputs.home-manager.nixosModules.default
           inputs.stylix.nixosModules.stylix
