@@ -44,7 +44,7 @@
     "sd_mod"  
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  networking.interfaces.enp4s0.wakeOnLan.enable = true;
+  #networking.interfaces.enp4s0.wakeOnLan.enable = true;
   
   # Tools & libs
   environment.systemPackages = with pkgs; [
