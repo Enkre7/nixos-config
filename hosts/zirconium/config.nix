@@ -47,24 +47,4 @@
     "sd_mod"  
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-<<<<<<< HEAD
-  #networking.interfaces.enp4s0.wakeOnLan.enable = true;
-  
-  # Tools & libs
-  environment.systemPackages = with pkgs; [
-    tree
-    wget
-    curl
-    iperf
-    nmap
-    netcat
-    ffmpeg-full
-    wev #wayland event viewer
-    dmidecode
-    dirbuster
-    dirstalk
-  ];
-=======
-  networking.interfaces.enp4s0.wakeOnLan.enable = true;
->>>>>>> 96a0c1ce76f7e7eea345b0d9c3ee994f012e62c8
 }
