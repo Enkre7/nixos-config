@@ -100,3 +100,11 @@ _Ask for password twice, first is for root second for specified user._
 
 ***To use Yubikey:***
   - Map yubikey.nix in the config.nix file 
+  - nix-shell -p pam_u2f
+  - mkdir -p ~/.config/Yubico
+  - pamu2fcfg > ~/.config/Yubico/u2f_keys
+    
+  To test: 
+    - nix-shell -p pamtester
+    - pamtester login $USER authenticate
+    - pamtester sudo $USER authenticate
