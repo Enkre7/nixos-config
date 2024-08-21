@@ -47,4 +47,6 @@
     "sd_mod"  
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
+
+  hardware.graphics.extraPackages = with pkgs; [ nvidia-vaapi-driver ];
 }
