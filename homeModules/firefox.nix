@@ -146,10 +146,6 @@
         "app.shield.optoutstudies.enabled" = false;
         "app.normandy.enabled" = false;
         "app.normandy.api_url" = "";
- 
-        # Disable crash reports
-        "breakpad.reportURL" = "";
-        "browser.tabs.crashReporting.sendReport" = false;
         
         # Security settings
         "dom.security.https_only_mode" = true;
