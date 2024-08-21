@@ -23,6 +23,7 @@
     ../../configModules/greetd.nix
     ../../configModules/style.nix
     ../../configModules/security.nix
+    #../../configModules/clamav.nix
     ../../configModules/fingerprint.nix
     ../../configModules/rgb.nix
     ../../configModules/yubikey.nix
@@ -48,10 +49,10 @@
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
 
-  hardware.graphics.extraPackages = with pkgs; [ nvidia-vaapi-driver ];
+  /*hardware.graphics.extraPackages = with pkgs; [ nvidia-vaapi-driver ];
   environment.variables = {
     LIBVA_DRIVER_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  };
+  };*/
 }

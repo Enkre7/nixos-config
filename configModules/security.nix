@@ -6,20 +6,6 @@
   security.pam.services.greetd.enableGnomeKeyring = true;
   programs.seahorse.enable = true; # Keyring manager
   
-  # Antivirus
-  services.clamav = {
-    daemon.enable = true;
-    fangfrisch.enable = true;
-    fangfrisch.interval = "daily";
-    updater.enable = true;
-    updater.interval = "daily"; #man systemd.time
-    updater.frequency = 12;
-    scanner = {
-      enable = true;
-      interval = "Mon *-*-* 12:00:00";
-    };
-  };
-
   # Enable USB Guard
   services.usbguard = {
     enable = false;
@@ -37,7 +23,6 @@
     libsecret  
     lxqt.lxqt-policykit 
     vulnix       #scan command: vulnix --system
-    clamav       #scan command: sudo freshclam; clamscan [options] [file/directory/-]
     chkrootkit   #scan command: sudo chkrootkit
   ];   
 }

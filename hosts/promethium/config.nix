@@ -24,6 +24,7 @@
     ../../configModules/greetd.nix
     ../../configModules/style.nix
     ../../configModules/security.nix
+    #../../configModules/clamav.nix
     ../../configModules/fingerprint.nix
     ../../configModules/yubikey.nix
     ../../configModules/thunar.nix
