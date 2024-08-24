@@ -11,7 +11,7 @@
     ../../homeModules/capture.nix
     ../../homeModules/hyprland.nix
     ../../homeModules/hyprlock.nix
-    ../../homeModules/hypridle.nix
+    ../../homeModules/hypridle2.nix
     ../../homeModules/firefox.nix
     ../../homeModules/git.nix
     ../../homeModules/vscode.nix
