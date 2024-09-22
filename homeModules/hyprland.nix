@@ -176,6 +176,10 @@ in
 	"$mainMod, mouse:273, resizewindow"
       ];
       
+      bindl = [
+        ",switch:Lid Switch, exec, hyprlock"
+      ];
+           
       # To get windows's names: hyprctl clients
       windowrule = [
 	"float, ^(nm-connection-editor)$"

@@ -32,15 +32,14 @@
       # The UNIX file mode bits
       mode = "0644";
     };
-  }; 
+  };
  
   security.pam.u2f = {
     enable = true;
     settings.origin = "pam://yubi";
     settings.appid = "pam://yubi";
-    # Format: "<username>:<KeyHandle>,<UserKey>,<CoseType>,<Options>"
-    settings.authFile = "/etc/u2f_mapping";
-    settings.control = "required";
+    settings.authFile = "/etc/u2f-mappings";
+    #settings.control = "required";
     settings.cue = true;
   };
 
