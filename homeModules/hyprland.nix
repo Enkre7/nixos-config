@@ -224,12 +224,12 @@ in
         "move 911 50, class:(firefox), title:^(Incrustation vidéo)$"
         "size 490 154, class:(firefox), title:^(Suppression des cookies.*)$"
         # Nexctcloud
-        "pin, class:(com.nextcloud.desktopclient.nextcloud)"
-        "rounding 10, class:(com.nextcloud.desktopclient.nextcloud)"
-        "noborder, class:(com.nextcloud.desktopclient.nextcloud)"
-        "float, class:(com.nextcloud.desktopclient.nextcloud)"
-        "center, class:(com.nextcloud.desktopclient.nextcloud)"
-        "size 800 500, class:(com.nextcloud.desktopclient.nextcloud)"
+        "pin, class:(Nextcloud)"
+        "rounding 10, class:(Nextcloud)"
+        "noborder, class:(Nextcloud)"
+        "float, class:(Nextcloud)"
+        "center, class:(Nextcloud)"
+        "size 800 500, class:(Nextcloud)"
         # Minecraft
         "fullscreen, title:^(Minecraft)(.*)$"
         # Gnome calculator
