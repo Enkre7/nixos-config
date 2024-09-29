@@ -11,7 +11,6 @@
     ../../homeModules/capture.nix
     ../../homeModules/hyprland.nix
     ../../homeModules/hyprlock.nix
-    ../../homeModules/hypridle2.nix
     ../../homeModules/firefox.nix
     ../../homeModules/git.nix
     ../../homeModules/vscode.nix
@@ -46,6 +45,7 @@
     };
 
   home.packages = with pkgs; [
+    obsidian
     webcord
     gnome-calculator
     nextcloud-client

@@ -18,6 +18,8 @@
     '';
   };
 
+  security.polkit.enable = true;
+
   environment.systemPackages = with pkgs; [
     # Polkit
     libsecret  

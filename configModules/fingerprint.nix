@@ -6,7 +6,6 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig.Type = "simple";
   };
-  security.polkit.enable = true;
   services.fprintd.enable = true; # sudo fprintd-enroll <user> & fprintd-verify
   security.pam.services = {
     hyprlock = {};
