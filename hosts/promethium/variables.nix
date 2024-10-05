@@ -2,7 +2,7 @@
 
 {
   options = with lib; with types; {
-    version = mkOption { type = str; };
+    stateVersion = mkOption { type = str; };
     hostname = mkOption { type = str; };
     user = mkOption { type = str; };
     flakePath = mkOption { type = str; };
@@ -15,7 +15,7 @@
   };
   
   config = {
-    version = "24.11";
+    stateVersion = "24.05";
     hostname = "promethium";
     user = "enkre";
     flakePath = "/persist/system/nixos";

@@ -46,8 +46,7 @@
     "sd_mod"  
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-
-  hardware.nvidia.open = lib.versionAtLeast config.hardware.nvidia.package.version "560";  
+  hardware.nvidia.powerManagement.enable = true;
   environment.sessionVariables = {
     STEAM_FORCE_DESKTOPUI_SCALING = "1.333333";
   };
