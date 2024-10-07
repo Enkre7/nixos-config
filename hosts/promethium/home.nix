@@ -38,11 +38,13 @@
       scripts = [pkgs.mpvScripts.mpris];
     };
 
+  programs.yt-dlp.enable = true;
   home.packages = with pkgs; [
     webcord
     gnome-calculator
     nextcloud-client    
     qimgv
     ffmpeg-full
+    picard
   ];
 }
