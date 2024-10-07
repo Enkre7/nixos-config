@@ -23,8 +23,6 @@
     ../../configModules/greetd.nix
     ../../configModules/style.nix
     ../../configModules/security.nix
-    #../../configModules/clamav.nix
-    ../../configModules/fingerprint.nix
     ../../configModules/rgb.nix
     ../../configModules/yubikey.nix
     ../../configModules/thunar.nix
@@ -48,11 +46,8 @@
     "sd_mod"  
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-
-  /*hardware.graphics.extraPackages = with pkgs; [ nvidia-vaapi-driver ];
-  environment.variables = {
-    LIBVA_DRIVER_NAME = "nvidia";
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  };*/
+  hardware.nvidia.powerManagement.enable = true;
+  environment.sessionVariables = {
+    STEAM_FORCE_DESKTOPUI_SCALING = "1.333333";
+  };
 }

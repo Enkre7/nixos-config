@@ -24,6 +24,7 @@
       list-gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
       clean-gen = "sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations";
       rollback-gen = "sudo nixos-rebuild --rollback switch --flake ${config.flakePath}#${config.hostname}";
+      switch-gen = "sudo nix-env --profile /nix/var/nix/profiles/system --switch-generation";
       clean-boot = "sudo /run/current-system/bin/switch-to-configuration boot";
     };
 
@@ -58,6 +59,7 @@
       list-gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
       clean-gen = "sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations";
       rollback-gen = "sudo nixos-rebuild --rollback switch --flake ${config.flakePath}#${config.hostname}";
+      switch-gen = "sudo nix-env --profile /nix/var/nix/profiles/system --switch-generation";
       clean-boot = "sudo /run/current-system/bin/switch-to-configuration boot";
     };
   };
