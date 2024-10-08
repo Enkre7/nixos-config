@@ -5,6 +5,8 @@
     enable = true;
     package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions; [
+      vscode-extensions.hars.cppsnippets
+      vscode-extensions.ms-vscode.cpptools-extension-pack
       esbenp.prettier-vscode
       davidanson.vscode-markdownlint
       ms-ceintl.vscode-language-pack-fr

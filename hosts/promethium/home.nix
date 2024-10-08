@@ -46,6 +46,5 @@
     qimgv
     ffmpeg-full
     picard
-    codeblocksFull
   ];
 }
