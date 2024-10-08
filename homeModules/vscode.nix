@@ -5,8 +5,7 @@
     enable = true;
     package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions; [
-      vscode-extensions.hars.cppsnippets
-      vscode-extensions.ms-vscode.cpptools-extension-pack
+      ms-vscode.cpptools-extension-pack
       esbenp.prettier-vscode
       davidanson.vscode-markdownlint
       ms-ceintl.vscode-language-pack-fr
@@ -24,7 +23,7 @@
       ms-vscode-remote.remote-containers
       ms-python.python
       ms-kubernetes-tools.vscode-kubernetes-tools
-      vscodevim.vim
+      #vscodevim.vim
       yzhang.markdown-all-in-one
       streetsidesoftware.code-spell-checker
     ];

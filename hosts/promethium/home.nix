@@ -46,5 +46,7 @@
     qimgv
     ffmpeg-full
     picard
+    gcc
+    gdb
   ];
 }
