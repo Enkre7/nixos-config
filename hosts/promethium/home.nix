@@ -48,5 +48,6 @@
     picard
     gcc
     gdb
+    obsidian
   ];
 }
