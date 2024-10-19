@@ -18,7 +18,7 @@ let
     ${pkgs.webcord}/bin/webcord -m &
     ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
     ${pkgs.nextcloud-client}/bin/nextcloud --background &
-    ${pkgs.openrgb}/bin/openrgb --startminimized -m static -c 00FF00 &
+    ${pkgs.openrgb}/bin/openrgb --startminimized -m static -c 00FF00 -b 100 &
   '';
 in
 {
