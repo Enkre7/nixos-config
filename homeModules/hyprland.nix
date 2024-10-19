@@ -14,12 +14,14 @@ let
     ${pkgs.swww}/bin/swww-daemon &
     sleep 0.1
     ${pkgs.swww}/bin/swww img config.wallpaper &
-    ${pkgs.coolercontrol.coolercontrol-gui}/bin/coolercontrol &
+    
+    coolercontrol &    
 
     ${pkgs.webcord}/bin/webcord -m &
     ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
     ${pkgs.nextcloud-client}/bin/nextcloud --background &
-    ${pkgs.openrgb-with-all-plugins}/bin/openrgb --startminimized -m static -c 00FF00 -b 100 &
+    
+    openrgb --startminimized -m static -c 00FF00 -b 100 &   
   '';
 in
 {
