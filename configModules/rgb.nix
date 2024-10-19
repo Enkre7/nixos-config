@@ -3,10 +3,16 @@
 {
   # Razer peripherals and AIO support
   hardware.openrazer.enable = true;
-  environment.systemPackages = with pkgs; [ openrazer-daemon polychromatic liquidctl gkraken ];
+  environment.systemPackages = with pkgs; [ openrazer-daemon polychromatic liquidctl ];
   users.users.${config.user}.extraGroups = [ "openrazer" ];
-  hardware.gkraken.enable = true;
+  programs.coolercontrol = {
+    enable = true;
+    nvidiaSupport = true;  
+  };
 
-  # RBB controller
-  services.hardware.openrgb.enable = true;
+  # RGB controller
+  services.hardware.openrgb = {
+    enable = true;
+    package = pkgs.openrgb-with-all-plugins;
+  };
 }
