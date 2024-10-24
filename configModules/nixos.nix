@@ -31,4 +31,11 @@
     clean.extraArgs = "--keep-since 5d --keep 3";
     flake = config.flakePath; # Flake location
   };
+
+  # Nixd (Nix language server)
+  environment.systemPackages = with pkgs; [
+    nixd
+    nixfmt
+  ];
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 }

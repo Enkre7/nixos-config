@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   programs.vscode = {
@@ -29,6 +29,16 @@
     ];
     userSettings = {
       "redhat.telemetry.enabled" = "false";
+      
+      "nix.serverPath" = "nixd";
+      "nix.enableLanguageServer" = true;
+      "nix.serverSettings.nixd" = {
+        "formatting.command" = [ "nixfmt" ]; # or alejandra or nixpkgs-fmt
+      };
+      "options" = {
+        "nixos.expr" = "(builtins.getFlake ${config.flakePath}).nixosConfigurations.${config.hostname}.options";
+        "home_manager.expr" = "(builtins.getFlake ${config.flakePath}).homeConfigurations.${config.hostname}.options";
+      };
     };
   };
 }
