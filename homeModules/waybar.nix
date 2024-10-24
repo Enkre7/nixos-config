@@ -8,8 +8,8 @@ with lib;
 {
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar;
-    
+    package = pkgs.waybar;    
+    systemd.enable = true;
     settings = [
       {
         layer = "top";
