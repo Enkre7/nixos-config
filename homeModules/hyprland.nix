@@ -12,15 +12,15 @@ let
     ${pkgs.udiskie}/bin/udiskie &
     ${pkgs.gammastep}/bin/gammastep &
     ${pkgs.swww}/bin/swww-daemon &
-    sleep 0.1
+    sleep 0.1 &
     ${pkgs.swww}/bin/swww img config.wallpaper &
-    
-    coolercontrol &    
-
+    ${pkgs.waybar}/bin/waybar &
+ 
     ${pkgs.webcord}/bin/webcord -m &
     ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
     ${pkgs.nextcloud-client}/bin/nextcloud --background &
-    
+
+    coolercontrol &     
     openrgb --startminimized -m static -c 00FF00 -b 100 &   
   '';
 in

@@ -42,12 +42,15 @@
   home.packages = with pkgs; [
     webcord
     gnome-calculator
-    nextcloud-client    
+    nextcloud-client
+    obsidian    
     qimgv
     ffmpeg-full
     picard
+    
+    # dev
     gcc
     gdb
-    obsidian
+    powershell
   ];
 }
