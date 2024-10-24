@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 let
   stylix = config.lib.stylix.colors.withHashtag;
 in

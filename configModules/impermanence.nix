@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, ... }:
+{ lib, ... }:
 
 {
   # Clean boot script

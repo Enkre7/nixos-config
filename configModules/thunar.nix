@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }:
+{ pkgs, ... }:
  
 {
   xdg.portal.enable = true;
@@ -14,7 +14,7 @@
     thunar-media-tags-plugin
   ];
   services.gvfs.enable = true; # Mount, trash, and other functionalities
-  services.gvfs.package = pkgs.gnome3.gvfs;
+  services.gvfs.package = pkgs.gnome.gvfs;
   services.tumbler.enable = true; # Thumbnail support for images
   programs.file-roller.enable = true; # Archive support
   services.devmon.enable = true; 

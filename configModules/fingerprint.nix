@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 
 {
   # Print Scanner

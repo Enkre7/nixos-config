@@ -1,4 +1,4 @@
-{ pkgs, lib, config, inputs, ... }:
+{ pkgs, lib, config, ... }:
 
 let
   suspendScript = pkgs.writeShellScript "suspend-script" ''

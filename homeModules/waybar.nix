@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   stylix = config.lib.stylix.colors.withHashtag;
@@ -9,6 +9,7 @@ with lib;
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
+    
     settings = [
       {
         layer = "top";

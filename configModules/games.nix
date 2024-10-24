@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: 
+{ pkgs, ... }: 
 {
   # Minecraft
   programs.java.enable = true;
