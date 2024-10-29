@@ -35,7 +35,7 @@
   # Nixd (Nix language server)
   environment.systemPackages = with pkgs; [
     nixd
-    nixfmt
+    nixfmt-rfc-style
   ];
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 }

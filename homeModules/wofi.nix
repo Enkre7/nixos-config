@@ -13,9 +13,10 @@ in
     };
     style = ''
       * {
-        color: ${stylix.base00};
+        color: ${stylix.base07};
         font-family: "JetbrainsMono Nerd Font Mono";
         font-size: 14px;
+        border-radius: 20px;
       }
  
       window {
@@ -28,7 +29,7 @@ in
       #input {
         margin: 5px;
         border: none;
-        background-color: ${stylix.base0C};
+        background-color: ${stylix.base0D};
         border-radius: 30px;
       }
 
@@ -56,13 +57,13 @@ in
       }
 
       #entry:selected {
-        background-color: ${stylix.base0C};
+        background-color: ${stylix.base0D};
         border-radius: 20px;
         outline: none;
       }
 
-      #entry:selected * {
-        background-color: ${stylix.base0C};
+      #entry:unselected {
+        background-color: ${stylix.base02};
         border-radius: 20px;
         outline: none;
       }
