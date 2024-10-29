@@ -13,7 +13,7 @@ in
     };
     style = ''
       * {
-        color: ${stylix.base07};
+        color: ${stylix.base00};
         font-family: "JetbrainsMono Nerd Font Mono";
         font-size: 14px;
         border-radius: 20px;
@@ -54,6 +54,7 @@ in
       #text {
         margin: 5px;
         border: none;
+        color: ${stylix.base05};
       }
 
       #entry:selected {
@@ -66,6 +67,18 @@ in
         background-color: ${stylix.base02};
         border-radius: 20px;
         outline: none;
+      }
+
+      #expander-box {
+        background-color: ${stylix.base02};
+      }
+
+      #entry:selected #text {
+        color: ${stylix.base02};
+      }
+
+      #expander-box #unselected #text {
+        color: ${stylix.base05};
       }
     '';
   };
