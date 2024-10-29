@@ -80,6 +80,10 @@ in
       #expander-box #unselected #text {
         color: ${stylix.base05};
       }
+
+      #entry:hover {
+        background-color: ${stylix.base03};
+      }
     '';
   };
 }
