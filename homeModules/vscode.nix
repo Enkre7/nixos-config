@@ -29,7 +29,10 @@
     ];
     userSettings = {
       "redhat.telemetry.enabled" = "false";
-      
+      "files.autoSave" = "off";
+
+      "cSpell.language" = "en,fr";
+     
       "nix.serverPath" = "nixd";
       "nix.enableLanguageServer" = true;
       "nix.serverSettings.nixd" = {

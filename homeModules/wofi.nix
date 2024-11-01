@@ -24,7 +24,7 @@ in
         margin: 0px;
         background-color: ${stylix.base02};
         border-radius: 30px;
-        border: 2px solid ${stylix.base0E};;
+        border: 2px solid ${stylix.base0E};
       }
 
       #input {
