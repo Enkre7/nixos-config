@@ -40,7 +40,7 @@
 
   programs.yt-dlp.enable = true;
   home.packages = with pkgs; [
-    webcord
+    vesktop # discord
     gnome-calculator
     nextcloud-client
     obsidian    

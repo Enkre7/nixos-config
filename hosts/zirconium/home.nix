@@ -45,9 +45,9 @@
     };
 
   home.packages = with pkgs; [
+    vesktop # discord
     r2modman
     obsidian
-    webcord
     gnome-calculator
     nextcloud-client
     qimgv

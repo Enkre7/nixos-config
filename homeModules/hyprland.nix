@@ -14,8 +14,9 @@ let
     ${pkgs.swww}/bin/swww-daemon &
     sleep 0.1 &
     ${pkgs.swww}/bin/swww img config.wallpaper &
- 
-    ${pkgs.webcord}/bin/webcord -m &
+
+    kdeconnect-app $ 
+    vesktop &
     ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
     ${pkgs.nextcloud-client}/bin/nextcloud --background &
 
