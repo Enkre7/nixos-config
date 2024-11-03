@@ -5,7 +5,6 @@ let
     # Start of SSH agent for gnome-keyrings
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh) &
     
-    #${pkgs.plasma5Packages.kdeconnect-kde}/bin/kdeconnect-app &
     ${pkgs.mako}/bin/mako &
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
     ${pkgs.blueman}/bin/blueman-applet &
@@ -15,7 +14,7 @@ let
     sleep 0.1 &
     ${pkgs.swww}/bin/swww img config.wallpaper &
 
-    kdeconnect-app $ 
+    ${pkgs.plasma5Packages.kdeconnect-kde}/bin/kdeconnect-app &
     vesktop &
     ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
     ${pkgs.nextcloud-client}/bin/nextcloud --background &
