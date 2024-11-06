@@ -14,7 +14,7 @@ let
     sleep 0.1 &
     ${pkgs.swww}/bin/swww img config.wallpaper &
 
-    ${pkgs.plasma5Packages.kdeconnect-kde}/bin/kdeconnect-app &
+    #${pkgs.plasma5Packages.kdeconnect-kde}/bin/kdeconnect-app &
     vesktop &
     ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
     ${pkgs.nextcloud-client}/bin/nextcloud --background &
@@ -55,10 +55,10 @@ in
         rounding = 5;
         active_opacity = "1.0";
         inactive_opacity = "1.0";
-        drop_shadow = true;
-        shadow_range = 5;
-        shadow_render_power = 3;
-        "col.shadow" = lib.mkForce "rgb(${stylix.base00})";
+        #drop_shadow = true;
+        #shadow_range = 5;
+        #shadow_render_power = 3;
+        #"col.shadow" = lib.mkForce "rgb(${stylix.base00})";
         blur = {
           enabled = true;
           size = 7;
