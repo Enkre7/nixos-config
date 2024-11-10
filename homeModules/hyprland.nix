@@ -4,7 +4,8 @@ let
   startupScript = pkgs.writeShellScriptBin "start" ''
     # Start of SSH agent for gnome-keyrings
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh) &
-    
+
+    ${pkgs.waybar}/bin/waybar &    
     ${pkgs.mako}/bin/mako &
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
     ${pkgs.blueman}/bin/blueman-applet &
@@ -55,10 +56,6 @@ in
         rounding = 5;
         active_opacity = "1.0";
         inactive_opacity = "1.0";
-        #drop_shadow = true;
-        #shadow_range = 5;
-        #shadow_render_power = 3;
-        #"col.shadow" = lib.mkForce "rgb(${stylix.base00})";
         blur = {
           enabled = true;
           size = 7;
@@ -199,8 +196,9 @@ in
         # Pavucontrol
         "float, class:(pavucontrol)"
         "center, class:(pavucontrol)"
-        "size 925 318, class:(pavucontrol)"
         "pin, class:(pavucontrol)"
+        "size 955 472, class:(pavucontrol)"
+
         # Steam
         "float, title:^(Steam Guard)$"
         "float, title:^(Paramètres Steam)$"
@@ -211,6 +209,7 @@ in
         "noborder, title:^(Liste de contacts)$"
         "size 480 480, title:^(Liste de contacts)"
         "center, title:^(Liste de contacts)"
+
         # Mullvad VPN
         "pin, class:(Mullvad VPN)"
         "rounding 10, class:(Mullvad VPN)"
@@ -219,6 +218,7 @@ in
         "float, class:(.blueman-manager-wrapped)"
         "size 654 428, class:(.blueman-manager-wrapped)"
         "center, class:(.blueman-manager-wrapped)"
+
 	# Firefox
         "float, class:(firefox), title:^(Incrustation vidéo)$"
         "pin, class:(firefox), title:^(Incrustation vidéo)$"
@@ -227,6 +227,7 @@ in
 	"size 35% 35%, class:(firefox), title:^(Incrustation vidéo)$"
         "move 911 50, class:(firefox), title:^(Incrustation vidéo)$"
         "size 490 154, class:(firefox), title:^(Suppression des cookies.*)$"
+
         # Nexctcloud
         "pin, class:(Nextcloud)"
         "rounding 10, class:(Nextcloud)"
@@ -234,14 +235,17 @@ in
         "float, class:(Nextcloud)"
         "center, class:(Nextcloud)"
         "size 800 500, class:(Nextcloud)"
+
         # Minecraft
         "fullscreen, title:^(Minecraft)(.*)$"
+
         # Gnome calculator
         "float, class:(org.gnome.Calculator)" # All modes
         #"size 670 700, class:(org.gnome.Calculator)" # Basic mode
         "size 345 492, class:(org.gnome.Calculator)"
         "move 1058 52, class:(org.gnome.Calculator)"
-        # keyring manager
+
+        # Keyring manager
         "dimaround, class:(gcr-prompter)"
         "pin, class:(gcr-prompter)"
       ];

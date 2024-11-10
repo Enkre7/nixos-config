@@ -9,7 +9,6 @@
   programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
   programs.hyprland.enable = true;
   programs.hyprland.xwayland.enable = true;
-  programs.waybar.enable = true;
   
   # Wayland event viewer
   environment.systemPackages = with pkgs; [ wev ];
