@@ -3,7 +3,7 @@ With Flakes, Home-manager, Lanzaboot, nixos-hardware, nh (nix-helper) and Sops-n
 Contain also a custom minimal ISO of nixos to facilitate installation via predefined aliases.
 
 ## Components
-|                          | Promethium                         | Zirconium (🚧 in build)            |
+|                          | Promethium                         | Zirconium                          |
 |--------------------------|------------------------------------|------------------------------------|
 | **Hardware**             | Framework Laptop 13" AMD           | Custom tower                       |
 | **Hardware**             | BTRFS Pool                         | BTRFS Pool                         |

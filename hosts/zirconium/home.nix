@@ -3,6 +3,7 @@
 {
   imports = [
     ./variables.nix
+    ../../homeModules/stylix.nix
     #../../homeModules/impermanence.nix
     ../../homeModules/wlogout.nix
     ../../homeModules/waybar.nix
@@ -26,9 +27,6 @@
   home.homeDirectory = "/home/${config.user}";
   home.stateVersion = config.stateVersion;
   nixpkgs.config.allowUnfreePredicate = _: true;  
-
-  stylix.targets.kde.enable = false;
-  stylix.targets.wofi.enable = false; 
 
   # Host specific settings
   wayland.windowManager.hyprland.settings = {
