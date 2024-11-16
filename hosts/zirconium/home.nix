@@ -20,6 +20,7 @@
     ../../homeModules/kdeconnect.nix
     ../../homeModules/wofi.nix
     ../../homeModules/libreoffice.nix
+    ../../homeModules/lf.nix
   ];
   
   programs.home-manager.enable = true;
