@@ -68,7 +68,7 @@ button {
     animation: gradient_f 20s ease-in infinite;
     transition: all 0.3s ease-in;
     box-shadow: 0 0 10px 2px transparent;
-    border: transparent;
+    border: none;
     border-radius: 25px;
     margin: 10px;
 }
@@ -84,6 +84,7 @@ button:hover {
 button:focus {
     background-size: 25%;
     box-shadow: none;
+    border: none;
 }
 
 #lock {
