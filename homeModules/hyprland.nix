@@ -35,6 +35,7 @@ in
 
       "$terminal" = "kitty";
       "$fileManager" = "thunar";
+      "$termFileManager" = "lf";
       "$menu" = "wofi";
       "$systman" = "btop";
       "$screenshot" = "grim -g \"$(slurp)\" - | swappy -f -";
@@ -115,8 +116,9 @@ in
         "$mainMod, A, exec, wlogout"
         "$mainMod, Q, exec, $terminal"
         "$mainMod, C, killactive,"
-        "$mainMod, E, exec, $systman"
+        "$mainMod, E, exec, $terminal -e $systman"
         "$mainMod, T, exec, $fileManager"
+        "$mainMod, G, exec, $terminal -e $termFileManager"
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo," # dwindle

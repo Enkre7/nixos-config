@@ -11,6 +11,7 @@ in
       mode = "drun";
       allow_images = true;
       key_expand = "Super_L";
+
     };
     style = ''
       * {

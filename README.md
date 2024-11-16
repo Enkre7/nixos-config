@@ -1,5 +1,5 @@
 # My personnal NixOS config
-With Flakes, Home-manager, Lanzaboot, nixos-hardware, nh (nix-helper) and Sops-nix.
+With Flakes, Home-manager, Lanzaboot, nixos-hardware, nh (nix-helper), impermanence (in test) and Sops-nix (also in test).
 Contain also a custom minimal ISO of nixos to facilitate installation via predefined aliases.
 
 ## Components
@@ -21,7 +21,7 @@ Contain also a custom minimal ISO of nixos to facilitate installation via predef
 | **Text Editor**          | LibreOffice                        | LibreOffice                        |
 | **Media Player**         | mpv                                | mpv                                |
 | **Browser**              | Firefox                            | Firefox                            |
-| **File Manager**         | Thunar                             | Thunar                             |
+| **File Manager**         | LF + Thunar                        | LF + Thunar                        |
 | **Games**                | Steam + Prism Launcher (Minecraft) | Steam + Prism Launcher (Minecraft) |
 | **Screenshot Software**  | Swappy + Grim                      | Swappy + Grim                      |
 | **Styling**              | Stylix                             | Stylix                             |

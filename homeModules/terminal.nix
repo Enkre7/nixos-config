@@ -13,7 +13,7 @@
     settings = {
       copy_on_select = true;
       clipboard_control = "write-clipboard read-clipboard write-primary read-primary";
-      confirm_os_window_close = -1;
+      confirm_os_window_close = 0;
     };
   };
 
