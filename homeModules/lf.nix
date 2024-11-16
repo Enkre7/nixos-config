@@ -44,4 +44,5 @@
       icons = true;
       ignorecase = true;
     };
+  };
 }
