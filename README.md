@@ -28,6 +28,12 @@ Contain also a custom minimal ISO of nixos to facilitate installation via predef
 | **Font**                 | NerdFonts (JetBrainsMono)          | NerdFonts (JetBrainsMono)          |
 | **Cursor**               | Bibata cursors (Bibata-Modern-Ice) | Bibata cursors (Bibata-Modern-Ice) |
 
+## Images:
+![alt text](https://github.com/Enkre7/nixos-config/blob/main/images/zirconium_1.png)
+![alt text](https://github.com/Enkre7/nixos-config/blob/main/images/promethium_1.png)
+![alt text](https://github.com/Enkre7/nixos-config/blob/main/images/promethium_2.png)
+![alt text](https://github.com/Enkre7/nixos-config/blob/main/images/promethium_3.png)
+
 ## Installation:
 You need to boot the minimal nixos iso after it's creation (See the [Build_custom_ISO.md](Build_custom_ISO.md) file).
 
