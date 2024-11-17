@@ -16,7 +16,7 @@ let
     ${pkgs.swww}/bin/swww img config.wallpaper &
 
     #${pkgs.plasma5Packages.kdeconnect-kde}/bin/kdeconnect-app &
-    vesktop &
+    ${pkgs.vesktop}/bin/vesktop --start-minimized &
     ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
     ${pkgs.nextcloud-client}/bin/nextcloud --background &
 
@@ -149,9 +149,13 @@ in
 	# Example special workspace (scratchpad)
 	"$mainMod, S, togglespecialworkspace, magic"
 	"$mainMod SHIFT, S, movetoworkspace, special:magic"
-	# Scroll through existing workspaces with mainMod + scroll
+	# Scroll through existing workspaces
+          # Mouse
 	"$mainMod, mouse_down, workspace, e+1"
 	"$mainMod, mouse_up, workspace, e-1"
+          # Keyboard
+        "$mainMod, Right, workspace, e+1"
+        "$mainMod, Left, workspace, e-1" 
 	# Sound
 	",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 	",XF86AudioPlay, exec, playerctl play-pause"
@@ -192,8 +196,6 @@ in
         "size 370 881, ^(Bitwarden)$"
       ];
 
-      "$firefox" = "class:(firefox)";
-
       windowrulev2 = [
         # Pavucontrol
         "float, class:(pavucontrol)"
@@ -216,10 +218,16 @@ in
         "pin, class:(Mullvad VPN)"
         "rounding 10, class:(Mullvad VPN)"
         "noborder, class:(Mullvad VPN)"
+
         # Blueman manager
         "float, class:(.blueman-manager-wrapped)"
         "size 654 428, class:(.blueman-manager-wrapped)"
         "center, class:(.blueman-manager-wrapped)"
+
+        # Btop
+        "float, title:^(btop)$"
+        "size 751 512, title:^(btop)$"
+        "center, title:^(btop)$"
 
 	# Firefox
         "float, class:(firefox), title:^(Incrustation vidéo)$"

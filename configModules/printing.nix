@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   services.printing = {
@@ -6,5 +6,14 @@
     drivers = with pkgs; [ brgenml1cupswrapper ];
   };
   programs.system-config-printer.enable = true;
-  hardware.sane.enable = true; # scanner
+  hardware.sane = {
+    enable = true; # scanner
+    brscan4.enable = true;
+  };
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+  };
+  services.ipp-usb.enable = true; # Microsoft WSD "driverless" scanning
+  users.users.${config.user}.extraGroups = [ "scanner" "lp" ];
 }
