@@ -12,7 +12,7 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      scan = "scanimage --format=jpeg --output-file=/home/${config.user}/Téléchargements/scan.jpeg";
+      scanfile = "scanimage --format=jpeg --output-file=/home/${config.user}/Téléchargements/scan.jpeg";
       ll = "sudo ls -laRh";
       fman = "compgen -c | fzf | xargs man";
       fetch = "${pkgs.fastfetch}/bin/fastfetch --config examples/10.jsonc";
@@ -48,7 +48,7 @@
 
   programs.bash = {
     shellAliases = {
-      scan = "scanimage --format=jpeg --output-file=/home/${config.user}/Téléchargements/scan.jpeg";
+      scanfile = "scanimage --format=jpeg --output-file=/home/${config.user}/Téléchargements/scan.jpeg";
       ll = "sudo ls -laRh";
       fman = "compgen -c | fzf | xargs man";
       fetch = "${pkgs.fastfetch}/bin/fastfetch --config examples/10.jsonc";
