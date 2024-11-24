@@ -29,6 +29,7 @@
     ../../configModules/printing.nix
     ../../configModules/games.nix
     ../../configModules/adb.nix
+    ../../configModules/docker.nix
   ];
   
   home-manager = {
