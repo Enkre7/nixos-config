@@ -191,9 +191,6 @@ in
       windowrule = [
 	"float, ^(nm-connection-editor)$"
         "float, ^(nm-applet)$"
-        # Bitwarden extension
-        "float, ^(Bitwarden)$"
-        "size 370 881, ^(Bitwarden)$"
       ];
 
       windowrulev2 = [
@@ -237,6 +234,10 @@ in
 	"size 35% 35%, class:(firefox), title:^(Incrustation vidéo)$"
         "move 911 50, class:(firefox), title:^(Incrustation vidéo)$"
         "size 490 154, class:(firefox), title:^(Suppression des cookies.*)$"
+	
+        # Bitwarden
+        "float, title:^(Extension : (Gestionnaire de mots de passe Bitwarden) - Bitwarden — Mozilla Firefox)$"
+        "center, title:^(Extension : (Gestionnaire de mots de passe Bitwarden) - Bitwarden — Mozilla Firefox)$"
 
         # Nexctcloud
         "pin, class:(Nextcloud)"
