@@ -12,7 +12,7 @@
   };
   services.avahi = {
     enable = true;
-    nssmdns4 = true;
+    nssmdns = true;
   };
   services.ipp-usb.enable = true; # Microsoft WSD "driverless" scanning
   users.users.${config.user}.extraGroups = [ "scanner" "lp" ];
