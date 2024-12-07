@@ -13,7 +13,7 @@
       size = 28;
     };
     fonts = {
-      monospace.package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
+      monospace.package = pkgs.nerd-fonts.jetbrains-mono;
       monospace.name = "JetbrainsMono Nerd Font Mono";
       sansSerif.package = pkgs.dejavu_fonts;
       sansSerif.name = "DejaVu Sans";
