@@ -45,6 +45,7 @@
     "usbhid"
     "sd_mod"  
   ];
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_11;
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   hardware.nvidia.powerManagement.enable = true;
   #environment.sessionVariables = {

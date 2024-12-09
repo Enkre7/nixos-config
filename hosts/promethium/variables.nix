@@ -15,7 +15,7 @@
   };
   
   config = {
-    stateVersion = "24.05";
+    stateVersion = "24.11";
     hostname = "promethium";
     user = "enkre";
     flakePath = "/persist/system/nixos";
