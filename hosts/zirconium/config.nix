@@ -21,7 +21,7 @@
     ../../configModules/shell.nix
     ../../configModules/terminal.nix
     ../../configModules/greetd.nix
-    ../../configModules/style.nix
+    ../../configModules/stylix.nix
     ../../configModules/security.nix
     ../../configModules/rgb.nix
     ../../configModules/yubikey.nix

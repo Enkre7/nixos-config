@@ -61,8 +61,12 @@
         ublock-origin
         user-agent-string-switcher
         privacy-badger
+        privacy-settings
         sponsorblock
         return-youtube-dislikes
+        translate-web-pages
+        french-language-pack
+        french-dictionary
        ];
       settings = {
         "intl.locale.requested" = "fr,en_US";
@@ -180,11 +184,6 @@
       };
     };
   };
-
-  home.file.".mozilla/firefox/prefs.js".text = ''
-    user_pref("general.useragent.locale", "fr");
-    user_pref("intl.accept_languages", "fr, en-US, en");
-  '';
  
   xdg.mimeApps.defaultApplications = {
     "text/html" = ["firefox.desktop"];

@@ -22,7 +22,7 @@
     ../../configModules/shell.nix
     ../../configModules/terminal.nix
     ../../configModules/greetd.nix
-    ../../configModules/style.nix
+    ../../configModules/stylix.nix
     ../../configModules/security.nix
     #../../configModules/clamav.nix
     ../../configModules/fingerprint.nix
@@ -40,8 +40,10 @@
   };
 
   # Debug
-  #stylix.enable = lib.mkForce false;
-  
+  stylix.enable = lib.mkForce true;
+  stylix.autoEnable = lib.mkForce false;  
+
+
   # Host specific settings  
   boot.initrd.availableKernelModules = [
     "nvme"
