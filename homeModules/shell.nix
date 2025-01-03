@@ -18,7 +18,7 @@
       fman = "compgen -c | fzf | xargs man";
       fetch = "${pkgs.fastfetch}/bin/fastfetch --config examples/10.jsonc";
       #rebuild = "sudo nixos-rebuild switch --flake ${config.flakePath}#${config.hostname}";
-      rebuild = "nh os switch --hostname ${config.hostname}";
+      rebuild = "nh os switch --hostname ${config.hostname} && fc-cache -r";
       push = "sudo chown -R ${config.user}:users ${config.flakePath} && sudo chmod -R +x ${config.flakePath} && cd ${config.flakePath} && git add . && git commit -m 'Automatic commit' && git push";
       pull = "cd ${config.flakePath} && git pull";
       #update = "cd ${config.flakePath} && sudo nix flake update";
@@ -55,7 +55,7 @@
       fman = "compgen -c | fzf | xargs man";
       fetch = "${pkgs.fastfetch}/bin/fastfetch --config examples/10.jsonc";
       #rebuild = "sudo nixos-rebuild switch --flake ${config.flakePath}#${config.hostname}";
-      rebuild = "nh os switch --hostname ${config.hostname}";
+      rebuild = "nh os switch --hostname ${config.hostname} && fc-cache -r";
       push = "sudo chown -R ${config.user}:users ${config.flakePath} && sudo chmod -R +x ${config.flakePath} && cd ${config.flakePath} && git add . && git commit -m 'Automatic commit' && git push";
       pull = "cd ${config.flakePath} && git pull";
       #update = "cd ${config.flakePath} && sudo nix flake update";

@@ -33,7 +33,7 @@
   nixpkgs.config.allowUnfreePredicate = _: true;
  
   # Debug
-  stylix.enable = lib.mkForce true;
+  #stylix.enable = lib.mkForce true;
 
   # Host specific settings
   programs.alacritty.enable = true;

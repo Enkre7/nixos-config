@@ -40,9 +40,8 @@
   };
 
   # Debug
-  stylix.enable = lib.mkForce true;
-  stylix.autoEnable = lib.mkForce false;  
-
+  #stylix.enable = lib.mkForce true;
+  #stylix.autoEnable = lib.mkForce false;
 
   # Host specific settings  
   boot.initrd.availableKernelModules = [
