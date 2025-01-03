@@ -12,6 +12,7 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
+      ssh = 'TERM="xterm-256color" kitty +kitten ssh';
       scanfile = "scanimage --format=jpeg --output-file=/home/${config.user}/Téléchargements/scan.jpeg";
       ll = "sudo ls -laRh";
       fman = "compgen -c | fzf | xargs man";
@@ -48,6 +49,7 @@
 
   programs.bash = {
     shellAliases = {
+      ssh = 'TERM="xterm-256color" kitty +kitten ssh';
       scanfile = "scanimage --format=jpeg --output-file=/home/${config.user}/Téléchargements/scan.jpeg";
       ll = "sudo ls -laRh";
       fman = "compgen -c | fzf | xargs man";

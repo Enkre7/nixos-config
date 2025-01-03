@@ -14,6 +14,7 @@
     ../../homeModules/hyprlock.nix
     ../../homeModules/firefox.nix
     ../../homeModules/git.nix
+    ../../homeModules/mpv.nix
     ../../homeModules/vscode.nix
     ../../homeModules/shell.nix
     ../../homeModules/terminal.nix
@@ -29,7 +30,11 @@
   home.stateVersion = config.stateVersion;
   nixpkgs.config.allowUnfreePredicate = _: true;  
 
+  # Debug
+  #stylix.enable = lib.mkForce false;
+
   # Host specific settings
+  programs.alacritty.enable = true;
   wayland.windowManager.hyprland.settings = {
     monitor = lib.mkForce ",4096x2160@119.88,0x0,1.333333";
     general.gaps_in = lib.mkForce 4;
@@ -37,11 +42,6 @@
   }; 
   
   xsession.numlock.enable = true;
-  
-  programs.mpv = {
-      enable = true;
-      scripts = [pkgs.mpvScripts.mpris];
-    };
 
   home.packages = with pkgs; [
     vesktop # discord

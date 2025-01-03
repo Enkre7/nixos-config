@@ -14,7 +14,7 @@
     steam-run
     steam
     lutris
-    heroic
+    #heroic
     protonup
     prismlauncher # Minecraft
     pavucontrol

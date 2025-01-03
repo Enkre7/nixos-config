@@ -180,6 +180,11 @@
       };
     };
   };
+
+  home.file.".mozilla/firefox/prefs.js".text = ''
+    user_pref("general.useragent.locale", "fr");
+    user_pref("intl.accept_languages", "fr, en-US, en");
+  '';
  
   xdg.mimeApps.defaultApplications = {
     "text/html" = ["firefox.desktop"];

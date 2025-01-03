@@ -35,6 +35,9 @@
     extraSpecialArgs = { inherit inputs; };
     users.${config.user} = import ./home.nix;
   };  
+
+  # Debug
+  #stylix.enable = lib.mkForce false;
   
   # Host specific settings
   boot.initrd.availableKernelModules = [

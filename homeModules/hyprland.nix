@@ -30,7 +30,10 @@ in
   wayland.windowManager.hyprland = {
     enable = true;    
     settings = {
-      monitor = ",highrr,auto,1.6";
+      monitor = [
+        ",highrr,auto,1.6"
+        ",preffered,auto,auto"
+      ];
       xwayland.force_zero_scaling = true;
 
       "$terminal" = "kitty";
