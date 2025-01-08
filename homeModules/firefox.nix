@@ -3,6 +3,10 @@
 {
   programs.firefox = {
     enable = true;
+    languagePacks = [
+      "fr"
+      "en-US"
+    ];
     policies = {
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
@@ -65,8 +69,6 @@
         sponsorblock
         return-youtube-dislikes
         translate-web-pages
-        french-language-pack
-        french-dictionary
        ];
       settings = {
         "intl.locale.requested" = "fr,en_US";
