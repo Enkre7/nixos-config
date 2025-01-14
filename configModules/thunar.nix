@@ -7,16 +7,16 @@
     extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   };
   xdg.mime.defaultApplications = {
-    "inode/directory" = "thunar.desktop";
-    "application/x-zip" = "file-roller.desktop";
-    "application/x-gzip" = "file-roller.desktop";
-    "application/x-bzip2" = "file-roller.desktop";
-    "application/x-xz" = "file-roller.desktop";
-    "application/zip" = "file-roller.desktop";
-    "application/gzip" = "file-roller.desktop";
-    "application/x-7z-compressed" = "file-roller.desktop";
-    "application/x-rar" = "file-roller.desktop";
-    "application/x-tar" = "file-roller.desktop";
+    "inode/directory" = "thunar";
+    "application/x-zip" = "file-roller";
+    "application/x-gzip" = "file-roller";
+    "application/x-bzip2" = "file-roller";
+    "application/x-xz" = "file-roller";
+    "application/zip" = "file-roller";
+    "application/gzip" = "file-roller";
+    "application/x-7z-compressed" = "file-roller";
+    "application/x-rar" = "file-roller";
+    "application/x-tar" = "file-roller";
   };
 
   programs.thunar.enable = true;

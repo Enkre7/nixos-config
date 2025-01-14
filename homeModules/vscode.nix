@@ -46,14 +46,16 @@
   };
 
   xdg.mimeApps.defaultApplications = {
-    "text/plain" = "codium.desktop";
-    "text/html" = "codium.desktop";
-    "application/javascript" = "codium.desktop";
-    "application/json" = "codium.desktop";
-    "application/x-python-code" = "codium.desktop";
-    "application/xml" = "codium.desktop";
-    "text/x-shellscript" = "codium.desktop";
-    "text/x-csrc" = "codium.desktop";
-    "text/x-c++src" = "codium.desktop";
+    "text/plain" = "codium";
+    "text/html" = "codium";
+    "application/javascript" = "codium";
+    "application/json" = "codium";
+    "application/x-python-code" = "codium";
+    "application/xml" = "codium";
+    "text/x-shellscript" = "codium";
+    "text/x-csrc" = "codium";
+    "text/x-c++src" = "codium";
+    "text/markdown" = "codium";
+    "text/x-nix" = "codium";
   };
 }
