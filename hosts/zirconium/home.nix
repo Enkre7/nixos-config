@@ -15,12 +15,14 @@
     ../../homeModules/firefox.nix
     ../../homeModules/git.nix
     ../../homeModules/mpv.nix
+    ../../homeModules/gimgv.nix
     ../../homeModules/vscode.nix
     ../../homeModules/shell.nix
     ../../homeModules/terminal.nix
     ../../homeModules/kdeconnect.nix
     ../../homeModules/wofi.nix
-    ../../homeModules/libreoffice.nix
+    #../../homeModules/libreoffice.nix
+    ../../homeModules/onlyoffice.nix
     ../../homeModules/lf.nix
   ];
   
@@ -34,7 +36,6 @@
   #stylix.enable = lib.mkForce false;
 
   # Host specific settings
-  programs.alacritty.enable = true;
   wayland.windowManager.hyprland.settings = {
     monitor = lib.mkForce ",4096x2160@119.88,0x0,1.333333";
     general.gaps_in = lib.mkForce 4;
@@ -49,7 +50,6 @@
     obsidian
     gnome-calculator
     nextcloud-client
-    qimgv
     ffmpeg-full
   ];
 }

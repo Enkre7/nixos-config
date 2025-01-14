@@ -17,12 +17,14 @@
     ../../homeModules/firefox.nix
     ../../homeModules/git.nix
     ../../homeModules/mpv.nix
+    ../../homeModules/gimgv.nix
     ../../homeModules/vscode.nix
     ../../homeModules/shell.nix
     ../../homeModules/terminal.nix
     ../../homeModules/kdeconnect.nix
     ../../homeModules/wofi.nix
-    ../../homeModules/libreoffice.nix
+    #../../homeModules/libreoffice.nix
+    ../../homeModules/onlyoffice.nix
     ../../homeModules/lf.nix
   ];
 
@@ -36,14 +38,12 @@
   #stylix.enable = lib.mkForce true;
 
   # Host specific settings
-  programs.alacritty.enable = true;
   programs.yt-dlp.enable = true;
   home.packages = with pkgs; [
     vesktop # discord
     gnome-calculator
     nextcloud-client
-    obsidian    
-    qimgv
+    obsidian
     ffmpeg-full
     picard
     

@@ -44,4 +44,16 @@
       };
     };
   };
+
+  xdg.mimeApps.defaultApplications = {
+    "text/plain" = "codium.desktop";
+    "text/html" = "codium.desktop";
+    "application/javascript" = "codium.desktop";
+    "application/json" = "codium.desktop";
+    "application/x-python-code" = "codium.desktop";
+    "application/xml" = "codium.desktop";
+    "text/x-shellscript" = "codium.desktop";
+    "text/x-csrc" = "codium.desktop";
+    "text/x-c++src" = "codium.desktop";
+  };
 }
