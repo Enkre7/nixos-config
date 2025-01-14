@@ -15,7 +15,7 @@
     ../../homeModules/firefox.nix
     ../../homeModules/git.nix
     ../../homeModules/mpv.nix
-    ../../homeModules/gimgv.nix
+    ../../homeModules/qimgv.nix
     ../../homeModules/vscode.nix
     ../../homeModules/shell.nix
     ../../homeModules/terminal.nix
