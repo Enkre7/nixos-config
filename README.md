@@ -13,7 +13,7 @@ Contain also a custom minimal ISO of nixos to facilitate installation via predef
 | **Display Manager**      | GDM                                | GDM                                |
 | **Bar**                  | Waybar                             | Waybar                             |
 | **Notification Daemon**  | Mako                               | Mako                               |
-| **Shell**                | Bash                               | Bash                               |
+| **Shell**                | ZSH                                | ZSH                                |
 | **Terminal**             | Kitty                              | Kitty                              |
 | **Keyring Manager**      | Gnome Keyring                      | Gnome Keyring                      |
 | **Application Launcher** | Wofi                               | Wofi                               |
