@@ -224,9 +224,7 @@ in
         "center, class:(.blueman-manager-wrapped)"
 
         # Btop
-        "float, title:^(btop)$"
-        "size 751 512, title:^(btop)$"
-        "center, title:^(btop)$"
+        "float, class:(kitty), title:^(btop)*"
 
 	# Firefox
         "float, class:(firefox), title:^(Incrustation vidéo)$"

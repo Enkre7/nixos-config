@@ -56,15 +56,18 @@ with lib;
         "memory" = {
           interval = 5;
           format = " {percentage}%";
+          on-click = "kitty -e btop";
         };
         "cpu" = {
           interval = 5;
           format = " {usage}%";
+          on-click = "kitty -e btop";
         };
         "disk" = {
           format = " {percentage_used}%";
           tooltip-format = "{used} / {total}";
           unit = "GB";
+          on-click = "kitty -e btop";
         };
         "network" = {
           interval = 2;

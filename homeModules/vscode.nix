@@ -25,6 +25,7 @@
       ms-kubernetes-tools.vscode-kubernetes-tools
       #vscodevim.vim
       yzhang.markdown-all-in-one
+      james-yu.latex-workshop
       streetsidesoftware.code-spell-checker
     ];
     userSettings = {

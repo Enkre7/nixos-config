@@ -46,6 +46,7 @@
     obsidian
     ffmpeg-full
     picard
+    texliveSmall
     
     # dev
     gcc
