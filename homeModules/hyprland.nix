@@ -20,6 +20,8 @@ let
     ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
     ${pkgs.nextcloud-client}/bin/nextcloud --background &
 
+    wl-paste --watch cliphist store &
+
     coolercontrol &     
     openrgb --startminimized -m static -c 00FF00 -b 100 &   
   '';
@@ -41,6 +43,7 @@ in
       "$menu" = "wofi";
       "$systman" = "btop";
       "$screenshot" = "grim -g \"$(slurp)\" - | swappy -f -";
+      "$clipboard" = "cliphist list | wofi --dmenu | cliphist decode | wl-copy";
        
       exec-once = ''${startupScript}/bin/start'';
       
@@ -168,6 +171,9 @@ in
         ",XF86AudioMedia, exec, hyprlock"
         # Screenshot
         ",Print, exec, $screenshot"
+        # Clipboard
+        "Control_L Alt_L, V, exec, $clipboard"
+        "Control_R Alt_R, V, exec, $clipboard"
       ];
 
       binde = [

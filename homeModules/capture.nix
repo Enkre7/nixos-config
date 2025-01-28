@@ -16,4 +16,6 @@
       early_exit=true
     '';
   };       
+
+  services.cliphist.enable = true;
 }
