@@ -173,7 +173,6 @@ in
         ",Print, exec, $screenshot"
         # Clipboard
         "Control_L Alt_L, V, exec, $clipboard"
-        "Control_R Alt_R, V, exec, $clipboard"
       ];
 
       binde = [
