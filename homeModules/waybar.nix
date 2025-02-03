@@ -41,8 +41,28 @@ with lib;
           on-scroll-down = "hyprctl dispatch workspace e-1";
         };
         "clock" = {
-          format = "{:L%H:%M}";
-          tooltip-format = "<big>{:L%d %A / %m}</big>\n<tt><small>{calendar}</small></tt>";
+          interval = 1;
+          timezone = "Europe/Paris";
+          locale = "fr_FR.UTF-8";
+          format = "{:%H:%M}";
+          format-alt = "{:L%A, %d %B %Y}";
+          tooltip-format = "<tt><small>{calendar}</small></tt>";
+          calendar = {
+            mode = "year";
+            mode-mon-col = 3;
+            weeks-pos = "right";
+            on-scroll = 2;
+            format = {
+              months = "<span color='${stylix.base09}'><b>{}</b></span>";
+              days = "<span color='${stylix.base05}'><b>{}</b></span>";
+              weeks = "<span color='${stylix.base0F}'><b>{}</b></span>";
+              weekdays = "<span color='${stylix.base0A}'><b>{}</b></span>";
+              today = "<span color='${stylix.base08}'><b><u>{}</u></b></span>";
+            };
+          };
+          on-click-right = "mode";
+          on-scroll-up = "shift_up";
+          on-scroll-down = "shift_down";
         };
         "hyprland/window" = {
           max-length = 32;
@@ -167,7 +187,7 @@ with lib;
           margin: 0px 3px;
           border-radius: 16px;
           color: ${stylix.base00};
-          background: linear-gradient(45deg, ${stylix.base0E}, ${stylix.base0F}, ${stylix.base0D}, ${stylix.base09});
+          background: ${stylix.base05};
           background-size: 300% 300%;
           transition: ${betterTransition};
           opacity: 1.0;
@@ -183,6 +203,9 @@ with lib;
           background-size: 300% 300%;
           opacity: 0.8;
           transition: ${betterTransition};
+        }
+        #workspaces button.active:hover {
+          background: ${stylix.base05};
         }
         @keyframes gradient_horizontal {
           0% {
@@ -240,7 +263,7 @@ with lib;
         #clock {
           font-weight: bold;
           color: ${stylix.base00};
-          background: linear-gradient(45deg, ${stylix.base0C}, ${stylix.base0F}, ${stylix.base0B}, ${stylix.base08});
+          background: ${stylix.base05};
           background-size: 300% 300%;
           margin: 0px;
           padding: 0px 15px 0px 30px;
