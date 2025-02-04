@@ -12,7 +12,7 @@
     yubikey-personalization
     yubikey-personalization-gui
     yubikey-manager
-    yubioath-flutter
+    #yubioath-flutter
   ];
 
   # Yubikey host authentification
