@@ -217,6 +217,7 @@ in
         "noborder, title:^(Liste de contacts)$"
         "size 480 480, title:^(Liste de contacts)"
         "center, title:^(Liste de contacts)"
+        "center, class:^(steam_app_)$"
 
         # Mullvad VPN
         "pin, class:(Mullvad VPN)"
@@ -229,7 +230,7 @@ in
         "center, class:(.blueman-manager-wrapped)"
 
         # Btop
-        "float, class:(kitty), title:^(btop)*"
+        "float, class:(kitty), title:^(btop)$"
 
 	# Firefox
         "float, class:(firefox), title:^(Incrustation vidéo)$"
