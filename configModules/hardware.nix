@@ -1,4 +1,4 @@
-{ lib, pkgs, modulesPath, ... }:
+{ config, lib, pkgs, modulesPath, ... }:
 
 {
   imports =
@@ -21,6 +21,7 @@
 
   # For Nvidia
   hardware.nvidia.open = true;
-  
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;  
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

@@ -50,6 +50,12 @@
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = [ "@searxng" "@sx" ];
         };
+        "ProtonDB" = {
+          urls = [{ template = "https://www.protondb.com/search?q={searchTerms}"; }];
+          iconUpdateURL = "https://www.iconarchive.com/download/i150669/simpleicons-team/simple/protondb.svg";
+          updateInterval = 24 * 60 * 60 * 1000; # every day
+          definedAliases = [ "@protondb" "@pr" ];
+        };
         "Google".metaData.alias = "@g";
       };
       search.force = true;

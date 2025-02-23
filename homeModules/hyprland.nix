@@ -129,6 +129,7 @@ in
         "$mainMod, P, pseudo," # dwindle
         "$mainMod, J, togglesplit," # dwindle
         "$mainMod, F, exec, firefox"
+        "$mainMod, B, fullscreen"
         "$mainMod SHIFT, F, exec, firefox --private-window"
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"
