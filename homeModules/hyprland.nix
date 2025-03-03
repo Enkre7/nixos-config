@@ -129,6 +129,7 @@ in
         "$mainMod, P, pseudo," # dwindle
         "$mainMod, J, togglesplit," # dwindle
         "$mainMod, F, exec, firefox"
+        "$mainMod, B, fullscreen"
         "$mainMod SHIFT, F, exec, firefox --private-window"
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"
@@ -217,6 +218,7 @@ in
         "noborder, title:^(Liste de contacts)$"
         "size 480 480, title:^(Liste de contacts)"
         "center, title:^(Liste de contacts)"
+        "center, class:^(steam_app_)$"
 
         # Mullvad VPN
         "pin, class:(Mullvad VPN)"
@@ -229,7 +231,7 @@ in
         "center, class:(.blueman-manager-wrapped)"
 
         # Btop
-        "float, class:(kitty), title:^(btop)*"
+        "float, class:(kitty), title:^(btop)$"
 
 	# Firefox
         "float, class:(firefox), title:^(Incrustation vidéo)$"

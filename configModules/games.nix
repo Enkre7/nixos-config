@@ -16,7 +16,19 @@
     lutris
     #heroic
     protonup
-    prismlauncher # Minecraft
+    (prismlauncher.override { # Minecraft
+      # Add binary required by some mod
+      additionalPrograms = [ ffmpeg ];
+      # Change Java runtimes available to Prism Launcher
+      jdks = [
+        temurin-jre-bin-8
+        temurin-jre-bin-17
+        graalvm-ce
+        zulu8
+        zulu17
+        zulu
+      ];
+    })
     pavucontrol
     playerctl
     mangohud    
