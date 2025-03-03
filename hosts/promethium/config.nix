@@ -30,8 +30,8 @@
     ../../configModules/thunar.nix
     ../../configModules/printing.nix
     ../../configModules/games.nix
-    #../../configModules/adb.nix
-    #../../configModules/esp.nix
+    ../../configModules/adb.nix
+    ../../configModules/esp.nix
   ];
 
   home-manager = {
