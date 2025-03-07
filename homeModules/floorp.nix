@@ -1,9 +1,8 @@
 { config, pkgs, inputs, ... }:
 
 {
-  programs.firefox = {
+  programs.floorp = {
     enable = true;
-    package = pkgs.librewolf;
     languagePacks = [
       "fr"
       "en-US"
