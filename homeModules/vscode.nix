@@ -4,7 +4,7 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
-    extensions = with pkgs.vscode-extensions; [
+    profiles.default.extensions = with pkgs.vscode-extensions; [
       ms-vscode.cpptools-extension-pack
       esbenp.prettier-vscode
       davidanson.vscode-markdownlint
@@ -28,7 +28,7 @@
       james-yu.latex-workshop
       streetsidesoftware.code-spell-checker
     ];
-    userSettings = {
+    profiles.default.userSettings = {
       "redhat.telemetry.enabled" = "false";
       "files.autoSave" = "off";
 
@@ -60,3 +60,4 @@
     "text/x-nix" = "codium";
   };
 }
+
