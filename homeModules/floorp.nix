@@ -1,9 +1,8 @@
 { config, pkgs, inputs, ... }:
 
 {
-  programs.firefox = {
+  programs.floorp = {
     enable = true;
-    package = pkgs.firefox;
     languagePacks = [
       "fr"
       "en-US"
@@ -79,8 +78,12 @@
        ];
       settings = {
         "intl.locale.requested" = "fr,en_US";
+        "intl.regional_prefs.use_os_locales" = true;
         "extensions.autoDisableScopes" = 0;
-        
+        "browser.newtabpage.activity-stream.floorp.background.image.path" = "${config.wallpaper}";
+        "browser.newtabpage.activity-stream.floorp.background.type" = 4;
+        "browser.display.use_system_colors" = true;      
+ 
         # Disable first-run stuff
         "browser.aboutConfig.showWarning" = false;
         "browser.disableResetPrompt" = true;
@@ -180,24 +183,25 @@
         "browser.uiCustomization.state" = builtins.toJSON {
           placements = {
             widget-overflow-fixed-list = [];
-            unified-extensions-area = ["sponsorblocker_ajay_app-browser-action" "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"];
-            nav-bar = ["back-button" "forward-button" "stop-reload-button" "customizableui-special-spring1" "home-button" "urlbar-container" "fxa-toolbar-menu-button" "privatebrowsing-button" "downloads-button" "customizableui-special-spring2" "save-to-pocket-button" "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action" "addon_darkreader_org-browser-action" "ublock0_raymondhill_net-browser-action" "jid1-mnnxcxisbpnsxq_jetpack-browser-action" "cookieautodelete_kennydo_com-browser-action" "unified-extensions-button"];
+            unified-extensions-area = ["sponsorblocker_ajay_app-browser-action" "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action" "canvasblocker_kkapsner_de-browser-action" "jid1-ckhysaadh4nl6q_jetpack-browser-action" "_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action" "_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action"];
+            nav-bar = ["back-button" "forward-button" "stop-reload-button" "customizableui-special-spring1" "home-button" "urlbar-container" "fxa-toolbar-menu-button" "privatebrowsing-button" "downloads-button" "customizableui-special-spring8" "customizableui-special-spring2" "save-to-pocket-button" "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action" "addon_darkreader_org-browser-action" "ublock0_raymondhill_net-browser-action" "jid1-mnnxcxisbpnsxq_jetpack-browser-action" "cookieautodelete_kennydo_com-browser-action" "unified-extensions-button"];
             toolbar-menubar = ["menubar-items"];
             TabsToolbar = ["tabbrowser-tabs" "new-tab-button" "alltabs-button"];
             PersonalToolbar = ["personal-bookmarks"];
-          };
-          seen = ["addon_darkreader_org-browser-action" "jid1-mnnxcxisbpnsxq_jetpack-browser-action" "ublock0_raymondhill_net-browser-action" "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action" "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action" "sponsorblocker_ajay_app-browser-action" "developer-button" "cookieautodelete_kennydo_com-browser-action"];
-          dirtyAreaCache = ["unified-extensions-area" "nav-bar" "toolbar-menubar" "TabsToolbar" "PersonalToolbar"];
-          currentVersion = 20;
-          newElementCount = 6;
+            statusBar = ["screenshot-button" "fullscreen-button" "status-text"];
+         };
+         seen = ["addon_darkreader_org-browser-action" "jid1-mnnxcxisbpnsxq_jetpack-browser-action" "ublock0_raymondhill_net-browser-action" "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action" "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action" "sponsorblocker_ajay_app-browser-action" "developer-button" "cookieautodelete_kennydo_com-browser-action" "canvasblocker_kkapsner_de-browser-action" "jid1-ckhysaadh4nl6q_jetpack-browser-action" "_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action" "_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action" "sidebar-reverse-position-toolbar" "undo-closed-tab" "profile-manager" "workspaces-toolbar-button"];
+        dirtyAreaCache = ["unified-extensions-area" "nav-bar" "toolbar-menubar" "TabsToolbar" "PersonalToolbar" "statusBar"];
+        currentVersion = 20;
+        newElementCount = 8;
         };
       };
     };
   };
  
   xdg.mimeApps.defaultApplications = {
-    "application/pdf" = "firefox.desktop";
-    "x-scheme-handler/http" = "firefox.desktop";
-    "x-scheme-handler/https" = "firefox.desktop";
+    "application/pdf" = "floorp.desktop";
+    "x-scheme-handler/http" = "floorp.desktop";
+    "x-scheme-handler/https" = "floorp.desktop";
   };
 }
