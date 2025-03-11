@@ -34,6 +34,7 @@
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users.${config.user} = import ./home.nix;
+    backupFileExtension = "backup";
   };  
 
   # Debug
