@@ -28,6 +28,7 @@
       yzhang.markdown-all-in-one
       james-yu.latex-workshop
       streetsidesoftware.code-spell-checker
+      ritwickdey.liveserver
     ];
     profiles.default.userSettings = {
       "redhat.telemetry.enabled" = "false";
