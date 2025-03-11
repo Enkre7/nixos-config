@@ -14,6 +14,7 @@
     ../../homeModules/hyprland.nix
     ../../homeModules/hyprlock.nix
     #../../homeModules/hypridle.nix
+    ../../homeModules/floorp.nix
     ../../homeModules/firefox.nix
     ../../homeModules/git.nix
     ../../homeModules/mpv.nix

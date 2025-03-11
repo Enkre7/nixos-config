@@ -39,6 +39,8 @@ in
 
       "$terminal" = "kitty";
       "$fileManager" = "thunar";
+      "$browser" = "floorp";
+      "$browserPrivate" = "floorp --private-window";
       "$termFileManager" = "lf";
       "$menu" = "wofi";
       "$systman" = "btop";
@@ -128,9 +130,9 @@ in
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo," # dwindle
         "$mainMod, J, togglesplit," # dwindle
-        "$mainMod, F, exec, firefox"
+        "$mainMod, F, exec, $browser"
         "$mainMod, B, fullscreen"
-        "$mainMod SHIFT, F, exec, firefox --private-window"
+        "$mainMod SHIFT, F, exec, $browserPrivate"
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
