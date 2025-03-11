@@ -1,6 +1,7 @@
 { config, pkgs, inputs, ... }:
 
 {
+  stylix.targets.floorp.profileNames = [ "${config.user}" ];
   programs.floorp = {
     enable = true;
     languagePacks = [
@@ -77,14 +78,23 @@
         translate-web-pages
        ];
       settings = {
+        # Firefox Sync-server
+        "identity.sync.tokenserver.uri" = "https://firefoxsyncserver.7mairot.com/token/1.0/sync/1.5";
+        "identity.fxaccounts.useSessionTokensForOAuth" = false;
+        "identity.sync.useOAuthForSyncToken" = false;
+
+        # Settings
         "intl.locale.requested" = "fr,en_US";
         "intl.regional_prefs.use_os_locales" = true;
         "extensions.autoDisableScopes" = 0;
         "browser.newtabpage.activity-stream.floorp.background.image.path" = "${config.wallpaper}";
         "browser.newtabpage.activity-stream.floorp.background.type" = 4;
         "browser.display.use_system_colors" = true;      
+        "floorp.browser.sidebar.enable" = false;
  
         # Disable first-run stuff
+        "browser.newtabpage.activity-stream.floorp.newtab.releasenote.hide" = true;
+        "browser.newtabpage.activity-stream.floorp.newtab.imagecredit.hide" = true;
         "browser.aboutConfig.showWarning" = false;
         "browser.disableResetPrompt" = true;
         "browser.download.panel.shown" = true;

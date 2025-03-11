@@ -1,6 +1,7 @@
 { pkgs, config, ... }:
 
 {
+  stylix.targets.vscode.profileNames = [ "${config.user}" ];
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;

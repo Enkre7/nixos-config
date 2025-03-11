@@ -1,6 +1,7 @@
 { config, pkgs, inputs, ... }:
 
 {
+  stylix.targets.firefox.profileNames = [ "${config.user}" ];
   programs.firefox = {
     enable = true;
     package = pkgs.firefox;
@@ -78,6 +79,12 @@
         translate-web-pages
        ];
       settings = {
+        # Firefox Sync-server
+        "identity.sync.tokenserver.uri" = "https://firefoxsyncserver.7mairot.com/token/1.0/sync/1.5";
+        "identity.fxaccounts.useSessionTokensForOAuth" = false;
+        "identity.sync.useOAuthForSyncToken" = false;
+
+        # Settings
         "intl.locale.requested" = "fr,en_US";
         "extensions.autoDisableScopes" = 0;
         

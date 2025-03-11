@@ -262,8 +262,8 @@ in
         # Gnome calculator
         "float, class:(org.gnome.Calculator)" # All modes
         #"size 670 700, class:(org.gnome.Calculator)" # Basic mode
-        "size 345 492, class:(org.gnome.Calculator)"
-        "move 1058 52, class:(org.gnome.Calculator)"
+        "size 360 616, class:(org.gnome.Calculator)"
+        "move 1043 52, class:(org.gnome.Calculator)"
 
         # Keyring manager
         "dimaround, class:(gcr-prompter)"
