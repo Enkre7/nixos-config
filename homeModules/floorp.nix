@@ -80,8 +80,9 @@
       settings = {
         # Firefox Sync-server
         "identity.sync.tokenserver.uri" = "https://firefoxsyncserver.7mairot.com/token/1.0/sync/1.5";
-        "identity.fxaccounts.useSessionTokensForOAuth" = false;
-        "identity.sync.useOAuthForSyncToken" = false;
+        "identity.fxaccounts.useSessionTokensForOAuth" = false; #Change to true on account login
+        "identity.sync.useOAuthForSyncToken" = false; #Change to true on account login
+        "identity.fxaccounts.account.device.name" = "${config.hostname}'s Floorp";
 
         # Settings
         "intl.locale.requested" = "fr,en_US";
