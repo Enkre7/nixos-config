@@ -20,6 +20,7 @@
     ../../homeModules/mpv.nix
     ../../homeModules/qimgv.nix
     ../../homeModules/vscode.nix
+    ../../homeModules/tex.nix
     ../../homeModules/shell.nix
     ../../homeModules/terminal.nix
     ../../homeModules/kdeconnect.nix
@@ -48,7 +49,6 @@
     obsidian
     ffmpeg-full
     picard
-    texliveSmall
     
     # dev
     gcc
