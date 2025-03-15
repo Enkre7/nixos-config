@@ -243,6 +243,15 @@ in
 	"size 35% 35%, class:(firefox), title:^(Incrustation vidéo)$"
         "move 911 50, class:(firefox), title:^(Incrustation vidéo)$"
         "size 490 154, class:(firefox), title:^(Suppression des cookies.*)$"
+
+        # Floorp
+        "float, class:(floorp), title:^(Incrustation vidéo)$"
+        "pin, class:(floorp), title:^(Incrustation vidéo)$"
+        "keepaspectratio, class:(floorp), title:^(Incrustation vidéo)$"
+        "noborder, class:(floorp), title:^(Incrustation vidéo)$"
+        "size 35% 35%, class:(floorp), title:^(Incrustation vidéo)$"
+        "move 911 50, class:(floorp), title:^(Incrustation vidéo)$"
+        "size 490 154, class:(floorp), title:^(Suppression des cookies.*)$"
 	
         # Bitwarden
         "float, title:^(Extension : (Gestionnaire de mots de passe Bitwarden) - Bitwarden — Mozilla Firefox)$"

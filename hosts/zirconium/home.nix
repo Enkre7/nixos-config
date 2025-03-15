@@ -13,7 +13,7 @@
     ../../homeModules/hyprland.nix
     ../../homeModules/hyprlock.nix
     ../../homeModules/floorp.nix
-    ../../homeModules/firefox.nix
+    #../../homeModules/firefox.nix
     ../../homeModules/git.nix
     ../../homeModules/mpv.nix
     ../../homeModules/qimgv.nix
