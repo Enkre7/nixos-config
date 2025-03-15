@@ -47,7 +47,7 @@
   xsession.numlock.enable = true;
 
   home.packages = with pkgs; [
-    rustdesk
+    #rustdesk
     vesktop # discord
     r2modman
     obsidian

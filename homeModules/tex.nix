@@ -3,7 +3,14 @@
 {
   programs.texlive = {
     enable = true;
-    packageSet = pkgs.texlive.combined.scheme-full;
+    extraPackages = tpkgs: {
+      inherit (tpkgs)
+        collection-fontsrecommended
+        collection-latexextra
+        collection-langfrench
+        latexmk
+      ;
+    };
   };
 
   programs.vscode = {
