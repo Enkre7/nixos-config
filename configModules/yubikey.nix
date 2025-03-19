@@ -6,7 +6,7 @@
   programs.yubikey-touch-detector.enable = true;
   
   services.pcscd.enable = true;  
-  services.udev.packages = with pkgs; [ yubikey-personalization libu2f-host ];
+  services.udev.packages = with pkgs; [ yubikey-personalization libu2f-host gnupg ];
   environment.systemPackages = with pkgs; [
     yubico-piv-tool
     yubikey-personalization

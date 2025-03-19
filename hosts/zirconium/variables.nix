@@ -12,6 +12,20 @@
     stylePolarity = mkOption { type = str; };
     gitUsername = mkOption { type = str; };
     gitEmail = mkOption { type = str; };
+    
+    # Options for battery.nix
+    hasLaptopBattery = mkOption {
+      type = types.bool;
+      default = false;
+    };
+    cpuVendor = mkOption {
+      type = types.enum [ "AMD" "Intel" "unknown" ];
+      default = "unknown";
+    };
+    isFrameworkDevice = mkOption {
+      type = types.bool;
+      default = false;
+    };
   };
   
   config = {
@@ -25,5 +39,8 @@
     stylePolarity = "dark";
     gitUsername = "Enkre7";
     gitEmail = "victor.mairot@proton.me";
+    hasLaptopBattery = false;
+    cpuVendor = "AMD";
+    isFrameworkDevice = false;
   };
 }

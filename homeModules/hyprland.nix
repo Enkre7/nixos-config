@@ -198,12 +198,10 @@ in
       ];
            
       # To get windows's names: hyprctl clients
-      windowrule = [
-	"float, ^(nm-connection-editor)$"
-        "float, ^(nm-applet)$"
-      ];
-
       windowrulev2 = [
+        # Network Manager
+        "float, class:^(nm-.*)$"
+
         # Pavucontrol
         "float, class:(pavucontrol)"
         "center, class:(pavucontrol)"
@@ -235,27 +233,15 @@ in
         # Btop
         "float, class:(kitty), title:^(btop)$"
 
-	# Firefox
-        "float, class:(firefox), title:^(Incrustation vidéo)$"
-        "pin, class:(firefox), title:^(Incrustation vidéo)$"
-	"keepaspectratio, class:(firefox), title:^(Incrustation vidéo)$"
-	"noborder, class:(firefox), title:^(Incrustation vidéo)$"
-	"size 35% 35%, class:(firefox), title:^(Incrustation vidéo)$"
-        "move 911 50, class:(firefox), title:^(Incrustation vidéo)$"
-        "size 490 154, class:(firefox), title:^(Suppression des cookies.*)$"
-
-        # Floorp
-        "float, class:(floorp), title:^(Incrustation vidéo)$"
-        "pin, class:(floorp), title:^(Incrustation vidéo)$"
-        "keepaspectratio, class:(floorp), title:^(Incrustation vidéo)$"
-        "noborder, class:(floorp), title:^(Incrustation vidéo)$"
-        "size 35% 35%, class:(floorp), title:^(Incrustation vidéo)$"
-        "move 911 50, class:(floorp), title:^(Incrustation vidéo)$"
-        "size 490 154, class:(floorp), title:^(Suppression des cookies.*)$"
-	
-        # Bitwarden
-        "float, title:^(Extension : (Gestionnaire de mots de passe Bitwarden) - Bitwarden — Mozilla Firefox)$"
-        "center, title:^(Extension : (Gestionnaire de mots de passe Bitwarden) - Bitwarden — Mozilla Firefox)$"
+	# Firefox browsers
+        "float, title:^(Incrustation vidéo)$"
+        "pin, title:^(Incrustation vidéo)$"
+	"keepaspectratio, title:^(Incrustation vidéo)$"
+	"noborder, title:^(Incrustation vidéo)$"
+	"size 35% 35%, title:^(Incrustation vidéo)$"
+        "move 911 50, title:^(Incrustation vidéo)$"
+        "size 490 154, title:^(Suppression des cookies.*)$"
+        "float, title:^(Extension:.*)$"
 
         # Nexctcloud
         "pin, class:(Nextcloud)"

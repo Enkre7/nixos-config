@@ -18,7 +18,7 @@
       james-yu.latex-workshop
     ];
 
-    userSettings = {
+    profiles.default.userSettings = {
       "latex-workshop.latex.tools" = [
         {
           "name" = "latexmk";

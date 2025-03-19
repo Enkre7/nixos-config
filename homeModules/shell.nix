@@ -23,6 +23,7 @@
       pull = "cd ${config.flakePath} && git pull";
       #update = "cd ${config.flakePath} && sudo nix flake update";
       update = "nh os switch --update --hostname ${config.hostname}";
+      update-firmware = "fwupdmgr refresh --force && fwupdmgr get-updates && fwupdmgr update";
       list-gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
       clean-gen = "sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations";
       rollback-gen = "sudo nixos-rebuild --rollback switch --flake ${config.flakePath}#${config.hostname}";
@@ -60,6 +61,7 @@
       pull = "cd ${config.flakePath} && git pull";
       #update = "cd ${config.flakePath} && sudo nix flake update";
       update = "nh os switch --update --hostname ${config.hostname}";
+      update-firmware = "fwupdmgr refresh --force && fwupdmgr get-updates && fwupdmgr update";
       list-gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
       clean-gen = "sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations";
       rollback-gen = "sudo nixos-rebuild --rollback switch --flake ${config.flakePath}#${config.hostname}";

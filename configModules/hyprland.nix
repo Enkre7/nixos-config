@@ -10,13 +10,27 @@
   programs.hyprland.enable = true;
   programs.hyprland.xwayland.enable = true;
   
-  # Wayland event viewer
-  environment.systemPackages = with pkgs; [ wev ];
+  environment.systemPackages = with pkgs; [
+    wev # Wayland event viewer
+    # Better wayland support for Qt
+    qt6.qtwayland
+    qt5.qtwayland
+    libsForQt5.qt5.qtwayland
+  ];
   
   # Resize & electron support
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     WLR_RENDERER_ALLOW_SOFTWARE = "1";
     MOZ_ENABLE_WAYLAND = "1";
+    XDG_SESSION_TYPE = "wayland";
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_DESKTOP = "Hyprland";
+    GDK_BACKEND = "wayland,x11";
+    QT_QPA_PLATFORM = "wayland;xcb";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    SDL_VIDEODRIVER = "wayland";
+    CLUTTER_BACKEND = "wayland";
   };  
 }
