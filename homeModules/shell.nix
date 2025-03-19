@@ -12,6 +12,8 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
+      edit-secrets = "SOPS_AGE_PLUGIN=yubikey sops ${config.flakePath}/secrets.yaml";
+      view-secrets = "SOPS_AGE_PLUGIN=yubikey sops -d ${config.flakePath}/secrets.yaml";
       ssh = "TERM='xterm-256color' kitty +kitten ssh";
       scanfile = "scanimage --format=jpeg --output-file=/home/${config.user}/Téléchargements/scan.jpeg";
       ll = "sudo ls -laRh";
@@ -50,6 +52,8 @@
 
   programs.bash = {
     shellAliases = {
+      edit-secrets = "SOPS_AGE_PLUGIN=yubikey sops ${config.flakePath}/secrets.yaml";
+      view-secrets = "SOPS_AGE_PLUGIN=yubikey sops -d ${config.flakePath}/secrets.yaml";
       ssh = "TERM='xterm-256color' kitty +kitten ssh";
       scanfile = "scanimage --format=jpeg --output-file=/home/${config.user}/Téléchargements/scan.jpeg";
       ll = "sudo ls -laRh";

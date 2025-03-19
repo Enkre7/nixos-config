@@ -1,13 +1,10 @@
 keys:
   - &users: 
-    - $enkre: age1qydnyugg6uws2wjv4u9gejkn35y85lz5kkq366rl7yc6peyruypq420lvp
-  - &hosts:
-    - &promethium:
-    #- &zirconium:
+    - &yubikey: age1yubikey1q04h9jvwdtsjzq59ysyv3sjslxxgkk6c56n3ckek95yzd8f2egy0qeg59nv
+
 creation_rules:
   - path_regex: secrets.yaml$
     key_groups:
     - age:
       - *enkre
-      - *promethium
-      #- *zirconium
+      - *enkre_yubikey
