@@ -1,4 +1,4 @@
-{ config, pkgs, ...}:
+{ config, pkgs, lib, ...}:
 
 {
   # Install yubikey packages
@@ -12,7 +12,10 @@
     yubikey-personalization
     yubikey-personalization-gui
     yubikey-manager
-    #yubioath-flutter
+    age
+    age-plugin-yubikey
+    sops
+    ssh-to-age
   ];
 
   # Yubikey host authentification
@@ -39,17 +42,17 @@
     settings.origin = "pam://yubi";
     settings.appid = "pam://yubi";
     settings.authFile = "/etc/u2f-mappings";
-    #settings.control = "required";
     settings.cue = true;
   };
 
-  # Locking the screen when a Yubikey is unplugged (from nixos documentation)
-  /*services.udev.extraRules = ''
-      ACTION=="remove",\
-       ENV{ID_BUS}=="usb",\
-       ENV{ID_MODEL_ID}=="0407",\
-       ENV{ID_VENDOR_ID}=="1050",\
-       ENV{ID_VENDOR}=="Yubico",\
-       RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
-  '';*/
+  # SSH config for  age-plugin-yubikey
+  programs.ssh.startAgent = true;
+  
+  programs.ssh.extraConfig = ''
+    AddKeysToAgent yes
+  '';
+
+  environment.sessionVariables = {
+    AGE_PLUGIN_YUBIKEY_CONFIRM = "false"; # Désactiver la confirmation pour chaque opération (optionnel)
+  };
 }

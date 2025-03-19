@@ -2,34 +2,43 @@
 
 {
   imports = [
+  # System foundation
     inputs.home-manager.nixosModules.default
     ./variables.nix
     ../../configModules/nixos.nix
     ../../configModules/hardware.nix
-    ../../configModules/battery.nix
+    ../../configModules/users.nix
+  # Boot & security
     ../../configModules/lanzaboot.nix
+    ../../configModules/security.nix
+    ../../configModules/sops.nix
+    ../../configModules/yubikey.nix
+  # File system
+    #../../configModules/impermanence.nix
+  # Networking
     ../../configModules/networking.nix
     ../../configModules/tailscale.nix
     ../../configModules/mullvad-vpn.nix
-    #../../configModules/impermanence.nix
-    ../../configModules/virtualisation.nix
-    ../../configModules/locale.nix
+  # Hardware management
+    ../../configModules/battery.nix
     ../../configModules/sound.nix
     ../../configModules/graphics.nix
-    ../../configModules/hyprland.nix
-    ../../configModules/users.nix
+    ../../configModules/printing.nix
+    ../../configModules/rgb.nix
+  # Virtualization
+    ../../configModules/virtualisation.nix
+  # User environment
+    ../../configModules/locale.nix
     ../../configModules/shell.nix
     ../../configModules/terminal.nix
     ../../configModules/greetd.nix
+    ../../configModules/hyprland.nix
     ../../configModules/stylix.nix
-    ../../configModules/security.nix
-    ../../configModules/rgb.nix
-    ../../configModules/yubikey.nix
     ../../configModules/thunar.nix
-    ../../configModules/printing.nix
+  # Applications & services
     ../../configModules/games.nix
     ../../configModules/adb.nix
-  ];
+];
   
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
