@@ -18,7 +18,7 @@ Contain also a custom minimal ISO of nixos to facilitate installation via predef
 | **Keyring Manager**      | Gnome Keyring                      | Gnome Keyring                      |
 | **Application Launcher** | Wofi                               | Wofi                               |
 | **Code Editor**          | VSCodium                           | VSCodium                           |
-| **Text Editor**          | LibreOffice                        | LibreOffice                        |
+| **Text Editor**          | OnlyOffice                         | OnlyOffice                         |
 | **Media Player**         | mpv                                | mpv                                |
 | **Browser**              | Firefox                            | Firefox                            |
 | **File Manager**         | LF + Thunar                        | LF + Thunar                        |
