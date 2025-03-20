@@ -11,10 +11,10 @@
     updater.frequency = 12;
     scanner = {
       enable = true;
-      interval = "Mon *-*-* 12:00:00";
+      interval = "Mon *-*-* 13:30:00";
+      scanDirectories = [
+        "/home/${config.user}/"
+      ];
     };
   };
-
-  # Scan command: sudo freshclam; clamscan [options] [file/directory/-]
-  environment.systemPackages = with pkgs; [ clamav ];
 }

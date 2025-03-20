@@ -8,11 +8,35 @@
 
   security.polkit.enable = true;
 
+
+  services.fail2ban = {
+    enable = true;
+    # Protect from SSH brute force
+    jails.ssh-iptables = ''
+      enabled = true
+      filter = sshd
+      maxretry = 5
+      bantime = 1h
+    '';
+  };
+
+  security = {
+    pam.sshAgentAuth.enable = true;
+    sudo.execWheelOnly = true;
+  };  
+    # Harden kernel
+  boot.kernel.sysctl = {
+    "kernel.unprivileged_bpf_disabled" = 1;
+    "net.core.bpf_jit_harden" = 2;
+    "kernel.yama.ptrace_scope" = 1;
+  };
+
   environment.systemPackages = with pkgs; [
     # Polkit
     libsecret  
     lxqt.lxqt-policykit 
     vulnix       #scan command: vulnix --system
     chkrootkit   #scan command: sudo chkrootkit
-  ];   
+    lynis
+  ];
 }
