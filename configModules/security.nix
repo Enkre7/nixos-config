@@ -24,7 +24,7 @@
     pam.sshAgentAuth.enable = true;
     sudo.execWheelOnly = true;
   };  
-    # Harden kernel
+  # Harden kernel
   boot.kernel.sysctl = {
     "kernel.unprivileged_bpf_disabled" = 1;
     "net.core.bpf_jit_harden" = 2;
@@ -32,9 +32,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # Polkit
-    libsecret  
-    lxqt.lxqt-policykit 
+    libsecret # Polkit  
+    lxqt.lxqt-policykit # Polkit 
     vulnix       #scan command: vulnix --system
     chkrootkit   #scan command: sudo chkrootkit
     lynis

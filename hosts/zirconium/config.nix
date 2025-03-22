@@ -2,7 +2,7 @@
 
 {
   imports = [
-  # System foundation
+  # Core
     inputs.home-manager.nixosModules.default
     ./variables.nix
     ../../configModules/nixos.nix

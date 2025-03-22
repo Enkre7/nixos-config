@@ -79,7 +79,6 @@
       AllowUsers = [ config.user ];
     };
     extraConfig = ''
-      AddKeysToAgent yes
       AllowGroups wheel ${config.user}
       LoginGraceTime 30
       MaxAuthTries 4
