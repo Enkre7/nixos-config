@@ -21,6 +21,8 @@ in
     yubikey-personalization-gui
     yubico-piv-tool
     yubioath-flutter
+    # Age for Yubikey
+    age-plugin-yubikey
   ];
 
   security.pam = {

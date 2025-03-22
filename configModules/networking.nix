@@ -77,9 +77,9 @@
       PermitRootLogin = "no";
       X11Forwarding = false;
       AllowUsers = [ config.user ];
+      AllowGroups = [ "wheel" config.user];
     };
     extraConfig = ''
-      AllowGroups wheel ${config.user}
       LoginGraceTime 30
       MaxAuthTries 4
       ClientAliveInterval 300

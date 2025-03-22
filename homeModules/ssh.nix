@@ -3,12 +3,10 @@
 {
   programs.ssh = {
     enable = true;
-    controlMaster = "auto"; # ssh session perssist
+    controlMaster = "auto"; # ssh session persist
     controlPath = "~/.ssh/sockets/S.%r@%h:%p";
     controlPersist = "10m";
-    extraConfig = ''
-      AddKeysToAgent yes
-    '';
+    addKeysToAgent = "yes";
   };
   
   home.file = {
@@ -17,10 +15,4 @@
     # Yubikey .pub symlink
     ".ssh/id_titanium.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.flakePath}/keys/id_titanium.pub";
   };
-  
-  # set perms
-  home.activation.sshPermissions = config.lib.dag.entryAfter ["writeBoundary"] ''
-    chmod 700 ~/.ssh
-    chmod 644 ~/.ssh/*.pub
-  '';
 }

@@ -13,6 +13,7 @@
     ../../configModules/security.nix
     ../../configModules/sops.nix
     ../../configModules/yubikey.nix
+    ../../configModules/security-scans.nix
   # File system
     #../../configModules/impermanence.nix
   # Networking

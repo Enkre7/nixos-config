@@ -1,0 +1,7 @@
+keys:
+  - &titanium age1yubikey1qdukuqu9fx3eux6xmeq8y5pnpxfr6urvcne8a83w9nwt3w8krd38gcxfn2j
+creation_rules:
+  - path_regex: secrets\.yaml$
+    key_groups:
+    - age:
+      - *titanium

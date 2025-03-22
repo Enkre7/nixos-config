@@ -1,8 +1,5 @@
 { config, lib, ... }:
 
-let
-  pubKeys = lib.filesystem.listFilesRecursive ../keys;
-in
 {
   users.mutableUsers = true;
   users.users.${config.user} = {
@@ -10,10 +7,10 @@ in
     description = config.user;
     extraGroups = [ "networkmanager" "audio" "video" "wheel" ];
     hashedPassword = "$y$j9T$MRfXTPEQAKtLXnT/pPbV00$c9aKUJ6lvABT8bmH3jb9V3JaDZUJqXfZgkaZavGTPgC";
-    openssh.authorizedKeys.keys = lib.lists.forEach pubKeys (key: builtins.readFile key);
+    openssh.authorizedKeys.keyFiles = lib.filter (path: lib.hasSuffix ".pub" path) (lib.filesystem.listFilesRecursive ../keys);
   };
   users.users.root = {
     hashedPassword = "$y$j9T$MRfXTPEQAKtLXnT/pPbV00$c9aKUJ6lvABT8bmH3jb9V3JaDZUJqXfZgkaZavGTPgC";
-    openssh.authorizedKeys.keys = config.users.users.${config.user}.openssh.authorizedKeys.keys;
+    openssh.authorizedKeys.keyFiles = config.users.users.${config.user}.openssh.authorizedKeys.keyFiles;
   };
 }

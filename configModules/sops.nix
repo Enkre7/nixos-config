@@ -1,15 +1,19 @@
-{ config, inputs, ... }:
+{ config, inputs, pkgs, ... }:
 
 {
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
+  environment.systemPackages = with pkgs; [ sops age ];
+
   sops.defaultSopsFile = ./secrets.yaml;
   sops.defaultSopsFormat = "yaml";
   sops.age.generateKey = false;
-  sops.age.keyFile = "/home/${config.user}/.config/sops/age/keys.txt";
 
-  environment.variables = {
-    SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
+  systemd.services.sops-nix = {
+    path = [ pkgs.age-plugin-yubikey ];
+    environment = {
+      SOPS_AGE_KEY_FILE = "";
+    };
   };
 
   systemd.services.pcscd = {

@@ -34,8 +34,5 @@
   environment.systemPackages = with pkgs; [
     libsecret # Polkit  
     lxqt.lxqt-policykit # Polkit 
-    vulnix       #scan command: vulnix --system
-    chkrootkit   #scan command: sudo chkrootkit
-    lynis
   ];
 }
