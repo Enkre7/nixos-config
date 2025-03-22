@@ -15,4 +15,9 @@
     enable = true;
     package = pkgs.openrgb-with-all-plugins;
   };
+
+  systemd.services.openrgb = {
+    before = [ "greetd.service" ];
+    wantedBy = [ "multi-user.target" ];
+  };
 }
