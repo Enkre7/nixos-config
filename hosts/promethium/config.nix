@@ -11,7 +11,7 @@
   # Boot & security
     ../../configModules/lanzaboot.nix
     ../../configModules/security.nix
-    ../../configModules/sops.nix
+    #../../configModules/sops.nix
     ../../configModules/yubikey.nix
     ../../configModules/fingerprint.nix
     #../../configModules/clamav.nix

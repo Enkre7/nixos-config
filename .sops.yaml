@@ -1,9 +1,0 @@
-keys:
-  - &users: 
-    - &yubikey: AGE-PLUGIN-YUBIKEY-1CH5ESQVZ4MV5TXGCKMZXH #age1yubikey1q2xyfkg4wayag5xmeeunt39fjyfa083lrwkese3v2k5vv0uhmr8jgnyzcdy
-
-creation_rules:
-  - path_regex: secrets\.yaml$
-    key_groups:
-    - age:
-      - *yubikey

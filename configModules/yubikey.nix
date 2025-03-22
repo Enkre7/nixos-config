@@ -2,33 +2,21 @@
 
 {
   services.pcscd.enable = true;  
-  services.yubikey-agent.enable = false;
+  services.yubikey-agent.enable = true;
   programs.yubikey-touch-detector.enable = true;
-  
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    pinentryPackage = pkgs.pinentry-qt;
-  };
 
   services.udev.packages = with pkgs; [ 
     yubikey-personalization 
-    libu2f-host 
-    gnupg 
+    libu2f-host
   ];
 
-  environment.systemPackages = with pkgs; [
-    gnupg
-    pinentry-curses
-    pinentry-qt
-    paperkey  # For GPG keys backup
-    
-    yubico-piv-tool
+  environment.systemPackages = with pkgs; [  
+    # Yubico's official tools
+    yubikey-manager
     yubikey-personalization
     yubikey-personalization-gui
-    yubikey-manager
-    
-    sops
+    yubico-piv-tool
+    yubioath-flutter
   ];
 
   security.pam.services = {
@@ -54,13 +42,4 @@
     settings.authFile = "/etc/u2f-mappings";
     settings.cue = true;
   };
-
-  programs.ssh.startAgent = lib.mkForce false;
-  programs.ssh.extraConfig = ''
-    AddKeysToAgent yes
-  '';
-
-  environment.shellInit = ''
-    export GPG_TTY=$(tty)
-  '';
 }

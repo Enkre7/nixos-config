@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 
 {
   networking = {
@@ -13,7 +8,6 @@
       wifi.powersave = false;
     };
     useDHCP = lib.mkDefault true;
-    # interfaces.wlp1s0.useDHCP = lib.mkDefault true;
   };
 
   # Network discovery
@@ -57,20 +51,13 @@
       1764 # KDE Connect
       1 # Bluetooth discovery
     ];
-    # Services spécifiques
     allowedTCPPortRanges = [
       # Steam remote play
-      {
-        from = 27015;
-        to = 27030;
-      }
+      { from = 27015; to = 27030; }
     ];
     allowedUDPPortRanges = [
       # Steam remote play
-      {
-        from = 27000;
-        to = 27100;
-      }
+      { from = 27000; to = 27100; }
     ];
     trustedInterfaces = [ "tailscale0" "lo" "docker0" ];
     allowPing = true;
@@ -85,7 +72,6 @@
   services.openssh = {
     enable = true;
     settings = {
-      # set to false, require public key authentication for better security
       PasswordAuthentication = true;
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
@@ -93,6 +79,7 @@
       AllowUsers = [ config.user ];
     };
     extraConfig = ''
+      AddKeysToAgent yes
       AllowGroups wheel ${config.user}
       LoginGraceTime 30
       MaxAuthTries 4
@@ -101,6 +88,7 @@
     '';
   };
 
+  # Usefull packages
   environment.systemPackages = with pkgs; [
     wget
     curl
