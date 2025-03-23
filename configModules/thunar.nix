@@ -1,17 +1,6 @@
 { pkgs, ... }:
  
 {
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;  
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
-    config.common.default = [
-      "hyprland"
-      "gtk"
-    ];
-  };
   xdg.mime.defaultApplications = {
     "inode/directory" = "thunar";
     "application/x-zip" = "file-roller";

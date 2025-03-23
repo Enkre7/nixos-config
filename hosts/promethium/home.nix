@@ -27,6 +27,7 @@
     ../../homeModules/vscode.nix
     ../../homeModules/tex.nix
   # Media & Files
+    ../../homeModules/xdg.nix
     ../../homeModules/mpv.nix
     ../../homeModules/qimgv.nix
     ../../homeModules/lf.nix

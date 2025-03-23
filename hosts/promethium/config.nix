@@ -17,6 +17,7 @@
     ../../configModules/security-scans.nix
   # File system
     #../../configModules/impermanence.nix
+    ../../configModules/xdg.nix
   # Networking
     ../../configModules/networking.nix
     ../../configModules/tailscale.nix
