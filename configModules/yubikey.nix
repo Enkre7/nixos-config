@@ -25,7 +25,7 @@ in
   security.pam = {
     u2f = {
       enable = true;
-      control = "required"; # "sufficient"
+      control = "sufficient";
       #settings.origin = "pam://yubi";
       #settings.appid = "pam://yubi";
       #settings.authFile = "/etc/u2f-mappings";

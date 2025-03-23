@@ -14,7 +14,6 @@
     ../../configModules/sops.nix
     ../../configModules/yubikey.nix
     ../../configModules/fingerprint.nix
-    ../../configModules/security-scans.nix
   # File system
     #../../configModules/impermanence.nix
     ../../configModules/xdg.nix
