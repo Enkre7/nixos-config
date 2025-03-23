@@ -9,10 +9,7 @@ in
   services.yubikey-agent.enable = true;
   programs.yubikey-touch-detector.enable = true;
 
-  services.udev.packages = with pkgs; [ 
-    yubikey-personalization 
-    #libu2f-host
-  ];
+  services.udev.packages = with pkgs; [ yubikey-personalization ];
 
   environment.systemPackages = with pkgs; [  
     # Yubico's official tools
@@ -26,22 +23,32 @@ in
   ];
 
   security.pam = {
-    services = {
-      login.u2fAuth = true;
-      greetd.u2fAuth = true;
-      sudo.u2fAuth = true;
-      sudo.sshAgentAuth = true; # Use SSH_AUTH_SOCK for sudo
-      hyprlock.u2fAuth = true;
-    };
     u2f = {
       enable = true;
+      control = "required"; # "sufficient"
       #settings.origin = "pam://yubi";
       #settings.appid = "pam://yubi";
       #settings.authFile = "/etc/u2f-mappings";
       settings.cue = true;
       settings.authFile = "${homeDirectory}/.config/Yubico/u2f_keys";
     };
+    services = {
+      login.u2fAuth = true;
+      greetd.u2fAuth = true;
+      sudo.u2fAuth = true;
+      hyprlock.u2fAuth = true;
+      sshd.u2fAuth = true;
+      polkit-1.u2fAuth = true;
+      su.u2fAuth = true;
+      passwd.u2fAuth = true;
+    };
   };
+  
+  system.activationScripts.yubikeydirs = ''
+    mkdir -p ${homeDirectory}/.config/Yubico
+    chown ${config.user}:users ${homeDirectory}/.config/Yubico
+    chmod 700 ${homeDirectory}/.config/Yubico
+  '';
 
   #environment.etc = {
     # create /etc/u2f-mappings

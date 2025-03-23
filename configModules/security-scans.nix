@@ -12,7 +12,7 @@
     
     # Central notification script
     (writeShellScriptBin "security-notify" ''
-      #!/bin/sh
+      #!/bin/bash
       LEVEL="$1"
       TOOL="$2"
       MESSAGE="$3"
@@ -20,15 +20,14 @@
       # Get user ID for DBUS
       USER_ID=$(id -u ${config.user})
       
-      # Send notification
+      # Send notification directly without sudo
       export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$USER_ID/bus"
-      sudo -u ${config.user} DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" \
-        ${pkgs.libnotify}/bin/notify-send -u "$LEVEL" "$TOOL" "$MESSAGE"
+      ${pkgs.libnotify}/bin/notify-send -u "$LEVEL" "$TOOL" "$MESSAGE"
     '')
     
     # Manual scan script
     (writeShellScriptBin "run-security-scan" ''
-      #!/bin/sh
+      #!/bin/bash
       echo "----------------------------------------"
       echo "Starting NixOS security scan..."
       echo "----------------------------------------"
@@ -61,7 +60,7 @@
     
     # View report script
     (writeShellScriptBin "view-security-report" ''
-      #!/bin/sh
+      #!/bin/bash
       REPORT_PATH="$HOME/security-report.txt"
       SCAN_DIR="/var/lib/security-scans"
       
@@ -107,7 +106,9 @@
       nmap coreutils gnugrep gawk findutils 
     ];
     script = ''
-      set -xe  # Enable debugging with error exit and command echo
+      # Use bash for more robust error handling
+      #!/usr/bin/env bash
+      set -e  # Exit on error
       
       # Directory for results
       SCAN_DIR="/var/lib/security-scans"
@@ -115,126 +116,274 @@
       TIMESTAMP=$(date +%F-%H%M)
       REPORT_FILE="$SCAN_DIR/report-$TIMESTAMP.txt"
       
-      echo "Security Scan Report - $(date)" > $REPORT_FILE
-      echo "===========================" >> $REPORT_FILE
-      echo "" >> $REPORT_FILE
+      # Log function
+      log() {
+        echo "$1" >> "$REPORT_FILE"
+        echo "$1"
+      }
+      
+      # Helper function to ensure we have a valid integer
+      ensure_number() {
+        local num="$1"
+        # Remove any non-numeric characters and ensure at least "0"
+        echo "${num//[^0-9]/}" | sed 's/^$/0/'
+      }
+      
+      log "Security Scan Report - $(date)"
+      log "==========================="
+      log ""
       
       # 1. Package vulnerability scan
-      echo "## Package Vulnerabilities (Vulnix)" >> $REPORT_FILE
+      log "## Package Vulnerabilities (Vulnix)"
       if command -v vulnix >/dev/null 2>&1; then
-        vulnix --system > $SCAN_DIR/vulnix-$TIMESTAMP.txt 2>/dev/null || echo "Vulnix scan failed" >> $REPORT_FILE
-        VULN_COUNT=$(grep -c "CVE-" $SCAN_DIR/vulnix-$TIMESTAMP.txt 2>/dev/null || echo 0)
-        CRITICAL_VULN=$(grep -c "CVE.*critical" $SCAN_DIR/vulnix-$TIMESTAMP.txt 2>/dev/null || echo 0)
-        echo "Total vulnerabilities: $VULN_COUNT (Critical: $CRITICAL_VULN)" >> $REPORT_FILE
+        VULNIX_FILE="$SCAN_DIR/vulnix-$TIMESTAMP.txt"
+        # Run vulnix with proper error handling
+        if vulnix --system > "$VULNIX_FILE" 2>/dev/null; then
+          # Count vulnerabilities properly
+          VULN_COUNT=$(ensure_number "$(grep -c "CVE-" "$VULNIX_FILE" 2>/dev/null || echo 0)")
+          CRITICAL_VULN=$(ensure_number "$(grep -c "CVE.*critical" "$VULNIX_FILE" 2>/dev/null || echo 0)")
+          log "Total vulnerabilities: $VULN_COUNT (Critical: $CRITICAL_VULN)"
+          
+          # List a few of the vulnerabilities if there are any
+          if [ "$VULN_COUNT" -gt 0 ]; then
+            log "Sample vulnerabilities:"
+            grep "CVE-" "$VULNIX_FILE" 2>/dev/null | head -3 | while read -r line; do
+              log "- $line"
+            done
+          fi
+        else
+          log "Vulnix scan failed to execute properly."
+          VULN_COUNT=0
+          CRITICAL_VULN=0
+        fi
       else
-        echo "vulnix not available" >> $REPORT_FILE
+        log "Vulnix not available on this system."
+        VULN_COUNT=0
+        CRITICAL_VULN=0
       fi
       
       # 2. System security audit
-      echo "" >> $REPORT_FILE
-      echo "## System Hardening (Lynis)" >> $REPORT_FILE
+      log ""
+      log "## System Hardening (Lynis)"
       if command -v lynis >/dev/null 2>&1; then
-        lynis audit system --no-colors --quiet > $SCAN_DIR/lynis-$TIMESTAMP.txt 2>/dev/null || echo "Lynis scan failed" >> $REPORT_FILE
-        SECURITY_SCORE=$(grep "Hardening index" $SCAN_DIR/lynis-$TIMESTAMP.txt 2>/dev/null | grep -o "[0-9]*" || echo 0)
-        SUGGESTIONS=$(grep -c "Suggestion" $SCAN_DIR/lynis-$TIMESTAMP.txt 2>/dev/null || echo 0)
-        WARNINGS=$(grep -c "Warning" $SCAN_DIR/lynis-$TIMESTAMP.txt 2>/dev/null || echo 0)
-        echo "Security hardening score: $SECURITY_SCORE/100" >> $REPORT_FILE
-        echo "Warnings: $WARNINGS" >> $REPORT_FILE
-        echo "Suggestions: $SUGGESTIONS" >> $REPORT_FILE
+        LYNIS_FILE="$SCAN_DIR/lynis-$TIMESTAMP.txt"
+        if lynis audit system --no-colors --quiet > "$LYNIS_FILE" 2>/dev/null; then
+          # Get hardening score with proper error handling
+          SECURITY_SCORE=$(ensure_number "$(grep "Hardening index" "$LYNIS_FILE" 2>/dev/null | grep -o "[0-9]*" || echo 0)")
+          SUGGESTIONS=$(ensure_number "$(grep -c "Suggestion" "$LYNIS_FILE" 2>/dev/null || echo 0)")
+          WARNINGS=$(ensure_number "$(grep -c "Warning" "$LYNIS_FILE" 2>/dev/null || echo 0)")
+          log "Security hardening score: $SECURITY_SCORE/100"
+          log "Warnings: $WARNINGS"
+          log "Suggestions: $SUGGESTIONS"
+          
+          # Show some sample suggestions
+          if [ "$SUGGESTIONS" -gt 0 ]; then
+            log "Sample suggestions:"
+            grep "Suggestion" "$LYNIS_FILE" 2>/dev/null | head -3 | while read -r line; do
+              log "- $line"
+            done
+          fi
+        else
+          log "Lynis scan failed to execute properly."
+          SECURITY_SCORE=0
+          SUGGESTIONS=0
+          WARNINGS=0
+        fi
       else
-        echo "lynis not available" >> $REPORT_FILE
+        log "Lynis not available on this system."
+        SECURITY_SCORE=0
+        SUGGESTIONS=0
+        WARNINGS=0
       fi
       
       # 3. Rootkit detection
-      echo "" >> $REPORT_FILE
-      echo "## Rootkit Detection" >> $REPORT_FILE
-      
-      # Chkrootkit
+      log ""
+      log "## Rootkit Detection"
       if command -v chkrootkit >/dev/null 2>&1; then
-        chkrootkit -q > $SCAN_DIR/chkrootkit-$TIMESTAMP.txt 2>/dev/null || echo "Chkrootkit scan failed" >> $REPORT_FILE
-        CHKROOTKIT_FOUND=$(grep -c -E "INFECTED|SUSPECT" $SCAN_DIR/chkrootkit-$TIMESTAMP.txt 2>/dev/null || echo 0)
-        echo "Chkrootkit indicators: $CHKROOTKIT_FOUND" >> $REPORT_FILE
+        CHKROOTKIT_FILE="$SCAN_DIR/chkrootkit-$TIMESTAMP.txt"
+        if chkrootkit -q > "$CHKROOTKIT_FILE" 2>/dev/null; then
+          CHKROOTKIT_FOUND=$(ensure_number "$(grep -c -E "INFECTED|SUSPECT" "$CHKROOTKIT_FILE" 2>/dev/null || echo 0)")
+          log "Chkrootkit indicators: $CHKROOTKIT_FOUND"
+          
+          # Show infected files if any
+          if [ "$CHKROOTKIT_FOUND" -gt 0 ]; then
+            log "Possible rootkit infections:"
+            grep -E "INFECTED|SUSPECT" "$CHKROOTKIT_FILE" 2>/dev/null | while read -r line; do
+              log "- $line"
+            done
+          fi
+        else
+          log "Chkrootkit scan completed with warnings."
+          CHKROOTKIT_FOUND=0
+        fi
       else
-        echo "chkrootkit not available" >> $REPORT_FILE
+        log "Chkrootkit not available on this system."
+        CHKROOTKIT_FOUND=0
       fi
       
       # 4. Native Nix Store Integrity Check
-      echo "" >> $REPORT_FILE
-      echo "## Nix Store Integrity Check" >> $REPORT_FILE
-      nix-store --verify --check-contents 2>&1 | head -n 20 > $SCAN_DIR/nixstore-$TIMESTAMP.txt || echo "Nix store verification failed" >> $REPORT_FILE
-      NIX_ERRORS=$(grep -c -i "error\|corrupt\|invalid" $SCAN_DIR/nixstore-$TIMESTAMP.txt 2>/dev/null || echo 0)
-      echo "Nix store integrity issues: $NIX_ERRORS" >> $REPORT_FILE
-      if [ "$NIX_ERRORS" -gt 0 ]; then
-        echo "IMPORTANT: Issues detected in Nix store integrity check!" >> $REPORT_FILE
-        grep -i "error\|corrupt\|invalid" $SCAN_DIR/nixstore-$TIMESTAMP.txt 2>/dev/null | head -n 5 >> $REPORT_FILE
+      log ""
+      log "## Nix Store Integrity Check"
+      NIX_STORE_FILE="$SCAN_DIR/nixstore-$TIMESTAMP.txt"
+      if nix-store --verify --check-contents 2>&1 | head -n 20 > "$NIX_STORE_FILE"; then
+        NIX_ERRORS=$(ensure_number "$(grep -c -i "error\|corrupt\|invalid" "$NIX_STORE_FILE" 2>/dev/null || echo 0)")
+        log "Nix store integrity issues: $NIX_ERRORS"
+        if [ "$NIX_ERRORS" -gt 0 ]; then
+          log "IMPORTANT: Issues detected in Nix store integrity check!"
+          grep -i "error\|corrupt\|invalid" "$NIX_STORE_FILE" 2>/dev/null | head -5 | while read -r line; do
+            log "- $line"
+          done
+        else
+          log "Nix store appears to be intact"
+        fi
       else
-        echo "Nix store appears to be intact" >> $REPORT_FILE
+        log "Nix store verification failed to complete."
+        NIX_ERRORS=0
       fi
       
       # 5. Port scan
-      echo "" >> $REPORT_FILE
-      echo "## Open Ports" >> $REPORT_FILE
+      log ""
+      log "## Open Ports"
       if command -v nmap >/dev/null 2>&1; then
-        nmap -F localhost > $SCAN_DIR/portscan-$TIMESTAMP.txt 2>/dev/null || echo "Port scan failed" >> $REPORT_FILE
-        OPEN_PORTS=$(grep "open" $SCAN_DIR/portscan-$TIMESTAMP.txt 2>/dev/null | wc -l)
-        echo "Open ports: $OPEN_PORTS" >> $REPORT_FILE
-        grep "open" $SCAN_DIR/portscan-$TIMESTAMP.txt 2>/dev/null | sed 's/^/- /' >> $REPORT_FILE
+        NMAP_FILE="$SCAN_DIR/portscan-$TIMESTAMP.txt"
+        if nmap -F localhost > "$NMAP_FILE" 2>/dev/null; then
+          OPEN_PORTS=$(ensure_number "$(grep "open" "$NMAP_FILE" 2>/dev/null | wc -l)")
+          log "Open ports: $OPEN_PORTS"
+          grep "open" "$NMAP_FILE" 2>/dev/null | while read -r line; do
+            log "- $line"
+          done
+        else
+          log "Port scan failed to complete."
+          OPEN_PORTS=0
+        fi
       else
-        echo "nmap not available" >> $REPORT_FILE
+        log "Nmap not available on this system."
+        OPEN_PORTS=0
       fi
       
       # 6. Check setuid/setgid binaries
-      echo "" >> $REPORT_FILE
-      echo "## SUID/SGID Binaries" >> $REPORT_FILE
-      find / -path /proc -prune -o -path /nix/store -prune -o \( -perm -4000 -o -perm -2000 \) -type f -ls 2>/dev/null > $SCAN_DIR/setuid-$TIMESTAMP.txt || echo "SUID/SGID scan failed" >> $REPORT_FILE
-      SETUID_COUNT=$(wc -l < $SCAN_DIR/setuid-$TIMESTAMP.txt 2>/dev/null || echo 0)
-      echo "SetUID/SetGID binaries found: $SETUID_COUNT" >> $REPORT_FILE
+      log ""
+      log "## SUID/SGID Binaries"
+      SETUID_FILE="$SCAN_DIR/setuid-$TIMESTAMP.txt"
+      if find / -path /proc -prune -o -path /nix/store -prune -o \( -perm -4000 -o -perm -2000 \) -type f -ls 2>/dev/null > "$SETUID_FILE"; then
+        SETUID_COUNT=$(ensure_number "$(wc -l < "$SETUID_FILE" 2>/dev/null || echo 0)")
+        log "SetUID/SetGID binaries found: $SETUID_COUNT"
+        
+        # List a few for example
+        if [ "$SETUID_COUNT" -gt 0 ]; then
+          log "Sample SUID/SGID binaries:"
+          head -3 "$SETUID_FILE" 2>/dev/null | while read -r line; do
+            log "- $line"
+          done
+        fi
+      else
+        log "SUID/SGID scan encountered some errors (permissions)."
+        # Still try to count what we got
+        if [ -f "$SETUID_FILE" ]; then
+          SETUID_COUNT=$(ensure_number "$(wc -l < "$SETUID_FILE" 2>/dev/null || echo 0)")
+          log "Partial results - SetUID/SetGID binaries found: $SETUID_COUNT"
+        else
+          SETUID_COUNT=0
+        fi
+      fi
       
       # 7. World-writable files
-      echo "" >> $REPORT_FILE
-      echo "## World-Writable Files" >> $REPORT_FILE
-      find / -path /proc -prune -o -path /sys -prune -o -path /dev -prune -o -path /nix/store -prune -o -perm -2 ! -type l -ls 2>/dev/null > $SCAN_DIR/world-writable-$TIMESTAMP.txt || echo "World-writable scan failed" >> $REPORT_FILE
-      WW_COUNT=$(wc -l < $SCAN_DIR/world-writable-$TIMESTAMP.txt 2>/dev/null || echo 0)
-      echo "World-writable files/dirs found: $WW_COUNT" >> $REPORT_FILE
+      log ""
+      log "## World-Writable Files"
+      WW_FILE="$SCAN_DIR/world-writable-$TIMESTAMP.txt"
+      if find / -path /proc -prune -o -path /sys -prune -o -path /dev -prune -o -path /nix/store -prune -o -perm -2 ! -type l -ls 2>/dev/null > "$WW_FILE"; then
+        WW_COUNT=$(ensure_number "$(wc -l < "$WW_FILE" 2>/dev/null || echo 0)")
+        log "World-writable files/dirs found: $WW_COUNT"
+        
+        # List a few for example
+        if [ "$WW_COUNT" -gt 0 ]; then
+          log "Sample world-writable files:"
+          head -3 "$WW_FILE" 2>/dev/null | while read -r line; do
+            log "- $line"
+          done
+        fi
+      else
+        log "World-writable files scan encountered some errors (permissions)."
+        # Still try to count what we got
+        if [ -f "$WW_FILE" ]; then
+          WW_COUNT=$(ensure_number "$(wc -l < "$WW_FILE" 2>/dev/null || echo 0)")
+          log "Partial results - World-writable files/dirs found: $WW_COUNT"
+        else
+          WW_COUNT=0
+        fi
+      fi
       
       # Create a risk score
-      echo "" >> $REPORT_FILE
-      echo "## Summary" >> $REPORT_FILE
+      log ""
+      log "## Summary"
       RISK_SCORE=0
       
-      # Calculate risk score
-      [ "$CRITICAL_VULN" -gt 0 ] && RISK_SCORE=$((RISK_SCORE+40)) || true
-      [ "$VULN_COUNT" -gt 5 ] && RISK_SCORE=$((RISK_SCORE+10)) || true
-      [ "$SECURITY_SCORE" -lt 70 ] && RISK_SCORE=$((RISK_SCORE+20)) || true
-      [ "$WARNINGS" -gt 5 ] && RISK_SCORE=$((RISK_SCORE+10)) || true
-      [ "$CHKROOTKIT_FOUND" -gt 0 ] && RISK_SCORE=$((RISK_SCORE+30)) || true
-      [ "$NIX_ERRORS" -gt 0 ] && RISK_SCORE=$((RISK_SCORE+50)) || true
+      # Calculate risk score with safer integer conversions
+      if [ "$CRITICAL_VULN" -gt 0 ] 2>/dev/null; then 
+        RISK_SCORE=$((RISK_SCORE+40))
+        log "- Critical vulnerabilities found: +40 points"
+      fi
+      
+      if [ "$VULN_COUNT" -gt 5 ] 2>/dev/null; then 
+        RISK_SCORE=$((RISK_SCORE+10))
+        log "- Multiple vulnerabilities found: +10 points"
+      fi
+      
+      if [ "$SECURITY_SCORE" -lt 70 ] 2>/dev/null; then 
+        RISK_SCORE=$((RISK_SCORE+20))
+        log "- Low security hardening score: +20 points"
+      fi
+      
+      if [ "$WARNINGS" -gt 5 ] 2>/dev/null; then 
+        RISK_SCORE=$((RISK_SCORE+10))
+        log "- Multiple security warnings: +10 points"
+      fi
+      
+      if [ "$CHKROOTKIT_FOUND" -gt 0 ] 2>/dev/null; then 
+        RISK_SCORE=$((RISK_SCORE+30))
+        log "- Potential rootkit indicators: +30 points"
+      fi
+      
+      if [ "$NIX_ERRORS" -gt 0 ] 2>/dev/null; then 
+        RISK_SCORE=$((RISK_SCORE+50))
+        log "- Nix store integrity issues: +50 points"
+      fi
       
       # Risk assessment
-      if [ "$RISK_SCORE" -ge 50 ]; then
+      if [ "$RISK_SCORE" -ge 50 ] 2>/dev/null; then
         RISK_LEVEL="HIGH"
-      elif [ "$RISK_SCORE" -ge 20 ]; then
+      elif [ "$RISK_SCORE" -ge 20 ] 2>/dev/null; then
         RISK_LEVEL="MEDIUM"
       else
         RISK_LEVEL="LOW"
       fi
       
-      echo "Overall risk assessment: $RISK_LEVEL ($RISK_SCORE points)" >> $REPORT_FILE
+      log "Overall risk assessment: $RISK_LEVEL ($RISK_SCORE points)"
       
-      # Copy report for user
-      cp $REPORT_FILE /home/${config.user}/security-report.txt || echo "Failed to copy report to user home" >> $REPORT_FILE
-      chown ${config.user}:users /home/${config.user}/security-report.txt 2>/dev/null || echo "Failed to set ownership on report" >> $REPORT_FILE
+      # Copy report for user - no need for sudo in systemd service run as root
+      cp "$REPORT_FILE" "/home/${config.user}/security-report.txt" || echo "Failed to copy report to user home"
+      chown ${config.user}:users "/home/${config.user}/security-report.txt" 2>/dev/null || echo "Failed to set ownership on report"
       
       # Create symlink to latest report
-      ln -sf $REPORT_FILE $SCAN_DIR/latest-report.txt || echo "Failed to create symlink to latest report" >> $REPORT_FILE
+      ln -sf "$REPORT_FILE" "$SCAN_DIR/latest-report.txt" || echo "Failed to create symlink to latest report"
       
-      # Send notification
+      # Send notification - directly using libnotify
+      USER_ID=$(id -u ${config.user})
+      DBUS_ADDRESS="unix:path=/run/user/$USER_ID/bus"
+      
       if [ "$RISK_LEVEL" = "HIGH" ]; then
-        /run/current-system/sw/bin/security-notify critical "Security Scan" "HIGH security risks detected! Check ~/security-report.txt" || echo "Failed to send notification" >> $REPORT_FILE
+        # Use printenv to debug environment
+        DBUS_SESSION_BUS_ADDRESS="$DBUS_ADDRESS" \
+          su - ${config.user} -c "${pkgs.libnotify}/bin/notify-send -u critical 'Security Scan' 'HIGH security risks detected! Check ~/security-report.txt'" || \
+          echo "Failed to send notification"
       elif [ "$RISK_LEVEL" = "MEDIUM" ]; then
-        /run/current-system/sw/bin/security-notify normal "Security Scan" "MEDIUM security risks detected. Check ~/security-report.txt" || echo "Failed to send notification" >> $REPORT_FILE
+        DBUS_SESSION_BUS_ADDRESS="$DBUS_ADDRESS" \
+          su - ${config.user} -c "${pkgs.libnotify}/bin/notify-send -u normal 'Security Scan' 'MEDIUM security risks detected. Check ~/security-report.txt'" || \
+          echo "Failed to send notification"
       else
-        /run/current-system/sw/bin/security-notify low "Security Scan" "Security scan completed. Risk level: LOW" || echo "Failed to send notification" >> $REPORT_FILE
+        DBUS_SESSION_BUS_ADDRESS="$DBUS_ADDRESS" \
+          su - ${config.user} -c "${pkgs.libnotify}/bin/notify-send -u low 'Security Scan' 'Security scan completed. Risk level: LOW'" || \
+          echo "Failed to send notification"
       fi
     '';
     serviceConfig = {

@@ -7,7 +7,13 @@
   programs.seahorse.enable = true; # Keyring manager
 
   security.polkit.enable = true;
-
+  security.pam.services = {
+    login = {}; 
+    greetd.gnupg.enable = true;
+    sudo.sshAgentAuth = true;      
+    hyprlock = {};
+  };
+  
 
   services.fail2ban = {
     enable = true;
@@ -34,5 +40,7 @@
   environment.systemPackages = with pkgs; [
     libsecret # Polkit  
     lxqt.lxqt-policykit # Polkit 
+    gnupg
+    pinentry
   ];
 }
