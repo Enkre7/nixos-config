@@ -7,6 +7,7 @@
     vulnix
     lynis
     chkrootkit
+    aide      # File integrity checker
     openscap  # Security compliance framework
     clamav    # Antivirus
     
@@ -29,81 +30,76 @@
     # Manual scan script
     (writeShellScriptBin "run-security-scan" ''
       #!/bin/sh
-      echo "----------------------------------------"
-      echo "Starting NixOS security scan..."
-      echo "----------------------------------------"
-      echo "This scan will check for:"
-      echo " - Package vulnerabilities (via vulnix)"
-      echo " - System hardening (via lynis)"
-      echo " - Rootkit detection (via chkrootkit)"
-      echo " - Nix store integrity"
-      echo " - Open ports (via nmap)"
-      echo " - SUID/SGID binaries"
-      echo " - World-writable files"
-      echo ""
-      echo "The report will be saved to: ~/security-report.txt"
-      echo "You can view it with: view-security-report"
-      echo ""
-      echo "Starting systemd service: security-scan.service"
+      echo "Running security scan..."
       sudo systemctl start security-scan.service
-      
-      # Check if the service started successfully
-      if [ $? -eq 0 ]; then
-        echo "Scan initiated successfully."
-        echo "Monitor progress with: journalctl -fu security-scan.service"
-        echo "You will receive a notification when the scan completes."
-      else
-        echo "Error: Failed to start security scan service."
-        echo "Check the logs with: journalctl -u security-scan.service"
-      fi
-      echo "----------------------------------------"
+      echo "Scan initiated. You will receive a notification when it completes."
     '')
     
     # View report script
     (writeShellScriptBin "view-security-report" ''
       #!/bin/sh
-      REPORT_PATH="$HOME/security-report.txt"
-      SCAN_DIR="/var/lib/security-scans"
-      
-      echo "----------------------------------------"
-      echo "NixOS Security Report Viewer"
-      echo "----------------------------------------"
-      
-      if [ -f "$REPORT_PATH" ]; then
-        echo "Found security report at: $REPORT_PATH"
-        echo "Report date: $(stat -c '%y' "$REPORT_PATH")"
-        echo "Report size: $(stat -c '%s' "$REPORT_PATH") bytes"
-        echo ""
-        echo "Press q to exit the report viewer"
-        echo "----------------------------------------"
-        sleep 1
-        ${pkgs.less}/bin/less "$REPORT_PATH"
+      if [ -f ~/security-report.txt ]; then
+        ${pkgs.less}/bin/less ~/security-report.txt
       else
-        echo "No security report found at: $REPORT_PATH"
-        echo ""
-        
-        # Check if there are any reports in the system directory
-        if [ -d "$SCAN_DIR" ] && [ "$(ls -A "$SCAN_DIR" 2>/dev/null)" ]; then
-          echo "System reports exist but haven't been copied to your home directory."
-          echo "Available system reports:"
-          sudo ls -lh "$SCAN_DIR" | grep report
-          echo ""
-          echo "You can copy the latest report with:"
-          echo "sudo cp $SCAN_DIR/latest-report.txt $REPORT_PATH"
-          echo "sudo chown $(whoami):users $REPORT_PATH"
-        else
-          echo "No system reports found. Run 'run-security-scan' to generate one."
-        fi
-        echo "----------------------------------------"
+        echo "No security report found. Run 'run-security-scan' to generate one."
       fi
     '')
+    
+    # AIDE initialize script
+    (writeShellScriptBin "init-aide-db" ''
+      #!/bin/sh
+      echo "Initializing AIDE database..."
+      sudo ${pkgs.aide}/bin/aide --init --config /etc/aide/aide.conf
+      sudo cp /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+      echo "AIDE database initialized."
+    '')
   ];
+
+  # AIDE configuration
+  environment.etc."aide/aide.conf".text = ''
+    # Configuration de base d'AIDE pour NixOS
+    # Règles pour définir les groupes
+    # Définition des types de vérifications
+    database_in=file:/var/lib/aide/aide.db
+    database_out=file:/var/lib/aide/aide.db.new
+
+    # Règles et groupes
+    Binaries = p+i+n+u+g+s+b+m+c+md5+sha1
+    Databases = p+i+n+u+g+s+b+m+c+md5+sha1
+    Logs = p+i+n+u+g+S
+    ConfigFiles = p+i+n+u+g+s+b+m+c+md5+sha1
+
+    # Règles pour les répertoires à surveiller
+    /bin Binaries
+    /sbin Binaries
+    /usr/bin Binaries
+    /usr/sbin Binaries
+    /usr/local/bin Binaries
+    /usr/local/sbin Binaries
+    /etc ConfigFiles
+    /nix/store Databases
+    /boot Databases
+
+    # Exclusions
+    !/proc
+    !/sys
+    !/dev
+    !/run
+    !/tmp
+    !/var/tmp
+    !/var/log
+    !/var/lib/systemd
+    !/var/lib/docker
+    !/home
+    !/var/cache
+    !/var/spool
+  '';
 
   # Enhanced weekly security scan
   systemd.services.security-scan = {
     description = "Weekly security scan";
     path = with pkgs; [ 
-      vulnix lynis chkrootkit clamav 
+      vulnix lynis chkrootkit aide clamav 
       nmap coreutils gnugrep gawk findutils 
     ];
     script = ''
@@ -114,6 +110,9 @@
       mkdir -p $SCAN_DIR
       TIMESTAMP=$(date +%F-%H%M)
       REPORT_FILE="$SCAN_DIR/report-$TIMESTAMP.txt"
+      
+      # Create directories for AIDE if they don't exist
+      mkdir -p /var/lib/aide
       
       echo "Security Scan Report - $(date)" > $REPORT_FILE
       echo "===========================" >> $REPORT_FILE
@@ -158,17 +157,26 @@
         echo "chkrootkit not available" >> $REPORT_FILE
       fi
       
-      # 4. Native Nix Store Integrity Check
+      # 4. File integrity check
       echo "" >> $REPORT_FILE
-      echo "## Nix Store Integrity Check" >> $REPORT_FILE
-      nix-store --verify --check-contents 2>&1 | head -n 20 > $SCAN_DIR/nixstore-$TIMESTAMP.txt || echo "Nix store verification failed" >> $REPORT_FILE
-      NIX_ERRORS=$(grep -c -i "error\|corrupt\|invalid" $SCAN_DIR/nixstore-$TIMESTAMP.txt 2>/dev/null || echo 0)
-      echo "Nix store integrity issues: $NIX_ERRORS" >> $REPORT_FILE
-      if [ "$NIX_ERRORS" -gt 0 ]; then
-        echo "IMPORTANT: Issues detected in Nix store integrity check!" >> $REPORT_FILE
-        grep -i "error\|corrupt\|invalid" $SCAN_DIR/nixstore-$TIMESTAMP.txt 2>/dev/null | head -n 5 >> $REPORT_FILE
+      echo "## File Integrity (AIDE)" >> $REPORT_FILE
+      if command -v aide >/dev/null 2>&1; then
+        if [ ! -f /var/lib/aide/aide.db.gz ]; then
+          echo "Initializing AIDE database..." >> $REPORT_FILE
+          aide --init --config /etc/aide/aide.conf > $SCAN_DIR/aide-init-$TIMESTAMP.txt 2>/dev/null || echo "AIDE initialization failed" >> $REPORT_FILE
+          if [ -f /var/lib/aide/aide.db.new.gz ]; then
+            cp /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz 2>/dev/null || echo "Failed to copy AIDE database" >> $REPORT_FILE
+            echo "AIDE database initialized. First check will be available next scan." >> $REPORT_FILE
+          else
+            echo "AIDE database initialization failed" >> $REPORT_FILE
+          fi
+        else
+          aide --check --config /etc/aide/aide.conf > $SCAN_DIR/aide-$TIMESTAMP.txt 2>&1 || echo "AIDE check failed" >> $REPORT_FILE
+          AIDE_CHANGES=$(grep -c -E "changed|added|removed" $SCAN_DIR/aide-$TIMESTAMP.txt 2>/dev/null || echo 0)
+          echo "Changed files detected: $AIDE_CHANGES" >> $REPORT_FILE
+        fi
       else
-        echo "Nix store appears to be intact" >> $REPORT_FILE
+        echo "aide not available" >> $REPORT_FILE
       fi
       
       # 5. Port scan
@@ -186,14 +194,14 @@
       # 6. Check setuid/setgid binaries
       echo "" >> $REPORT_FILE
       echo "## SUID/SGID Binaries" >> $REPORT_FILE
-      find / -path /proc -prune -o -path /nix/store -prune -o \( -perm -4000 -o -perm -2000 \) -type f -ls 2>/dev/null > $SCAN_DIR/setuid-$TIMESTAMP.txt || echo "SUID/SGID scan failed" >> $REPORT_FILE
+      find / -path /proc -prune -o \( -perm -4000 -o -perm -2000 \) -type f -ls 2>/dev/null > $SCAN_DIR/setuid-$TIMESTAMP.txt || echo "SUID/SGID scan failed" >> $REPORT_FILE
       SETUID_COUNT=$(wc -l < $SCAN_DIR/setuid-$TIMESTAMP.txt 2>/dev/null || echo 0)
       echo "SetUID/SetGID binaries found: $SETUID_COUNT" >> $REPORT_FILE
       
       # 7. World-writable files
       echo "" >> $REPORT_FILE
       echo "## World-Writable Files" >> $REPORT_FILE
-      find / -path /proc -prune -o -path /sys -prune -o -path /dev -prune -o -path /nix/store -prune -o -perm -2 ! -type l -ls 2>/dev/null > $SCAN_DIR/world-writable-$TIMESTAMP.txt || echo "World-writable scan failed" >> $REPORT_FILE
+      find / -path /proc -prune -o -path /sys -prune -o -path /dev -prune -o -perm -2 ! -type l -ls 2>/dev/null > $SCAN_DIR/world-writable-$TIMESTAMP.txt || echo "World-writable scan failed" >> $REPORT_FILE
       WW_COUNT=$(wc -l < $SCAN_DIR/world-writable-$TIMESTAMP.txt 2>/dev/null || echo 0)
       echo "World-writable files/dirs found: $WW_COUNT" >> $REPORT_FILE
       
@@ -208,7 +216,7 @@
       [ "$SECURITY_SCORE" -lt 70 ] && RISK_SCORE=$((RISK_SCORE+20)) || true
       [ "$WARNINGS" -gt 5 ] && RISK_SCORE=$((RISK_SCORE+10)) || true
       [ "$CHKROOTKIT_FOUND" -gt 0 ] && RISK_SCORE=$((RISK_SCORE+30)) || true
-      [ "$NIX_ERRORS" -gt 0 ] && RISK_SCORE=$((RISK_SCORE+50)) || true
+      [ "$AIDE_CHANGES" -gt 10 ] && RISK_SCORE=$((RISK_SCORE+15)) || true
       
       # Risk assessment
       if [ "$RISK_SCORE" -ge 50 ]; then
@@ -272,5 +280,6 @@
   # Create necessary directories
   systemd.tmpfiles.rules = [
     "d /var/lib/security-scans 0750 root root -"
+    "d /var/lib/aide 0750 root root -"
   ];
 }
