@@ -1,32 +1,29 @@
 { config, pkgs, lib, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     nextcloud-client
   ];
   
-  home.file.".config/Nextcloud/nextcloud.cfg".text = lib.mkAfter ''
-    [General]
-    useUploadLimit=false
-    newBigFolderSizeLimit=500
-    optionalServerNotifications=true
-    showInExplorerNavigationPane=true
+  home.file."Nextcloud/.keep".text = "";
+  
+  home.activation.nextcloudConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    mkdir -p "${config.home.homeDirectory}/.config/Nextcloud"
     
-    [Accounts]
-    0\Folders\1\ignoreHiddenFiles=false
-    0\Folders\1\localPath=${config.home.homeDirectory}/Nextcloud
-    0\Folders\1\paused=false
-    0\Folders\1\targetPath=/
-    0\Folders\1\usePlaceholders=false
-    0\Folders\1\version=2
-    0\authType=webflow
-    0\databaseDirectoryPermissions=0700
-    0\serverVersion=
-    0\url=https://spacecloud.7mairot.com
+    if [ ! -f "${config.home.homeDirectory}/.config/Nextcloud/nextcloud.cfg" ]; then
+      echo "[General]
+crashReporter=true
+monoIcons=false
+newBigFolderSizeLimit=500
+optionalServerNotifications=true
+showInExplorerNavigationPane=true
+useNewBigFolderSizeLimit=true
+keyChainUsePassword=true" > "${config.home.homeDirectory}/.config/Nextcloud/nextcloud.cfg"
+    fi
     
-    0\http_credentials_encrypted=true
+    chmod -R 755 "${config.home.homeDirectory}/.config/Nextcloud"
+    chmod 600 "${config.home.homeDirectory}/.config/Nextcloud/nextcloud.cfg"
     
-    [Settings]
-    geometry=@ByteArray()
+    chown -R ${config.user}:users "${config.home.homeDirectory}/.config/Nextcloud"
   '';
 }
