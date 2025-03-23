@@ -33,6 +33,7 @@
     ../../homeModules/lf.nix
     ../../homeModules/capture.nix  
   # Applications
+    ../../homeModules/nextcloud-client.nix
     ../../homeModules/floorp.nix
     #../../homeModules/firefox.nix
     #../../homeModules/libreoffice.nix
@@ -63,7 +64,6 @@
     r2modman
     obsidian
     gnome-calculator
-    nextcloud-client
     ffmpeg-full
   ];
 }

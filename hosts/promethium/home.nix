@@ -33,6 +33,7 @@
     ../../homeModules/lf.nix
     ../../homeModules/capture.nix  
   # Applications
+    ../../homeModules/nextcloud-client.nix
     ../../homeModules/floorp.nix
     #../../homeModules/firefox.nix
     #../../homeModules/libreoffice.nix
@@ -54,14 +55,9 @@
     #rustdesk
     vesktop # discord
     gnome-calculator
-    nextcloud-client
     obsidian
     ffmpeg-full
     picard
-    
-    # dev
-    gcc
-    gdb
     powershell
   ];
 }

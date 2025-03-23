@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 
 {
   systemd.services.fprintd = {
@@ -8,7 +8,7 @@
 
   services.fprintd.enable = true; # sudo fprintd-enroll <user> & fprintd-verify
   security.pam.services = {
-    login.fprintAuth = true;
+    login.fprintAuth = lib.mkForce true;
     greetd.fprintAuth = true;
     sudo.fprintAuth = true;
     hyprlock.fprintAuth = true;

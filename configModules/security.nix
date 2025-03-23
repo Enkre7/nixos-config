@@ -2,9 +2,9 @@
 
 {  
   # Keyrings
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.greetd.enableGnomeKeyring = true;
-  programs.seahorse.enable = true; # Keyring manager
+  #services.gnome.gnome-keyring.enable = true;
+  #security.pam.services.greetd.enableGnomeKeyring = true;
+  #programs.seahorse.enable = true; # Keyring manager
   security.polkit.enable = true;
 
   security.pam = {
