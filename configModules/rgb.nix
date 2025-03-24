@@ -16,6 +16,8 @@
     package = pkgs.openrgb-with-all-plugins;
   };
 
+  networking.firewall.allowedTCPPorts = [ 6742 ]; # openRGB server
+
   systemd.services.openrgb = {
     before = [ "greetd.service" ];
     wantedBy = [ "multi-user.target" ];
