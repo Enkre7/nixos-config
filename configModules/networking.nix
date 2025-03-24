@@ -43,6 +43,7 @@
       1196 # Mullvad VPN
       1197 # Mullvad VPN
       51820 # Mullvad VPN
+      41641 # Tailscale
       5353 # mDNS/Avahi
       631 # CUPS
       1 # Bluetooth discovery
