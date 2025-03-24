@@ -1,6 +1,12 @@
 { pkgs, ... }:
 
 {
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+    package = pkgs.kdePackages.kdeconnect-kde;
+  };
+
   # Hide all .desktop, except for org.kde.kdeconnect.settings
   xdg.desktopEntries = {
     "org.kde.kdeconnect.sms" = {
@@ -18,11 +24,5 @@
       name = "KDE Connect";
       settings.NoDisplay = "true";
     };
-  };
-
-  services.kdeconnect = {
-    enable = true;
-    indicator = true;
-    package = pkgs.kdePackages.kdeconnect-kde;
   };
 }

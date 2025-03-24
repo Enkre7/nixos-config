@@ -1,32 +1,18 @@
 { pkgs, ... }: 
 
 {  
-  # Keyrings
-  #services.gnome.gnome-keyring.enable = true;
-  #security.pam.services.greetd.enableGnomeKeyring = true;
-  #programs.seahorse.enable = true; # Keyring manager
-  security.polkit.enable = true;
-
   security.pam = {
     services = {
       sudo.sshAgentAuth = true;
+      greetd.enableGnomeKeyring = true; 
+      login.enableGnomeKeyring = true; 
     };
     sshAgentAuth.enable = true;
   };
+
   security.sudo.execWheelOnly = true;
-
-  services.fail2ban = {
-    enable = true;
-    # Protect from SSH brute force
-    jails.ssh-iptables = ''
-      enabled = true
-      filter = sshd
-      maxretry = 5
-      bantime = 2h
-    '';
-  };
-
   security.auditd.enable = true;
+  security.polkit.enable = true;
 
   # Harden kernel
   boot.kernel.sysctl = {
@@ -39,10 +25,20 @@
     "net.ipv4.conf.all.log_martians" = 1;
     "net.ipv4.conf.default.log_martians" = 1;
   };
+  
+  services.fail2ban = {
+    enable = true;
+    # Protect from SSH brute force
+    jails.ssh-iptables = ''
+      enabled = true
+      filter = sshd
+      maxretry = 5
+      bantime = 2h
+    '';
+  };
 
   environment.systemPackages = with pkgs; [
-    libsecret # Polkit  
-    lxqt.lxqt-policykit # Polkit
-    pinentry
+    libsecret #Polkit
+    lxqt.lxqt-policykit #Polkit
   ];
 }

@@ -23,7 +23,7 @@
   services.blueman.enable = true;
 
   # Firewall
-  networking.firewall = {
+  networking.firewall = rec {
     enable = true;
     allowedTCPPorts = [
       22 # SSH
@@ -31,11 +31,9 @@
       5901 # Hyprland portals
       27036 # Steam
       27037 # Steam
-      53 # Mullvad VPN
+      53 # DNS
       4447 # Mullvad VPN
       631 # CUPS
-      1716 # KDE Connect
-      1764 # KDE Connect
     ];
     allowedUDPPorts = [
       27031 # Steam
@@ -47,18 +45,14 @@
       51820 # Mullvad VPN
       5353 # mDNS/Avahi
       631 # CUPS
-      1716 # KDE Connect
-      1764 # KDE Connect
       1 # Bluetooth discovery
     ];
     allowedTCPPortRanges = [
-      # Steam remote play
-      { from = 27015; to = 27030; }
+      { from = 27015; to = 27030; } # Steam remote play
+      { from = 1714; to = 1764; } # KDE Connect
     ];
-    allowedUDPPortRanges = [
-      # Steam remote play
-      { from = 27000; to = 27100; }
-    ];
+    allowedUDPPortRanges = allowedTCPPortRanges;
+
     trustedInterfaces = [ "tailscale0" "lo" "docker0" ];
     allowPing = true;
     checkReversePath = "loose"; # for VPN

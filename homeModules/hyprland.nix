@@ -18,7 +18,7 @@ let
     #${pkgs.plasma5Packages.kdeconnect-kde}/bin/kdeconnect-app &
     ${pkgs.vesktop}/bin/vesktop --start-minimized &
     ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
-    ${pkgs.nextcloud-client}/bin/nextcloud --background &
+    #${pkgs.nextcloud-client}/bin/nextcloud --background &
 
     wl-paste --watch cliphist store &
 
