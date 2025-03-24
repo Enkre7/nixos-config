@@ -14,7 +14,7 @@
     gitEmail = mkOption { type = str; };
     
     # Options for battery.nix
-    hasLaptopBattery = mkOption {
+    isLaptop = mkOption {
       type = types.bool;
       default = false;
     };
@@ -39,7 +39,7 @@
     stylePolarity = "light";
     gitUsername = "Enkre7";
     gitEmail = "victor.mairot@proton.me";
-    hasLaptopBattery = true;
+    isLaptop = true;
     cpuVendor = "AMD";
     isFrameworkDevice = true;
   };

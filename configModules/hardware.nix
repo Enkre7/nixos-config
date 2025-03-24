@@ -12,7 +12,7 @@
       efi.canTouchEfiVariables = true;
     };
     kernelPackages = pkgs.linuxPackages_latest; #pkgs.linuxPackages_zen
-    kernelParams = [ ];
+    kernelParams = [];
     extraModulePackages = [];
     consoleLogLevel = 3;
   };

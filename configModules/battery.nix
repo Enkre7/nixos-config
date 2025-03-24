@@ -4,7 +4,7 @@ with lib;
 
 {
   services.auto-cpufreq = {
-    enable = config.hasLaptopBattery;
+    enable = config.isLaptop;
     settings = {
       battery = {
         governor = "powersave";
@@ -20,7 +20,7 @@ with lib;
   };
 
   services.tlp = {
-    enable = config.hasLaptopBattery;
+    enable = config.isLaptop;
     settings = let
       isAMD = config.cpuVendor == "AMD";
       isIntel = config.cpuVendor == "Intel";
@@ -82,7 +82,7 @@ with lib;
   };
 
   # Thermald service (especially useful for Intel CPUs)
-  services.thermald.enable = config.cpuVendor == "Intel" && config.hasLaptopBattery;
+  services.thermald.enable = config.cpuVendor == "Intel" && config.isLaptop;
   
   # Power profiles daemon is handled by nixos-hardware, disable to avoid conflicts
   services.power-profiles-daemon.enable = false;
@@ -90,11 +90,11 @@ with lib;
   powerManagement = {
     enable = true;
     powertop.enable = true;
-    cpuFreqGovernor = mkIf (!config.hasLaptopBattery) "performance";
+    cpuFreqGovernor = mkIf (!config.isLaptop) "performance";
   };
   
   # Hybrid sleep configuration
-  systemd.sleep.extraConfig = mkIf config.hasLaptopBattery ''
+  systemd.sleep.extraConfig = mkIf config.isLaptop ''
     [Sleep]
     HibernateDelaySec=120m
     SuspendEstimationSec=15
@@ -104,8 +104,8 @@ with lib;
   services.logind = {
     powerKey = "suspend";
     powerKeyLongPress = "poweroff";
-    lidSwitch = mkIf config.hasLaptopBattery "suspend-then-hibernate";
-    lidSwitchExternalPower = mkIf config.hasLaptopBattery "lock";
+    lidSwitch = mkIf config.isLaptop "suspend-then-hibernate";
+    lidSwitchExternalPower = mkIf config.isLaptop "lock";
     extraConfig = ''
       IdleAction=lock
       IdleActionSec=300
@@ -114,7 +114,7 @@ with lib;
   };
 
   # Battery management utilities
-  environment.systemPackages = with pkgs; mkIf config.hasLaptopBattery [
+  environment.systemPackages = with pkgs; mkIf config.isLaptop [
     powertop
     acpi
     tlp

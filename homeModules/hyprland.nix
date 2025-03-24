@@ -3,7 +3,8 @@ let
   stylix = config.lib.stylix.colors;
   startupScript = pkgs.writeShellScriptBin "start" ''
     # Start of SSH agent for gnome-keyrings
-    eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh) &
+    eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+    export SSH_AUTH_SOCK
 
     ${pkgs.waybar}/bin/waybar &    
     ${pkgs.mako}/bin/mako &
@@ -11,11 +12,10 @@ let
     ${pkgs.blueman}/bin/blueman-applet &
     ${pkgs.udiskie}/bin/udiskie &
     ${pkgs.gammastep}/bin/gammastep &
-    ${pkgs.swww}/bin/swww-daemon &
+    #${pkgs.swww}/bin/swww-daemon &
     sleep 0.1 &
-    ${pkgs.swww}/bin/swww img config.wallpaper &
+    #${pkgs.swww}/bin/swww img config.wallpaper &
 
-    #${pkgs.plasma5Packages.kdeconnect-kde}/bin/kdeconnect-app &
     ${pkgs.vesktop}/bin/vesktop --start-minimized &
     ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
     #${pkgs.nextcloud-client}/bin/nextcloud --background &
@@ -184,7 +184,7 @@ in
 	",XF86AudioLowerVolume, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 | wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
 	# Screen Brightness
 	",XF86MonBrightnessDown, exec, brightnessctl set 5%-"
-	",XF86MonBrightnessUP, exec, brightnessctl set 5%+"
+	",XF86MonBrightnessUP, exec, brightnessctl set +5%"
       ];
       
       bindm = [

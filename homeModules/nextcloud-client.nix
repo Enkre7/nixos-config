@@ -5,6 +5,4 @@
     enable = true;
     startInBackground = true;
   };
-  
-  services.gnome-keyring.enable = true;
 }
