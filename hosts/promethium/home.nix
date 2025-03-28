@@ -25,7 +25,7 @@
   # Development
     ../../homeModules/git.nix
     ../../homeModules/vscode.nix
-    ../../homeModules/tex.nix
+    #../../homeModules/tex.nix
   # Media & Files
     ../../homeModules/xdg.nix
     ../../homeModules/mpv.nix

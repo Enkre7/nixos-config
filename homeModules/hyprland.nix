@@ -114,7 +114,7 @@ in
 
       device = {
         name = "epic-mouse-v1";
-        sensitivity = "-0.5";
+        sensitivity = "-0.3";
       };
 
       "$mainMod" = "SUPER"; # Sets "Windows" key as main modifier
@@ -134,10 +134,10 @@ in
         "$mainMod, B, fullscreen"
         "$mainMod SHIFT, F, exec, $browserPrivate"
         # Move focus with mainMod + arrow keys
-        "$mainMod, left, movefocus, l"
-        "$mainMod, right, movefocus, r"
-        "$mainMod, up, movefocus, u"
-        "$mainMod, down, movefocus, d"
+        "$mainMod, Left, movefocus, l"
+        "$mainMod, Right, movefocus, r"
+        "$mainMod, Up, movefocus, u"
+        "$mainMod, Down, movefocus, d"
         # Switch workspaces
         "$mainMod, code:10, workspace, 1"
         "$mainMod, code:11, workspace, 2"

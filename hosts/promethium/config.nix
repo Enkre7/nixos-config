@@ -51,6 +51,7 @@
   # Debug
   #stylix.enable = lib.mkForce true;
   #stylix.autoEnable = lib.mkForce false;
+  services.auto-cpufreq.enable = lib.mkForce false;
 
   # Host specific settings  
   boot.initrd.availableKernelModules = [

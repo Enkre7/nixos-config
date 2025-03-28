@@ -35,33 +35,33 @@
         };
         "NixOS Wiki" = {
           urls = [{ template = "https://nixos.wiki/index.php?search={searchTerms}"; }];
-          iconUpdateURL = "https://nixos.wiki/favicon.png";
+          icon = "https://nixos.wiki/favicon.png";
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = [ "@nw" ];
         };
         "MyNixOS" = {
           urls = [{ template = "https://mynixos.com/search?q={searchTerms}"; }];
-          iconUpdateURL = "https://nixos.wiki/favicon.png";
+          icon = "https://nixos.wiki/favicon.png";
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = [ "@mn" ];
         };
         "SearXNG" = {
           urls = [{ template = "https://searxng.7mairot.com/search?q={searchTerms}"; }];
-          iconUpdateURL = "https://raw.githubusercontent.com/searxng/searxng/master/src/brand/searxng-wordmark.svg";
+          icon = "https://raw.githubusercontent.com/searxng/searxng/master/src/brand/searxng-wordmark.svg";
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = [ "@searxng" "@sx" ];
         };
         "ProtonDB" = {
           urls = [{ template = "https://www.protondb.com/search?q={searchTerms}"; }];
-          iconUpdateURL = "https://www.iconarchive.com/download/i150669/simpleicons-team/simple/protondb.svg";
+          icon = "https://www.iconarchive.com/download/i150669/simpleicons-team/simple/protondb.svg";
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = [ "@protondb" "@pr" ];
         };
-        "Google".metaData.alias = "@g";
+        google.metaData.alias = "@g";
       };
       search.force = true;
       search.default = "SearXNG";
-      search.order = [ "SearXNG" "Google" ];
+      search.order = [ "SearXNG" "google" ];
       
       # To display extentions: nix flake show "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons"
       extensions.packages = with inputs.firefox-addons.packages."x86_64-linux"; [
@@ -92,7 +92,8 @@
         "browser.newtabpage.activity-stream.floorp.background.type" = 4;
         "browser.display.use_system_colors" = true;      
         "floorp.browser.sidebar.enable" = false;
- 
+        "browser.search.separatePrivateDefault" = false; 
+
         # Disable first-run stuff
         "browser.newtabpage.activity-stream.floorp.newtab.releasenote.hide" = true;
         "browser.newtabpage.activity-stream.floorp.newtab.imagecredit.hide" = true;
