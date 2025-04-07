@@ -26,6 +26,11 @@
       type = types.bool;
       default = false;
     };
+
+    kernelPackage = mkOption {
+      type = types.attrs;
+      description = "Kernel package to use (e.g. pkgs.linuxPackages_zen)";
+    };
   };
   
   config = {
@@ -42,5 +47,6 @@
     isLaptop = true;
     cpuVendor = "AMD";
     isFrameworkDevice = true;
+    kernelPackage = pkgs.linuxPackages_latest;
   };
 }
