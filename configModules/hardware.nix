@@ -15,6 +15,7 @@
     kernelParams = [];
     extraModulePackages = [];
     consoleLogLevel = 3;
+    tmp.cleanOnBoot = true;
   };
   # Bios upgrade
   services.fwupd.enable = true;
