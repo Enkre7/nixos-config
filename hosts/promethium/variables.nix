@@ -12,7 +12,9 @@
     stylePolarity = mkOption { type = str; };
     gitUsername = mkOption { type = str; };
     gitEmail = mkOption { type = str; };
-    
+    searxngURL = mkOption { type = str; };
+    firefoxSyncURL = mkOption { type = str; };
+
     # Options for battery.nix
     isLaptop = mkOption {
       type = types.bool;
@@ -44,6 +46,8 @@
     stylePolarity = "light";
     gitUsername = "Enkre7";
     gitEmail = "victor.mairot@proton.me";
+    searxngURL = "searxng.7mairot.com";
+    firefoxSyncURL = "firefoxsyncserver.7mairot.com";
     isLaptop = true;
     cpuVendor = "AMD";
     isFrameworkDevice = true;

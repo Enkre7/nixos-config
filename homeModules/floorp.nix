@@ -46,7 +46,7 @@
           definedAliases = [ "@mn" ];
         };
         "SearXNG" = {
-          urls = [{ template = "https://searxng.7mairot.com/search?q={searchTerms}"; }];
+          urls = [{ template = "https://${config.searxngURL}/search?q={searchTerms}"; }];
           icon = "https://raw.githubusercontent.com/searxng/searxng/master/src/brand/searxng-wordmark.svg";
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = [ "@searxng" "@sx" ];
@@ -79,20 +79,22 @@
        ];
       settings = {
         # Firefox Sync-server
-        "identity.sync.tokenserver.uri" = "https://firefoxsyncserver.7mairot.com/token/1.0/sync/1.5";
+        "identity.sync.tokenserver.uri" = "https://${config.firefoxSyncURL}/token/1.0/sync/1.5";
         "identity.fxaccounts.useSessionTokensForOAuth" = false; #Change to true on account login
         "identity.sync.useOAuthForSyncToken" = false; #Change to true on account login
         "identity.fxaccounts.account.device.name" = "${config.hostname}'s Floorp";
 
-        # Settings
-        "intl.locale.requested" = "fr,en_US";
-        "intl.regional_prefs.use_os_locales" = true;
-        "extensions.autoDisableScopes" = 0;
+        # Floorp specific
         "browser.newtabpage.activity-stream.floorp.background.image.path" = "${config.wallpaper}";
         "browser.newtabpage.activity-stream.floorp.background.type" = 4;
         "browser.display.use_system_colors" = true;      
         "floorp.browser.sidebar.enable" = false;
         "browser.search.separatePrivateDefault" = false; 
+
+        # Settings
+        "intl.locale.requested" = "fr,en_US";
+        "intl.regional_prefs.use_os_locales" = true;
+        "extensions.autoDisableScopes" = 0;
 
         # Disable first-run stuff
         "browser.newtabpage.activity-stream.floorp.newtab.releasenote.hide" = true;
