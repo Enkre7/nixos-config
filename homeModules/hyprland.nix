@@ -232,7 +232,7 @@ in
         "center, class:(.blueman-manager-wrapped)"
 
         # Btop
-        "float, class:(kitty), title:^(btop)$"
+        "float, class:(kitty), title:(btop)"
 
 	# Firefox browsers
         "float, title:^(Incrustation vidéo)$"
