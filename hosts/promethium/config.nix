@@ -23,7 +23,7 @@
     ../../configModules/mullvad-vpn.nix
   # Hardware management
     ../../configModules/battery.nix
-    ../../configModules/sound.nix
+    ../../configModules/audio.nix
     ../../configModules/graphics.nix
     ../../configModules/printing.nix
   # Virtualization

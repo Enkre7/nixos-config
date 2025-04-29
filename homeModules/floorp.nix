@@ -93,6 +93,10 @@
 
         # Settings
         "extensions.autoDisableScopes" = 0;
+        "media.navigator.video.enabled" = true;
+        "media.navigator.audio.enabled" = true;
+        "media.getusermedia.screensharing.enabled" = true;
+        "media.getusermedia.audiocapture.enabled" = true;
 
         # Disable first-run stuff
         "browser.newtabpage.activity-stream.floorp.newtab.releasenote.hide" = true;
@@ -184,7 +188,7 @@
         "privacy.trackingprotection.enabled" = true;
         "signon.autofillForms" = false;
         "network.auth.subresource-http-auth-allow" = 1;
-        "media.peerconnection.enabled" = false;
+        "media.peerconnection.enabled" = true; #WebRTC
         
         # Disable addons recommendation (uses Google Analytics)
         "extensions.getAddons.showPane" = false;
