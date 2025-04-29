@@ -34,7 +34,7 @@ in
     enable = true;    
     settings = {
       monitor = [
-        ",highrr,auto,1.6"
+        ",preferred,auto,1.6"
       ];
       xwayland.force_zero_scaling = true;
 

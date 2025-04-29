@@ -50,7 +50,8 @@
 
   # Host specific settings
   wayland.windowManager.hyprland.settings = {
-    monitor = lib.mkForce ",4096x2160@119.88,0x0,1.333333";
+    #monitor = lib.mkForce ",4096x2160@119.88,0x0,1.333333";
+    monitor = lib.mkForce ",preferred,auto,1.333333";
     general.gaps_in = lib.mkForce 4;
     general.gaps_out = lib.mkForce 7;
   }; 

@@ -48,6 +48,10 @@
   # Debug
   #stylix.enable = lib.mkForce true;
 
+  wayland.windowManager.hyprland.settings = {
+    monitor = lib.mkForce "eDP-1,highrr,auto,1.6";
+  };
+
   # Host specific settings
   programs.yt-dlp.enable = true;
   home.packages = with pkgs; [
