@@ -12,6 +12,7 @@ let
     ${pkgs.blueman}/bin/blueman-applet &
     ${pkgs.udiskie}/bin/udiskie &
     ${pkgs.gammastep}/bin/gammastep &
+    thunar --daemon &
     #${pkgs.swww}/bin/swww-daemon &
     sleep 0.1 &
     #${pkgs.swww}/bin/swww img config.wallpaper &

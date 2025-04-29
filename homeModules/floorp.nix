@@ -92,8 +92,6 @@
         "browser.search.separatePrivateDefault" = false; 
 
         # Settings
-        "intl.locale.requested" = "fr,en_US";
-        "intl.regional_prefs.use_os_locales" = true;
         "extensions.autoDisableScopes" = 0;
 
         # Disable first-run stuff
