@@ -57,11 +57,12 @@
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = [ "@protondb" "@pr" ];
         };
+        bing.metaData.hidden = true;
         google.metaData.alias = "@g";
       };
       search.force = true;
       search.default = "SearXNG";
-      search.order = [ "SearXNG" "google" ];
+      search.order = [ "SearXNG" "google" "ddg" ];
       
       # To display extentions: nix flake show "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons"
       extensions.packages = with inputs.firefox-addons.packages."x86_64-linux"; [
