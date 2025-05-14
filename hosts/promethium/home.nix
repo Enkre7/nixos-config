@@ -55,7 +55,7 @@
   # Host specific settings
   programs.yt-dlp.enable = true;
   home.packages = with pkgs; [
-    #rustdesk
+    rustdesk
     vesktop # discord
     gnome-calculator
     obsidian
