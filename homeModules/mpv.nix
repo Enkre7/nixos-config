@@ -7,6 +7,9 @@
   };
 
   xdg.mimeApps.defaultApplications = {
+    "audio/midi" = "mpv";
+    "audio/aac" = "mpv";
+    "video/x-msvideo" = "mpv";
     "audio/mpeg" = "mpv";
     "audio/ogg" = "mpv";
     "video/mp4" = "mpv";

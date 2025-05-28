@@ -24,7 +24,7 @@ let
     wl-paste --watch cliphist store &
 
     coolercontrol &     
-    openrgb --startminimized -m static -c 00FF00 -b 100 &   
+    openrgb --startminimized --server -m static -c 00FF00 -b 100 &   
   '';
 in
 {

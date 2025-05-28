@@ -5,12 +5,13 @@
     "inode/directory" = "thunar";
     "application/x-zip" = "file-roller";
     "application/x-gzip" = "file-roller";
+    "application/x-bzip" = "file-roller";
     "application/x-bzip2" = "file-roller";
     "application/x-xz" = "file-roller";
     "application/zip" = "file-roller";
     "application/gzip" = "file-roller";
     "application/x-7z-compressed" = "file-roller";
-    "application/x-rar" = "file-roller";
+    "application/x-rar-compressed" = "file-roller";
     "application/x-tar" = "file-roller";
   };
 

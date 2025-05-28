@@ -13,13 +13,11 @@
   # RGB controller
   services.hardware.openrgb = {
     enable = true;
-    package = pkgs.openrgb-with-all-plugins;
+    #package = pkgs.openrgb-with-all-plugins;
   };
 
-  networking.firewall.allowedTCPPorts = [ 6742 ]; # openRGB server
-
-  systemd.services.openrgb = {
-    before = [ "greetd.service" ];
-    wantedBy = [ "multi-user.target" ];
+  networking.firewall = {
+    allowedTCPPorts = [ 6742 ]; # OpenRGB server
+    allowedUDPPorts = [ 6742 ];
   };
 }

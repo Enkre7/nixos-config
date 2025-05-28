@@ -90,5 +90,6 @@
     nmap
     netcat
     networkmanagerapplet
+    lsof
   ];
 }

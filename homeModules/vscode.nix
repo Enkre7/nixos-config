@@ -133,7 +133,9 @@
   xdg.mimeApps.defaultApplications = {
     "text/plain" = "codium";
     "text/html" = "codium";
+    "text/css" = "codium";
     "application/javascript" = "codium";
+    "application/typescript" = "codium";
     "application/json" = "codium";
     "application/x-python-code" = "codium";
     "application/xml" = "codium";
@@ -142,6 +144,8 @@
     "text/x-c++src" = "codium";
     "text/markdown" = "codium";
     "text/x-nix" = "codium";
+    "application/xhtml+xml" = "codium";
+    "application/x-sh" = "codium";
   };
 }
 
