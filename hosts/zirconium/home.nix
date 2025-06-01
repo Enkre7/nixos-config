@@ -59,6 +59,7 @@
   xsession.numlock.enable = true;
 
   home.packages = with pkgs; [
+    drawio
     rustdesk
     vesktop # discord
     r2modman
