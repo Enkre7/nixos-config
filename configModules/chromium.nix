@@ -1,7 +1,6 @@
 { config, pkgs, inputs, ... }:
 
 {
-  # Installation de Chromium
   programs.chromium = {
     enable = true;
     extensions = [
@@ -15,7 +14,7 @@
       "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"
     ];
     extraOpts = {
-      # Disable télémétry
+      # Disable telemetry
       "BrowserSignin" = 0;
       "SyncDisabled" = true;
       "PasswordManagerEnabled" = false;
@@ -43,7 +42,7 @@
       # Sécurity settings
       "BlockThirdPartyCookies" = true;
       "CookiesSessionOnlyForUrls" = [ "[*.]example.com" ];
-      "DefaultNotificationsSetting" = 2; # Bloquer
+      "DefaultNotificationsSetting" = 2; # Block
       "EnableDoNotTrack" = true;
     };
   };

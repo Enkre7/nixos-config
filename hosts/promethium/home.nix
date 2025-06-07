@@ -35,6 +35,7 @@
   # Applications
     ../../homeModules/nextcloud-client.nix
     ../../homeModules/floorp.nix
+    ../../homeModules/chromium.nix
     #../../homeModules/libreoffice.nix
     ../../homeModules/onlyoffice.nix
   ];
