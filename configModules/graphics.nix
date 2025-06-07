@@ -7,7 +7,6 @@
     xkb.layout = "fr";
     xkb.variant = "";
     excludePackages = with pkgs; [ xterm ];
-    displayManager.gdm.enable = true;
   };
   
   # Graphics

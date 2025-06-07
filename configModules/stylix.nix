@@ -28,7 +28,12 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [ swww hyprcursor papirus-icon-theme ];
+  environment.systemPackages = with pkgs; [
+    swww
+    hyprcursor
+    papirus-icon-theme
+    adwaita-icon-theme
+  ];
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = 1;
     HYPRCURSOR_THEME = "Bibata-Modern-Ice";
