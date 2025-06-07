@@ -2,7 +2,6 @@
 
 {
   # Display server
-  services.desktopManager.gnome.enable = true;
   services.xserver = {
     enable = true;
     xkb.layout = "fr";

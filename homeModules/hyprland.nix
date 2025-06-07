@@ -38,16 +38,19 @@ in
       ];
       xwayland.force_zero_scaling = true;
 
+      "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$fileManager" = "thunar";
       "$browser" = "floorp";
       "$browserPrivate" = "floorp --private-window";
       "$termFileManager" = "lf";
-      "$menu" = "wofi";
+      "$menu" = "pgrep wofi >/dev/null 2>&1 && killall wofi || wofi --location=top -y 15";
       "$systman" = "btop";
       "$screenshot" = "grim -g \"$(slurp)\" - | swappy -f -";
       "$clipboard" = "cliphist list | wofi --dmenu | cliphist decode | wl-copy";
-       
+      "$powermanager" = "pgrep wlogout >/dev/null 2>&1 && killall wlogout || wlogout";
+      "$lockscreen" = "hyprlock";
+
       exec-once = ''${startupScript}/bin/start'';
       
       general = { 
@@ -104,24 +107,19 @@ in
         kb_rules = "";
         follow_mouse = 1;
         sensitivity = 0;
+        force_no_accel = 0;
         numlock_by_default = true;
         touchpad = {
           natural_scroll = false;
+          scroll_factor = 0.7;
           disable_while_typing = false;
         };
       };
 
       gestures.workspace_swipe = true;
 
-      device = {
-        name = "epic-mouse-v1";
-        sensitivity = "-0.3";
-      };
-
-      "$mainMod" = "SUPER"; # Sets "Windows" key as main modifier
-
       bind = [
-        "$mainMod, A, exec, wlogout"
+        "$mainMod, A, exec, $powermanager"
         "$mainMod, Q, exec, $terminal"
         "$mainMod, C, killactive,"
         "$mainMod, E, exec, $terminal -e $systman"
@@ -172,7 +170,7 @@ in
 	",XF86AudioNext, exec, playerctl next"
 	",XF86AudioPrev, exec, playerctl previous"
         # Lock Session
-        ",XF86AudioMedia, exec, hyprlock"
+        ",XF86AudioMedia, exec, $lockscreen"
         # Screenshot
         ",Print, exec, $screenshot"
         # Clipboard

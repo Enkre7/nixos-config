@@ -56,7 +56,6 @@
   programs.yt-dlp.enable = true;
   home.packages = with pkgs; [
     drawio
-    rustdesk
     vesktop # discord
     gnome-calculator
     obsidian

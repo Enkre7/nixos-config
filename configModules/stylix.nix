@@ -10,7 +10,7 @@
     cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
-      size = 28;
+      size = 26;
     };
     fonts = {
       monospace.package = pkgs.nerd-fonts.jetbrains-mono;

@@ -3,22 +3,6 @@
 with lib;
 
 {
-  services.auto-cpufreq = {
-    enable = config.isLaptop;
-    settings = {
-      battery = {
-        governor = "powersave";
-        turbo = "never";
-        energy_performance_preference = "power";
-      };
-      charger = {
-        governor = "performance";
-        turbo = "auto";
-        energy_performance_preference = "performance";
-      };
-    };
-  };
-
   services.tlp = {
     enable = config.isLaptop;
     settings = let
@@ -82,10 +66,10 @@ with lib;
   };
 
   # Thermald service (especially useful for Intel CPUs)
-  services.thermald.enable = config.cpuVendor == "Intel" && config.isLaptop;
+  services.thermald.enable = config.cpuVendor == "Intel";
   
   # Power profiles daemon is handled by nixos-hardware, disable to avoid conflicts
-  services.power-profiles-daemon.enable = false;
+  services.power-profiles-daemon.enable = mkForce false;
   
   powerManagement = {
     enable = true;

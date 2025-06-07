@@ -23,47 +23,65 @@
     profiles.${config.user} = {
       search.engines = {
         "Nix Packages" = {
-          urls = [{
-            template = "https://search.nixos.org/packages";
-            params = [
-              { name = "type"; value = "packages"; }
-              { name = "query"; value = "{searchTerms}"; }
-            ];
-          }];
+          urls = [
+            {
+              template = "https://search.nixos.org/packages";
+              params = [
+                {
+                  name = "type";
+                  value = "packages";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
           icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
           definedAliases = [ "@np" ];
         };
         "NixOS Wiki" = {
-          urls = [{ template = "https://nixos.wiki/index.php?search={searchTerms}"; }];
+          urls = [ { template = "https://nixos.wiki/index.php?search={searchTerms}"; } ];
           icon = "https://nixos.wiki/favicon.png";
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = [ "@nw" ];
         };
         "MyNixOS" = {
-          urls = [{ template = "https://mynixos.com/search?q={searchTerms}"; }];
+          urls = [ { template = "https://mynixos.com/search?q={searchTerms}"; } ];
           icon = "https://nixos.wiki/favicon.png";
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = [ "@mn" ];
         };
         "SearXNG" = {
-          urls = [{ template = "https://${config.searxngURL}/search?q={searchTerms}"; }];
+          urls = [ { template = "https://${config.searxngURL}/search?q={searchTerms}"; } ];
           icon = "https://raw.githubusercontent.com/searxng/searxng/master/src/brand/searxng-wordmark.svg";
           updateInterval = 24 * 60 * 60 * 1000; # every day
-          definedAliases = [ "@searxng" "@sx" ];
+          definedAliases = [
+            "@searxng"
+            "@sx"
+          ];
         };
         "ProtonDB" = {
-          urls = [{ template = "https://www.protondb.com/search?q={searchTerms}"; }];
+          urls = [ { template = "https://www.protondb.com/search?q={searchTerms}"; } ];
           icon = "https://www.iconarchive.com/download/i150669/simpleicons-team/simple/protondb.svg";
           updateInterval = 24 * 60 * 60 * 1000; # every day
-          definedAliases = [ "@protondb" "@pr" ];
+          definedAliases = [
+            "@protondb"
+            "@pr"
+          ];
         };
         bing.metaData.hidden = true;
         google.metaData.alias = "@g";
       };
       search.force = true;
       search.default = "SearXNG";
-      search.order = [ "SearXNG" "google" "ddg" ];
-      
+      search.order = [
+        "SearXNG"
+        "google"
+        "ddg"
+      ];
+
       # To display extentions: nix flake show "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons"
       extensions.packages = with inputs.firefox-addons.packages."x86_64-linux"; [
         bitwarden
@@ -77,20 +95,20 @@
         sponsorblock
         return-youtube-dislikes
         translate-web-pages
-       ];
+      ];
       settings = {
         # Firefox Sync-server
         "identity.sync.tokenserver.uri" = "https://${config.firefoxSyncURL}/token/1.0/sync/1.5";
-        "identity.fxaccounts.useSessionTokensForOAuth" = false; #Change to true on account login
-        "identity.sync.useOAuthForSyncToken" = false; #Change to true on account login
+        "identity.fxaccounts.useSessionTokensForOAuth" = false; # Change to true on account login
+        "identity.sync.useOAuthForSyncToken" = false; # Change to true on account login
         "identity.fxaccounts.account.device.name" = "${config.hostname}'s Floorp";
 
         # Floorp specific
         "browser.newtabpage.activity-stream.floorp.background.image.path" = "${config.wallpaper}";
         "browser.newtabpage.activity-stream.floorp.background.type" = 4;
-        "browser.display.use_system_colors" = true;      
+        "browser.display.use_system_colors" = true;
         "floorp.browser.sidebar.enable" = false;
-        "browser.search.separatePrivateDefault" = false; 
+        "browser.search.separatePrivateDefault" = false;
 
         # Settings
         "extensions.autoDisableScopes" = 0;
@@ -100,6 +118,7 @@
         "media.getusermedia.audiocapture.enabled" = true;
 
         # Disable first-run stuff
+        "extensions.screenshots.disabled" = true;
         "browser.newtabpage.activity-stream.floorp.newtab.releasenote.hide" = true;
         "browser.newtabpage.activity-stream.floorp.newtab.imagecredit.hide" = true;
         "browser.aboutConfig.showWarning" = false;
@@ -120,11 +139,11 @@
 
         # Don't ask for download dir
         "browser.download.useDownloadDir" = false;
-        
+
         # Disable translate prompt
         "browser.translations.automaticallyPopup" = false;
         "browser.translations.neverTranslateLanguages" = "en";
-        
+
         # Disable Newtab page
         "browser.contentblocking.category" = "standard"; # "strict"
         "browser.newtabpage.pinned" = "";
@@ -175,12 +194,12 @@
         "toolkit.coverage.opt-out" = true;
         "toolkit.coverage.endpoint.base" = "";
         "beacon.enabled" = false;
-        
+
         # Disable studdies
         "app.shield.optoutstudies.enabled" = false;
         "app.normandy.enabled" = false;
         "app.normandy.api_url" = "";
-        
+
         # Security settings
         "dom.security.https_only_mode" = true;
         "browser.region.network.url" = "";
@@ -189,33 +208,158 @@
         "privacy.trackingprotection.enabled" = true;
         "signon.autofillForms" = false;
         "network.auth.subresource-http-auth-allow" = 1;
-        "media.peerconnection.enabled" = true; #WebRTC
-        
+        "media.peerconnection.enabled" = true; # WebRTC
+
         # Disable addons recommendation (uses Google Analytics)
         "extensions.getAddons.showPane" = false;
         "extensions.htmlaboutaddons.recommendations.enabled" = false;
         "browser.discovery.enabled" = false;
 
         # UI customization
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "browser.uiCustomization.state" = builtins.toJSON {
           placements = {
-            widget-overflow-fixed-list = [];
-            unified-extensions-area = ["sponsorblocker_ajay_app-browser-action" "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action" "canvasblocker_kkapsner_de-browser-action" "jid1-ckhysaadh4nl6q_jetpack-browser-action" "_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action" "_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action"];
-            nav-bar = ["back-button" "forward-button" "stop-reload-button" "customizableui-special-spring1" "home-button" "urlbar-container" "fxa-toolbar-menu-button" "privatebrowsing-button" "downloads-button" "customizableui-special-spring8" "customizableui-special-spring2" "save-to-pocket-button" "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action" "addon_darkreader_org-browser-action" "ublock0_raymondhill_net-browser-action" "jid1-mnnxcxisbpnsxq_jetpack-browser-action" "cookieautodelete_kennydo_com-browser-action" "unified-extensions-button"];
-            toolbar-menubar = ["menubar-items"];
-            TabsToolbar = ["tabbrowser-tabs" "new-tab-button" "alltabs-button"];
-            PersonalToolbar = ["personal-bookmarks"];
-            statusBar = ["screenshot-button" "fullscreen-button" "status-text"];
-         };
-         seen = ["addon_darkreader_org-browser-action" "jid1-mnnxcxisbpnsxq_jetpack-browser-action" "ublock0_raymondhill_net-browser-action" "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action" "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action" "sponsorblocker_ajay_app-browser-action" "developer-button" "cookieautodelete_kennydo_com-browser-action" "canvasblocker_kkapsner_de-browser-action" "jid1-ckhysaadh4nl6q_jetpack-browser-action" "_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action" "_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action" "sidebar-reverse-position-toolbar" "undo-closed-tab" "profile-manager" "workspaces-toolbar-button"];
-        dirtyAreaCache = ["unified-extensions-area" "nav-bar" "toolbar-menubar" "TabsToolbar" "PersonalToolbar" "statusBar"];
-        currentVersion = 20;
-        newElementCount = 8;
+            widget-overflow-fixed-list = [ ];
+            unified-extensions-area = [
+              "sponsorblocker_ajay_app-browser-action"
+              "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
+              "canvasblocker_kkapsner_de-browser-action"
+              "jid1-ckhysaadh4nl6q_jetpack-browser-action"
+              "_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action"
+              "_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action"
+            ];
+            nav-bar = [
+              "back-button"
+              "forward-button"
+              "stop-reload-button"
+              "customizableui-special-spring1"
+              "home-button"
+              "urlbar-container"
+              "fxa-toolbar-menu-button"
+              "privatebrowsing-button"
+              "downloads-button"
+              "customizableui-special-spring8"
+              "customizableui-special-spring2"
+              "save-to-pocket-button"
+              "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
+              "addon_darkreader_org-browser-action"
+              "ublock0_raymondhill_net-browser-action"
+              "jid1-mnnxcxisbpnsxq_jetpack-browser-action"
+              "cookieautodelete_kennydo_com-browser-action"
+              "unified-extensions-button"
+            ];
+            toolbar-menubar = [ "menubar-items" ];
+            TabsToolbar = [
+              "tabbrowser-tabs"
+              "new-tab-button"
+              "alltabs-button"
+            ];
+            PersonalToolbar = [ "personal-bookmarks" ];
+            statusBar = [
+              "screenshot-button"
+              "fullscreen-button"
+              "status-text"
+            ];
+          };
+          seen = [
+            "addon_darkreader_org-browser-action"
+            "jid1-mnnxcxisbpnsxq_jetpack-browser-action"
+            "ublock0_raymondhill_net-browser-action"
+            "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
+            "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
+            "sponsorblocker_ajay_app-browser-action"
+            "developer-button"
+            "cookieautodelete_kennydo_com-browser-action"
+            "canvasblocker_kkapsner_de-browser-action"
+            "jid1-ckhysaadh4nl6q_jetpack-browser-action"
+            "_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action"
+            "_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action"
+            "sidebar-reverse-position-toolbar"
+            "undo-closed-tab"
+            "profile-manager"
+            "workspaces-toolbar-button"
+          ];
+          dirtyAreaCache = [
+            "unified-extensions-area"
+            "nav-bar"
+            "toolbar-menubar"
+            "TabsToolbar"
+            "PersonalToolbar"
+            "statusBar"
+          ];
+          currentVersion = 20;
+          newElementCount = 8;
         };
       };
+      userChrome = ''
+        @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+        #ublock0_raymondhill_net-menuitem,
+        #context-blockimage,
+        #context-selectall + menuseparator + menuitem[label*="uBlock"],
+        menuitem[label*="uBlock"],
+        menuitem[label*="Bloquer"],
+        #context-menu menuitem[oncommand*="ublock"],
+        #context-inspect,
+        #context-inspect-a11y,
+        #context-viewsource,
+        #context-viewinfo,
+        #context-metadata,
+        #context-keywordfield,
+        #context-searchselect,
+        #context-translate-selection,
+        #context-translate-page,
+        #context-viewpartialsource-selection,
+        #context-viewpartialsource-mathml,
+        #context-media-eme-learnmore,
+        #context-media-eme-separator,
+        #fill-login,
+        #fill-login-separator,
+        #context-pocket,
+        #context-savelinktopocket,
+        #context-sendpagetodevice,
+        #context-sendlinktodevice,
+        #context-sep-sendpagetodevice,
+        #screenshots_mozilla_org-menuitem,
+        #context-sep-screenshots_mozilla_org,
+        #context-take-screenshot,
+        #context-sep-selectall,
+        #context-spell-check-enabled,
+        #spell-check-separator,
+        #context_sendTabToDevice,
+        #context_moveTabOptions,
+        #context_bookmarkTab,
+        #context_bookmarkAllTabs,
+        #context_selectAllTabs,
+        #context_closeTabsToTheEnd,
+        #context_closeOtherTabs,
+        #context_undoCloseTab,
+        #context-openlinkincontainertab,
+        #context-openlinkincurrenttab,
+        #context-containers-submenu,
+        #context-sep-open,
+        #context-bookmarklink,
+        #context-searchselect-private,
+        #context-sendimage,
+        #context-emailimage,
+        #context-sendlink,
+        #context-emaillink,
+        #context-openlinkinprivatecontainer,
+        #context-openlinkinnewprivatewindow,
+        #context-addpagetopanel,
+        #context-addtowebpanel,
+        #context-openasexternalbrowser,
+        #context-openinexternalbrowser,
+        #context-openpage-externalbrowser {display: none !important;}
+        #contentAreaContextMenu menuseparator,
+        #contentAreaContextMenu menuseparator:first-child,
+        #contentAreaContextMenu menuseparator + menuseparator,
+        #contentAreaContextMenu menuseparator:last-child {display: none !important;}
+        #contentAreaContextMenu {--panel-padding: 4px !important;}
+        #contentAreaContextMenu menuitem {padding-block: 4px !important;}
+      '';
     };
   };
- 
+
   xdg.mimeApps.defaultApplications = {
     "application/pdf" = "floorp.desktop";
     "x-scheme-handler/http" = "floorp.desktop";

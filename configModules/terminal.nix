@@ -6,5 +6,8 @@
     fastfetch
     tree
     vim
-  ];  
+    procps
+    psmisc
+  ];
+  services.glances.enable = true;
 }
