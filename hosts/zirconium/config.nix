@@ -37,8 +37,9 @@
     ../../configModules/stylix.nix
     ../../configModules/thunar.nix
   # Applications & services
+    ../../configModules/chromium.nix
     ../../configModules/games.nix
-    ../../configModules/adb.nix
+    #../../configModules/adb.nix
 ];
   
   home-manager = {
