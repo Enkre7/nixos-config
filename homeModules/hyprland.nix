@@ -262,6 +262,7 @@ in
         # Keyring manager
         "dimaround, class:(gcr-prompter)"
         "pin, class:(gcr-prompter)"
+        "bordersize 3, class:(gcr-prompter)"
       ];
     };
   };

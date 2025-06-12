@@ -17,9 +17,10 @@ with lib;
         modules-left = [
           "custom/startmenu"
           "cpu"
+          "temperature"
           "memory"
           "disk"
-          "hyprland/window"
+          #"hyprland/window"
         ];
         modules-right = [
           #"idle_inhibitor"
@@ -73,14 +74,18 @@ with lib;
             "" = " Rien ";
           };
         };
-        "memory" = {
-          interval = 5;
-          format = " {percentage}%";
-          on-click = "kitty -e btop";
-        };
         "cpu" = {
           interval = 5;
           format = " {usage}%";
+          on-click = "kitty -e btop";
+        };
+        "temperature" = {
+          format = "{temperatureC}°C";
+          interval = 2;
+        };
+        "memory" = {
+          interval = 5;
+          format = " {percentage}%";
           on-click = "kitty -e btop";
         };
         "disk" = {
@@ -234,7 +239,7 @@ with lib;
         tooltip label {
           color: ${stylix.base07};
         }
-        #window, #cpu, #memory, #disk {
+        #window, #cpu, #temperature,  #memory, #disk {
           font-weight: bold;
           margin: 4px 0px;
           margin-left: 7px;
