@@ -77,7 +77,7 @@ with lib;
         "cpu" = {
           interval = 5;
           format = " {usage}%";
-          on-click = "kitty -e btop";
+          on-click = "kitty --class='system-monitor' --hold -e btop";
         };
         "temperature" = {
           format = "{temperatureC}°C";
@@ -86,13 +86,13 @@ with lib;
         "memory" = {
           interval = 5;
           format = " {percentage}%";
-          on-click = "kitty -e btop";
+          on-click = "kitty --class='system-monitor' --hold -e btop";
         };
         "disk" = {
           format = " {percentage_used}%";
           tooltip-format = "{used} / {total}";
           unit = "GB";
-          on-click = "kitty -e btop";
+          on-click = "kitty --class='disk-monitor' --hold -e bash -c \"duf --sort size && echo -e '\\n---\\n' && lsblk -o NAME,SIZE,FSTYPE,FSUSE%,MOUNTPOINT && echo -e '\\n---\\n' && dust -n 10 /\"";
         };
         "network" = {
           interval = 2;

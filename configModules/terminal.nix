@@ -8,6 +8,8 @@
     vim
     procps
     psmisc
+    duf
+    dust
   ];
   services.glances.enable = true;
 }
