@@ -30,7 +30,7 @@ let
     wl-paste --watch cliphist store &
 
     coolercontrol &
-    openrgb --startminimized --server -m static -c 00FF00 -b 100 &
+    ${pkgs.openrgb-with-all-plugins}/bin/openrgb --startminimized -m static -c 00FF00 -b 100 &
   '';
 in
 {
@@ -215,8 +215,6 @@ in
         "size 873 586, class:com.nextcloud.desktopclient.nextcloud"
         "center, class:com.nextcloud.desktopclient.nextcloud"
         "animation slide, class:com.nextcloud.desktopclient.nextcloud"
-        "pin, class:com.nextcloud.desktopclient.nextcloud"
-        "stayfocused, class:com.nextcloud.desktopclient.nextcloud"
 
         # Blueman Bluetooth Manager
         "float, class:^(blueman-manager)$"
@@ -235,6 +233,18 @@ in
         "size 400 300, class:^(nm-applet)$"
         "center, class:^(nm-applet)$"
         "animation slide, class:^(nm-applet)$"
+
+        # OpenRGB
+        "float, class:^(openrgb)$"
+        "size 1000 700, class:^(openrgb)$"
+        "center, class:^(openrgb)$"
+        "animation slide, class:^(openrgb)$"
+
+        # CoolerControl
+        "float, class:^(org.coolercontrol.CoolerControl)$"
+        "size 900 600, class:^(org.coolercontrol.CoolerControl)$"
+        "center, class:^(org.coolercontrol.CoolerControl)$"
+        "animation slide, class:^(org.coolercontrol.CoolerControl)$"
 
         # Mullvad VPN
         "pin, class:(Mullvad VPN)"

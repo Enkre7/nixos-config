@@ -7,9 +7,7 @@
   users.users.${config.user}.extraGroups = [ "openrazer" ];
   programs.coolercontrol = {
     enable = true;
-    nvidiaSupport = true;  
   };
-
 
   # RGB controller
   boot = {
