@@ -7,7 +7,9 @@
     startInBackground = true;
   };
 
-  home.sessionPath = [ "${pkgs.nextcloud-client}/bin" ];
+  home.packages = with pkgs; [
+    nextcloud-client
+  ];
 
   # Prevent nextcloud window to close when unfocused
   home.activation.nextcloudConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
