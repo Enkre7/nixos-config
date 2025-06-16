@@ -30,7 +30,7 @@ let
     wl-paste --watch cliphist store &
 
     coolercontrol &
-    ${pkgs.openrgb-with-all-plugins}/bin/openrgb --startminimized -m static -c 00FF00 -b 100 &
+    openrgb --startminimized -m static -c 00FF00 -b 100 &
   '';
 in
 {
