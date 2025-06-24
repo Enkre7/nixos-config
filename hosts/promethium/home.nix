@@ -14,7 +14,8 @@
     ../../homeModules/waybar.nix
     ../../homeModules/wofi.nix
     ../../homeModules/wlogout.nix
-    ../../homeModules/notification.nix
+    #../../homeModules/mako.nix
+    ../../homeModules/swaync.nix
     ../../homeModules/light.nix
   # Terminal & Shell
     ../../homeModules/terminal.nix

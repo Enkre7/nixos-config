@@ -11,6 +11,7 @@ let
     # Start of SSH agent for gnome-keyrings
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
     export SSH_AUTH_SOCK
+    systemctl --user start hyprpolkitagent
 
     ${pkgs.waybar}/bin/waybar &
     ${pkgs.mako}/bin/mako &
@@ -25,7 +26,6 @@ let
 
     ${pkgs.vesktop}/bin/vesktop --start-minimized &
     ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
-    #${pkgs.nextcloud-client}/bin/nextcloud --background &
 
     wl-paste --watch cliphist store &
 
@@ -36,8 +36,18 @@ in
 {
   imports = [ inputs.hyprland.homeManagerModules.default ];
 
+  services.hyprpolkitagent.enable = true;
+
   wayland.windowManager.hyprland = {
     enable = true;
+    package = null;
+    portalPackage = null;
+    systemd.variables = ["--all"];
+
+    plugins = [
+      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
+    ];
+
     settings = {
       monitor = [
         ",preferred,auto,1.6"
@@ -280,7 +290,7 @@ in
 
         # System monitor (waybar)
         "float, class:^(system-monitor)$"
-        "size 1400 900, class:^(system-monitor)$"
+        "size 1200 800, class:^(system-monitor)$"
         "center, class:^(system-monitor)$"
         "animation slide, class:^(system-monitor)$"
 

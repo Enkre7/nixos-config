@@ -11,15 +11,11 @@ in
 
   services.udev.packages = with pkgs; [ yubikey-personalization ];
 
-  environment.systemPackages = with pkgs; [  
-    # Yubico's official tools
+  environment.systemPackages = with pkgs; [
     yubikey-manager
     yubikey-personalization
-    yubikey-personalization-gui
     yubico-piv-tool
     yubioath-flutter
-    # Age for Yubikey
-    age-plugin-yubikey
   ];
 
   security.pam = {
