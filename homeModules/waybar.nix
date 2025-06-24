@@ -27,6 +27,7 @@ with lib;
           #"network
           "battery"
           "pulseaudio"
+          "custom/notification"
           "tray"
           "clock"
         ];
@@ -104,6 +105,25 @@ with lib;
 	  tooltip-format-wifi = "SSID: {essid}\rSignal: {signaldBm} ({signalStrength}%)\r\r {bandwidthDownOctets} /  {bandwidthDownOctets}\r\rIP: {ipaddr}\rGtw: {gwaddr}/{cidr}";
 	  tooltip-format-ethernet = " {bandwidthDownOctets} /  {bandwidthDownOctets}\r\rIP: {ipaddr}\rGtw: {gwaddr}/{cidr}";
 	  tooltip-format-disconnected = "Deconnecté";
+        };
+        "custom/notification" = {
+          tooltip = false;
+          format = "{icon} {}";
+          format-icons = {
+            notification = "<span foreground='red'><sup></sup></span>";
+            none = "";
+            dnd-notification = "<span foreground='red'><sup></sup></span>";
+            dnd-none = "";
+            inhibited-notification = "<span foreground='red'><sup></sup></span>";
+            inhibited-none = "";
+            dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>";
+            dnd-inhibited-none = "";
+          };
+          return-type = "json";
+          exec-if = "which swaync-client";
+          exec = "swaync-client -swb";
+          on-click = "swaync-client -t";
+          escape = true;
         };
         "tray" = {
           icon-size = 21;
@@ -256,7 +276,7 @@ with lib;
           padding: 0px 25px 0px 15px;
           border-radius: 0px 0px 40px 0px;
         }
-        #network, #battery, #pulseaudio, #tray, #idle_inhibitor {
+        #network, #battery, #pulseaudio, #tray, #custom-notification, #idle_inhibitor {
           font-weight: bold;
           background: ${stylix.base01};
           color: ${stylix.base05};

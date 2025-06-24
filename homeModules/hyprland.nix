@@ -12,9 +12,8 @@ let
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
     export SSH_AUTH_SOCK
     systemctl --user start hyprpolkitagent
-
-    ${pkgs.waybar}/bin/waybar &
-    ${pkgs.mako}/bin/mako &
+    killall -q waybar;sleep .5 && waybar &
+    #${pkgs.mako}/bin/mako &
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
     ${pkgs.blueman}/bin/blueman-applet &
     ${pkgs.udiskie}/bin/udiskie &
@@ -23,12 +22,10 @@ let
     #${pkgs.swww}/bin/swww-daemon &
     sleep 0.1 &
     #${pkgs.swww}/bin/swww img config.wallpaper &
-
     ${pkgs.vesktop}/bin/vesktop --start-minimized &
     ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
-
+    killall -q swaync;sleep .5 && swaync
     wl-paste --watch cliphist store &
-
     coolercontrol &
     openrgb --startminimized -m static -c 00FF00 -b 100 &
   '';
@@ -42,11 +39,11 @@ in
     enable = true;
     package = null;
     portalPackage = null;
-    systemd.variables = ["--all"];
+    systemd.variables = [ "--all" ];
 
-    plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
-    ];
+    #plugins = [
+    #  inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
+    #];
 
     settings = {
       monitor = [
@@ -73,7 +70,7 @@ in
         gaps_in = 3;
         gaps_out = 5;
         border_size = 2;
-        "col.active_border" = lib.mkForce "rgb(${stylix.base0E}) rgb(${stylix.base0A}) 45deg";
+        "col.active_border" = lib.mkForce "rgb(${stylix.base0D})";
         "col.inactive_border" = lib.mkForce "rgb(${stylix.base03})";
         resize_on_border = false;
         allow_tearing = false;
