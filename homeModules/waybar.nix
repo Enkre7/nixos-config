@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   stylix = config.lib.stylix.colors.withHashtag;
@@ -97,14 +102,20 @@ with lib;
         };
         "network" = {
           interval = 2;
-          format-icons = [ "󰤯" "󰤟" "󰤢" "󰤥" "󰤨" ];
+          format-icons = [
+            "󰤯"
+            "󰤟"
+            "󰤢"
+            "󰤥"
+            "󰤨"
+          ];
           format-ethernet = " Ethernet";
           format-wifi = "{icon} {frequency}Ghz";
           format-disconnected = "󰤮";
-	  tooltip-format =  "{ifname}";
-	  tooltip-format-wifi = "SSID: {essid}\rSignal: {signaldBm} ({signalStrength}%)\r\r {bandwidthDownOctets} /  {bandwidthDownOctets}\r\rIP: {ipaddr}\rGtw: {gwaddr}/{cidr}";
-	  tooltip-format-ethernet = " {bandwidthDownOctets} /  {bandwidthDownOctets}\r\rIP: {ipaddr}\rGtw: {gwaddr}/{cidr}";
-	  tooltip-format-disconnected = "Deconnecté";
+          tooltip-format = "{ifname}";
+          tooltip-format-wifi = "SSID: {essid}\rSignal: {signaldBm} ({signalStrength}%)\r\r {bandwidthDownOctets} /  {bandwidthDownOctets}\r\rIP: {ipaddr}\rGtw: {gwaddr}/{cidr}";
+          tooltip-format-ethernet = " {bandwidthDownOctets} /  {bandwidthDownOctets}\r\rIP: {ipaddr}\rGtw: {gwaddr}/{cidr}";
+          tooltip-format-disconnected = "Deconnecté";
         };
         "custom/notification" = {
           tooltip = false;
@@ -143,7 +154,11 @@ with lib;
             phone = "";
             portable = "";
             car = "";
-            default = [ "" "" "" ];
+            default = [
+              ""
+              ""
+              ""
+            ];
           };
           on-click-right = "pavucontrol";
           on-click = "pavucontrol";
@@ -172,7 +187,18 @@ with lib;
           format = "{icon} {capacity}%";
           format-charging = "󰂄 {capacity}%";
           format-plugged = "󱘖 {capacity}%";
-          format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+          format-icons = [
+            "󰁺"
+            "󰁻"
+            "󰁼"
+            "󰁽"
+            "󰁾"
+            "󰁿"
+            "󰂀"
+            "󰂁"
+            "󰂂"
+            "󰁹"
+          ];
         };
       }
     ];

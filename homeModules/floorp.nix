@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   stylix.targets.floorp.profileNames = [ "${config.user}" ];
@@ -71,8 +76,8 @@
             "@pr"
           ];
         };
-        bing.metaData.hidden = true;
-        google.metaData.alias = "@g";
+        "Bing".metaData.hidden = true;
+        "Google".metaData.alias = "@g";
       };
       search.force = true;
       search.default = "SearXNG";

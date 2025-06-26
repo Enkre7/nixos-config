@@ -44,8 +44,8 @@ in
           text = "Notifications";
         };
         mpris = {
-          image-size = 96;
-          image-radius = 7;
+          image-size = 64;
+          image-radius = 5;
         };
         volume = {
           label = "󰕾";
@@ -273,10 +273,10 @@ in
       }
       .widget-mpris-title {
         font-weight: 700;
-        font-size: 1.25rem
+        font-size: 0.9rem
       }
       .widget-mpris-subtitle {
-        font-size: 1.1rem
+        font-size: 0.7rem
       }
       .widget-menubar>box>.menu-button-bar>button {
         border: none;
