@@ -57,6 +57,7 @@
   # Host specific settings
   programs.yt-dlp.enable = true;
   home.packages = with pkgs; [
+    rustdesk
     drawio
     vesktop # discord
     gnome-calculator

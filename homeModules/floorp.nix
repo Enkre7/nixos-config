@@ -76,15 +76,18 @@
             "@pr"
           ];
         };
-        "Bing".metaData.hidden = true;
-        "Google".metaData.alias = "@g";
+        bing.metaData.hidden = true;
+        "Startpage".metaData.hidden = true;
+        "You.com".metaData.hidden = true;
+        google.metaData.alias = "@g";
       };
       search.force = true;
-      search.default = "SearXNG";
+      search.default = "ddg";
+      search.privateDefault = "ddg";
       search.order = [
+        "ddg"
         "SearXNG"
         "google"
-        "ddg"
       ];
 
       # To display extentions: nix flake show "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons"
