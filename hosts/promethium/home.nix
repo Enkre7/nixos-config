@@ -35,7 +35,8 @@
     ../../homeModules/capture.nix  
   # Applications
     ../../homeModules/nextcloud-client.nix
-    ../../homeModules/floorp.nix
+    #../../homeModules/floorp.nix
+    ../../homeModules/firefox.nix
     #../../homeModules/chromium.nix
     #../../homeModules/libreoffice.nix
     ../../homeModules/onlyoffice.nix

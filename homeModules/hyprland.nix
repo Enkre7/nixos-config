@@ -54,8 +54,8 @@ in
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$fileManager" = "thunar";
-      "$browser" = "floorp";
-      "$browserPrivate" = "floorp --private-window";
+      "$browser" = "firefox";
+      "$browserPrivate" = "firefox --private-window";
       "$termFileManager" = "lf";
       "$menu" = "pgrep wofi >/dev/null 2>&1 && killall wofi || wofi --location=top -y 15";
       "$systman" = "btop";
