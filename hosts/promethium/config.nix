@@ -45,7 +45,7 @@
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users.${config.user} = import ./home.nix;
-    backupFileExtension = "backup";
+    backupFileExtension = "backup-" + pkgs.lib.readFile "${pkgs.runCommand "timestamp" {} "echo -n `date '+%Y%m%d%H%M%S'` > $out"}";
   };
 
   # Debug

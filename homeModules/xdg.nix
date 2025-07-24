@@ -9,4 +9,5 @@
     templates = null;
   };
   xdg.mimeApps.enable = true;
+  xdg.configFile."mimeapps.list".force = true;
 }
