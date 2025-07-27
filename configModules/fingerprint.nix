@@ -10,8 +10,8 @@
   security.pam.services = {
     login.fprintAuth = lib.mkForce true;
     greetd.fprintAuth = true;
-    sudo.fprintAuth = true;
     hyprlock.fprintAuth = true;
+    sudo.fprintAuth = true;
     sshd.fprintAuth = true;
     polkit-1.fprintAuth = true;
     su.fprintAuth = true;
