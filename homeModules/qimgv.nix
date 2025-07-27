@@ -3,20 +3,33 @@
 {
   home.packages = with pkgs; [ qimgv ];
 
+  xdg.configFile."qimgv/qimgv.conf" = {
+    text = ''
+      [General]
+      JPEGSaveQuality=95
+      backgroundOpacity=0.48
+      autoResizeWindow=false
+      useSystemColorScheme=true
+      scalingFilter=3
+      memoryAllocationLimit=1024
+      enableSmoothScroll=true
+      smoothUpscaling=true
+    '';
+    force = false;
+  };
+
   xdg.mimeApps.defaultApplications = {
-    "image/svg+xml" = "qimgv";
-    "image/jpeg" = "qimgv";
-    "image/png" = "qimgv";
-    "image/webp" = "qimgv";
-    "image/gif" = "qimgv";
-    "image/bmp" = "qimgv";
-    "image/tiff" = "qimgv";
-    "image/x-ms-bmp" = "qimgv";
-    "image/x-portable-pixmap" = "qimgv";
-    "image/x-raw" = "qimgv";
-    "image/vnd.microsoft.icon" = "qimgv";
-    "application/epub+zip" = "qimgv";
-    "application/vnd.amazon.ebook" = "qimgv";
-    "image/x-icon" = "qimgv";
+    "image/svg+xml" = "qimgv.desktop";
+    "image/jpeg" = "qimgv.desktop";
+    "image/png" = "qimgv.desktop";
+    "image/webp" = "qimgv.desktop";
+    "image/gif" = "qimgv.desktop";
+    "image/bmp" = "qimgv.desktop";
+    "image/tiff" = "qimgv.desktop";
+    "image/x-ms-bmp" = "qimgv.desktop";
+    "image/x-portable-pixmap" = "qimgv.desktop";
+    "image/x-raw" = "qimgv.desktop";
+    "image/vnd.microsoft.icon" = "qimgv.desktop";
+    "image/x-icon" = "qimgv.desktop";
   };
 }

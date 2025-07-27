@@ -41,7 +41,7 @@
     user = "enkre";
     flakePath = "/persist/system/nixos";
     dotfilesPath = "${config.flakePath}/dotfiles";
-    wallpaper = "${config.dotfilesPath}/wallpapers/everforest-circuit_closeup.png"; # only png
+    wallpaper = "${config.dotfilesPath}/wallpapers/everforest-mist_forest.png"; # only png
     styleTheme = "everforest";
     stylePolarity = "dark";
     gitUsername = "Enkre7";
