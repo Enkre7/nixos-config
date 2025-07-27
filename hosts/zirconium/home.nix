@@ -11,7 +11,7 @@
     ../../homeModules/hyprland.nix
     ../../homeModules/hyprlock.nix
     #../../homeModules/hypridle.nix
-    ../../homeModules/waybar.nix
+    ../../homeModules/waybar2.nix
     ../../homeModules/wofi.nix
     ../../homeModules/wlogout.nix
     #../../homeModules/mako.nix

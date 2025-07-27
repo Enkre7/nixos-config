@@ -9,7 +9,8 @@ let
   stylix = config.lib.stylix.colors.withHashtag;
   betterTransition = "all 0.3s cubic-bezier(.55,-0.68,.48,1.682)";
   
-  # Configuration horizontale (par défaut)
+  useVerticalBar = false;
+  
   horizontalConfig = {
     layer = "top";
     position = "top";
@@ -34,7 +35,6 @@ let
     ];
   };
   
-  # Configuration verticale (alternative)
   verticalConfig = {
     layer = "top";
     position = "left";
@@ -59,24 +59,23 @@ let
     ];
   };
   
-  # Modules communs
   commonModules = {
     "hyprland/workspaces" = {
       format = "{icon}";
       on-click = "activate";
       format-icons = {
-        "1" = "";
-        "2" = "";
-        "3" = "";
-        "4" = "";
-        "5" = "";
-        "6" = "";
-        "7" = "";
-        "8" = "";
-        "9" = "";
-        default = "";
-        active = "";
-        urgent = "";
+        "1" = "󰲠";
+        "2" = "󰲢";
+        "3" = "󰲤";
+        "4" = "󰲦";
+        "5" = "󰲨";
+        "6" = "󰲪";
+        "7" = "󰲬";
+        "8" = "󰲮";
+        "9" = "󰲰";
+        default = "○";
+        active = "●";
+        urgent = "󰀧";
       };
       persistent-workspaces = {
         "*" = 5;
@@ -119,25 +118,25 @@ let
     };
 
     "custom/calendar-icon" = {
-      format = "";
+      format = "󰃭";
       tooltip = false;
     };
 
     "custom/time-icon" = {
-      format = "";
+      format = "󰥔";
       tooltip = false;
     };
 
     "custom/separator" = {
-      format = "";
+      format = "│";
       tooltip = false;
     };
 
     network = {
-      format-wifi = "";
-      format-ethernet = "";
-      format-linked = "";
-      format-disconnected = "";
+      format-wifi = "󰤨";
+      format-ethernet = "󰈀";
+      format-linked = "󰤨";
+      format-disconnected = "󰤭";
       tooltip-format-wifi = "{essid} ({signalStrength}%)";
       tooltip-format-ethernet = "{ipaddr}/{cidr}";
       tooltip-format-disconnected = "Disconnected";
@@ -146,19 +145,19 @@ let
 
     pulseaudio = {
       format = "{icon} {volume}%";
-      format-bluetooth = " {volume}%";
-      format-bluetooth-muted = " ";
-      format-muted = " ";
-      format-source = " {volume}%";
-      format-source-muted = "";
+      format-bluetooth = "󰂯 {volume}%";
+      format-bluetooth-muted = "󰂲 󰝟";
+      format-muted = "󰝟";
+      format-source = "󰍬 {volume}%";
+      format-source-muted = "󰍭";
       format-icons = {
-        headphone = "";
-        hands-free = "";
-        headset = "";
-        phone = "";
-        portable = "";
-        car = "";
-        default = ["" "" ""];
+        headphone = "󰋋";
+        hands-free = "󰋎";
+        headset = "󰋎";
+        phone = "󰏲";
+        portable = "󰦧";
+        car = "󰄋";
+        default = ["󰕿" "󰖀" "󰕾"];
       };
       on-click = "pavucontrol";
       on-click-right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
@@ -171,10 +170,10 @@ let
         critical = 15;
       };
       format = "{icon} {capacity}%";
-      format-charging = " {capacity}%";
-      format-plugged = " {capacity}%";
-      format-full = " {capacity}%";
-      format-icons = ["" "" "" "" ""];
+      format-charging = "󰂄 {capacity}%";
+      format-plugged = "󰚥 {capacity}%";
+      format-full = "󰁹 {capacity}%";
+      format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
       tooltip-format = "{time}";
     };
 
@@ -182,14 +181,14 @@ let
       tooltip = false;
       format = "{icon} {}";
       format-icons = {
-        notification = "<span foreground='${stylix.base08}'><sup></sup></span>";
-        none = "";
-        dnd-notification = "<span foreground='${stylix.base08}'><sup></sup></span>";
-        dnd-none = "";
-        inhibited-notification = "<span foreground='${stylix.base08}'><sup></sup></span>";
-        inhibited-none = "";
-        dnd-inhibited-notification = "<span foreground='${stylix.base08}'><sup></sup></span>";
-        dnd-inhibited-none = "";
+        notification = "<span foreground='${stylix.base08}'>󰍡</span>";
+        none = "󰂚";
+        dnd-notification = "<span foreground='${stylix.base08}'>󰍡</span>";
+        dnd-none = "󱏧";
+        inhibited-notification = "<span foreground='${stylix.base08}'>󰍡</span>";
+        inhibited-none = "󰂚";
+        dnd-inhibited-notification = "<span foreground='${stylix.base08}'>󰍡</span>";
+        dnd-inhibited-none = "󱏧";
       };
       return-type = "json";
       exec-if = "which swaync-client";
@@ -212,12 +211,12 @@ with lib;
     package = pkgs.waybar;
     
     settings = [
-      (horizontalConfig // commonModules)
+      ((if useVerticalBar then verticalConfig else horizontalConfig) // commonModules)
     ];
     
     style = ''
       * {
-        font-family: "JetBrainsMono Nerd Font Mono", "tabler-icons";
+        font-family: "JetBrainsMono Nerd Font Mono";
         font-size: 13px;
         border: none;
         border-radius: 0;
@@ -248,7 +247,7 @@ with lib;
         margin: 4px 4px 4px 8px;
         padding: 4px 8px;
         border-radius: 16px;
-        font-size: 16px;
+        font-size: 40px;
       }
 
       #workspaces button {
@@ -258,6 +257,7 @@ with lib;
         border-radius: 12px;
         background: transparent;
         transition: ${betterTransition};
+        font-size: 30px;
       }
 
       #workspaces button.active {
@@ -300,7 +300,7 @@ with lib;
         padding: 8px 12px;
         margin: 4px 2px;
         border-radius: 16px;
-        font-size: 16px;
+        font-size: 22px;
       }
 
       #pulseaudio {
@@ -308,7 +308,7 @@ with lib;
         color: ${stylix.base0A};
         padding: 8px 12px;
         margin: 4px 2px;
-        border-radius: 16px;
+        border-radius: 26px;
       }
 
       #battery {
@@ -316,7 +316,7 @@ with lib;
         color: ${stylix.base0B};
         padding: 8px 12px;
         margin: 4px 2px;
-        border-radius: 16px;
+        border-radius: 22px;
       }
 
       #battery.warning {
@@ -333,7 +333,7 @@ with lib;
         color: ${stylix.base0E};
         padding: 8px 12px;
         margin: 4px 2px;
-        border-radius: 16px;
+        border-radius: 26px;
       }
 
       #tray {
@@ -359,48 +359,55 @@ with lib;
       }
 
       /* Configuration verticale alternative */
-      window#waybar.vertical {
-        background: transparent;
-      }
+      ${if useVerticalBar then ''
+        window#waybar {
+          background: transparent;
+        }
 
-      .vertical #workspaces {
-        background: ${stylix.base01};
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-        padding: 16px 8px 8px;
-        font-size: 18px;
-      }
+        #workspaces {
+          background: ${stylix.base01};
+          border-top-left-radius: 15px;
+          border-top-right-radius: 15px;
+          padding: 16px 8px 8px;
+          font-size: 24px;
+          margin: 0;
+        }
 
-      .vertical #workspaces button {
-        padding: 8px 4px;
-        margin: 4px 0;
-      }
+        #workspaces button {
+          padding: 8px 4px;
+          margin: 4px 0;
+          font-size: 24px;
+        }
 
-      .vertical #network,
-      .vertical #pulseaudio,
-      .vertical #battery,
-      .vertical #custom-notification,
-      .vertical #custom-calendar-icon,
-      .vertical #clock,
-      .vertical #custom-time-icon {
-        background: ${stylix.base00};
-        padding: 12px 8px;
-        margin: 0;
-        border-radius: 0;
-        font-size: 16px;
-      }
+        #network,
+        #pulseaudio,
+        #battery,
+        #custom-notification,
+        #custom-calendar-icon,
+        #clock,
+        #clock\#date,
+        #custom-time-icon,
+        #clock\#time {
+          background: ${stylix.base00};
+          padding: 12px 8px;
+          margin: 0;
+          border-radius: 0;
+          font-size: 16px;
+        }
 
-      .vertical #custom-separator {
-        background: transparent;
-        padding: 4px;
-        margin: 0;
-      }
+        #custom-separator {
+          background: transparent;
+          padding: 4px;
+          margin: 0;
+          color: ${stylix.base03};
+        }
 
-      .vertical #clock.time {
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
-        padding-bottom: 16px;
-      }
+        #clock\#time {
+          border-bottom-left-radius: 15px;
+          border-bottom-right-radius: 15px;
+          padding-bottom: 16px;
+        }
+      '' else ""}
     '';
   };
 }
