@@ -217,7 +217,7 @@ with lib;
     style = ''
       * {
         font-family: "JetBrainsMono Nerd Font Mono";
-        font-size: 13px;
+        font-size: 14px;
         border: none;
         border-radius: 0;
         min-height: 0;
@@ -257,7 +257,7 @@ with lib;
         border-radius: 12px;
         background: transparent;
         transition: ${betterTransition};
-        font-size: 30px;
+        font-size: 40px;
       }
 
       #workspaces button.active {
@@ -283,6 +283,7 @@ with lib;
         margin: 4px 4px;
         border-radius: 16px;
         font-weight: bold;
+        font-size: 13px;
       }
 
       #clock {
@@ -292,6 +293,7 @@ with lib;
         margin: 4px;
         border-radius: 16px;
         font-weight: bold;
+        font-size: 14px;
       }
 
       #network {
@@ -300,7 +302,7 @@ with lib;
         padding: 8px 12px;
         margin: 4px 2px;
         border-radius: 16px;
-        font-size: 22px;
+        font-size: 16px;
       }
 
       #pulseaudio {
@@ -308,7 +310,8 @@ with lib;
         color: ${stylix.base0A};
         padding: 8px 12px;
         margin: 4px 2px;
-        border-radius: 26px;
+        border-radius: 16px;
+        font-size: 15px;
       }
 
       #battery {
@@ -316,7 +319,8 @@ with lib;
         color: ${stylix.base0B};
         padding: 8px 12px;
         margin: 4px 2px;
-        border-radius: 22px;
+        border-radius: 16px;
+        font-size: 15px;
       }
 
       #battery.warning {
@@ -333,7 +337,8 @@ with lib;
         color: ${stylix.base0E};
         padding: 8px 12px;
         margin: 4px 2px;
-        border-radius: 26px;
+        border-radius: 16px;
+        font-size: 12px;
       }
 
       #tray {
@@ -341,6 +346,7 @@ with lib;
         padding: 8px 12px;
         margin: 4px 8px 4px 2px;
         border-radius: 16px;
+        font-size: 10px;
       }
 
       #tray > .passive {
@@ -369,14 +375,14 @@ with lib;
           border-top-left-radius: 15px;
           border-top-right-radius: 15px;
           padding: 16px 8px 8px;
-          font-size: 24px;
+          font-size: 48px;
           margin: 0;
         }
 
         #workspaces button {
           padding: 8px 4px;
           margin: 4px 0;
-          font-size: 24px;
+          font-size: 48px;
         }
 
         #network,
@@ -392,7 +398,7 @@ with lib;
           padding: 12px 8px;
           margin: 0;
           border-radius: 0;
-          font-size: 16px;
+          font-size: 12px;
         }
 
         #custom-separator {
