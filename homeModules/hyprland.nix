@@ -303,7 +303,6 @@ in
         "center, title:^(Liste de contacts)"
         "center, class:^(steam_app_)$"
         "fullscreen, class:^(steam_app_).*"
-        "workspace special:games, class:^(steam_app_).*"
         "animation slide, class:^(steam_app_).*"
 
         # Wine/Lutris Games

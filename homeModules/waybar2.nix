@@ -9,200 +9,6 @@ let
   stylix = config.lib.stylix.colors.withHashtag;
   betterTransition = "all 0.3s cubic-bezier(.55,-0.68,.48,1.682)";
   
-  useVerticalBar = false;
-  
-  horizontalConfig = {
-    layer = "top";
-    position = "top";
-    height = 40;
-    margin-top = 5;
-    margin-left = 10;
-    margin-right = 10;
-    
-    modules-left = [
-      "hyprland/workspaces"
-      "hyprland/window"
-    ];
-    modules-center = [
-      "clock"
-    ];
-    modules-right = [
-      "pulseaudio"
-      "battery"
-      "network"
-      "custom/notification"
-      "tray"
-    ];
-  };
-  
-  verticalConfig = {
-    layer = "top";
-    position = "left";
-    height = 400;
-    width = 60;
-    margin-left = 10;
-    margin-top = 10;
-    margin-bottom = 10;
-    
-    modules-center = [
-      "hyprland/workspaces"
-      "custom/separator"
-      "network"
-      "pulseaudio"
-      "battery"
-      "custom/separator"
-      "custom/calendar-icon"
-      "clock"
-      "clock#date"
-      "custom/time-icon"
-      "clock#time"
-    ];
-  };
-  
-  commonModules = {
-    "hyprland/workspaces" = {
-      format = "{icon}";
-      on-click = "activate";
-      format-icons = {
-        "1" = "󰲠";
-        "2" = "󰲢";
-        "3" = "󰲤";
-        "4" = "󰲦";
-        "5" = "󰲨";
-        "6" = "󰲪";
-        "7" = "󰲬";
-        "8" = "󰲮";
-        "9" = "󰲰";
-        default = "○";
-        active = "●";
-        urgent = "󰀧";
-      };
-      persistent-workspaces = {
-        "*" = 5;
-      };
-    };
-
-    "hyprland/window" = {
-      format = "{title}";
-      max-length = 50;
-      separate-outputs = true;
-    };
-
-    clock = {
-      interval = 1;
-      format = "{:%H:%M}";
-      format-alt = "{:%A, %d %B %Y}";
-      tooltip-format = "<tt><small>{calendar}</small></tt>";
-      calendar = {
-        mode = "year";
-        mode-mon-col = 3;
-        weeks-pos = "right";
-        on-scroll = 1;
-        format = {
-          months = "<span color='${stylix.base09}'><b>{}</b></span>";
-          days = "<span color='${stylix.base05}'><b>{}</b></span>";
-          weeks = "<span color='${stylix.base0F}'><b>{}</b></span>";
-          weekdays = "<span color='${stylix.base0A}'><b>{}</b></span>";
-          today = "<span color='${stylix.base08}'><b><u>{}</u></b></span>";
-        };
-      };
-    };
-
-    "clock#date" = {
-      format = "{:%d}";
-      tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-    };
-
-    "clock#time" = {
-      format = "{:%H\n%M}";
-    };
-
-    "custom/calendar-icon" = {
-      format = "󰃭";
-      tooltip = false;
-    };
-
-    "custom/time-icon" = {
-      format = "󰥔";
-      tooltip = false;
-    };
-
-    "custom/separator" = {
-      format = "│";
-      tooltip = false;
-    };
-
-    network = {
-      format-wifi = "󰤨";
-      format-ethernet = "󰈀";
-      format-linked = "󰤨";
-      format-disconnected = "󰤭";
-      tooltip-format-wifi = "{essid} ({signalStrength}%)";
-      tooltip-format-ethernet = "{ipaddr}/{cidr}";
-      tooltip-format-disconnected = "Disconnected";
-      on-click = "nm-connection-editor";
-    };
-
-    pulseaudio = {
-      format = "{icon} {volume}%";
-      format-bluetooth = "󰂯 {volume}%";
-      format-bluetooth-muted = "󰂲 󰝟";
-      format-muted = "󰝟";
-      format-source = "󰍬 {volume}%";
-      format-source-muted = "󰍭";
-      format-icons = {
-        headphone = "󰋋";
-        hands-free = "󰋎";
-        headset = "󰋎";
-        phone = "󰏲";
-        portable = "󰦧";
-        car = "󰄋";
-        default = ["󰕿" "󰖀" "󰕾"];
-      };
-      on-click = "pavucontrol";
-      on-click-right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-    };
-
-    battery = {
-      interval = 10;
-      states = {
-        warning = 30;
-        critical = 15;
-      };
-      format = "{icon} {capacity}%";
-      format-charging = "󰂄 {capacity}%";
-      format-plugged = "󰚥 {capacity}%";
-      format-full = "󰁹 {capacity}%";
-      format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
-      tooltip-format = "{time}";
-    };
-
-    "custom/notification" = {
-      tooltip = false;
-      format = "{icon} {}";
-      format-icons = {
-        notification = "<span foreground='${stylix.base08}'>󰍡</span>";
-        none = "󰂚";
-        dnd-notification = "<span foreground='${stylix.base08}'>󰍡</span>";
-        dnd-none = "󱏧";
-        inhibited-notification = "<span foreground='${stylix.base08}'>󰍡</span>";
-        inhibited-none = "󰂚";
-        dnd-inhibited-notification = "<span foreground='${stylix.base08}'>󰍡</span>";
-        dnd-inhibited-none = "󱏧";
-      };
-      return-type = "json";
-      exec-if = "which swaync-client";
-      exec = "swaync-client -swb";
-      on-click = "swaync-client -t";
-      escape = true;
-    };
-
-    tray = {
-      icon-size = 16;
-      spacing = 8;
-    };
-  };
-
 in
 with lib;
 {
@@ -211,13 +17,141 @@ with lib;
     package = pkgs.waybar;
     
     settings = [
-      ((if useVerticalBar then verticalConfig else horizontalConfig) // commonModules)
+      {
+        layer = "top";
+        position = "top";
+        height = 40;
+        margin-top = 5;
+        margin-left = 10;
+        margin-right = 10;
+        
+        modules-left = [
+          "hyprland/workspaces"
+          "hyprland/window"
+        ];
+        modules-center = [
+          "clock"
+        ];
+        modules-right = [
+          "pulseaudio"
+          "battery"
+          "custom/notification"
+          "tray"
+        ];
+
+        "hyprland/workspaces" = {
+          format = "{icon}";
+          on-click = "activate";
+          format-icons = {
+            "1" = "󰲠";
+            "2" = "󰲢";
+            "3" = "󰲤";
+            "4" = "󰲦";
+            "5" = "󰲨";
+            "6" = "󰲪";
+            "7" = "󰲬";
+            "8" = "󰲮";
+            "9" = "󰲰";
+            default = "○";
+            active = "●";
+            urgent = "󰀧";
+          };
+          persistent-workspaces = {
+            "*" = 5;
+          };
+        };
+
+        "hyprland/window" = {
+          format = "{title}";
+          max-length = 60;
+          separate-outputs = true;
+        };
+
+        clock = {
+          interval = 1;
+          format = "{:%H:%M}";
+          format-alt = "{:%A, %d %B %Y}";
+          tooltip-format = "<tt><small>{calendar}</small></tt>";
+          calendar = {
+            mode = "year";
+            mode-mon-col = 3;
+            weeks-pos = "right";
+            on-scroll = 1;
+            format = {
+              months = "<span color='${stylix.base09}'><b>{}</b></span>";
+              days = "<span color='${stylix.base05}'><b>{}</b></span>";
+              weeks = "<span color='${stylix.base0F}'><b>{}</b></span>";
+              weekdays = "<span color='${stylix.base0A}'><b>{}</b></span>";
+              today = "<span color='${stylix.base08}'><b><u>{}</u></b></span>";
+            };
+          };
+        };
+
+        pulseaudio = {
+          format = "<span size='x-large'>{icon}</span> <span size='medium'>{volume}%</span>";
+          format-bluetooth = "<span size='x-large'>󰂯</span> <span size='medium'>{volume}%</span>";
+          format-bluetooth-muted = "<span size='x-large'>󰂲</span> <span size='medium'>󰝟</span>";
+          format-muted = "<span size='x-large'>󰝟</span>";
+          format-source = "<span size='x-large'>󰍬</span> <span size='medium'>{volume}%</span>";
+          format-source-muted = "<span size='x-large'>󰍭</span>";
+          format-icons = {
+            headphone = "󰋋";
+            hands-free = "󰋎";
+            headset = "󰋎";
+            phone = "󰏲";
+            portable = "󰦧";
+            car = "󰄋";
+            default = ["󰕿" "󰖀" "󰕾"];
+          };
+          on-click = "pavucontrol";
+          on-click-right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+        };
+
+        battery = {
+          interval = 10;
+          states = {
+            warning = 30;
+            critical = 15;
+          };
+          format = "<span size='x-large'>{icon}</span> <span size='medium'>{capacity}%</span>";
+          format-charging = "<span size='x-large'>󰂄</span> <span size='medium'>{capacity}%</span>";
+          format-plugged = "<span size='x-large'>󰚥</span> <span size='medium'>{capacity}%</span>";
+          format-full = "<span size='x-large'>󰁹</span> <span size='medium'>{capacity}%</span>";
+          format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+          tooltip-format = "{time}";
+        };
+
+        "custom/notification" = {
+          tooltip = false;
+          format = "<span size='x-large'>{icon}</span> <span size='medium'>{}</span>";
+          format-icons = {
+            notification = "<span foreground='${stylix.base08}'>󰍡</span>";
+            none = "󰂚";
+            dnd-notification = "<span foreground='${stylix.base08}'>󰍡</span>";
+            dnd-none = "󱏧";
+            inhibited-notification = "<span foreground='${stylix.base08}'>󰍡</span>";
+            inhibited-none = "󰂚";
+            dnd-inhibited-notification = "<span foreground='${stylix.base08}'>󰍡</span>";
+            dnd-inhibited-none = "󱏧";
+          };
+          return-type = "json";
+          exec-if = "which swaync-client";
+          exec = "swaync-client -swb";
+          on-click = "swaync-client -t";
+          escape = true;
+        };
+
+        tray = {
+          icon-size = 16;
+          spacing = 8;
+        };
+      }
     ];
     
     style = ''
       * {
         font-family: "JetBrainsMono Nerd Font Mono";
-        font-size: 14px;
+        font-size: 0.8rem;
         border: none;
         border-radius: 0;
         min-height: 0;
@@ -245,9 +179,8 @@ with lib;
       #workspaces {
         background: ${stylix.base01};
         margin: 4px 4px 4px 8px;
-        padding: 4px 8px;
+        padding: 4px 1rem;
         border-radius: 16px;
-        font-size: 40px;
       }
 
       #workspaces button {
@@ -257,7 +190,7 @@ with lib;
         border-radius: 12px;
         background: transparent;
         transition: ${betterTransition};
-        font-size: 40px;
+        font-size: 2.5rem;
       }
 
       #workspaces button.active {
@@ -279,21 +212,21 @@ with lib;
       #window {
         background: ${stylix.base01};
         color: ${stylix.base05};
-        padding: 8px 16px;
+        padding: 8px 1rem;
         margin: 4px 4px;
         border-radius: 16px;
         font-weight: bold;
-        font-size: 13px;
+        font-size: 0.8rem;
       }
 
       #clock {
         background: ${stylix.base01};
         color: ${stylix.base05};
-        padding: 8px 16px;
+        padding: 8px 1.5rem;
         margin: 4px;
         border-radius: 16px;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 0.8rem;
       }
 
       #network {
@@ -302,7 +235,7 @@ with lib;
         padding: 8px 12px;
         margin: 4px 2px;
         border-radius: 16px;
-        font-size: 16px;
+        font-weight: bold;
       }
 
       #pulseaudio {
@@ -311,7 +244,7 @@ with lib;
         padding: 8px 12px;
         margin: 4px 2px;
         border-radius: 16px;
-        font-size: 15px;
+        font-weight: bold;
       }
 
       #battery {
@@ -320,7 +253,7 @@ with lib;
         padding: 8px 12px;
         margin: 4px 2px;
         border-radius: 16px;
-        font-size: 15px;
+        font-weight: bold;
       }
 
       #battery.warning {
@@ -338,7 +271,7 @@ with lib;
         padding: 8px 12px;
         margin: 4px 2px;
         border-radius: 16px;
-        font-size: 12px;
+        font-weight: bold;
       }
 
       #tray {
@@ -346,7 +279,7 @@ with lib;
         padding: 8px 12px;
         margin: 4px 8px 4px 2px;
         border-radius: 16px;
-        font-size: 10px;
+        font-size: 0.6rem;
       }
 
       #tray > .passive {
@@ -363,57 +296,6 @@ with lib;
           color: ${stylix.base00};
         }
       }
-
-      /* Configuration verticale alternative */
-      ${if useVerticalBar then ''
-        window#waybar {
-          background: transparent;
-        }
-
-        #workspaces {
-          background: ${stylix.base01};
-          border-top-left-radius: 15px;
-          border-top-right-radius: 15px;
-          padding: 16px 8px 8px;
-          font-size: 48px;
-          margin: 0;
-        }
-
-        #workspaces button {
-          padding: 8px 4px;
-          margin: 4px 0;
-          font-size: 48px;
-        }
-
-        #network,
-        #pulseaudio,
-        #battery,
-        #custom-notification,
-        #custom-calendar-icon,
-        #clock,
-        #clock\#date,
-        #custom-time-icon,
-        #clock\#time {
-          background: ${stylix.base00};
-          padding: 12px 8px;
-          margin: 0;
-          border-radius: 0;
-          font-size: 12px;
-        }
-
-        #custom-separator {
-          background: transparent;
-          padding: 4px;
-          margin: 0;
-          color: ${stylix.base03};
-        }
-
-        #clock\#time {
-          border-bottom-left-radius: 15px;
-          border-bottom-right-radius: 15px;
-          padding-bottom: 16px;
-        }
-      '' else ""}
     '';
   };
 }

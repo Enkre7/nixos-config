@@ -32,6 +32,7 @@
     pavucontrol
     playerctl
     mangohud    
+    bottles
   ];
 
   environment.sessionVariables = {

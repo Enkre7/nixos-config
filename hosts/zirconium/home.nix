@@ -11,7 +11,7 @@
     ../../homeModules/hyprland.nix
     ../../homeModules/hyprlock.nix
     #../../homeModules/hypridle.nix
-    ../../homeModules/waybar2.nix
+    ../../homeModules/waybar.nix
     ../../homeModules/wofi.nix
     ../../homeModules/wlogout.nix
     #../../homeModules/mako.nix
@@ -69,5 +69,6 @@
     obsidian
     gnome-calculator
     ffmpeg-full
+    protonvpn-gui
   ];
 }
