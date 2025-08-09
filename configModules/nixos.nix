@@ -12,6 +12,7 @@
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
     optimise.automatic = true;
+    settings.warn-dirty = false;
   };
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = config.stateVersion;
