@@ -63,7 +63,7 @@
 
   home.packages = with pkgs; [
     drawio
-    rustdesk
+    #rustdesk
     vesktop # discord
     r2modman
     obsidian
