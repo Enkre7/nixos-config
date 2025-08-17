@@ -33,6 +33,7 @@
     playerctl
     mangohud    
     bottles
+    cockatrice
   ];
 
   environment.sessionVariables = {
