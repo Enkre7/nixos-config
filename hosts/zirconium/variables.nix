@@ -51,6 +51,6 @@
     isLaptop = false;
     cpuVendor = "AMD";
     isFrameworkDevice = false;
-    kernelPackage = pkgs.linuxPackages_zen;
+    kernelPackage = pkgs.linuxPackages_latest;
   };
 }

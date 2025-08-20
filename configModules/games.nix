@@ -29,11 +29,11 @@
         zulu
       ];
     })
-    (wineWowPackages.full.override {
+    winetricks
+    (wineWowPackages.waylandFull.override {
       wineRelease = "staging";
       mingwSupport = true;
-     })
-    winetricks
+    })
     pavucontrol
     playerctl
     mangohud    
