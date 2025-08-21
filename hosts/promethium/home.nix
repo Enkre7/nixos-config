@@ -41,6 +41,7 @@
     #../../homeModules/libreoffice.nix
     ../../homeModules/onlyoffice.nix
     #../../homeModules/minecraft.nix
+    #../../homeModules/lutris.nix
   ];
 
   programs.home-manager.enable = true; 

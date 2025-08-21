@@ -10,7 +10,6 @@
   environment.systemPackages = with pkgs; [
     steam-run
     steam
-    lutris
     #heroic
     protonup
     winetricks
@@ -20,8 +19,7 @@
     })
     pavucontrol
     playerctl
-    mangohud    
-    bottles
+    mangohud
     cockatrice
   ];
 
