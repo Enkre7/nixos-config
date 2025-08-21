@@ -40,6 +40,7 @@
     #../../homeModules/chromium.nix
     #../../homeModules/libreoffice.nix
     ../../homeModules/onlyoffice.nix
+    ../../homeModules/minecraft.nix
   ];
   
   programs.home-manager.enable = true;

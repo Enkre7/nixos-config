@@ -24,6 +24,7 @@ let
     #${pkgs.swww}/bin/swww img config.wallpaper &
     ${pkgs.vesktop}/bin/vesktop --start-minimized &
     ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
+    ${pkgs.protonvpn-gui}/bin/protonvpn-app &
     killall -q swaync;sleep .5 && swaync
     wl-paste --watch cliphist store &
     coolercontrol &

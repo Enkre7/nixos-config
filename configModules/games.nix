@@ -1,8 +1,5 @@
 { pkgs, ... }: 
 {
-  # Minecraft
-  programs.java.enable = true;
-
   # Steam
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
@@ -16,19 +13,6 @@
     lutris
     #heroic
     protonup
-    (prismlauncher.override { # Minecraft
-      # Add binary required by some mod
-      additionalPrograms = [ ffmpeg ];
-      # Change Java runtimes available to Prism Launcher
-      jdks = [
-        temurin-jre-bin-8
-        temurin-jre-bin-17
-        graalvm-ce
-        zulu8
-        zulu17
-        zulu
-      ];
-    })
     winetricks
     (wineWowPackages.waylandFull.override {
       wineRelease = "staging";
