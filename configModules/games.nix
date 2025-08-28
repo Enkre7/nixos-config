@@ -12,11 +12,6 @@
     steam
     #heroic
     protonup
-    winetricks
-    (wineWowPackages.waylandFull.override {
-      wineRelease = "staging";
-      mingwSupport = true;
-    })
     pavucontrol
     playerctl
     mangohud

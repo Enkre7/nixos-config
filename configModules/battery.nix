@@ -90,7 +90,7 @@ with lib;
     powerKeyLongPress = "poweroff";
     lidSwitch = mkIf config.isLaptop "suspend-then-hibernate";
     lidSwitchExternalPower = mkIf config.isLaptop "lock";
-    extraConfig = ''
+    services.logind.settings.Login = ''
       IdleAction=lock
       IdleActionSec=300
       HandlePowerKey=suspend

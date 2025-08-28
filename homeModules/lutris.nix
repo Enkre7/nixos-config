@@ -9,16 +9,24 @@
       winetricks
       vulkan-tools
       vulkan-loader
+      dxvk
+      vkd3d
     ];
-    wine = with pkgs; [
+    winePackages = with pkgs; [
       wineWowPackages.waylandFull
+      wineWowPackages.staging
       wineWowPackages.stable
     ];
     runners = {
       wine = {
         settings = {
-          runner.runner_executable = "${pkgs.wineWowPackages.waylandFull}/bin/wine";
-          system.dxvk = true;
+          runner.runner_executable = "${pkgs.wineWowPackages.staging}/bin/wine";
+          system = {
+            dxvk = true;
+            vkd3d = true;
+            disable_compositor = true;
+            restore_gamma = true;
+          };
         };
       };
       steam = {
