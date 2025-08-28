@@ -130,8 +130,6 @@ in
         };
       };
 
-      gestures.workspace_swipe = true;
-
       bind = [
         "$mainMod, A, exec, $powermanager"
         "$mainMod, Q, exec, $terminal"

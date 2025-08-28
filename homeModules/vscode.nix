@@ -22,7 +22,7 @@
       pkief.material-icon-theme
       ms-vscode.powershell
       ms-vscode-remote.remote-containers
-      ms-python.python
+      #ms-python.python
       ms-kubernetes-tools.vscode-kubernetes-tools
       eamodio.gitlens
       yzhang.markdown-all-in-one

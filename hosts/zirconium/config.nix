@@ -48,6 +48,10 @@
     backupFileExtension = "backup-" + pkgs.lib.readFile "${pkgs.runCommand "timestamp" {} "echo -n `date '+%Y%m%d%H%M%S'` > $out"}";
   };  
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "qtwebengine-5.15.19"
+  ];
+  
   # Debug
   #stylix.enable = lib.mkForce false;
   #stylix.autoEnable = lib.mkForce false;
