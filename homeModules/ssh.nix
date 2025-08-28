@@ -3,10 +3,15 @@
 {
   programs.ssh = {
     enable = true;
-    controlMaster = "auto"; # ssh session persist
-    controlPath = "~/.ssh/sockets/S.%r@%h:%p";
-    controlPersist = "10m";
-    addKeysToAgent = "yes";
+    enableDefaultConfig = false;
+    matchBlocks = {
+      "*" = {
+        controlMaster = "auto";
+        controlPath = "~/.ssh/sockets/S.%r@%h:%p";
+        controlPersist = "10m";
+        addKeysToAgent = "yes";
+      };
+    };
   };
   
   home.file = {

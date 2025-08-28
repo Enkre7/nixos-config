@@ -86,15 +86,14 @@ with lib;
   '';
   
   services.logind = {
-    powerKey = "suspend";
-    powerKeyLongPress = "poweroff";
     lidSwitch = mkIf config.isLaptop "suspend-then-hibernate";
     lidSwitchExternalPower = mkIf config.isLaptop "lock";
-    services.logind.settings.Login = ''
-      IdleAction=lock
-      IdleActionSec=300
-      HandlePowerKey=suspend
-    '';
+    settings.Login = {
+      IdleAction = "lock";
+      IdleActionSec = 300;
+      HandlePowerKey = "suspend";
+      HandlePowerKeyLongPress = "poweroff";
+    };
   };
 
   # Battery management utilities

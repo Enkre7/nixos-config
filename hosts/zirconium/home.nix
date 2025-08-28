@@ -30,7 +30,8 @@
   # Media & Files
     ../../homeModules/xdg.nix
     ../../homeModules/mpv.nix
-    ../../homeModules/qimgv.nix
+    #../../homeModules/qimgv.nix
+    ../../homeModules/imv.nix
     ../../homeModules/lf.nix
     ../../homeModules/capture.nix  
   # Applications

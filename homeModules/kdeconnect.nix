@@ -4,7 +4,6 @@
   services.kdeconnect = {
     enable = true;
     indicator = true;
-    package = pkgs.kdePackages.kdeconnect-kde;
   };
 
   # Hide all .desktop, except for org.kde.kdeconnect.settings
