@@ -86,9 +86,9 @@ with lib;
   '';
   
   services.logind = {
-    HandleLidSwitch = mkIf config.isLaptop "suspend-then-hibernate";
-    HandleLidSwitchExternalPower = mkIf config.isLaptop "lock";
     settings.Login = {
+      HandleLidSwitch = mkIf config.isLaptop "suspend-then-hibernate";
+      HandleLidSwitchExternalPower = mkIf config.isLaptop "lock";
       IdleAction = "lock";
       IdleActionSec = 300;
       HandlePowerKey = "suspend";

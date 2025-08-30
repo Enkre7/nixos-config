@@ -66,6 +66,7 @@
   home.packages = with pkgs; [
     drawio
     #rustdesk
+    prusa-slicer
     vesktop # discord
     r2modman
     obsidian
