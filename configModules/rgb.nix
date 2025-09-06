@@ -20,10 +20,11 @@
     enable = true;
     package = pkgs.openrgb-with-all-plugins;
     motherboard = "amd";
+    server.port = 6743;
   };  
 
   networking.firewall = {
-    allowedTCPPorts = [ 6742 ]; # OpenRGB server
-    allowedUDPPorts = [ 6742 ];
+    allowedTCPPorts = [ 6743 ]; # OpenRGB server
+    allowedUDPPorts = [ 6743 ];
   };
 }

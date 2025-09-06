@@ -8,27 +8,33 @@
 let
   stylix = config.lib.stylix.colors;
   startupScript = pkgs.writeShellScriptBin "start" ''
-    # Start of SSH agent for gnome-keyrings
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
     export SSH_AUTH_SOCK
     systemctl --user start hyprpolkitagent
-    killall -q waybar;sleep .5 && waybar &
-    #${pkgs.mako}/bin/mako &
+    
+    pkill -x waybar || true
+    sleep 0.5
+    ${pkgs.waybar}/bin/waybar &
+
+    pkill -x swaync || true
+    sleep 0.5
+    ${pkgs.swaynotificationcenter}/bin/swaync &
+    
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
     ${pkgs.blueman}/bin/blueman-applet &
     ${pkgs.udiskie}/bin/udiskie &
     ${pkgs.gammastep}/bin/gammastep &
     thunar --daemon &
-    #${pkgs.swww}/bin/swww-daemon &
-    sleep 0.1 &
-    #${pkgs.swww}/bin/swww img config.wallpaper &
+    coolercontrol &
+    ${pkgs.openrgb}/bin/openrgb --server --server-port 6743 --startminimized -m static -c 00FF00 -b 100    
+
+    sleep 1
     ${pkgs.vesktop}/bin/vesktop --start-minimized &
+    sleep 0.5
     ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
     ${pkgs.protonvpn-gui}/bin/protonvpn-app &
-    killall -q swaync;sleep .5 && swaync
+    
     wl-paste --watch cliphist store &
-    coolercontrol &
-    openrgb --startminimized -m static -c 00FF00 -b 100 &
   '';
 in
 {
