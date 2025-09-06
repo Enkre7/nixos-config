@@ -24,7 +24,7 @@
   };  
 
   networking.firewall = {
-    allowedTCPPorts = [ 6743 ]; # OpenRGB server
-    allowedUDPPorts = [ 6743 ];
+    allowedTCPPorts = [ 6742 ]; # OpenRGB server
+    allowedUDPPorts = [ 6742 ];
   };
 }

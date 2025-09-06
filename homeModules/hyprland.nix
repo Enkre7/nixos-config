@@ -26,7 +26,7 @@ let
     ${pkgs.gammastep}/bin/gammastep &
     thunar --daemon &
     coolercontrol &
-    ${pkgs.openrgb}/bin/openrgb --server --server-port 6743 --startminimized -m static -c 00FF00 -b 100    
+    openrgb --server --startminimized -m static -c 00FF00 -b 100 &
 
     sleep 1
     ${pkgs.vesktop}/bin/vesktop --start-minimized &
