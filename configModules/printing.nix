@@ -16,4 +16,6 @@
   };
   services.ipp-usb.enable = true; # Microsoft WSD "driverless" scanning
   users.users.${config.user}.extraGroups = [ "scanner" "lp" ];
+
+  environment.systemPackages = with pkgs; [ simple-scan ];
 }

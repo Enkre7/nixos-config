@@ -46,6 +46,12 @@
           icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
           definedAliases = [ "@np" ];
         };
+        "Nix Packages Issues" = {
+          urls = [ { template = "https://github.com/NixOS/nixpkgs/issues?q=is%253Aissue%20state%253Aopen {searchTerms}"; } ];
+          icon = "https://wiki.nixos.org/nixos.png";
+          updateInterval = 24 * 60 * 60 * 1000; # every day
+          definedAliases = [ "@npi" ];
+        };
         "NixOS Wiki" = {
           urls = [ { template = "https://wiki.nixos.org/w/index.php?search={searchTerms}"; } ];
           icon = "https://wiki.nixos.org/nixos.png";
