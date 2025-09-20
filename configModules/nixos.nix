@@ -5,30 +5,35 @@
     settings.experimental-features = [ "nix-command" "flakes" ];
     settings.auto-optimise-store = true;
     settings.substituters = [
-      "https://nix-community.cachix.org"
       "https://cache.nixos.org/"
+      "https://nix-community.cachix.org"
+      "https://hyprland.cachix.org"
+      "https://nixpkgs-wayland.cachix.org"
     ];
     settings.trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
     ];
+    settings.builders-use-substitutes = true;
+    settings.fallback = false;
+    settings.keep-going = true;
     optimise.automatic = true;
     settings.warn-dirty = false;
   };
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = config.stateVersion;
     
-  # Disable nix inbuild documentation 
   documentation.doc.enable = false;
 
-  # Nix helper module
   programs.nh = {
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = config.flakePath; # Flake location
+    flake = config.flakePath;
   };
 
-  # Nixd (Nix language server)
   environment.systemPackages = with pkgs; [
     nixd
     nixfmt-rfc-style
