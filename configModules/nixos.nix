@@ -2,6 +2,7 @@
 
 {
   nix = {
+    settings.timeout = 3600;
     settings.experimental-features = [ "nix-command" "flakes" ];
     settings.auto-optimise-store = true;
     settings.substituters = [
