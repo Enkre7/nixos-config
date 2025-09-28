@@ -15,11 +15,21 @@
   ];
 
   xdg.portal = {
+    enable = true;
     extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
       inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
     ];
     config = {
-      hyprland.default = [ "hyprland" "wlr" "gtk" ];
+      common = {
+        default = [ "hyprland" "gtk" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Print" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.Wallpaper" = [ "hyprland" ];
+      };
+      hyprland.default = [ "hyprland" "gtk" ];
     };
   };
   
