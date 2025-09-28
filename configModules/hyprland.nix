@@ -27,6 +27,5 @@
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     SDL_VIDEODRIVER = "wayland,x11";
     CLUTTER_BACKEND = "wayland";
-
   };  
 }
