@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
  
 {
   xdg.portal = {
@@ -9,8 +9,17 @@
       xdg-desktop-portal-wlr
     ];
     config = {
-      common.default = ["hyprland" "gtk"];
-      hyprland.default = ["wlr" "gtk"];
+      common = {
+        default = [ "wlr" "gtk" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Print" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+        "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+        "org.freedesktop.impl.portal.Wallpaper" = [ "wlr" ];
+      };
+      
+      sway.default = [ "wlr" "gtk" ];
+      niri.default = [ "wlr" "gtk" ];
     };
   };
 }

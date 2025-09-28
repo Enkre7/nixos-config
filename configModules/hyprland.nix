@@ -13,6 +13,15 @@
   environment.systemPackages = with pkgs; [
     wev # Wayland event viewer
   ];
+
+  xdg.portal = {
+    extraPortals = with pkgs; [
+      inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+    ];
+    config = {
+      hyprland.default = [ "hyprland" "wlr" "gtk" ];
+    };
+  };
   
   # Resize & electron support
   environment.sessionVariables = {

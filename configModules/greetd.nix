@@ -1,15 +1,19 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, lib, ... }:
 
 let
   tuigreet = "${pkgs.tuigreet}/bin/tuigreet";
-  hyprland-session = "${inputs.hyprland.packages.${pkgs.system}.hyprland}/share/wayland-sessions";
+  sessionsPaths = lib.concatStringsSep ":" [
+    "${inputs.hyprland.packages.${pkgs.system}.hyprland}/share/wayland-sessions"
+    "${pkgs.sway}/share/wayland-sessions"
+    "/run/current-system/sw/share/wayland-sessions"
+  ];
 in 
 {
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        command = "${tuigreet} --time --remember --remember-session --sessions ${hyprland-session}";
+        command = "${tuigreet} --time --remember --remember-session --sessions ${sessionsPaths}";
         user = "greeter";
       };
     };
