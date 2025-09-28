@@ -1,6 +1,7 @@
 { pkgs, ... }: 
 
-{  
+{
+  # PAM
   services.gnome.gnome-keyring.enable = true;
   security.pam = {
     services = {
@@ -10,11 +11,11 @@
     };
     sshAgentAuth.enable = true;
   };
-
   security.sudo.execWheelOnly = true;
+  
   security.auditd.enable = true;
-  security.polkit.enable = true;
-
+  
+  
   # Harden kernel
   boot.kernel.sysctl = {
     "kernel.unprivileged_bpf_disabled" = 1;
@@ -27,6 +28,8 @@
     "net.ipv4.conf.default.log_martians" = 1;
   };
   
+  
+  # Fail2ban
   services.fail2ban = {
     enable = true;
     # Protect from SSH brute force
@@ -37,9 +40,45 @@
       bantime = 2h
     '';
   };
+  
+  
+  # Polkit
+  security.polkit.enable = true;
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
+
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+        if (
+            subject.isInGroup("users")
+                && (
+                    action.id == "org.freedesktop.login1.reboot" ||
+                    action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
+                    action.id == "org.freedesktop.login1.power-off" ||
+                    action.id == "org.freedesktop.login1.power-off-multiple-sessions"
+                )
+            )
+        {
+            return polkit.Result.YES;
+        }
+    })
+  '';
 
   environment.systemPackages = with pkgs; [
-    libsecret #Polkit
-    lxqt.lxqt-policykit #Polkit
+    libsecret
+    polkit_gnome
   ];
 }

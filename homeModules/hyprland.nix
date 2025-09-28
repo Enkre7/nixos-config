@@ -10,7 +10,7 @@ let
   startupScript = pkgs.writeShellScriptBin "start" ''
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
     export SSH_AUTH_SOCK
-    systemctl --user start hyprpolkitagent
+    ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &    
     
     pkill -x waybar || true
     sleep 0.5
@@ -39,8 +39,6 @@ let
 in
 {
   imports = [ inputs.hyprland.homeManagerModules.default ];
-
-  services.hyprpolkitagent.enable = true;
 
   wayland.windowManager.hyprland = {
     enable = true;
