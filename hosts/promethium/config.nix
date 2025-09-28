@@ -48,6 +48,15 @@
     backupFileExtension = "backup-" + pkgs.lib.readFile "${pkgs.runCommand "timestamp" {} "echo -n `date '+%Y%m%d%H%M%S'` > $out"}";
   };
 
+  # limit 80% ressources for nix rebuild
+  nix.settings.max-jobs = 6;
+  nix.settings.cores = 2;
+  systemd.services.nix-daemon.serviceConfig = {
+    MemoryLimit = "48G";
+    CPUQuota = "1280%";
+    Nice = 5;
+  };
+
   nixpkgs.config.permittedInsecurePackages = [
     "qtwebengine-5.15.19"
   ];
