@@ -60,8 +60,8 @@
     "sd_mod"  
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  hardware.nvidia.powerManagement.enable = true;
-  #environment.sessionVariables = {
-  #  STEAM_FORCE_DESKTOPUI_SCALING = "1.333333";
-  #};
+
+  environment.sessionVariables = {
+    STEAM_FORCE_DESKTOPUI_SCALING = "1.333333";
+  };
 }

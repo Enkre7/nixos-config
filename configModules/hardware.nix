@@ -23,6 +23,7 @@
   # For Nvidia
   hardware.nvidia.open = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;  
+  hardware.nvidia.powerManagement.enable = true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
