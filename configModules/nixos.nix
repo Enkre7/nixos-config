@@ -17,7 +17,6 @@
         "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
       ];
       auto-optimise-store = true;
-      timeout = 7200;
       builders-use-substitutes = true;
       keep-going = true;
       warn-dirty = false;

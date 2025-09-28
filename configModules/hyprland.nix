@@ -12,10 +12,6 @@
   
   environment.systemPackages = with pkgs; [
     wev # Wayland event viewer
-    # Better wayland support for Qt
-    qt6.qtwayland
-    qt5.qtwayland
-    libsForQt5.qt5.qtwayland
   ];
   
   # Resize & electron support

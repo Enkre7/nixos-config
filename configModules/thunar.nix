@@ -27,5 +27,5 @@
   programs.file-roller.enable = true; # Archive support
   services.devmon.enable = true; 
   services.udisks2.enable = true;
-  environment.systemPackages = with pkgs; [ libsForQt5.full zip unzip usbutils udiskie ];
+  environment.systemPackages = with pkgs; [ zip unzip usbutils udiskie ];
 }
