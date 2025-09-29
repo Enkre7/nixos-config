@@ -26,12 +26,15 @@
     ../../configModules/rgb.nix
   # Virtualization
     ../../configModules/virtualisation.nix
-  # User environment
+  # Desktop environment
     ../../configModules/locale.nix
     ../../configModules/shell.nix
     ../../configModules/terminal.nix
     ../../configModules/greetd.nix
+    ../../configModules/wayland.nix    
     ../../configModules/hyprland.nix
+    #../../configModules/sway.nix
+    #../../configModules/niri.nix
     ../../configModules/stylix.nix
     ../../configModules/thunar.nix
   # Applications & services
