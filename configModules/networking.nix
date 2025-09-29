@@ -27,8 +27,6 @@
     enable = true;
     allowedTCPPorts = [
       22 # SSH
-      5900 # Hyprland portals
-      5901 # Hyprland portals
       27036 # Steam
       27037 # Steam
       53 # DNS

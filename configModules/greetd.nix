@@ -1,13 +1,18 @@
-{ pkgs, inputs, lib, ... }:
+{ pkgs, inputs, lib, config, ... }:
 
 let
   tuigreet = "${pkgs.tuigreet}/bin/tuigreet";
-  sessionsPaths = lib.concatStringsSep ":" [
-    "${inputs.hyprland.packages.${pkgs.system}.hyprland}/share/wayland-sessions"
-    "${pkgs.sway}/share/wayland-sessions"
-    "/run/current-system/sw/share/wayland-sessions"
-  ];
-in 
+  
+  sessionsPaths = lib.concatStringsSep ":" (
+    lib.optional (config.programs.hyprland.enable or false)
+      "${inputs.hyprland.packages.${pkgs.system}.hyprland}/share/wayland-sessions"
+    ++ lib.optional (config.programs.sway.enable or false)
+      "${pkgs.sway}/share/wayland-sessions"
+    ++ lib.optional (config.programs.niri.enable or false)
+      "${pkgs.niri}/share/wayland-sessions"
+    ++ [ "/run/current-system/sw/share/wayland-sessions" ]
+  );
+in
 {
   services.greetd = {
     enable = true;
@@ -19,13 +24,11 @@ in
     };
   };
 
-  # https://www.reddit.com/r/NixOS/comments/u0cdpi/tuigreet_with_xmonad_how/
   systemd.services.greetd.serviceConfig = {
     Type = "idle";
     StandardInput = "tty";
     StandardOutput = "tty";
-    StandardError = "journal"; # Without this errors will spam on screen
-    # Without these bootlogs will spam on screen
+    StandardError = "journal";
     TTYReset = true;
     TTYVHangup = true;
     TTYVTDisallocate = true;

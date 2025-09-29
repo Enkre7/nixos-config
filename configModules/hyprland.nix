@@ -25,4 +25,6 @@
     XDG_CURRENT_DESKTOP = "Hyprland";
     XDG_SESSION_DESKTOP = "Hyprland";
   };  
+
+  networking.firewall.allowedTCPPorts = [ 5900 5901 ]; # Hyprland portals
 }
