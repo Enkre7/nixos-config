@@ -25,11 +25,8 @@ with lib;
           "temperature"
           "memory"
           "disk"
-          #"hyprland/window"
         ];
         modules-right = [
-          #"idle_inhibitor"
-          #"network
           "battery"
           "pulseaudio"
           "custom/notification"
@@ -71,15 +68,6 @@ with lib;
           on-scroll-up = "shift_up";
           on-scroll-down = "shift_down";
         };
-        "hyprland/window" = {
-          max-length = 32;
-          icon = true;
-          icon-size = 18;
-          separate-outputs = false;
-          rewrite = {
-            "" = " Rien ";
-          };
-        };
         "cpu" = {
           interval = 5;
           format = " {usage}%";
@@ -99,23 +87,6 @@ with lib;
           tooltip-format = "{used} / {total}";
           unit = "GB";
           on-click = "kitty --class='disk-monitor' --hold -e bash -c \"duf --sort size && echo -e '\\n---\\n' && lsblk -o NAME,SIZE,FSTYPE,FSUSE%,MOUNTPOINT && echo -e '\\n---\\n' && dust -n 10 /\"";
-        };
-        "network" = {
-          interval = 2;
-          format-icons = [
-            "󰤯"
-            "󰤟"
-            "󰤢"
-            "󰤥"
-            "󰤨"
-          ];
-          format-ethernet = " Ethernet";
-          format-wifi = "{icon} {frequency}Ghz";
-          format-disconnected = "󰤮";
-          tooltip-format = "{ifname}";
-          tooltip-format-wifi = "SSID: {essid}\rSignal: {signaldBm} ({signalStrength}%)\r\r {bandwidthDownOctets} /  {bandwidthDownOctets}\r\rIP: {ipaddr}\rGtw: {gwaddr}/{cidr}";
-          tooltip-format-ethernet = " {bandwidthDownOctets} /  {bandwidthDownOctets}\r\rIP: {ipaddr}\rGtw: {gwaddr}/{cidr}";
-          tooltip-format-disconnected = "Deconnecté";
         };
         "custom/notification" = {
           tooltip = false;
@@ -168,15 +139,6 @@ with lib;
           format = "";
           on-click = "wlogout";
           on-click-right = "wofi";
-        };
-        "idle_inhibitor" = {
-          format = "{icon}";
-          format-icons = {
-            activated = "";
-            deactivated = "";
-          };
-          tooltip-format-activated = "Actif";
-          tooltip-format-deactivated = "Désactivé";
         };
         "battery" = {
           interval = 5;
@@ -285,7 +247,7 @@ with lib;
         tooltip label {
           color: ${stylix.base07};
         }
-        #window, #cpu, #temperature,  #memory, #disk {
+        #cpu, #temperature,  #memory, #disk {
           font-weight: bold;
           margin: 4px 0px;
           margin-left: 7px;
@@ -302,7 +264,7 @@ with lib;
           padding: 0px 25px 0px 15px;
           border-radius: 0px 0px 40px 0px;
         }
-        #network, #battery, #pulseaudio, #tray, #custom-notification, #idle_inhibitor {
+        #battery, #pulseaudio, #tray, #custom-notification {
           font-weight: bold;
           background: ${stylix.base01};
           color: ${stylix.base05};
@@ -324,3 +286,4 @@ with lib;
     ];
   };
 }
+

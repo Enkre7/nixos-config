@@ -67,8 +67,7 @@ in
       "$screenshot" = "grim -g \"$(slurp)\" - | swappy -f -";
       "$clipboard" = "cliphist list | wofi --dmenu | cliphist decode | wl-copy";
       "$powermanager" = "pgrep wlogout >/dev/null 2>&1 && killall wlogout || wlogout";
-      #"$lockscreen" = "hyprlock";
-      "$lockscreen" = "$HOME/.local/bin/lock";
+      "$lockscreen" = "hyprlock";
 
       exec-once = ''${startupScript}/bin/start'';
 
