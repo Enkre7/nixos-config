@@ -10,11 +10,11 @@
   # Desktop Environment
     ../../homeModules/hyprland.nix
     ../../homeModules/hyprlock.nix
-    #../../homeModules/hypridle.nix
+    #../../homeModules/sway.nix
+    #../../homeModules/niri.nix
     ../../homeModules/waybar.nix
     ../../homeModules/wofi.nix
     ../../homeModules/wlogout.nix
-    #../../homeModules/mako.nix
     ../../homeModules/swaync.nix
     ../../homeModules/light.nix
   # Terminal & Shell
