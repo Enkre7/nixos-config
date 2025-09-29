@@ -56,7 +56,13 @@
   wayland.windowManager.hyprland.settings = {
     monitor = lib.mkForce "eDP-1,highrr,auto,1.6";
   };
-
+   
+  xdg.configFile."niri/config.kdl".text = lib.mkAfter ''
+    output "eDP-1" {
+      scale 1.6
+    }
+  '';
+   
   # Host specific settings
   programs.yt-dlp.enable = true;
   home.packages = with pkgs; [
