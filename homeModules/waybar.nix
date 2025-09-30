@@ -182,7 +182,7 @@ with lib;
           font-size: 0.8rem;
           border-radius: 0px;
           border: none;
-          font-family: JetBrainsMono Nerd Font Mono;
+          font-family: ${config.stylix.fonts.monospace.name};
           min-height: 0px;
         }
         window#waybar {

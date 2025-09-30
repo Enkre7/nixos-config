@@ -29,9 +29,7 @@ with lib;
         margin-left = 12;
         margin-right = 12;
         
-        modules-left = mkIf (workspacesModule != null) [
-          workspacesModule
-        ];
+        modules-left = mkIf (workspacesModule != null) [ workspacesModule ];
         
         modules-center = [ "clock" ];
         
@@ -50,8 +48,6 @@ with lib;
             "3" = "三";
             "4" = "四";
             "5" = "五";
-            "active" = "";
-            "default" = "";
           };
           persistent-workspaces = {
             "*" = 5;
@@ -68,9 +64,23 @@ with lib;
             "3" = "三";
             "4" = "四";
             "5" = "五";
-            "urgent" = "";
-            "focused" = "";
-            "default" = "";
+          };
+          persistent-workspaces = {
+            "*" = 5;
+          };
+        };
+
+        "niri/workspaces" = mkIf isNiri {
+          format = "{icon}";
+          format-icons = {
+            "1" = "一";
+            "2" = "二";
+            "3" = "三";
+            "4" = "四";
+            "5" = "五";
+          };
+          persistent-workspaces = {
+            "*" = 5;
           };
         };
 
@@ -202,7 +212,7 @@ with lib;
       .modules-right > * { margin: 0 6px; }
 
       #workspaces button {
-        color: ${stylix.base05};
+        color: ${stylix.base04};
         background: transparent;
         padding: 4px 10px;
         margin: 0 2px;
@@ -218,7 +228,7 @@ with lib;
       #workspaces button.active,
       #workspaces button.focused {
         background: ${stylix.base03};
-        color: ${stylix.base01};
+        color: ${stylix.base05};
       }
 
       #workspaces button.urgent {
