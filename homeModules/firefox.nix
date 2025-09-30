@@ -1,18 +1,10 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}:
+{ config, pkgs, inputs, ... }:
 
 {
   stylix.targets.firefox.profileNames = [ "${config.user}" ];
   programs.firefox = {
     enable = true;
-    languagePacks = [
-      "fr"
-      "en-US"
-    ];
+    languagePacks = [ "fr" "en-US" ];
     policies = {
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
@@ -90,11 +82,7 @@
       search.force = true;
       search.default = "ddg";
       search.privateDefault = "ddg";
-      search.order = [
-        "ddg"
-        "SearXNG"
-        "google"
-      ];
+      search.order = [ "ddg" "SearXNG" "google" ];
 
       # To display extentions: nix flake show "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons"
       extensions.packages = with inputs.firefox-addons.packages."x86_64-linux"; [
@@ -108,6 +96,7 @@
         privacy-settings
         sponsorblock
         return-youtube-dislikes
+        youtube-no-translation
         translate-web-pages
       ];
       settings = {

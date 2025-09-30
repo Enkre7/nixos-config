@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}:
+{ config, lib, pkgs, inputs, ... }:
 let
   stylix = config.lib.stylix.colors;
   startupScript = pkgs.writeShellScriptBin "start" ''
