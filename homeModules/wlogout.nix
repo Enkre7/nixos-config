@@ -2,6 +2,19 @@
 
 let
   stylix = config.lib.stylix.colors.withHashtag;
+
+  osConfig = config.home.sessionVariables.XDG_CURRENT_DESKTOP or "";
+  isHyprland = osConfig == "Hyprland";
+  isSway = osConfig == "sway";
+  isNiri = osConfig == "niri";
+
+  logoutCommand = 
+    if isHyprland then "hyprctl dispatch exit 0"
+    else if isSway then "swaymsg exit"
+    else if isNiri then "niri msg action quit"
+    else "hyprctl dispatch exit 0";
+
+
 in
 {
  programs.wlogout = {

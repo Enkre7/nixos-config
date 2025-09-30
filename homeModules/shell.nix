@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     fzf
+    exfat
   ];
   
   programs.zsh = {

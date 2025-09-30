@@ -2,12 +2,51 @@
   config,
   pkgs,
   lib,
+  osConfig,
   ...
 }:
 
 let
   stylix = config.lib.stylix.colors.withHashtag;
   betterTransition = "all 0.3s cubic-bezier(.55,-0.68,.48,1.682)";
+
+  isHyprland = osConfig.programs.hyprland.enable or false;
+  isNiri = osConfig.programs.niri.enable or false;
+  isSway = osConfig.programs.sway.enable or false;
+
+  workspacesModule = 
+    if isHyprland then "hyprland/workspaces"
+    else if isSway then "sway/workspaces"
+    else if isNiri then "niri/workspaces"
+    else "hyprland/workspaces";
+    
+  workspacesConfig = 
+    if isHyprland then {
+      format = "{name}";
+      format-icons = {
+        default = " ";
+        active = " ";
+        urgent = " ";
+      };
+      on-scroll-up = "hyprctl dispatch workspace e+1";
+      on-scroll-down = "hyprctl dispatch workspace e-1";
+    }
+    else if isSway then {
+      format = "{name}";
+      format-icons = {
+        default = " ";
+        focused = " ";
+        urgent = " ";
+      };
+    }
+    else if isNiri then {
+      format = "{index}";
+      format-icons = {
+        default = " ";
+        active = " ";
+      };
+    }
+    else {};
 in
 with lib;
 {
@@ -18,7 +57,6 @@ with lib;
       {
         layer = "top";
         position = "top";
-        modules-center = [ "hyprland/workspaces" ];
         modules-left = [
           "custom/startmenu"
           "cpu"
@@ -26,6 +64,7 @@ with lib;
           "memory"
           "disk"
         ];
+        modules-center = [ workspacesModule ];
         modules-right = [
           "battery"
           "pulseaudio"
@@ -34,16 +73,6 @@ with lib;
           "clock"
         ];
 
-        "hyprland/workspaces" = {
-          format = "{name}";
-          format-icons = {
-            default = " ";
-            active = " ";
-            urgent = " ";
-          };
-          on-scroll-up = "hyprctl dispatch workspace e+1";
-          on-scroll-down = "hyprctl dispatch workspace e-1";
-        };
         "clock" = {
           interval = 1;
           timezone = "Europe/Paris";
@@ -206,6 +235,18 @@ with lib;
           opacity: 1.0;
           min-width: 40px;
         }
+        #workspaces button.focused {
+          font-weight: bold;
+          padding: 0px 5px;
+          margin: 0px 3px;
+          border-radius: 16px;
+          color: ${stylix.base00};
+          background: ${stylix.base05};
+          background-size: 300% 300%;
+          transition: ${betterTransition};
+          opacity: 1.0;
+          min-width: 40px;
+        }
         #workspaces button:hover {
           font-weight: bold;
           padding: 0px 5px;
@@ -217,8 +258,13 @@ with lib;
           opacity: 0.8;
           transition: ${betterTransition};
         }
-        #workspaces button.active:hover {
+        #workspaces button.active:hover,
+        #workspaces button.focused:hover {
           background: ${stylix.base05};
+        }
+        #workspaces button.urgent {
+          background: ${stylix.base08};
+          opacity: 1.0;
         }
         @keyframes gradient_horizontal {
           0% {
