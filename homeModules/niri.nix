@@ -139,7 +139,6 @@ in
         }
     }
     
-    // Règles de fenêtres
     window-rule {
         match app-id="org.pulseaudio.pavucontrol"
         default-column-width { proportion 0.4; }
@@ -238,9 +237,7 @@ in
         open-fullscreen true
     }
     
-    // Raccourcis clavier
     binds {
-        // Applications
         Mod+Q { spawn "kitty"; }
         Mod+C { close-window; }
         Mod+E { spawn "kitty" "-e" "btop"; }
@@ -253,11 +250,9 @@ in
         Mod+V { toggle-window-floating; }
         Mod+B { fullscreen-window; }
         
-        // Redimensionnement colonnes
         Mod+P { set-column-width "-10%"; }
         Mod+J { set-column-width "+10%"; }
         
-        // Navigation focus
         Mod+Left { focus-column-left; }
         Mod+Right { focus-column-right; }
         Mod+Up { focus-window-up; }
@@ -266,7 +261,6 @@ in
         Mod+L { focus-column-right; }
         Mod+K { focus-window-up; }
         
-        // Déplacer fenêtres
         Mod+Shift+Left { move-column-left; }
         Mod+Shift+Right { move-column-right; }
         Mod+Shift+Up { move-window-up; }
@@ -275,7 +269,6 @@ in
         Mod+Shift+L { move-column-right; }
         Mod+Shift+K { move-window-up; }
         
-        // Workspaces
         Mod+1 { focus-workspace 1; }
         Mod+2 { focus-workspace 2; }
         Mod+3 { focus-workspace 3; }
@@ -292,41 +285,32 @@ in
         Mod+Shift+6 { move-column-to-workspace 6; }
         Mod+Shift+7 { move-column-to-workspace 7; }
         
-        // Scratchpad
         Mod+S { focus-workspace "magic"; }
         Mod+Shift+S { move-column-to-workspace "magic"; }
         
-        // Navigation workspaces avec molette
         Mod+WheelScrollDown { focus-workspace-down; }
         Mod+WheelScrollUp { focus-workspace-up; }
         Mod+WheelScrollRight { focus-workspace-down; }
         Mod+WheelScrollLeft { focus-workspace-up; }
         
-        // Son
         XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
         XF86AudioRaiseVolume { spawn "sh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"; }
         XF86AudioLowerVolume { spawn "sh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"; }
         
-        // Média
         XF86AudioPlay { spawn "playerctl" "play-pause"; }
         XF86AudioPause { spawn "playerctl" "play-pause"; }
         XF86AudioNext { spawn "playerctl" "next"; }
         XF86AudioPrev { spawn "playerctl" "previous"; }
         
-        // Luminosité
         XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
         XF86MonBrightnessUp { spawn "brightnessctl" "set" "+5%"; }
         
-        // Lock screen
         XF86AudioMedia { spawn "hyprlock"; }
         
-        // Screenshot
         Print { spawn "sh" "-c" "grim -g \"$(slurp)\" - | swappy -f -"; }
         
-        // Clipboard
         Ctrl+Alt+V { spawn "sh" "-c" "cliphist list | wofi --dmenu | cliphist decode | wl-copy"; }
         
-        // Système
         Mod+Shift+E { quit; }
     }
   '';

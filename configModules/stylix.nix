@@ -14,7 +14,7 @@
     };
     fonts = {
       monospace.package = pkgs.nerd-fonts.jetbrains-mono;
-      monospace.name = "JetbrainsMono Nerd Font Mono";
+      monospace.name = "JetbrainsMono Nerd Font Propo";
       sansSerif.package = pkgs.dejavu_fonts;
       sansSerif.name = "DejaVu Sans";
       serif.package = pkgs.dejavu_fonts;

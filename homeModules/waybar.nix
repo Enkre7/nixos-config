@@ -1,18 +1,12 @@
-{
-  config,
-  pkgs,
-  lib,
-  osConfig,
-  ...
-}:
+{ config, pkgs, lib, ... }:
 
 let
   stylix = config.lib.stylix.colors.withHashtag;
   betterTransition = "all 0.3s cubic-bezier(.55,-0.68,.48,1.682)";
 
-  isHyprland = osConfig.programs.hyprland.enable or false;
-  isNiri = osConfig.programs.niri.enable or false;
-  isSway = osConfig.programs.sway.enable or false;
+  isHyprland = config.wayland.windowManager.hyprland.enable or false;
+  isSway = config.wayland.windowManager.sway.enable or false;
+  isNiri = builtins.pathExists "${config.xdg.configHome}/niri/config.kdl";
 
   workspacesModule = 
     if isHyprland then "hyprland/workspaces"
@@ -178,18 +172,7 @@ with lib;
           format = "{icon} {capacity}%";
           format-charging = "󰂄 {capacity}%";
           format-plugged = "󱘖 {capacity}%";
-          format-icons = [
-            "󰁺"
-            "󰁻"
-            "󰁼"
-            "󰁽"
-            "󰁾"
-            "󰁿"
-            "󰂀"
-            "󰂁"
-            "󰂂"
-            "󰁹"
-          ];
+          format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
         };
       }
     ];
