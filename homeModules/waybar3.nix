@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
-
 let
   stylix = config.lib.stylix.colors.withHashtag;
+  betterTransition = "all 0.3s cubic-bezier(.55,-0.68,.48,1.682)";
   
   isHyprland = config.wayland.windowManager.hyprland.enable or false;
   isSway = config.wayland.windowManager.sway.enable or false;
@@ -11,6 +11,12 @@ let
     if isHyprland then "hyprland/workspaces"
     else if isSway then "sway/workspaces"
     else if isNiri then "niri/workspaces"
+    else null;
+    
+  windowModule = 
+    if isHyprland then "hyprland/window"
+    else if isSway then "sway/window"
+    else if isNiri then "niri/window"
     else null;
 in
 with lib;
@@ -28,21 +34,22 @@ with lib;
         margin-left = 10;
         margin-right = 10;
         
-        modules-left = [
-          "hyprland/workspaces"
-          "hyprland/window"
-        ];
+        modules-left = 
+          (mkIf (workspacesModule != null) [ workspacesModule ]) ++
+          (mkIf (windowModule != null) [ windowModule ]);
+          
         modules-center = [
           "clock"
         ];
+        
         modules-right = [
           "pulseaudio"
           "battery"
           "custom/notification"
           "tray"
         ];
-
-        "hyprland/workspaces" = {
+        
+        "hyprland/workspaces" = mkIf isHyprland {
           format = "{icon}";
           on-click = "activate";
           format-icons = {
@@ -63,13 +70,65 @@ with lib;
             "*" = 5;
           };
         };
+        
+        "sway/workspaces" = mkIf isSway {
+          format = "{icon}";
+          format-icons = {
+            "1" = "󰲠";
+            "2" = "󰲢";
+            "3" = "󰲤";
+            "4" = "󰲦";
+            "5" = "󰲨";
+            "6" = "󰲪";
+            "7" = "󰲬";
+            "8" = "󰲮";
+            "9" = "󰲰";
+            default = "○";
+            focused = "●";
+            urgent = "󰀧";
+          };
+          persistent-workspaces = {
+            "1" = [];
+            "2" = [];
+            "3" = [];
+            "4" = [];
+            "5" = [];
+          };
+        };
 
-        "hyprland/window" = {
+        "niri/workspaces" = mkIf isNiri {
+          format = "{icon}";
+          format-icons = {
+            "1" = "󰲠";
+            "2" = "󰲢";
+            "3" = "󰲤";
+            "4" = "󰲦";
+            "5" = "󰲨";
+            "6" = "󰲪";
+            "7" = "󰲬";
+            "8" = "󰲮";
+            "9" = "󰲰";
+            default = "○";
+            active = "●";
+          };
+        };
+
+        "hyprland/window" = mkIf isHyprland {
           format = "{title}";
           max-length = 60;
           separate-outputs = true;
         };
-
+        
+        "sway/window" = mkIf isSway {
+          format = "{title}";
+          max-length = 60;
+        };
+        
+        "niri/window" = mkIf isNiri {
+          format = "{title}";
+          max-length = 60;
+        };
+        
         clock = {
           interval = 1;
           format = "{:%H:%M}";
@@ -89,7 +148,7 @@ with lib;
             };
           };
         };
-
+        
         pulseaudio = {
           format = "<span size='x-large'>{icon}</span> <span size='medium'>{volume}%</span>";
           format-bluetooth = "<span size='x-large'>󰂯</span> <span size='medium'>{volume}%</span>";
@@ -109,7 +168,7 @@ with lib;
           on-click = "pavucontrol";
           on-click-right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
         };
-
+        
         battery = {
           interval = 10;
           states = {
@@ -123,7 +182,7 @@ with lib;
           format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
           tooltip-format = "{time}";
         };
-
+        
         "custom/notification" = {
           tooltip = false;
           format = "<span size='x-large'>{icon}</span> <span size='medium'>{}</span>";
@@ -143,7 +202,7 @@ with lib;
           on-click = "swaync-client -t";
           escape = true;
         };
-
+        
         tray = {
           icon-size = 16;
           spacing = 8;
@@ -161,7 +220,7 @@ with lib;
         padding: 0;
         margin: 0;
       }
-
+ 
       window#waybar {
         background: transparent;
         color: ${stylix.base05};
@@ -196,7 +255,8 @@ with lib;
         font-size: 2.5rem;
       }
 
-      #workspaces button.active {
+      #workspaces button.active,
+      #workspaces button.focused {
         color: ${stylix.base0D};
         background: ${stylix.base02};
       }

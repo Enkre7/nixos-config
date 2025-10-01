@@ -13,33 +13,6 @@ let
     else if isSway then "sway/workspaces"
     else if isNiri then "niri/workspaces"
     else "hyprland/workspaces";
-    
-  workspacesConfig = 
-    if isHyprland then {
-      format = "{name}";
-      format-icons = {
-        default = " ";
-        active = " ";
-        urgent = " ";
-      };
-      on-scroll-up = "hyprctl dispatch workspace e+1";
-      on-scroll-down = "hyprctl dispatch workspace e-1";
-    }
-    else if isSway then {
-      format = "{name}";
-      format-icons = {
-        default = " ";
-        focused = " ";
-        urgent = " ";
-      };
-    }
-    else if isNiri then {
-      format = "{index}";
-      format-icons = {
-        default = " ";
-        active = " ";
-      };
-    }
     else {};
 in
 with lib;
@@ -51,6 +24,7 @@ with lib;
       {
         layer = "top";
         position = "top";
+
         modules-left = [
           "custom/startmenu"
           "cpu"
@@ -58,14 +32,36 @@ with lib;
           "memory"
           "disk"
         ];
-        modules-center = [ workspacesModule ];
+        modules-left = mkIf (workspacesModule != null) [ workspacesModule ];
         modules-right = [
-          "battery"
           "pulseaudio"
           "custom/notification"
           "tray"
           "clock"
-        ];
+        ];++ optional config.isLaptop "battery";
+
+        "hyprland/workspaces" = mkIf isHyprland {
+          format = "{icon}";
+          persistent-workspaces = {
+            "*" = 3;
+          };
+          on-scroll-up = "hyprctl dispatch workspace e+1";
+          on-scroll-down = "hyprctl dispatch workspace e-1";
+        };
+
+        "sway/workspaces" = mkIf isSway {
+          format = "{icon}";
+          persistent-workspaces = {
+            "*" = 3;
+          };
+        };
+
+        "niri/workspaces" = mkIf isNiri {
+          format = "{icon}";
+          persistent-workspaces = {
+            "*" = 3;
+          };
+        };
 
         "clock" = {
           interval = 1;
@@ -91,26 +87,31 @@ with lib;
           on-scroll-up = "shift_up";
           on-scroll-down = "shift_down";
         };
+
         "cpu" = {
           interval = 5;
           format = " {usage}%";
           on-click = "kitty --class='system-monitor' --hold -e btop";
         };
+
         "temperature" = {
           format = "{temperatureC}°C";
           interval = 2;
         };
+
         "memory" = {
           interval = 5;
           format = " {percentage}%";
           on-click = "kitty --class='system-monitor' --hold -e btop";
         };
+
         "disk" = {
           format = " {percentage_used}%";
           tooltip-format = "{used} / {total}";
           unit = "GB";
           on-click = "kitty --class='disk-monitor' --hold -e bash -c \"duf --sort size && echo -e '\\n---\\n' && lsblk -o NAME,SIZE,FSTYPE,FSUSE%,MOUNTPOINT && echo -e '\\n---\\n' && dust -n 10 /\"";
         };
+
         "custom/notification" = {
           tooltip = false;
           format = "{icon} {}";
@@ -130,10 +131,12 @@ with lib;
           on-click = "swaync-client -t";
           escape = true;
         };
+
         "tray" = {
           icon-size = 21;
           spacing = 12;
         };
+
         "pulseaudio" = {
           format = "{icon} {volume}%";
           format-bluetooth = "{volume}% {icon}";
@@ -157,13 +160,15 @@ with lib;
           on-click-right = "pavucontrol";
           on-click = "pavucontrol";
         };
+
         "custom/startmenu" = {
           tooltip = false;
           format = "";
           on-click = "wlogout";
           on-click-right = "wofi";
         };
-        "battery" = {
+
+        battery = mkIf config.isLaptop {
           interval = 5;
           states = {
             warning = 30;

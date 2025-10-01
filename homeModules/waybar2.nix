@@ -37,8 +37,9 @@ with lib;
           "pulseaudio"
           "cpu"
           "memory"
-        ] ++ optional config.isLaptop "battery"
-          ++ [ "custom/notification" "tray" ];
+          "custom/notification"
+          "tray"
+        ] ++ optional config.isLaptop "battery";
 
         "hyprland/workspaces" = mkIf isHyprland {
           format = "{icon}";
