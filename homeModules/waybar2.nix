@@ -24,22 +24,19 @@ with lib;
         layer = "top";
         position = "top";
         height = 40;
-        spacing = 8;
-        margin-top = 8;
-        margin-left = 12;
-        margin-right = 12;
+        spacing = 6;
+        margin-top = 7;
+        margin-left = 6;
+        margin-right = 6;
         
         modules-left = mkIf (workspacesModule != null) [ workspacesModule ];
-        
         modules-center = [ "clock" ];
-        
         modules-right = [
           "pulseaudio"
           "cpu"
           "memory"
-          "custom/notification"
-          "tray"
-        ] ++ optional config.isLaptop "battery";
+        ] ++ optional config.isLaptop "battery"
+          ++ [ "custom/notification" "tray" ];
 
         "hyprland/workspaces" = mkIf isHyprland {
           format = "{icon}";
@@ -218,10 +215,11 @@ with lib;
       .modules-center,
       .modules-right {
         background: ${stylix.base01};
-        border-radius: 12px;
-        padding: 4px 8px;
+        border-radius: 20px;
+        padding: 0 6px;
         margin: 0 4px;
       }
+
 
       .modules-left > * { margin: 0 6px; }
       .modules-center > * { margin: 0 6px; }
@@ -230,9 +228,9 @@ with lib;
       #workspaces button {
         color: ${stylix.base04};
         background: transparent;
-        padding: 4px 10px;
+        padding: 5px 10px;
         margin: 0 2px;
-        border-radius: 8px;
+        border-radius: 10px;
         transition: all 0.3s cubic-bezier(0.55, 0.0, 0.28, 1.682);
       }
 
@@ -326,7 +324,7 @@ with lib;
       #clock:hover,
       #custom-notification:hover {
         background: ${stylix.base02};
-        border-radius: 8px;
+        border-radius: 20px;
         transition: all 0.3s ease;
       }
 

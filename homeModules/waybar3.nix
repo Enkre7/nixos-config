@@ -18,6 +18,10 @@ let
     else if isSway then "sway/window"
     else if isNiri then "niri/window"
     else null;
+
+  modulesLeft = 
+    (lib.optional (workspacesModule != null) workspacesModule) ++
+    (lib.optional (windowModule != null) windowModule);
 in
 with lib;
 {
@@ -34,14 +38,10 @@ with lib;
         margin-left = 10;
         margin-right = 10;
         
-        modules-left = 
-          (mkIf (workspacesModule != null) [ workspacesModule ]) ++
-          (mkIf (windowModule != null) [ windowModule ]);
-          
+        modules-left = modulesLeft;
         modules-center = [
           "clock"
         ];
-        
         modules-right = [
           "pulseaudio"
           "battery"
