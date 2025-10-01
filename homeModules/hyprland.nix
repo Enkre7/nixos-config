@@ -155,7 +155,10 @@ in
         "$mainMod, code:14, workspace, 5"
         "$mainMod, code:15, workspace, 6"
         "$mainMod, code:16, workspace, 7"
-        # Move active window to a workspace with mainMod + SHIFT + [0-7]
+        "$mainMod, code:17, workspace, 8"
+        "$mainMod, code:18, workspace, 9"
+        "$mainMod, code:19, workspace, 10"
+        # Move active window to a workspace
         "$mainMod SHIFT, code:10, movetoworkspace, 1"
         "$mainMod SHIFT, code:11, movetoworkspace, 2"
         "$mainMod SHIFT, code:12, movetoworkspace, 3"
@@ -163,6 +166,9 @@ in
         "$mainMod SHIFT, code:14, movetoworkspace, 5"
         "$mainMod SHIFT, code:15, movetoworkspace, 6"
         "$mainMod SHIFT, code:16, movetoworkspace, 7"
+        "$mainMod SHIFT, code:17, movetoworkspace, 8"
+        "$mainMod SHIFT, code:18, movetoworkspace, 9"
+        "$mainMod SHIFT, code:19, movetoworkspace, 10"
         # Example special workspace (scratchpad)
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
