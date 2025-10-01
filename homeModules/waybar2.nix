@@ -204,6 +204,7 @@ with lib;
         font-weight: 600;
         border: none;
         border-radius: 0;
+        background: transparent;
         min-height: 0;
       }
 
@@ -220,7 +221,7 @@ with lib;
         margin: 0 4px;
       }
 
-
+      .modules-left { padding: 0 2px; }
       .modules-left > * { margin: 0 6px; }
       .modules-center > * { margin: 0 6px; }
       .modules-right > * { margin: 0 6px; }

@@ -42,7 +42,7 @@
     flakePath = "/persist/system/nixos";
     dotfilesPath = "${config.flakePath}/dotfiles";
     wallpaper = "${config.dotfilesPath}/wallpapers/nord-light-mountains.png"; # only png
-    styleTheme = "nord-light";
+    styleTheme = "nord-light"; 
     stylePolarity = "light";
     gitUsername = "Enkre7";
     gitEmail = "victor.mairot@proton.me";

@@ -187,12 +187,15 @@ with lib;
           font-size: 0.8rem;
           border-radius: 0px;
           border: none;
+          background: none;
           font-family: ${config.stylix.fonts.monospace.name};
           min-height: 0px;
         }
+
         window#waybar {
-          background-color: transparent;
+          background: transparent;
         }
+
         #workspaces {
           color: ${stylix.base00};
           background: ${stylix.base01};
@@ -200,6 +203,7 @@ with lib;
           padding: 8px 5px;
           border-radius: 16px;
         }
+
         #workspaces button {
           font-weight: bold;
           padding: 0px 5px;
@@ -211,6 +215,7 @@ with lib;
           opacity: 0.5;
           transition: ${betterTransition};
         }
+
         #workspaces button.active {
           font-weight: bold;
           padding: 0px 5px;
@@ -223,6 +228,7 @@ with lib;
           opacity: 1.0;
           min-width: 40px;
         }
+
         #workspaces button.focused {
           font-weight: bold;
           padding: 0px 5px;
@@ -235,6 +241,7 @@ with lib;
           opacity: 1.0;
           min-width: 40px;
         }
+
         #workspaces button:hover {
           font-weight: bold;
           padding: 0px 5px;
@@ -246,14 +253,17 @@ with lib;
           opacity: 0.8;
           transition: ${betterTransition};
         }
+
         #workspaces button.active:hover,
         #workspaces button.focused:hover {
           background: ${stylix.base05};
         }
+
         #workspaces button.urgent {
           background: ${stylix.base08};
           opacity: 1.0;
         }
+
         @keyframes gradient_horizontal {
           0% {
             background-position: 0% 50%;
@@ -265,6 +275,7 @@ with lib;
             background-position: 0% 50%;
           }
         }
+
         @keyframes swiping {
           0% {
             background-position: 0% 200%;
@@ -273,14 +284,17 @@ with lib;
             background-position: 200% 200%;
           }
         }
+
         tooltip {
           background: ${stylix.base00};
           border: 1px solid ${stylix.base0D};
           border-radius: 12px;
         }
+
         tooltip label {
           color: ${stylix.base07};
         }
+
         #cpu, #temperature,  #memory, #disk {
           font-weight: bold;
           margin: 4px 0px;
@@ -290,6 +304,7 @@ with lib;
           background: ${stylix.base01};
           border-radius: 24px 10px 24px 10px;
         }
+
         #custom-startmenu {
           color: ${stylix.base0D};
           background: ${stylix.base01};
@@ -298,6 +313,7 @@ with lib;
           padding: 0px 25px 0px 15px;
           border-radius: 0px 0px 40px 0px;
         }
+
         #battery, #pulseaudio, #tray, #custom-notification {
           font-weight: bold;
           background: ${stylix.base01};
@@ -307,6 +323,7 @@ with lib;
           border-radius: 10px 24px 10px 24px;
           padding: 0px 18px;
         }
+
         #clock {
           font-weight: bold;
           color: ${stylix.base00};

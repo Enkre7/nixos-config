@@ -260,6 +260,11 @@ in
         "pin, class:(Mullvad VPN)"
         "rounding 10, class:(Mullvad VPN)"
 
+        # Proton VPN
+        "pin, title:(Proton VPN)"
+        "size 403 600, title:(Proton VPN)"
+        "center, title:(Proton VPN)"
+
         # Firefox browsers
         "float, title:^(Incrustation vidéo)$"
         "pin, title:^(Incrustation vidéo)$"
