@@ -217,11 +217,10 @@ with lib;
       .modules-right {
         background: ${stylix.base01};
         border-radius: 20px;
-        padding: 0 6px;
+        padding: 0 8px;
         margin: 0 4px;
       }
 
-      .modules-left { padding: 0 2px; }
       .modules-left > * { margin: 0 6px; }
       .modules-center > * { margin: 0 6px; }
       .modules-right > * { margin: 0 6px; }
@@ -231,7 +230,7 @@ with lib;
         background: transparent;
         padding: 5px 10px;
         margin: 0 2px;
-        border-radius: 10px;
+        border-radius: 16px;
         transition: all 0.3s cubic-bezier(0.55, 0.0, 0.28, 1.682);
       }
 

@@ -41,6 +41,7 @@
     #../../configModules/chromium.nix
     ../../configModules/games.nix
     #../../configModules/adb.nix
+    ../../configModules/lamp.nix
 ];
 
   home-manager = {
