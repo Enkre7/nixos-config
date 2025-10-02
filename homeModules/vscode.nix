@@ -4,7 +4,7 @@
   stylix.targets.vscode.profileNames = [ "${config.user}" ];
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium;
+    package = pkgs.vscodium; #pkgs.vscode;
     profiles.default.extensions = with pkgs.vscode-extensions; [
       ms-vscode.cpptools-extension-pack
       esbenp.prettier-vscode
@@ -18,17 +18,18 @@
       redhat.vscode-yaml
       redhat.vscode-xml
       zainchen.json
-      redhat.ansible
+      #redhat.ansible
       pkief.material-icon-theme
       ms-vscode.powershell
       ms-vscode-remote.remote-containers
       #ms-python.python
-      ms-kubernetes-tools.vscode-kubernetes-tools
+      #ms-kubernetes-tools.vscode-kubernetes-tools
       eamodio.gitlens
       yzhang.markdown-all-in-one
       james-yu.latex-workshop
       streetsidesoftware.code-spell-checker
       ritwickdey.liveserver
+      github.codespaces
     ];
     profiles.default.userSettings = {
       # Interface and appearance - automatic adaptation to system preferences
@@ -59,10 +60,14 @@
       "editor.suggestSelection" = "first";
       "editor.inlineSuggest.enabled" = true;
       
-      # Your custom settings
+      # Other settings
       "redhat.telemetry.enabled" = false;
       "files.autoSave" = "off";
       "cSpell.language" = "en;fr";
+      
+      # Security 
+      "security.allowedUNCHosts" = [];
+      "git.terminalAuthentication" = true;
       
       # Nix configuration
       "nix.serverPath" = "nixd";
@@ -146,6 +151,10 @@
     "text/x-nix" = "codium.desktop";
     "application/xhtml+xml" = "codium.desktop";
     "application/x-sh" = "codium.desktop";
+  };
+
+  home.sessionVariables = {
+    GNOME_KEYRING_CONTROL = "/run/user/1000/keyring";
   };
 }
 

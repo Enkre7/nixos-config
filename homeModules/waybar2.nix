@@ -229,8 +229,8 @@ with lib;
         color: ${stylix.base04};
         background: transparent;
         padding: 5px 10px;
-        margin: 0 2px;
-        border-radius: 16px;
+        margin: 0 4px;
+        border-radius: 20px;
         transition: all 0.3s cubic-bezier(0.55, 0.0, 0.28, 1.682);
       }
 

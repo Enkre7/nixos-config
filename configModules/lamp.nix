@@ -1,12 +1,11 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Services web - Apache et Nginx
+  # Apache
   services.httpd = {
     enable = true;
     enablePHP = true;
     phpPackage = pkgs.php82;
-    
     adminAddr = "admin@localhost";
     
     virtualHosts."localhost" = {
@@ -24,29 +23,18 @@
         </Directory>
       '';
       
-      # Configuration SSL auto-signée
-      sslServerCert = "/var/lib/acme/localhost/cert.pem";
-      sslServerKey = "/var/lib/acme/localhost/key.pem";
+      sslServerCert = "/var/lib/ssl-certs/localhost.crt";
+      sslServerKey = "/var/lib/ssl-certs/localhost.key";
     };
     
-    extraModules = [
-      "rewrite"
-      "ssl"
-      "proxy"
-      "proxy_http"
-      "proxy_fcgi"
-    ];
+    extraModules = [ "rewrite" "ssl" "proxy" "proxy_http" "proxy_fcgi" ];
   };
 
-  # Nginx en parallèle sur le port 8080
+  # Nginx
   services.nginx = {
     enable = true;
-    
     virtualHosts."localhost-nginx" = {
-      listen = [
-        { addr = "0.0.0.0"; port = 8080; }
-      ];
-      
+      listen = [ { addr = "0.0.0.0"; port = 8080; } ];
       root = "/home/${config.user}/www";
       
       locations."~ \\.php$" = {
@@ -64,12 +52,11 @@
     };
   };
 
-  # PHP-FPM pour Nginx
+  # PHP-FPM
   services.phpfpm.pools.www = {
     user = config.user;
     group = "users";
     phpPackage = pkgs.php82;
-    
     settings = {
       "listen.owner" = config.services.nginx.user;
       "pm" = "dynamic";
@@ -81,189 +68,69 @@
     };
   };
 
-  # MySQL 5.7
+  # MySQL
   services.mysql = {
     enable = true;
-    package = pkgs.mysql57;
-    
-    settings = {
-      mysqld = {
-        port = 3306;
-        bind-address = "127.0.0.1";
-        max_connections = 200;
-        # Configuration optimisée pour le développement
-        innodb_buffer_pool_size = "256M";
-        key_buffer_size = "32M";
-      };
+    package = pkgs.mysql80;
+    settings.mysqld = {
+      port = 3306;
+      bind-address = "127.0.0.1";
+      max_connections = 200;
+      innodb_buffer_pool_size = "256M";
+      key_buffer_size = "32M";
     };
-    
-    ensureDatabases = [ "laragon" ];
-    ensureUsers = [
-      {
-        name = config.user;
-        ensurePermissions = {
-          "*.*" = "ALL PRIVILEGES";
-        };
-      }
-    ];
+    ensureDatabases = [ "lamp" ];
+    ensureUsers = [{
+      name = config.user;
+      ensurePermissions = { "*.*" = "ALL PRIVILEGES"; };
+    }];
   };
 
-  # PHP 8.2 et PHP 7.4
+  # Packages
   environment.systemPackages = with pkgs; [
-    # PHP 8.2 (par défaut)
-    php82
-    php82Packages.composer
-    
-    # PHP 7.4 (alternatif)
-    php74
-    php74Packages.composer
-    
-    # PHPMyAdmin
-    phpmyadmin
-    
-    # HeidiSQL équivalent (DBeaver est un excellent client SQL multiplateforme)
-    dbeaver-bin
-    
-    # Outils utiles pour le développement web
-    nodejs_20
-    nodePackages.npm
-    git
-    
-    # Certificats SSL auto-signés
-    openssl
-    
-    # Outils de monitoring
-    htop
-    nettools
+    php82 php82Packages.composer
+    php81 php81Packages.composer
+    php83 php83Packages.composer
+    dbeaver-bin nodejs_20 nodePackages.npm
+    git openssl htop nettools
   ];
 
-  # Configuration PHP 8.2
-  environment.etc."php82/php.ini".text = ''
-    max_execution_time = 300
-    memory_limit = 512M
-    post_max_size = 100M
-    upload_max_filesize = 100M
-    date.timezone = Europe/Paris
-    
-    ; Extensions courantes
-    extension=mysqli
-    extension=pdo_mysql
-    extension=gd
-    extension=curl
-    extension=mbstring
-    extension=zip
-    extension=xml
-    extension=intl
-  '';
-
-  # Configuration PHP 7.4
-  environment.etc."php74/php.ini".text = ''
-    max_execution_time = 300
-    memory_limit = 512M
-    post_max_size = 100M
-    upload_max_filesize = 100M
-    date.timezone = Europe/Paris
-    
-    extension=mysqli
-    extension=pdo_mysql
-    extension=gd
-    extension=curl
-    extension=mbstring
-    extension=zip
-    extension=xml
-  '';
-
-  # Créer le répertoire www automatiquement
+  # Certificats SSL
   systemd.tmpfiles.rules = [
     "d /home/${config.user}/www 0755 ${config.user} users -"
     "f /home/${config.user}/www/index.php 0644 ${config.user} users - <?php phpinfo(); ?>"
+    "d /var/lib/ssl-certs 0755 root root -"
   ];
 
-  # Génération de certificat SSL auto-signé
-  security.acme.certs."localhost" = {
-    domain = "localhost";
-    email = config.gitEmail;
-    webroot = "/home/${config.user}/www";
-    postRun = "systemctl reload httpd";
+  systemd.services.generate-ssl-cert = {
+    description = "Generate SSL certificate";
+    wantedBy = [ "multi-user.target" ];
+    before = [ "httpd.service" ];
+    serviceConfig = { Type = "oneshot"; RemainAfterExit = true; };
+    script = ''
+      if [ ! -f /var/lib/ssl-certs/localhost.crt ]; then
+        ${pkgs.openssl}/bin/openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+          -keyout /var/lib/ssl-certs/localhost.key \
+          -out /var/lib/ssl-certs/localhost.crt \
+          -subj "/C=FR/ST=France/L=Paris/O=Development/CN=localhost"
+        chmod 600 /var/lib/ssl-certs/localhost.key
+        chmod 644 /var/lib/ssl-certs/localhost.crt
+      fi
+    '';
   };
 
-  # Ouvrir les ports du firewall
+  # Firewall
   networking.firewall.allowedTCPPorts = [ 80 443 3306 8080 ];
 
-  # Alias shell pratiques
+  # Aliases
   environment.shellAliases = {
-    # Gestion des services
-    laragon-start = "sudo systemctl start httpd nginx mysql phpfpm-www";
-    laragon-stop = "sudo systemctl stop httpd nginx mysql phpfpm-www";
-    laragon-restart = "sudo systemctl restart httpd nginx mysql phpfpm-www";
-    laragon-status = "sudo systemctl status httpd nginx mysql phpfpm-www";
-    
-    # Logs
-    laragon-logs-apache = "sudo journalctl -u httpd -f";
-    laragon-logs-nginx = "sudo journalctl -u nginx -f";
-    laragon-logs-mysql = "sudo journalctl -u mysql -f";
-    
-    # Basculer entre PHP 7.4 et 8.2
-    php74-switch = "sudo systemctl stop phpfpm-www && export PATH=${pkgs.php74}/bin:$PATH";
-    php82-switch = "sudo systemctl stop phpfpm-www && export PATH=${pkgs.php82}/bin:$PATH";
-    
-    # Outils pratiques
-    mysql-console = "mysql -u ${config.user} -p";
-    phpmyadmin-url = "echo 'http://localhost/phpmyadmin'";
+    lamp-start = "sudo systemctl start httpd nginx mysql phpfpm-www";
+    lamp-stop = "sudo systemctl stop httpd nginx mysql phpfpm-www";
+    lamp-restart = "sudo systemctl restart httpd nginx mysql phpfpm-www";
+    lamp-status = "sudo systemctl status httpd nginx mysql phpfpm-www";
   };
 
-  # Script de démarrage pratique
-  environment.systemPackages = [
-    (pkgs.writeScriptBin "laragon-info" ''
-      #!${pkgs.bash}/bin/bash
-      echo "╔═══════════════════════════════════════╗"
-      echo "║   Laragon-like Environment Info       ║"
-      echo "╚═══════════════════════════════════════╝"
-      echo ""
-      echo "📁 Web Root: /home/${config.user}/www"
-      echo ""
-      echo "🌐 Web Servers:"
-      echo "   • Apache: http://localhost (port 80)"
-      echo "   • Apache SSL: https://localhost (port 443)"
-      echo "   • Nginx: http://localhost:8080"
-      echo ""
-      echo "🗄️  Database:"
-      echo "   • MySQL 5.7: localhost:3306"
-      echo "   • User: ${config.user}"
-      echo ""
-      echo "🐘 PHP Versions:"
-      echo "   • Active: $(php -v | head -n1)"
-      echo "   • Available: PHP 7.4, PHP 8.2"
-      echo ""
-      echo "🛠️  Tools:"
-      echo "   • PHPMyAdmin: http://localhost/phpmyadmin"
-      echo "   • DBeaver: launch with 'dbeaver'"
-      echo ""
-      echo "📋 Quick Commands:"
-      echo "   • laragon-start    : Start all services"
-      echo "   • laragon-stop     : Stop all services"
-      echo "   • laragon-restart  : Restart all services"
-      echo "   • laragon-status   : Check services status"
-      echo ""
-    '')
-  ];
-
-  # Configuration de PHPMyAdmin
-  services.httpd.virtualHosts."localhost".extraConfig = lib.mkAfter ''
-    Alias /phpmyadmin ${pkgs.phpmyadmin}/share/phpmyadmin
-    
-    <Directory ${pkgs.phpmyadmin}/share/phpmyadmin>
-      DirectoryIndex index.php
-      AllowOverride All
-      Require all granted
-      
-      <FilesMatch \.php$>
-        SetHandler "proxy:unix:${config.services.phpfpm.pools.www.socket}|fcgi://localhost"
-      </FilesMatch>
-    </Directory>
-  '';
-
-  # Assurer que tous les services démarrent au boot
+  # Auto-start
   systemd.services.httpd.wantedBy = lib.mkForce [ "multi-user.target" ];
   systemd.services.nginx.wantedBy = lib.mkForce [ "multi-user.target" ];
   systemd.services.mysql.wantedBy = lib.mkForce [ "multi-user.target" ];
