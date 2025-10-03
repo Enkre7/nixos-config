@@ -12,7 +12,6 @@ let
     if isHyprland then "hyprland/workspaces"
     else if isSway then "sway/workspaces"
     else if isNiri then "niri/workspaces"
-    else "hyprland/workspaces";
     else {};
 in
 with lib;
