@@ -31,13 +31,13 @@ with lib;
           "memory"
           "disk"
         ];
-        modules-left = mkIf (workspacesModule != null) [ workspacesModule ];
+        modules-center = mkIf (workspacesModule != null) [ workspacesModule ];
         modules-right = [
           "pulseaudio"
           "custom/notification"
           "tray"
           "clock"
-        ];++ optional config.isLaptop "battery";
+        ] ++ optional config.isLaptop "battery";
 
         "hyprland/workspaces" = mkIf isHyprland {
           format = "{icon}";
@@ -284,10 +284,13 @@ with lib;
           }
         }
 
+	menu,
         tooltip {
           background: ${stylix.base00};
-          border: 1px solid ${stylix.base0D};
-          border-radius: 12px;
+          border: 2px solid ${stylix.base03};
+          border-radius: 8px;
+	  opacity: 1;
+          padding: 8px;
         }
 
         tooltip label {
@@ -307,7 +310,7 @@ with lib;
         #custom-startmenu {
           color: ${stylix.base0D};
           background: ${stylix.base01};
-          font-size: 33px;
+	  font-size: 30px;
           margin: 0px;
           padding: 0px 25px 0px 15px;
           border-radius: 0px 0px 40px 0px;
