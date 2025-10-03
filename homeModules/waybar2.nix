@@ -328,10 +328,12 @@ with lib;
         transition: all 0.3s ease;
       }
 
+      menu,
       tooltip {
         background: ${stylix.base00};
-        border: 1px solid ${stylix.base03};
+        border: 2px solid ${stylix.base03};
         border-radius: 8px;
+        opacity: 1;
         padding: 8px;
       }
 
