@@ -41,25 +41,16 @@ with lib;
 
         "hyprland/workspaces" = mkIf isHyprland {
           format = "{icon}";
-          persistent-workspaces = {
-            "*" = 3;
-          };
           on-scroll-up = "hyprctl dispatch workspace e+1";
           on-scroll-down = "hyprctl dispatch workspace e-1";
         };
 
         "sway/workspaces" = mkIf isSway {
           format = "{icon}";
-          persistent-workspaces = {
-            "*" = 3;
-          };
         };
 
         "niri/workspaces" = mkIf isNiri {
           format = "{icon}";
-          persistent-workspaces = {
-            "*" = 3;
-          };
         };
 
         "clock" = {
