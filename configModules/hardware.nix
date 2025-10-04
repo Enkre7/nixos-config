@@ -20,8 +20,7 @@
   # Bios upgrade
   services.fwupd.enable = true;
  
-  hardware.enableAllHardware = true;
-  hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
 
   # For Nvidia
   hardware.nvidia.open = true;

@@ -3,12 +3,32 @@
 {
   networking = {
     hostName = config.hostname;
+
+    useDHCP = lib.mkDefault true;
+    wireless.enable = lib.mkForce false;
+
     networkmanager = {
       enable = true;
-      wifi.powersave = false;
+      dns = "systemd-resolved";
+      wifi = {
+        powersave = false;
+        backend = "iwd";
+        macAddress = "stable";
+      };
     };
-    useDHCP = lib.mkDefault true;
+
+    wireless.iwd = {
+      enable = true;
+      settings = {
+        General = {
+          EnableNetworkConfiguration = false;
+          AddressRandomization = "once";
+        };
+        Settings.AutoConnect = true;
+      };
+    };
   };
+  services.resolved.enable = true;
 
   # Network discovery
   services.avahi = {
@@ -90,5 +110,7 @@
     netcat
     networkmanagerapplet
     lsof
+    iw
+    wavemon
   ];
 }
