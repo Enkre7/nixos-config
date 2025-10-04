@@ -13,9 +13,8 @@
     #../../homeModules/niri.nix
     ../../homeModules/hyprlock.nix
     ../../homeModules/waybar.nix
+    ../../homeModules/wlogout.nix
     ../../homeModules/wofi.nix
-    #../../homeModules/wlogout.nix
-    ../../homeModules/wleave.nix
     ../../homeModules/swaync.nix
     ../../homeModules/light.nix
   # Terminal & Shell
