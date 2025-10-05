@@ -23,7 +23,7 @@ in
       matching = "fuzzy";
       filter_rate = 100;
       allow_markup = true;
-      sort_order = "alphabetical";
+      sort_order = "default";
     };
     
     style = ''
