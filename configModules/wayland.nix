@@ -11,6 +11,8 @@
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     SDL_VIDEODRIVER = "wayland,x11";
     CLUTTER_BACKEND = "wayland";
+    GDK_BACKEND = "wayland,x11";
+    GSK_RENDERER = "vulkan";
   };
 
   xdg.portal = {

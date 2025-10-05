@@ -12,7 +12,7 @@ in
       allow_images = true;
       image_size = 32;
       insensitive = true;
-      hide_scroll = true;
+      hide_scroll = false;
       no_actions = true;
       width = "35%";
       height = "45%";
@@ -28,6 +28,8 @@ in
     
     style = ''
       * {
+        background: none;
+        border: none;
         color: ${stylix.base05};
         font-family: "JetbrainsMono Nerd Font Mono";
         font-size: 14px;
@@ -39,9 +41,10 @@ in
         padding: 0px;
         background-color: ${stylix.base00};
         border-radius: 20px;
-        border: 2px solid ${stylix.base0D};
+        border: 3px solid ${stylix.base0D};
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
         animation: fadeIn 0.2s ease-in-out;
+        overflow: hidden;
       }
 
       @keyframes fadeIn {
@@ -58,7 +61,7 @@ in
       #input {
         margin: 12px;
         padding: 12px 18px;
-        border: 2px solid ${stylix.base03};
+        border: 2px solid ${stylix.base0D};
         background-color: ${stylix.base01};
         border-radius: 15px;
         color: ${stylix.base05};
@@ -84,6 +87,7 @@ in
         padding: 0px;
         border: none;
         background-color: transparent;
+        border-radius: 20px;
       }
 
       #scroll {
@@ -144,7 +148,6 @@ in
         background-color: ${stylix.base00}20;
       }
 
-      /* Responsive adjustments */
       @media (max-width: 1920px) {
         window {
           width: 40%;

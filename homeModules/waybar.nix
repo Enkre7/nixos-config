@@ -154,7 +154,7 @@ with lib;
         "custom/startmenu" = {
           tooltip = false;
           format = "";
-          on-click = "wlogout";
+          on-click = "wlogout-wrapper";
           on-click-right = "wofi";
         };
 
