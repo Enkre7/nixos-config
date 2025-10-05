@@ -65,6 +65,6 @@
   boot.initrd.kernelModules = [ "dm-snapshot" ];
 
   environment.sessionVariables = {
-    STEAM_FORCE_DESKTOPUI_SCALING = "1.333333";
+    STEAM_FORCE_DESKTOPUI_SCALING = "1.3334";
   };
 }
