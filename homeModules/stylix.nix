@@ -4,6 +4,7 @@
   stylix.targets.kde.useWallpaper = false;
   stylix.targets.wofi.enable = false; 
   stylix.targets.hyprlock.enable = false;
+  stylix.targets.waybar.addCss = false;
   stylix.iconTheme = {
     enable = true;
     package = pkgs.papirus-icon-theme;

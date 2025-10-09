@@ -12,7 +12,7 @@ in
       allow_images = true;
       image_size = 32;
       insensitive = true;
-      hide_scroll = false;
+      hide_scroll = true;
       no_actions = true;
       width = "35%";
       height = "45%";
@@ -31,7 +31,7 @@ in
         background: none;
         border: none;
         color: ${stylix.base05};
-        font-family: "JetbrainsMono Nerd Font Mono";
+        font-family: ${config.stylix.fonts.monospace.name};
         font-size: 14px;
         font-weight: 500;
       }

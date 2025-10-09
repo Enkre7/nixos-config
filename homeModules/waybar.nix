@@ -27,7 +27,6 @@ with lib;
         modules-left = [
           "custom/startmenu"
           "cpu"
-          "temperature"
           "memory"
           "disk"
         ];
@@ -82,11 +81,6 @@ with lib;
           interval = 5;
           format = " {usage}%";
           on-click = "kitty --class='system-monitor' --hold -e btop";
-        };
-
-        "temperature" = {
-          format = "{temperatureC}°C";
-          interval = 2;
         };
 
         "memory" = {
@@ -178,7 +172,6 @@ with lib;
           border-radius: 0px;
           border: none;
           background: none;
-          font-family: ${config.stylix.fonts.monospace.name};
           min-height: 0px;
         }
 
@@ -288,7 +281,7 @@ with lib;
           color: ${stylix.base07};
         }
 
-        #cpu, #temperature,  #memory, #disk {
+        #cpu, #memory, #disk {
           font-weight: bold;
           margin: 4px 0px;
           margin-left: 7px;
