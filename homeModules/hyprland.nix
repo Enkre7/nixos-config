@@ -56,11 +56,13 @@ in
       "$browser" = "firefox";
       "$browserPrivate" = "firefox --private-window";
       "$termFileManager" = "lf";
-      "$menu" = "pgrep wofi >/dev/null 2>&1 && killall wofi || wofi --location=top -y 15";
+      #"$menu" = "pgrep wofi >/dev/null 2>&1 && killall wofi || wofi --location=top -y 15";
+      "$menu" = "rofi-launcher";
       "$systman" = "btop";
       "$screenshot" = "grim -g \"$(slurp)\" - | swappy -f -";
       "$clipboard" = "cliphist list | wofi --dmenu | cliphist decode | wl-copy";
-      "$powermanager" = "wlogout-wrapper";
+      #"$powermenu" = "wlogout-wrapper";
+      "$powermenu" = "rofi-powermenu";
       "$lockscreen" = "hyprlock";
 
       exec-once = ''${startupScript}/bin/start'';
@@ -130,7 +132,7 @@ in
       };
 
       bind = [
-        "$mainMod, A, exec, $powermanager"
+        "$mainMod, A, exec, $powermenu"
         "$mainMod, Q, exec, $terminal"
         "$mainMod, C, killactive,"
         "$mainMod, E, exec, $terminal -e $systman"
