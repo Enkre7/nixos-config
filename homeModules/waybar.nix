@@ -149,8 +149,8 @@ with lib;
         "custom/startmenu" = {
           tooltip = false;
           format = "";
-          on-click = "wlogout-wrapper";
-          on-click-right = "wofi";
+          on-click = "rofi-powermenu";
+          on-click-right = "rofi-launcher";
         };
 
         battery = mkIf config.isLaptop {

@@ -73,11 +73,14 @@ in
       location = 0;
       disable-history = false;
       hide-scrollbar = true;
-      display-drun = "   Apps ";
-      display-run = "   Run ";
-      display-filebrowser = "   File ";
-      display-window = " 﩯  Window";
+      display-drun = " Apps";
+      display-run = "  Run";
+      display-filebrowser = " Files";
+      display-window = " Windows";
       sidebar-mode = true;
+      sorting-method = "fzf";
+      matching = "fuzzy";
+      sort = true;
     };
     
     theme = let
@@ -92,8 +95,7 @@ in
         fg-col = mkLiteral "#${stylix.base05}";
         fg-col2 = mkLiteral "#${stylix.base08}";
         grey = mkLiteral "#${stylix.base03}";
-        width = 600;
-        font = "${config.stylix.fonts.monospace.name} 14";
+        font = "${config.stylix.fonts.monospace.name} 11";
       };
 
       "element-text, element-icon, mode-switcher" = {
@@ -102,60 +104,89 @@ in
       };
 
       window = {
-        height = mkLiteral "360px";
+        transparency = "real";
+        location = mkLiteral "north";
+        anchor = mkLiteral "north";
+        fullscreen = false;
+        width = mkLiteral "37.5%";
+        y-offset = mkLiteral "10px";
         border = mkLiteral "3px";
         border-color = mkLiteral "@border-col";
         background-color = mkLiteral "@bg-col";
-        border-radius = mkLiteral "20px";
+        border-radius = mkLiteral "12px";
       };
 
       mainbox = {
         background-color = mkLiteral "@bg-col";
+        padding = mkLiteral "20px";
+        spacing = mkLiteral "10px";
       };
 
       inputbar = {
         children = mkLiteral "[prompt,entry]";
         background-color = mkLiteral "@bg-col-light";
-        border-radius = mkLiteral "15px";
+        border-radius = mkLiteral "10px";
         padding = mkLiteral "8px 12px";
-        margin = mkLiteral "12px";
+        spacing = mkLiteral "8px";
       };
 
       prompt = {
         background-color = mkLiteral "transparent";
         text-color = mkLiteral "@blue";
-        padding = mkLiteral "6px 10px 6px 10px";
-        font = "${config.stylix.fonts.monospace.name} Bold 16";
+        padding = mkLiteral "4px 8px";
+        font = "${config.stylix.fonts.monospace.name} Bold 12";
       };
 
       entry = {
-        padding = mkLiteral "6px";
+        padding = mkLiteral "4px";
         background-color = mkLiteral "transparent";
         text-color = mkLiteral "@fg-col";
         placeholder = "Search...";
         placeholder-color = mkLiteral "@grey";
       };
 
+      message = {
+        margin = mkLiteral "0px";
+        padding = mkLiteral "8px";
+        background-color = mkLiteral "@bg-col-light";
+        border-radius = mkLiteral "8px";
+      };
+
+      textbox = {
+        padding = mkLiteral "4px";
+        text-color = mkLiteral "@fg-col";
+        background-color = mkLiteral "transparent";
+      };
+
       listview = {
-        border = mkLiteral "0px 0px 0px";
-        padding = mkLiteral "6px 0px 0px";
-        margin = mkLiteral "10px 12px 10px 12px";
+        border = mkLiteral "0px";
+        padding = mkLiteral "4px 0px";
         columns = 2;
-        lines = 5;
-        background-color = mkLiteral "@bg-col";
+        lines = 9;
+        background-color = mkLiteral "transparent";
         spacing = mkLiteral "4px";
+        cycle = true;
+        dynamic = true;
+        layout = mkLiteral "vertical";
       };
 
       element = {
-        padding = mkLiteral "8px 10px";
+        padding = mkLiteral "6px 8px";
         background-color = mkLiteral "transparent";
         text-color = mkLiteral "@fg-col";
-        border-radius = mkLiteral "12px";
+        border-radius = mkLiteral "8px";
+        spacing = mkLiteral "8px";
       };
 
       "element-icon" = {
-        size = mkLiteral "28px";
-        margin = mkLiteral "0 8px 0 0";
+        size = mkLiteral "24px";
+        background-color = mkLiteral "transparent";
+      };
+
+      "element-text" = {
+        background-color = mkLiteral "transparent";
+        text-color = mkLiteral "inherit";
+        vertical-align = mkLiteral "0.5";
       };
 
       "element selected" = {
@@ -163,38 +194,27 @@ in
         text-color = mkLiteral "@bg-col";
       };
 
+      "element alternate.normal" = {
+        background-color = mkLiteral "transparent";
+      };
+
       mode-switcher = {
-        spacing = 0;
-        margin = mkLiteral "10px 12px 12px 12px";
+        spacing = mkLiteral "8px";
+        margin = mkLiteral "0px";
+        background-color = mkLiteral "transparent";
       };
 
       button = {
-        padding = mkLiteral "10px";
+        padding = mkLiteral "8px 12px";
         background-color = mkLiteral "@bg-col-light";
         text-color = mkLiteral "@grey";
-        vertical-align = mkLiteral "0.5";
-        horizontal-align = mkLiteral "0.5";
-        border-radius = mkLiteral "12px";
-        margin = mkLiteral "0 4px";
+        border-radius = mkLiteral "8px";
+        font = "${config.stylix.fonts.monospace.name} 10";
       };
 
       "button selected" = {
-        background-color = mkLiteral "@bg-col";
-        text-color = mkLiteral "@blue";
-      };
-
-      message = {
-        background-color = mkLiteral "@bg-col-light";
-        margin = mkLiteral "12px";
-        padding = mkLiteral "8px";
-        border-radius = mkLiteral "12px";
-      };
-
-      textbox = {
-        padding = mkLiteral "6px";
-        margin = mkLiteral "20px 0px 0px 20px";
-        text-color = mkLiteral "@blue";
-        background-color = mkLiteral "transparent";
+        background-color = mkLiteral "@blue";
+        text-color = mkLiteral "@bg-col";
       };
     };
   };
