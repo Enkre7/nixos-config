@@ -15,6 +15,7 @@
     ../../homeModules/waybar.nix
     ../../homeModules/wlogout.nix
     ../../homeModules/wofi.nix
+    ../../homeModules/rofi.nix
     ../../homeModules/swaync.nix
     ../../homeModules/light.nix
   # Terminal & Shell

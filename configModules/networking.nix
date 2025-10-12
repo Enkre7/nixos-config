@@ -112,5 +112,6 @@
     lsof
     iw
     wavemon
+    dnsutils
   ];
 }
