@@ -8,6 +8,7 @@
       jdks = [
         temurin-jre-bin-8
         temurin-jre-bin-17
+        temurin-jre-bin
         graalvm-ce
         zulu8
         zulu17
