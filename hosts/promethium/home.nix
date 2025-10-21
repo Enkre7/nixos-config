@@ -15,6 +15,7 @@
     ../../homeModules/waybar2.nix
     #../../homeModules/wofi.nix
     #../../homeModules/wlogout.nix
+    ../../homeModules/rofi.nix
     ../../homeModules/swaync.nix
     ../../homeModules/light.nix
   # Terminal & Shell
@@ -40,7 +41,7 @@
     #../../homeModules/chromium.nix
     #../../homeModules/libreoffice.nix
     ../../homeModules/onlyoffice.nix
-    #../../homeModules/minecraft.nix
+    ../../homeModules/minecraft.nix
     #../../homeModules/lutris.nix
   ];
 
