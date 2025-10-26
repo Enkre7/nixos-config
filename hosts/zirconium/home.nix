@@ -73,5 +73,6 @@
     gnome-calculator
     ffmpeg-full
     protonvpn-gui
+    hyprviz
   ];
 }
