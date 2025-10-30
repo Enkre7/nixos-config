@@ -11,7 +11,7 @@
     steam-run
     steam
     #heroic
-    protonup
+    protonup-ng
     pavucontrol
     playerctl
     mangohud

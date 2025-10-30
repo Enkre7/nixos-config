@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ onlyoffice-bin ];
+  home.packages = with pkgs; [ onlyoffice-desktopeditors ];
 
   xdg.mimeApps.defaultApplications = {
     "application/vnd.oasis.opendocument.presentation" = "onlyoffice";

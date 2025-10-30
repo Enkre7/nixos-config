@@ -9,7 +9,7 @@
         temurin-jre-bin-8
         temurin-jre-bin-17
         temurin-jre-bin
-        graalvm-ce
+        graalvmPackages.graalvm-ce
         zulu8
         zulu17
         zulu

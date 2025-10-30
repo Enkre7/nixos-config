@@ -3,9 +3,9 @@
 {
   programs.git = {
     enable = true;
-    userName  = config.gitUsername;
-    userEmail = config.gitEmail;
-    extraConfig = {    
+    settings = {
+      user.name  = config.gitUsername;
+      user.email = config.gitEmail;
       init.defaultBranch = "main";
       safe.directory = [ config.flakePath  "/home/${config.user}/.dotfiles" ];  
       push.autoSetupRemote = true;
