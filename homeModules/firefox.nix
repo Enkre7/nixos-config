@@ -1,5 +1,8 @@
 { config, pkgs, inputs, ... }:
 
+let
+  stylix = config.lib.stylix.colors.withHashtag;
+in
 {
   stylix.targets.firefox.profileNames = [ "${config.user}" ];
   programs.firefox = {
@@ -352,6 +355,20 @@
         #contentAreaContextMenu menuseparator:last-child {display: none !important;}
         #contentAreaContextMenu {--panel-padding: 4px !important;}
         #contentAreaContextMenu menuitem {padding-block: 4px !important;}
+        #contentAreaContextMenu {
+          --panel-padding: 4px !important;
+          background-color: ${stylix.base00} !important;
+          border: 1px solid ${stylix.base03} !important;
+        }
+        
+        #contentAreaContextMenu menuitem {
+          padding-block: 4px !important;
+          color: ${stylix.base05} !important;
+        }
+        
+        #contentAreaContextMenu menuitem:hover {
+          background-color: ${stylix.base02} !important;
+        }
       '';
     };
   };
