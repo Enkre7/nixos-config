@@ -11,7 +11,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     stylix.url = "github:danth/stylix";
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
+      url = "github:nix-community/lanzaboote/v0.4.3";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
