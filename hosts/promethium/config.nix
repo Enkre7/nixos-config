@@ -9,7 +9,7 @@
     ../../configModules/hardware.nix
     ../../configModules/users.nix
   # Boot & security
-    ../../configModules/lanzaboot.nix
+    ../../configModules/lanzaboote.nix
     ../../configModules/security.nix
     ../../configModules/sops.nix
     ../../configModules/yubikey.nix

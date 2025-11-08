@@ -42,7 +42,7 @@
     #../../homeModules/libreoffice.nix
     ../../homeModules/onlyoffice.nix
     ../../homeModules/minecraft.nix
-    ../../homeModules/lutris.nix
+    #../../homeModules/lutris.nix
   ];
   
   programs.home-manager.enable = true;
@@ -65,7 +65,6 @@
 
   home.packages = with pkgs; [
     drawio
-    #rustdesk
     prusa-slicer
     vesktop # discord
     r2modman
@@ -73,6 +72,5 @@
     gnome-calculator
     ffmpeg-full
     protonvpn-gui
-    hyprviz
   ];
 }
