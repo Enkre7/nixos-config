@@ -13,6 +13,7 @@
     };
     kernelPackages = config.kernelPackage;
     kernelParams = [];
+    extraKernelParams = [ "ipv6.disable=1" ];
     extraModulePackages = [];
     consoleLogLevel = 3;
     tmp.cleanOnBoot = true;

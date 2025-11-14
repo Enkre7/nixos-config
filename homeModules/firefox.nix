@@ -353,8 +353,6 @@ in
         #contentAreaContextMenu menuseparator:first-child,
         #contentAreaContextMenu menuseparator + menuseparator,
         #contentAreaContextMenu menuseparator:last-child {display: none !important;}
-        #contentAreaContextMenu {--panel-padding: 4px !important;}
-        #contentAreaContextMenu menuitem {padding-block: 4px !important;}
         #contentAreaContextMenu {
           --panel-padding: 4px !important;
           background-color: ${stylix.base00} !important;
