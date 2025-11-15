@@ -67,14 +67,13 @@
   # Host specific settings
   programs.yt-dlp.enable = true;
   home.packages = with pkgs; [
-    #rustdesk
     prusa-slicer
     drawio
     vesktop # discord
     gnome-calculator
     obsidian
-    ffmpeg-full
-    picard
-    powershell
+    #ffmpeg-full
+    #picard
+    #powershell
   ];
 }

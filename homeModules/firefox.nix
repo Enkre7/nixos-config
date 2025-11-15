@@ -42,7 +42,7 @@ in
           definedAliases = [ "@np" ];
         };
         "Nix Packages Issues" = {
-          urls = [ { template = "https://github.com/NixOS/nixpkgs/issues?q=is%253Aissue%20state%253Aopen {searchTerms}"; } ];
+          urls = [ { template = "https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue state%3Aopen {searchTerms}"; } ];
           icon = "https://wiki.nixos.org/nixos.png";
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = [ "@npi" ];

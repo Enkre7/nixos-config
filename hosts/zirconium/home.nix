@@ -70,7 +70,6 @@
     r2modman
     obsidian
     gnome-calculator
-    ffmpeg-full
-    protonvpn-gui
+    #protonvpn-gui
   ];
 }
