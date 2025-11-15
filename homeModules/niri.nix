@@ -24,15 +24,15 @@ let
     ${pkgs.blueman}/bin/blueman-applet &
     ${pkgs.udiskie}/bin/udiskie &
     ${pkgs.gammastep}/bin/gammastep &
-    thunar --daemon &
-    ${lib.optionalString (!config.isLaptop) "coolercontrol &"}
-    ${lib.optionalString (!config.isLaptop) "openrgb --server --startminimized -m static -c 00FF00 -b 100 &"}
+    command -v thunar >/dev/null 2>&1 && thunar --daemon &
+    ${lib.optionalString (!config.isLaptop) "command -v coolercontrol >/dev/null 2>&1 && coolercontrol &"}
+    ${lib.optionalString (!config.isLaptop) "command -v openrgb >/dev/null 2>&1 && openrgb --server --startminimized -m static -c 00FF00 -b 100 &"}
 
     sleep 1
-    ${pkgs.vesktop}/bin/vesktop --start-minimized &
+    command -v vesktop >/dev/null 2>&1 && vesktop --start-minimized &
     sleep 0.5
-    ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
-    ${pkgs.protonvpn-gui}/bin/protonvpn-app &
+    command -v mullvad-vpn >/dev/null 2>&1 && mullvad-vpn &
+    command -v protonvpn-app >/dev/null 2>&1 && protonvpn-app &
     
     wl-paste --watch cliphist store &
   '';
