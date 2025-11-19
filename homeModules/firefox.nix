@@ -1,13 +1,22 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   stylix = config.lib.stylix.colors.withHashtag;
 in
 {
   stylix.targets.firefox.profileNames = [ "${config.user}" ];
+  stylix.targets.firefox.colorTheme.enable = true;
   programs.firefox = {
     enable = true;
-    languagePacks = [ "fr" "en-US" ];
+    languagePacks = [
+      "fr"
+      "en-US"
+    ];
     policies = {
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
@@ -42,7 +51,9 @@ in
           definedAliases = [ "@np" ];
         };
         "Nix Packages Issues" = {
-          urls = [ { template = "https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue state%3Aopen {searchTerms}"; } ];
+          urls = [
+            { template = "https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue state%3Aopen {searchTerms}"; }
+          ];
           icon = "https://wiki.nixos.org/nixos.png";
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = [ "@npi" ];
@@ -85,7 +96,11 @@ in
       search.force = true;
       search.default = "ddg";
       search.privateDefault = "ddg";
-      search.order = [ "ddg" "SearXNG" "google" ];
+      search.order = [
+        "ddg"
+        "SearXNG"
+        "google"
+      ];
 
       # To display extentions: nix flake show "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons"
       extensions.packages = with inputs.firefox-addons.packages."x86_64-linux"; [
@@ -102,6 +117,7 @@ in
         youtube-no-translation
         translate-web-pages
       ];
+      extensions.force = true;
       settings = {
         # Firefox Sync-server
         "identity.sync.tokenserver.uri" = "https://${config.firefoxSyncURL}/token/1.0/sync/1.5";
@@ -353,19 +369,6 @@ in
         #contentAreaContextMenu menuseparator:first-child,
         #contentAreaContextMenu menuseparator + menuseparator,
         #contentAreaContextMenu menuseparator:last-child {display: none !important;}
-        #contentAreaContextMenu {
-          --panel-padding: 4px !important;
-          background-color: ${stylix.base00} !important;
-          border: 1px solid ${stylix.base03} !important;
-        }
-        
-        #contentAreaContextMenu menuitem {
-          padding-block: 4px !important;
-          color: ${stylix.base05} !important;
-        }
-        
-        #contentAreaContextMenu menuitem:hover {
-          background-color: ${stylix.base02} !important;
         }
       '';
     };

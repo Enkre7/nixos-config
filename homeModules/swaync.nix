@@ -10,20 +10,24 @@ in
       positionX = "right";
       positionY = "top";
       layer = "overlay";
+
+      control-center-width = 400;
+      control-center-height = 510;
       control-center-margin-top = 10;
       control-center-margin-bottom = 10;
       control-center-margin-right = 10;
       control-center-margin-left = 10;
-      notification-icon-size = 64;
-      notification-body-image-height = 50;
-      notification-body-image-width = 100;
+
+      notification-window-width = 300;
+      notification-icon-size = 48;
+      notification-body-image-height = 160;
+      notification-body-image-width = 200;
+
       timeout = 10;
       timeout-low = 5;
       timeout-critical = 0;
+
       fit-to-screen = false;
-      control-center-width = 400;
-      control-center-height = 600;
-      notification-window-width = 300;
       keyboard-shortcuts = true;
       image-visibility = "when-available";
       transition-time = 200;
@@ -34,283 +38,348 @@ in
         title = {
           text = "Notifications";
           clear-all-button = true;
-          button-text = "󰆴 Clear All";
+          button-text = "Clear All";
         };
         dnd = {
-          text = "Do Not Disturb";
+          text = "Ne pas déranger";
         };
         label = {
           max-lines = 1;
           text = "Notifications";
         };
         mpris = {
-          image-size = 64;
-          image-radius = 5;
-        };
-        volume = {
-          label = "󰕾";
-        };
-        backlight = {
-          label = "󰃟";
+          autohide = true;
         };
       };
       widgets = [
         "title"
         "mpris"
-        #"volume"
-        #"backlight"
         "dnd"
         "notifications"
       ];
     };
     style = ''
       * {
+        all: unset;
         font-family: JetBrainsMono Nerd Font Mono;
         font-weight: normal;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       }
-      .control-center .notification-row:focus,
-      .control-center .notification-row:hover {
-        opacity: 0.9;
-        background: #${stylix.base00}
+
+      /* === CONTROL CENTER === */
+      .control-center {
+        background: #${stylix.base00};
+        border: 2px solid #${stylix.base0C};
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        padding: 0;
       }
+
+      .control-center-list {
+        background: transparent;
+        padding: 0;
+      }
+
+      .control-center-list-placeholder {
+        opacity: 0.5;
+        margin: 20px;
+        color: #${stylix.base04};
+      }
+
+      /* === NOTIFICATION ROWS === */
       .notification-row {
         outline: none;
-        margin: 10px;
+        margin: 8px;
         padding: 0;
+        border-radius: 8px;
       }
+
+      .control-center .notification-row:focus,
+      .control-center .notification-row:hover {
+        background: #${stylix.base01};
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
       .notification {
         background: transparent;
-        background-color: transparent;
         padding: 0;
-        margin: 0px;
-      }
-      .notification-content {
-        background: #${stylix.base00};
-        padding: 10px;
-        border-radius: 5px;
-        border: 2px solid #${stylix.base0D};
         margin: 0;
       }
+
+      /* === NOTIFICATION CONTENT === */
+      .notification-content {
+        background: #${stylix.base00};
+        padding: 12px;
+        border-radius: 8px;
+        border: 2px solid #${stylix.base0D};
+        margin: 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+
       .notification-default-action {
         margin: 0;
         padding: 0;
-        border-radius: 5px;
+        border-radius: 8px;
       }
+
+      .notification-default-action:hover {
+        background: #${stylix.base01};
+      }
+
+      /* === CLOSE BUTTON === */
       .close-button {
         background: #${stylix.base08};
         color: #${stylix.base00};
         text-shadow: none;
-        padding: 0;
-        border-radius: 5px;
-        margin-top: 5px;
-        margin-right: 5px;
+        padding: 4px 8px;
+        border-radius: 8px;
+        margin-top: 8px;
+        margin-right: 8px;
+        min-width: 24px;
+        min-height: 24px;
       }
+
       .close-button:hover {
-        box-shadow: none;
-        background: #${stylix.base0D};
-        transition: all .15s ease-in-out;
-        border: none
+        background: #${stylix.base09};
+        transform: scale(1.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
+
+      /* === NOTIFICATION ACTIONS === */
       .notification-action {
+        background: #${stylix.base01};
         border: 2px solid #${stylix.base0D};
         border-top: none;
-        border-radius: 5px;
+        border-radius: 0 0 8px 8px;
+        padding: 8px;
+        margin: 0;
       }
-      .notification-default-action:hover,
+
       .notification-action:hover {
-        color: #${stylix.base0B};
-        background: #${stylix.base0B}
+        background: #${stylix.base0D};
+        color: #${stylix.base00};
       }
-      .notification-default-action {
-        border-radius: 5px;
-        margin: 0px;
-      }
-      .notification-default-action:not(:only-child) {
-        border-bottom-left-radius: 7px;
-        border-bottom-right-radius: 7px
-      }
+
       .notification-action:first-child {
-        border-bottom-left-radius: 10px;
-        background: #${stylix.base00}
+        border-bottom-left-radius: 8px;
       }
+
       .notification-action:last-child {
-        border-bottom-right-radius: 10px;
-        background: #${stylix.base00}
+        border-bottom-right-radius: 8px;
       }
+
+      /* === INLINE REPLY === */
       .inline-reply {
-        margin-top: 8px
+        margin-top: 8px;
       }
+
       .inline-reply-entry {
-        background: #${stylix.base00};
+        background: #${stylix.base01};
         color: #${stylix.base05};
-        caret-color: #${stylix.base05};
-        border: 1px solid #${stylix.base09};
-        border-radius: 5px
+        caret-color: #${stylix.base0D};
+        border: 2px solid #${stylix.base03};
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 14px;
       }
+
+      .inline-reply-entry:focus {
+        border-color: #${stylix.base0D};
+        box-shadow: 0 0 0 2px rgba(${stylix.base0D}, 0.2);
+      }
+
       .inline-reply-button {
-        margin-left: 4px;
-        background: #${stylix.base00};
-        border: 1px solid #${stylix.base09};
-        border-radius: 5px;
-        color: #${stylix.base05}
+        margin-left: 8px;
+        background: #${stylix.base0D};
+        border: none;
+        border-radius: 8px;
+        color: #${stylix.base00};
+        padding: 8px 16px;
+        font-weight: 600;
       }
+
       .inline-reply-button:disabled {
-        background: initial;
-        color: #${stylix.base03};
-        border: 1px solid transparent
+        background: #${stylix.base02};
+        color: #${stylix.base04};
+        opacity: 0.5;
       }
-      .inline-reply-button:hover {
-        background: #${stylix.base00}
+
+      .inline-reply-button:hover:not(:disabled) {
+        background: #${stylix.base0E};
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
-      .body-image {
-        margin-top: 6px;
-        background-color: #${stylix.base05};
-        border-radius: 5px
-      }
+
+      /* === TEXT ELEMENTS === */
       .summary {
         font-size: 16px;
         font-weight: 700;
-        background: transparent;
-        color: rgba(158, 206, 106, 1);
-        text-shadow: none
+        color: #${stylix.base0D};
+        margin-bottom: 4px;
       }
+
       .time {
-        font-size: 16px;
-        font-weight: 700;
-        background: transparent;
-        color: #${stylix.base05};
-        text-shadow: none;
-        margin-right: 18px
+        font-size: 13px;
+        font-weight: 500;
+        color: #${stylix.base04};
+        margin-right: 8px;
+        opacity: 0.8;
       }
+
       .body {
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 400;
-        background: transparent;
         color: #${stylix.base05};
-        text-shadow: none
+        line-height: 1.5;
+        margin-top: 4px;
       }
-      .control-center {
-        background: #${stylix.base00};
-        border: 2px solid #${stylix.base0C};
-        border-radius: 5px;
+
+      .body-image {
+        margin-top: 8px;
+        background-color: #${stylix.base01};
+        border-radius: 8px;
+        overflow: hidden;
       }
-      .control-center-list {
-        background: transparent
-      }
-      .control-center-list-placeholder {
-        opacity: .5
-      }
-      .floating-notifications {
-        background: transparent
-      }
-      .blank-window {
-        background: alpha(black, 0)
-      }
+
+      /* === WIDGETS === */
       .widget-title {
-        color: #${stylix.base0B};
-        background: #${stylix.base00};
-        padding: 5px 10px;
-        margin: 10px 10px 5px 10px;
-        font-size: 1.5rem;
-        border-radius: 5px;
+        color: #${stylix.base0D};
+        background: #${stylix.base01};
+        padding: 12px 16px;
+        margin: 12px;
+        font-size: 1.3rem;
+        font-weight: 700;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
-      .widget-title>button {
-        font-size: 1rem;
+
+      .widget-title > button {
+        font-size: 13px;
         color: #${stylix.base05};
-        text-shadow: none;
-        background: #${stylix.base00};
-        box-shadow: none;
-        border-radius: 5px;
+        background: #${stylix.base02};
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-weight: 600;
       }
-      .widget-title>button:hover {
+
+      .widget-title > button:hover {
         background: #${stylix.base08};
         color: #${stylix.base00};
+        transform: scale(1.05);
       }
+
+      /* === DND WIDGET === */
       .widget-dnd {
-        background: #${stylix.base00};
-        padding: 5px 10px;
-        margin: 10px 10px 5px 10px;
-        border-radius: 5px;
-        font-size: large;
+        background: #${stylix.base01};
+        padding: 12px 16px;
+        margin: 8px 12px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
         color: #${stylix.base0B};
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
-      .widget-dnd>switch {
-        border-radius: 5px;
-        /* border: 1px solid #${stylix.base0B}; */
-        background: #${stylix.base0B};
+
+      .widget-dnd > switch {
+        border-radius: 16px;
+        background: #${stylix.base02};
+        min-width: 48px;
+        min-height: 24px;
       }
-      .widget-dnd>switch:checked {
+
+      .widget-dnd > switch:checked {
         background: #${stylix.base08};
-        border: 1px solid #${stylix.base08};
       }
-      .widget-dnd>switch slider {
+
+      .widget-dnd > switch slider {
+        background: #${stylix.base05};
+        border-radius: 50%;
+        margin: 2px;
+        min-width: 20px;
+        min-height: 20px;
+      }
+
+      .widget-dnd > switch:checked slider {
         background: #${stylix.base00};
-        border-radius: 5px
       }
-      .widget-dnd>switch:checked slider {
-        background: #${stylix.base00};
-        border-radius: 5px
-      }
+
+      /* === LABEL WIDGET === */
       .widget-label {
-          margin: 10px 10px 5px 10px;
+        margin: 8px 12px;
+        padding: 8px 12px;
       }
-      .widget-label>label {
-        font-size: 1rem;
+
+      .widget-label > label {
+        font-size: 0.95rem;
         color: #${stylix.base05};
+        font-weight: 500;
       }
+
+      /* === MPRIS WIDGET === */
       .widget-mpris {
+        background: #${stylix.base01};
         color: #${stylix.base05};
-        padding: 5px 10px;
-        margin: 10px 10px 5px 10px;
-        border-radius: 5px;
+        padding: 12px;
+        margin: 8px 12px;
+        border-radius: 10px;
       }
+
       .widget-mpris > box > button {
-        border-radius: 5px;
+        border-radius: 8px;
+        background: #${stylix.base02};
+        padding: 8px;
+        margin: 2px;
       }
+
+      .widget-mpris > box > button:hover {
+        background: #${stylix.base0D};
+        color: #${stylix.base00};
+        transform: scale(1.1);
+      }
+
       .widget-mpris-player {
-        padding: 5px 10px;
-        margin: 10px
+        padding: 8px;
+        margin: 4px;
       }
+
       .widget-mpris-title {
         font-weight: 700;
-        font-size: 0.9rem
+        font-size: 0.95rem;
+        color: #${stylix.base0D};
+        margin-bottom: 4px;
       }
+
       .widget-mpris-subtitle {
-        font-size: 0.7rem
+        font-size: 0.8rem;
+        color: #${stylix.base04};
       }
-      .widget-menubar>box>.menu-button-bar>button {
+
+      /* === FLOATING NOTIFICATIONS === */
+      .floating-notifications {
+        background: transparent;
+      }
+
+      .blank-window {
+        background: transparent;
+      }
+
+      /* === MENUBAR === */
+      .widget-menubar > box > .menu-button-bar > button,
+      .topbar-buttons > button {
         border: none;
-        background: transparent
+        background: transparent;
+        padding: 8px;
+        border-radius: 8px;
       }
-      .topbar-buttons>button {
-        border: none;
-        background: transparent
-      }
-      .widget-volume {
-        background: #${stylix.base01};
-        padding: 5px;
-        margin: 10px 10px 5px 10px;
-        border-radius: 5px;
-        font-size: x-large;
-        color: #${stylix.base05};
-      }
-      .widget-volume>box>button {
-        background: #${stylix.base0B};
-        border: none
-      }
-      .per-app-volume {
-        background-color: #${stylix.base00};
-        padding: 4px 8px 8px;
-        margin: 0 8px 8px;
-        border-radius: 5px;
-      }
-      .widget-backlight {
-        background: #${stylix.base01};
-        padding: 5px;
-        margin: 10px 10px 5px 10px;
-        border-radius: 5px;
-        font-size: x-large;
-        color: #${stylix.base05}
+
+      .widget-menubar > box > .menu-button-bar > button:hover,
+      .topbar-buttons > button:hover {
+        background: #${stylix.base02};
       }
     '';
   };

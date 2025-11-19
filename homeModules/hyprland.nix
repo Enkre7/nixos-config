@@ -19,15 +19,15 @@ let
     ${pkgs.udiskie}/bin/udiskie &
     ${pkgs.gammastep}/bin/gammastep &
     thunar --daemon &
-    coolercontrol &
-    openrgb --server --startminimized -m static -c 00FF00 -b 100 &
+    command -v coolercontrol &> /dev/null && coolercontrol &
+    command -v openrgb &> /dev/null && openrgb --server --startminimized -m static -c 00FF00 -b 100 &
 
     sleep 1
-    ${pkgs.vesktop}/bin/vesktop --start-minimized &
+    command -v vesktop &> /dev/null && vesktop --start-minimized &
     sleep 0.5
-    ${pkgs.mullvad-vpn}/bin/mullvad-vpn &
-    ${pkgs.protonvpn-gui}/bin/protonvpn-app &
-    
+    command -v mullvad-vpn &> /dev/null && mullvad-vpn &
+    command -v protonvpn-app &> /dev/null && protonvpn-app &
+
     wl-paste --watch cliphist store &
   '';
 in

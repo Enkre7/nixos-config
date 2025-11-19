@@ -1,24 +1,33 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   stylix = config.lib.stylix.colors.withHashtag;
-  
+
   isHyprland = config.wayland.windowManager.hyprland.enable or false;
   isSway = config.wayland.windowManager.sway.enable or false;
   isNiri = builtins.pathExists "${config.xdg.configHome}/niri/config.kdl";
-  
-  workspacesModule = 
-    if isHyprland then "hyprland/workspaces"
-    else if isSway then "sway/workspaces"
-    else if isNiri then "niri/workspaces"
-    else null;
+
+  workspacesModule =
+    if isHyprland then
+      "hyprland/workspaces"
+    else if isSway then
+      "sway/workspaces"
+    else if isNiri then
+      "niri/workspaces"
+    else
+      null;
 in
 with lib;
 {
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
-    
+
     settings = [
       {
         layer = "top";
@@ -28,15 +37,19 @@ with lib;
         margin-top = 7;
         margin-left = 6;
         margin-right = 6;
-        
+
         modules-left = mkIf (workspacesModule != null) [ workspacesModule ];
         modules-center = [ "clock" ];
         modules-right = [
           "pulseaudio"
           "cpu"
           "memory"
-        ] ++ optional config.isLaptop "battery"
-          ++ [ "custom/notification" "tray" ];
+        ]
+        ++ optional config.isLaptop "battery"
+        ++ [
+          "custom/notification"
+          "tray"
+        ];
 
         "hyprland/workspaces" = mkIf isHyprland {
           format = "{icon}";
@@ -65,7 +78,7 @@ with lib;
           interval = 1;
           timezone = "Europe/Paris";
           locale = "fr_FR.UTF-8";
-          format = "{:%H:%M}";   
+          format = "{:%H:%M}";
           format-alt = "{:L%A, %d %B %Y}";
           tooltip-format = "<tt><small>{calendar}</small></tt>";
           calendar = {
@@ -107,7 +120,18 @@ with lib;
           format = "{icon} {capacity}%";
           format-charging = "󰂄 {capacity}%";
           format-plugged = "󱘖 {capacity}%";
-          format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+          format-icons = [
+            "󰁺"
+            "󰁻"
+            "󰁼"
+            "󰁽"
+            "󰁾"
+            "󰁿"
+            "󰂀"
+            "󰂁"
+            "󰂂"
+            "󰁹"
+          ];
         };
 
         "pulseaudio" = {
@@ -136,7 +160,7 @@ with lib;
 
         "custom/notification" = {
           tooltip = false;
-          format = "{icon} {}";
+          format = "{icon}";
           format-icons = {
             notification = "<span foreground='red'><sup></sup></span>";
             none = "";
@@ -150,7 +174,8 @@ with lib;
           return-type = "json";
           exec-if = "which swaync-client";
           exec = "swaync-client -swb";
-          on-click = "swaync-client -t";
+          on-click = "swaync-client -t -sw";
+          on-click-right = "swaync-client -d -sw";
           escape = true;
         };
 
@@ -183,6 +208,7 @@ with lib;
         border-radius: 20px;
         padding: 0 8px;
         margin: 0 4px;
+        border: 2px solid ${stylix.base03};
       }
 
       .modules-left > * { margin: 0 6px; }

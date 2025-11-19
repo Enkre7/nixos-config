@@ -1,15 +1,19 @@
-{ pkgs, inputs, lib, config, ... }:
+{
+  pkgs,
+  inputs,
+  lib,
+  config,
+  ...
+}:
 
 let
   tuigreet = "${pkgs.tuigreet}/bin/tuigreet";
-  
+
   sessionsPaths = lib.concatStringsSep ":" (
     lib.optional (config.programs.hyprland.enable or false)
-      "${inputs.hyprland.packages.${pkgs.system}.hyprland}/share/wayland-sessions"
-    ++ lib.optional (config.programs.sway.enable or false)
-      "${pkgs.sway}/share/wayland-sessions"
-    ++ lib.optional (config.programs.niri.enable or false)
-      "${pkgs.niri}/share/wayland-sessions"
+      "${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland}/share/wayland-sessions"
+    ++ lib.optional (config.programs.sway.enable or false) "${pkgs.sway}/share/wayland-sessions"
+    ++ lib.optional (config.programs.niri.enable or false) "${pkgs.niri}/share/wayland-sessions"
     ++ [ "/run/current-system/sw/share/wayland-sessions" ]
   );
 in
