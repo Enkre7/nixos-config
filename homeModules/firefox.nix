@@ -119,13 +119,18 @@ in
       ];
       extensions.force = true;
       settings = {
+
+        # DDNS
+        "network.trr.mode" = 2;
+        "network.trr.uri" = " https://dns.nextdns.io/89e3d4/Firefox"; 
+
         # Firefox Sync-server
         "identity.sync.tokenserver.uri" = "https://${config.firefoxSyncURL}/token/1.0/sync/1.5";
         "identity.fxaccounts.useSessionTokensForOAuth" = false; # Change to true on account login
         "identity.sync.useOAuthForSyncToken" = false; # Change to true on account login
         "identity.fxaccounts.account.device.name" = "${config.hostname}'s Firefox";
 
-        # Settings
+        # Other
         "extensions.autoDisableScopes" = 0;
         "media.navigator.video.enabled" = true;
         "media.navigator.audio.enabled" = true;

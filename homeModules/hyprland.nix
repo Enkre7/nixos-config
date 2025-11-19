@@ -18,16 +18,16 @@ let
     ${pkgs.blueman}/bin/blueman-applet &
     ${pkgs.udiskie}/bin/udiskie &
     ${pkgs.gammastep}/bin/gammastep &
-    thunar --daemon &
-    command -v coolercontrol &> /dev/null && coolercontrol &
-    command -v openrgb &> /dev/null && openrgb --server --startminimized -m static -c 00FF00 -b 100 &
+    command -v thunar >/dev/null 2>&1 && thunar --daemon &
+    command -v coolercontrol >/dev/null 2>&1 && coolercontrol &
+    command -v openrgb >/dev/null 2>&1 && openrgb --server --startminimized -m static -c 00FF00 -b 100 &
 
     sleep 1
-    command -v vesktop &> /dev/null && vesktop --start-minimized &
+    command -v vesktop >/dev/null 2>&1 && vesktop --start-minimized &
     sleep 0.5
-    command -v mullvad-vpn &> /dev/null && mullvad-vpn &
-    command -v protonvpn-app &> /dev/null && protonvpn-app &
-
+    command -v mullvad-vpn >/dev/null 2>&1 && mullvad-vpn &
+    command -v protonvpn-app >/dev/null 2>&1 && protonvpn-app &
+    
     wl-paste --watch cliphist store &
   '';
 in
