@@ -62,15 +62,17 @@
                 "/root" = {
                   mountpoint = "/";
                   mountOptions = [
+                    "x-initrd.mount"
                     "compress=zstd:1"
                     "noatime"
                     "space_cache=v2"
                     "discard=async"
                   ];
                 };
-                "/home" = {
-                  mountpoint = "/home";
+                "/persist" = {
+                  mountpoint = "/persist";
                   mountOptions = [
+                    "x-initrd.mount"
                     "compress=zstd:3"
                     "noatime"
                     "space_cache=v2"
@@ -80,13 +82,14 @@
                 "/nix" = {
                   mountpoint = "/nix";
                   mountOptions = [
+                    "x-initrd.mount"
                     "compress=zstd:1"
                     "noatime"
                     "space_cache=v2"
                     "discard=async"
                   ];
                 };
-                "/var-log" = {
+                "/log" = {
                   mountpoint = "/var/log";
                   mountOptions = [
                     "compress=zstd:1"
@@ -96,7 +99,7 @@
                   ];
                 };
                 "/snapshots" = {
-                  mountpoint = "/.snapshots";
+                  mountpoint = "/snapshots";
                   mountOptions = [
                     "compress=zstd:3"
                     "noatime"

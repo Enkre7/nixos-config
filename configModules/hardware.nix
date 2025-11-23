@@ -1,28 +1,35 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
   
   boot = {
     loader = {
+      systemd-boot.enable = lib.mkDefault true;
+      systemd-boot.editor = false;
+      systemd-boot.configurationLimit = 20;
       efi.canTouchEfiVariables = true;
     };
-    initrd.kernelModules = [ "dm-snapshot" ];
-    initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+    
+    # Filesystems
+    initrd.supportedFilesystems = [ "btrfs" ];
+    supportedFilesystems = [ "btrfs" ];
+    initrd.services.lvm.enable = true;
+    
     kernelPackages = config.kernelPackage;
-    kernelParams = [];
-    extraModulePackages = [];
+    kernelParams = [ ];
+    extraModulePackages = [ ];
     consoleLogLevel = 3;
     tmp.cleanOnBoot = true;
   };
+  
   # Bios upgrade
   services.fwupd.enable = true;
  
+  # Nvidia GPU
   hardware.enableRedistributableFirmware = true;
-
-  # For Nvidia
   hardware.nvidia.open = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;  
   hardware.nvidia.powerManagement.enable = true;
