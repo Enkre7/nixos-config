@@ -39,7 +39,7 @@
     stateVersion = "25.05";
     hostname = "zirconium";
     user = "enkre";
-    flakePath = "/persist/system/nixos";
+    flakePath = "/etc/nixos";
     dotfilesPath = "${config.flakePath}/dotfiles";
     wallpaper = "${config.dotfilesPath}/wallpapers/everforest-mist_forest.png"; # only png
     styleTheme = "everforest";

@@ -98,7 +98,7 @@ with lib;
 
         "custom/notification" = {
           tooltip = false;
-          format = "{icon} {}";
+          format = "{icon}";
           format-icons = {
             notification = "<span foreground='${stylix.base08}'>󰂚</span>";
             none = "󰂚";
