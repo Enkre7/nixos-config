@@ -24,8 +24,7 @@
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.gvfs.package = pkgs.gnome.gvfs;
   services.tumbler.enable = true; # Thumbnail support for images
-  programs.file-roller.enable = true; # Archive support
   services.devmon.enable = true; 
   services.udisks2.enable = true;
-  environment.systemPackages = with pkgs; [ zip unzip usbutils udiskie ];
+  environment.systemPackages = with pkgs; [ zip unzip usbutils udiskie file-roller ];
 }
