@@ -1,14 +1,16 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   programs.git = {
     enable = true;
     settings = {
-      user.name  = config.gitUsername;
+      user.name = config.gitUsername;
       user.email = config.gitEmail;
       init.defaultBranch = "main";
-      safe.directory = [ config.flakePath  "/home/${config.user}/.dotfiles" ];  
+      pull.rebase = false;
       push.autoSetupRemote = true;
+      safe.directory = [ config.flakePath "/home/${config.user}/.dotfiles" ];
+      
       diff.tool = "meld"; 
       difftool = {
         prompt = false;
@@ -16,11 +18,42 @@
       };
       merge.tool = "meld";
       mergetool.cmd = "meld $LOCAL $MERGED $REMOTE --output $MERGED";
-      credential.helper = "store";
-      url."git@github.com:".insteadOf = "https://github.com/";
     };
   };
   
-  # git diff/merge tool
+  home.activation.setupGitSSH = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    SETUP_FLAG="$HOME/.ssh/.github-setup-done"
+    
+    if [ ! -f "$SETUP_FLAG" ]; then
+      if [ ! -f $HOME/.ssh/github ]; then
+        $DRY_RUN_CMD ${pkgs.openssh}/bin/ssh-keygen -t ed25519 -C "${config.gitEmail}" -f $HOME/.ssh/github -N ""
+        $DRY_RUN_CMD chmod 600 $HOME/.ssh/github
+        $DRY_RUN_CMD chmod 644 $HOME/.ssh/github.pub
+      fi
+      
+      if [ -f $HOME/.ssh/github.pub ]; then
+        # Console output
+        echo ""
+        echo "GitHub SSH key generated"
+        echo "Run: show-github-key"
+        echo ""
+        
+        # Visual notification
+        $DRY_RUN_CMD ${pkgs.libnotify}/bin/notify-send "GitHub SSH Key" "Key generated. Run 'show-github-key' in terminal" -u critical -t 10000
+      fi
+      
+      touch "$SETUP_FLAG"
+    fi
+  '';
+  
+  home.file.".ssh/config.d/github".text = ''
+    Host github.com
+      HostName github.com
+      User git
+      IdentityFile ~/.ssh/github
+      IdentitiesOnly yes
+      AddKeysToAgent yes
+  '';
+  
   home.packages = with pkgs; [ meld ];
 }

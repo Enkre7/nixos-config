@@ -40,10 +40,6 @@ in
     portalPackage = null;
     systemd.variables = [ "--all" ];
 
-    #plugins = [
-    #  inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
-    #];
-
     settings = {
       monitor = [
         ",preferred,auto,1.6"
@@ -56,13 +52,10 @@ in
       "$browser" = "firefox";
       "$browserPrivate" = "firefox --private-window";
       "$termFileManager" = "lf";
-      #"$menu" = "pgrep wofi >/dev/null 2>&1 && killall wofi || wofi --location=top -y 15";
       "$menu" = "rofi-launcher";
       "$systman" = "btop";
       "$screenshot" = "grim -g \"$(slurp)\" - | swappy -f -";
       "$clipboard" = "cliphist list | wofi --dmenu | cliphist decode | wl-copy";
-      #"$clipboard" = "~/.local/bin/cliphist-smart.sh";
-      #"$powermenu" = "wlogout-wrapper";
       "$powermenu" = "rofi-powermenu";
       "$lockscreen" = "hyprlock";
 
@@ -146,12 +139,10 @@ in
         "$mainMod, F, exec, $browser"
         "$mainMod, B, fullscreen"
         "$mainMod SHIFT, F, exec, $browserPrivate"
-        # Move focus with mainMod + arrow keys
         "$mainMod, Left, movefocus, l"
         "$mainMod, Right, movefocus, r"
         "$mainMod, Up, movefocus, u"
         "$mainMod, Down, movefocus, d"
-        # Switch workspaces
         "$mainMod, code:10, workspace, 1"
         "$mainMod, code:11, workspace, 2"
         "$mainMod, code:12, workspace, 3"
@@ -162,7 +153,6 @@ in
         "$mainMod, code:17, workspace, 8"
         "$mainMod, code:18, workspace, 9"
         "$mainMod, code:19, workspace, 10"
-        # Move active window to a workspace
         "$mainMod SHIFT, code:10, movetoworkspace, 1"
         "$mainMod SHIFT, code:11, movetoworkspace, 2"
         "$mainMod SHIFT, code:12, movetoworkspace, 3"
@@ -173,41 +163,30 @@ in
         "$mainMod SHIFT, code:17, movetoworkspace, 8"
         "$mainMod SHIFT, code:18, movetoworkspace, 9"
         "$mainMod SHIFT, code:19, movetoworkspace, 10"
-        # Example special workspace (scratchpad)
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
-        # Scroll through existing workspaces
-        # Mouse
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
-        # Keyboard
         "$mainMod, Right, workspace, e+1"
         "$mainMod, Left, workspace, e-1"
-        # Sound
         ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ",XF86AudioPlay, exec, playerctl play-pause"
         ",XF86AudioPause, exec, playerctl play-pause"
         ",XF86AudioNext, exec, playerctl next"
         ",XF86AudioPrev, exec, playerctl previous"
-        # Lock Session
         ",XF86AudioMedia, exec, $lockscreen"
-        # Screenshot
         ",Print, exec, $screenshot"
-        # Clipboard
         "Control_L Alt_L, V, exec, $clipboard"
       ];
 
       binde = [
-        # Sound
         ",XF86AudioRaiseVolume, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 | wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
         ",XF86AudioLowerVolume, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 | wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
-        # Screen Brightness
         ",XF86MonBrightnessDown, exec, brightnessctl set 5%-"
         ",XF86MonBrightnessUP, exec, brightnessctl set +5%"
       ];
 
       bindm = [
-        # Move/resize windows with mainMod + LMB/RMB and dragging
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
@@ -216,138 +195,139 @@ in
         ",switch:Lid Switch, exec, hyprlock"
       ];
 
-      # To get windows's names: hyprctl clients
-      windowrulev2 = [
+      windowrule = [
         # PulseAudio Volume Control
-        "float, class:(org.pulseaudio.pavucontrol)"
-        "size 800 600, class:(org.pulseaudio.pavucontrol)"
-        "center, class:(org.pulseaudio.pavucontrol)"
-        "animation slide, class:(org.pulseaudio.pavucontrol)"
+        "match:class org.pulseaudio.pavucontrol, float on"
+        "match:class org.pulseaudio.pavucontrol, size 800 600"
+        "match:class org.pulseaudio.pavucontrol, center on"
+        "match:class org.pulseaudio.pavucontrol, animation slide"
 
         # Nextcloud Client
-        "float, class:com.nextcloud.desktopclient.nextcloud"
-        "size 873 586, class:com.nextcloud.desktopclient.nextcloud"
-        "center, class:com.nextcloud.desktopclient.nextcloud"
-        "animation slide, class:com.nextcloud.desktopclient.nextcloud"
+        "match:class com.nextcloud.desktopclient.nextcloud, float on"
+        "match:class com.nextcloud.desktopclient.nextcloud, size 873 586"
+        "match:class com.nextcloud.desktopclient.nextcloud, center on"
+        "match:class com.nextcloud.desktopclient.nextcloud, animation slide"
 
         # Blueman Bluetooth Manager
-        "float, class:^(blueman-manager)$"
-        "size 700 500, class:^(blueman-manager)$"
-        "center, class:^(blueman-manager)$"
-        "animation slide, class:^(blueman-manager)$"
+        "match:class blueman-manager, float on"
+        "match:class blueman-manager, size 700 500"
+        "match:class blueman-manager, center on"
+        "match:class blueman-manager, animation slide"
 
         # Network Manager (nm-connection-editor)
-        "float, class:^(nm-connection-editor)$"
-        "size 800 600, class:^(nm-connection-editor)$"
-        "center, class:^(nm-connection-editor)$"
-        "animation slide, class:^(nm-connection-editor)$"
+        "match:class nm-connection-editor, float on"
+        "match:class nm-connection-editor, size 800 600"
+        "match:class nm-connection-editor, center on"
+        "match:class nm-connection-editor, animation slide"
 
         # Network Manager Applet
-        "float, class:^(nm-applet)$"
-        "size 400 300, class:^(nm-applet)$"
-        "center, class:^(nm-applet)$"
-        "animation slide, class:^(nm-applet)$"
+        "match:class nm-applet, float on"
+        "match:class nm-applet, size 400 300"
+        "match:class nm-applet, center on"
+        "match:class nm-applet, animation slide"
 
         # OpenRGB
-        "float, class:^(openrgb)$"
-        "size 1000 700, class:^(openrgb)$"
-        "center, class:^(openrgb)$"
-        "animation slide, class:^(openrgb)$"
+        "match:class openrgb, float on"
+        "match:class openrgb, size 1000 700"
+        "match:class openrgb, center on"
+        "match:class openrgb, animation slide"
 
         # CoolerControl
-        "float, class:^(org.coolercontrol.CoolerControl)$"
-        "size 900 600, class:^(org.coolercontrol.CoolerControl)$"
-        "center, class:^(org.coolercontrol.CoolerControl)$"
-        "animation slide, class:^(org.coolercontrol.CoolerControl)$"
+        "match:class org.coolercontrol.CoolerControl, float on"
+        "match:class org.coolercontrol.CoolerControl, size 900 600"
+        "match:class org.coolercontrol.CoolerControl, center on"
+        "match:class org.coolercontrol.CoolerControl, animation slide"
 
         # Mullvad VPN
-        "pin, class:(Mullvad VPN)"
-        "rounding 10, class:(Mullvad VPN)"
+        "match:class Mullvad VPN, pin on"
+        "match:class Mullvad VPN, rounding 10"
 
         # Proton VPN
-        "pin, title:(Proton VPN)"
-        "size 403 600, title:(Proton VPN)"
-        "center, title:(Proton VPN)"
+        "match:title Proton VPN, pin on"
+        "match:title Proton VPN, size 403 600"
+        "match:title Proton VPN, center on"
 
         # Firefox browsers
-        "float, title:^(Incrustation vidéo)$"
-        "pin, title:^(Incrustation vidéo)$"
-        "keepaspectratio, title:^(Incrustation vidéo)$"
-        "noborder, title:^(Incrustation vidéo)$"
-        "size 35% 35%, title:^(Incrustation vidéo)$"
-        "move 911 50, title:^(Incrustation vidéo)$"
-        "size 490 154, title:^(Suppression des cookies.*)$"
-        "float, title:^(Extension:.*)$"
+        "match:title Incrustation vidéo, float on"
+        "match:title Incrustation vidéo, pin on"
+        "match:title Incrustation vidéo, keep_aspect_ratio on"
+        "match:title Incrustation vidéo, border_size 0"
+        "match:title Incrustation vidéo, size 35% 35%"
+        "match:title Incrustation vidéo, move 911 50"
+        "match:title Suppression des cookies.*, size 490 154"
+        "match:title Suppression des cookies.*, float on"
+        "match:title Suppression des cookies.*, center on"
+        "match:title Extension:.*, float on"
 
         # Gnome calculator
-        "float, class:(org.gnome.Calculator)" # All modes
-        #"size 670 700, class:(org.gnome.Calculator)" # Basic mode
-        "size 360 616, class:(org.gnome.Calculator)"
-        "move 1043 52, class:(org.gnome.Calculator)"
+        "match:class org.gnome.Calculator, float on"
+        "match:class org.gnome.Calculator, size 360 616"
+        "match:class org.gnome.Calculator, move 1043 52"
 
         # Keyring manager
-        "dimaround, class:(gcr-prompter)"
-        "pin, class:(gcr-prompter)"
-        "bordersize 3, class:(gcr-prompter)"
-        "animation slide,, class:(gcr-prompter)"
+        "match:class gcr-prompter, dim_around on"
+        "match:class gcr-prompter, pin on"
+        "match:class gcr-prompter, border_size 3"
+        "match:class gcr-prompter, animation slide"
 
         # Disk monitor (waybar)
-        "float, class:^(disk-monitor)$"
-        "size 1200 800, class:^(disk-monitor)$"
-        "center, class:^(disk-monitor)$"
-        "animation slide, class:^(disk-monitor)$"
+        "match:class disk-monitor, float on"
+        "match:class disk-monitor, size 1200 800"
+        "match:class disk-monitor, center on"
+        "match:class disk-monitor, animation slide"
 
         # System monitor (waybar)
-        "float, class:^(system-monitor)$"
-        "size 1200 800, class:^(system-monitor)$"
-        "center, class:^(system-monitor)$"
-        "animation slide, class:^(system-monitor)$"
+        "match:class system-monitor, float on"
+        "match:class system-monitor, size 1200 800"
+        "match:class system-monitor, center on"
+        "match:class system-monitor, animation slide"
 
         # Steam
-        "float, title:^(Steam Guard)$"
-        "float, title:^(Paramètres Steam)$"
-        "float, title:^(Liste de contacts)$"
-        "float, title:^(Offres spéciales)$"
-        "noborder, title:^(Paramètres Steam)$"
-        "noborder, title:^(Offres spéciales)$"
-        "noborder, title:^(Liste de contacts)$"
-        "size 480 480, title:^(Liste de contacts)"
-        "center, title:^(Liste de contacts)"
-        "center, class:^(steam_app_)$"
-        "fullscreen, class:^(steam_app_).*"
-        "animation slide, class:^(steam_app_).*"
+        "match:title Steam Guard, float on"
+        "match:title Paramètres Steam, float on"
+        "match:title Liste de contacts, float on"
+        "match:title Offres spéciales, float on"
+        "match:title Paramètres Steam, border_size 0"
+        "match:title Offres spéciales, border_size 0"
+        "match:title Liste de contacts, border_size 0"
+        "match:title Liste de contacts, size 480 480"
+        "match:title Liste de contacts, center on"
+        "match:class steam_app_, center on"
+        "match:class steam_app_.*, fullscreen on"
+        "match:class steam_app_.*, animation slide"
 
         # Wine/Lutris Games
-        "fullscreen, class:^(wine)$"
-        "fullscreen, class:^(lutris)$"
-        "workspace special:games, class:^(wine)$"
-        "workspace special:games, class:^(lutris)$"
+        "match:class wine, fullscreen on"
+        "match:class lutris, fullscreen on"
+        "match:class wine, workspace special:games"
+        "match:class lutris, workspace special:games"
 
         # Other Games
-        "fullscreen, class:^(minecraft-launcher)$"
-        "fullscreen, title:^(Minecraft)(.*)$"
-        "fullscreen, class:^(gamemoderun)$"
-        "fullscreen, class:^(heroic)$"
-        "fullscreen, class:^(legendary)$"
-        "fullscreen, class:^(bottles)$"
-        "fullscreen, class:^(retroarch)$"
-        "fullscreen, class:^(dolphin-emu)$"
-        "fullscreen, class:^(pcsx2-qt)$"
-        "fullscreen, class:^(rpcs3)$"
-        "fullscreen, class:^(yuzu)$"
-        "fullscreen, class:^(citra)$"
+        "match:class minecraft-launcher, fullscreen on"
+        "match:title Minecraft, fullscreen on"
+        "match:class gamemoderun, fullscreen on"
+        "match:class heroic, fullscreen on"
+        "match:class legendary, fullscreen on"
+        "match:class bottles, fullscreen on"
+        "match:class retroarch, fullscreen on"
+        "match:class dolphin-emu, fullscreen on"
+        "match:class pcsx2-qt, fullscreen on"
+        "match:class rpcs3, fullscreen on"
+        "match:class yuzu, fullscreen on"
+        "match:class citra, fullscreen on"
 
         # Specific Games Patterns
-        "fullscreen, title:.*[Gg]ame.*"
-        "fullscreen, class:^(com\.valvesoftware\.Steam)$"
-        "fullscreen, class:^(hl2_linux)$"
-        "fullscreen, class:^(csgo_linux64)$"
-        "fullscreen, class:^(dota2)$"
+        "match:title .*[Gg]ame.*, fullscreen on"
+        "match:class com.valvesoftware.Steam, fullscreen on"
+        "match:class hl2_linux, fullscreen on"
+        "match:class csgo_linux64, fullscreen on"
+        "match:class dota2, fullscreen on"
 
         # Generic Games Patterns
-        "fullscreen, class:.*[Gg]ame.*"
-        "fullscreen, title:.*[Ff]ullscreen.*"
+        "match:class .*[Gg]ame.*, fullscreen on"
+        "match:title .*[Ff]ullscreen.*, fullscreen on"
       ];
     };
   };
 }
+

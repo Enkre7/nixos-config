@@ -4,6 +4,7 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
+    includes = [ "~/.ssh/config.d/*" ];
     matchBlocks = {
       "*" = {
         controlMaster = "auto";
@@ -15,9 +16,8 @@
   };
   
   home.file = {
-    # SSH sockets dir
-    ".ssh/sockets/.keep".text = "# Managed by Home Manager"; 
-    # Yubikey .pub symlink
+    ".ssh/sockets/.keep".text = "# Managed by Home Manager";
+    ".ssh/config.d/.keep".text = "# SSH config includes";
     ".ssh/id_titanium.pub".source = config.lib.file.mkOutOfStoreSymlink "${config.flakePath}/keys/id_titanium.pub";
   };
 }
