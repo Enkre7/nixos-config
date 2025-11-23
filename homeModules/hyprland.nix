@@ -217,12 +217,12 @@ in
       ];
 
       # To get windows's names: hyprctl clients
-      windowrule = [
+      windowrulev2 = [
         # PulseAudio Volume Control
-        "float, on, class:org.pulseaudio.pavucontrol"
-        "size 800 600, class:org.pulseaudio.pavucontrol"
-        "center, class:org.pulseaudio.pavucontrol"
-        "animation slide, class:org.pulseaudio.pavucontrol"
+        "float, class:(org.pulseaudio.pavucontrol)"
+        "size 800 600, class:(org.pulseaudio.pavucontrol)"
+        "center, class:(org.pulseaudio.pavucontrol)"
+        "animation slide, class:(org.pulseaudio.pavucontrol)"
 
         # Nextcloud Client
         "float, class:com.nextcloud.desktopclient.nextcloud"

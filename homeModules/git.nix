@@ -17,7 +17,7 @@
       merge.tool = "meld";
       mergetool.cmd = "meld $LOCAL $MERGED $REMOTE --output $MERGED";
       credential.helper = "store";
-      url."https://github.com/".insteadOf = "git@github.com:";
+      url."git@github.com:".insteadOf = "https://github.com/";
     };
   };
   

@@ -12,6 +12,9 @@
     sshAgentAuth.enable = true;
   };
   security.sudo.execWheelOnly = true;
+  programs.ssh.extraConfig = ''
+    AddKeysToAgent yes
+  '';
   
   security.auditd.enable = true;
   
