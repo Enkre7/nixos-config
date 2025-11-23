@@ -35,11 +35,11 @@
         # Console output
         echo ""
         echo "GitHub SSH key generated"
-        echo "Run: show-github-key"
+        echo "Run: cat ~/.ssh/github.pub in terminal and setup it in Github."
         echo ""
         
         # Visual notification
-        $DRY_RUN_CMD ${pkgs.libnotify}/bin/notify-send "GitHub SSH Key" "Key generated. Run 'show-github-key' in terminal" -u critical -t 10000
+        $DRY_RUN_CMD ${pkgs.libnotify}/bin/notify-send "GitHub SSH Key" "Key generated. Run: cat ~/.ssh/github.pub in terminal and setup it in Github." -u critical -t 10000
       fi
       
       touch "$SETUP_FLAG"
