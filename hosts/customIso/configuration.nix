@@ -25,11 +25,24 @@
     
     setup-disk = ''
       lsblk && \
+      echo "" && \
+      echo "Choose installation type:" && \
+      echo "1) Standard (persistent root)" && \
+      echo "2) Impermanence (ephemeral root)" && \
+      read -p "Choice [1/2]: " CHOICE && \
       read -p "Enter DISKNAME to format: " DISKNAME && \
       DISKPATH="/dev/$DISKNAME" && \
+      if [ "$CHOICE" = "1" ]; then
+        DISKO_FILE="/tmp/nixos/tools/disko.nix"
+      elif [ "$CHOICE" = "2" ]; then
+        DISKO_FILE="/tmp/nixos/tools/disko-persist.nix"
+      else
+        echo "Invalid choice, using standard installation"
+        DISKO_FILE="/tmp/nixos/tools/disko.nix"
+      fi && \
       sudo nix --experimental-features "nix-command flakes" \
         run github:nix-community/disko -- \
-        --mode disko /tmp/nixos/tools/disko.nix \
+        --mode disko $DISKO_FILE \
         --argstr device $DISKPATH && \
       lsblk $DISKPATH --fs
     '';

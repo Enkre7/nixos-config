@@ -233,6 +233,11 @@ with lib;
       #workspaces button.focused {
         background: ${stylix.base03};
         color: ${stylix.base05};
+        opacity: 0.7;
+      }
+
+      #workspaces button.active:hover {
+      	opacity: 1;	
       }
 
       #workspaces button.urgent {
@@ -273,6 +278,14 @@ with lib;
         color: ${stylix.base03};
         background: ${stylix.base08};
         animation: blink 1s linear infinite;
+        padding: 5px 10px;
+        margin: 0 4px;
+        border-radius: 20px;
+        transition: all 0.3s cubic-bezier(0.55, 0.0, 0.28, 1.682);
+      }
+
+      #battery.critical:not(.charging):hover {
+	opacity: 0.33;	
       }
 
       @keyframes blink {

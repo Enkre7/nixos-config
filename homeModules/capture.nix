@@ -6,6 +6,7 @@
     grim
     slurp
     wl-clipboard
+    tesseract
   ];
     
   home.file = {

@@ -61,6 +61,7 @@ in
       "$systman" = "btop";
       "$screenshot" = "grim -g \"$(slurp)\" - | swappy -f -";
       "$clipboard" = "cliphist list | wofi --dmenu | cliphist decode | wl-copy";
+      #"$clipboard" = "~/.local/bin/cliphist-smart.sh";
       #"$powermenu" = "wlogout-wrapper";
       "$powermenu" = "rofi-powermenu";
       "$lockscreen" = "hyprlock";
