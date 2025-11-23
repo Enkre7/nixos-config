@@ -1,17 +1,14 @@
 { pkgs, modulesPath, ... }:
-
 {
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
   ];
-
   environment.systemPackages = with pkgs; [
     wget
     disko
     parted
     git
   ];
-
   environment.shellAliases = {
     setup-wifi = ''
       ifconfig && \
@@ -56,19 +53,49 @@
       if [ "$CHOICE" = "1" ]; then
         sudo mkdir -p /mnt/etc && \
         sudo cp -r /tmp/nixos /mnt/etc/nixos && \
+        echo "" && \
+        echo "⚠️  IMPORTANT: Edit configuration before installing!" && \
+        echo "   nano /mnt/etc/nixos/hosts/[hostname]/variables.nix" && \
+        echo "   Set: flakePath = \"/etc/nixos\"" && \
+        echo "" && \
+        echo "   Comment impermanence imports in:" && \
+        echo "   - config.nix" && \
+        echo "   - home.nix" && \
+        echo "   - flake.nix" && \
+        echo "" && \
         ls -lR /mnt/etc/nixos
       elif [ "$CHOICE" = "2" ]; then
         sudo mkdir -p /mnt/persist/system /mnt/persist/home && \
         sudo cp -r /tmp/nixos /mnt/persist/system/ && \
+        echo "" && \
+        echo "⚠️  IMPORTANT: Edit configuration before installing!" && \
+        echo "   nano /mnt/persist/system/nixos/hosts/[hostname]/variables.nix" && \
+        echo "   Set: flakePath = \"/persist/system/nixos\"" && \
+        echo "" && \
+        echo "   Uncomment impermanence imports in:" && \
+        echo "   - config.nix" && \
+        echo "   - home.nix" && \
+        echo "   - flake.nix" && \
+        echo "" && \
         ls -lR /mnt/persist/system
       else
         echo "Invalid choice, using standard installation" && \
         sudo mkdir -p /mnt/etc && \
         sudo cp -r /tmp/nixos /mnt/etc/nixos && \
+        echo "" && \
+        echo "⚠️  IMPORTANT: Edit configuration before installing!" && \
+        echo "   nano /mnt/etc/nixos/hosts/[hostname]/variables.nix" && \
+        echo "   Set: flakePath = \"/etc/nixos\"" && \
+        echo "" && \
+        echo "   Comment impermanence imports in:" && \
+        echo "   - config.nix" && \
+        echo "   - home.nix" && \
+        echo "   - flake.nix" && \
+        echo "" && \
         ls -lR /mnt/etc/nixos
       fi
     '';
-
+    
     setup-nixos = ''
       echo "" && \
       echo "Choose installation type:" && \
@@ -89,8 +116,7 @@
       sudo nixos-enter --root /mnt -c "passwd $USERNAME"
     '';    
   }; 
-	    
+	   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   nixpkgs.hostPlatform = "x86_64-linux";
 }
