@@ -48,10 +48,25 @@
     '';
     
     setup-dir = ''
-      sudo mkdir -p /mnt/persist/system && \
-      sudo mkdir -p /mnt/persist/home && \
-      sudo cp -r /tmp/nixos /mnt/persist/system/ && \
-      ls -lR /mnt/persist/system
+      echo "" && \
+      echo "Choose installation type:" && \
+      echo "1) Standard (persistent root)" && \
+      echo "2) Impermanence (ephemeral root)" && \
+      read -p "Choice [1/2]: " CHOICE && \
+      if [ "$CHOICE" = "1" ]; then
+        sudo mkdir -p /mnt/etc && \
+        sudo cp -r /tmp/nixos /mnt/etc/nixos && \
+        ls -lR /mnt/etc/nixos
+      elif [ "$CHOICE" = "2" ]; then
+        sudo mkdir -p /mnt/persist/system /mnt/persist/home && \
+        sudo cp -r /tmp/nixos /mnt/persist/system/ && \
+        ls -lR /mnt/persist/system
+      else
+        echo "Invalid choice, using standard installation" && \
+        sudo mkdir -p /mnt/etc && \
+        sudo cp -r /tmp/nixos /mnt/etc/nixos && \
+        ls -lR /mnt/etc/nixos
+      fi
     '';
     
     setup-nixos = ''
