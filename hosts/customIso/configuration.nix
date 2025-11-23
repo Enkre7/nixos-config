@@ -68,15 +68,28 @@
         ls -lR /mnt/etc/nixos
       fi
     '';
-    
+
     setup-nixos = ''
+      echo "" && \
+      echo "Choose installation type:" && \
+      echo "1) Standard (persistent root)" && \
+      echo "2) Impermanence (ephemeral root)" && \
+      read -p "Choice [1/2]: " CHOICE && \
       read -p "Enter flake's config hostname: " HOSTNAME && \
       read -p "Enter lowercase username: " USERNAME && \
-      sudo nixos-install --flake /mnt/persist/system/nixos#$HOSTNAME && \
-      passwd $USERNAME
-    '';
+      if [ "$CHOICE" = "1" ]; then
+        FLAKE_PATH="/mnt/etc/nixos"
+      elif [ "$CHOICE" = "2" ]; then
+        FLAKE_PATH="/mnt/persist/system/nixos"
+      else
+        echo "Invalid choice, using standard installation" && \
+        FLAKE_PATH="/mnt/etc/nixos"
+      fi && \
+      sudo nixos-install --flake $FLAKE_PATH#$HOSTNAME && \
+      sudo nixos-enter --root /mnt -c "passwd $USERNAME"
+    '';    
   }; 
-    
+	    
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
