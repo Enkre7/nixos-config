@@ -24,6 +24,7 @@
     ../../configModules/graphics.nix
     ../../configModules/printing.nix
     ../../configModules/rgb.nix
+    ../../configModules/coolercontrol.nix
   # Virtualization
     ../../configModules/virtualisation.nix
   # Desktop environment

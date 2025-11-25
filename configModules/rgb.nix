@@ -3,11 +3,8 @@
 {
   # Razer peripherals and AIO support
   hardware.openrazer.enable = true;
-  environment.systemPackages = with pkgs; [ openrazer-daemon polychromatic i2c-tools liquidctl];
+  environment.systemPackages = with pkgs; [ openrazer-daemon polychromatic i2c-tools ];
   users.users.${config.user}.extraGroups = [ "openrazer" ];
-  programs.coolercontrol = {
-    enable = true;
-  };
 
   # RGB controller
   boot = {

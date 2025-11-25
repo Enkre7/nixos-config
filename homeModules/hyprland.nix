@@ -234,7 +234,7 @@ in
 
         # CoolerControl
         "match:class org.coolercontrol.CoolerControl, float on"
-        "match:class org.coolercontrol.CoolerControl, size 900 600"
+        "match:class org.coolercontrol.CoolerControl, size 908 678"
         "match:class org.coolercontrol.CoolerControl, center on"
         "match:class org.coolercontrol.CoolerControl, animation slide"
 

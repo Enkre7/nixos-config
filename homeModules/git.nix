@@ -29,6 +29,7 @@
         $DRY_RUN_CMD ${pkgs.openssh}/bin/ssh-keygen -t ed25519 -C "${config.gitEmail}" -f $HOME/.ssh/github -N ""
         $DRY_RUN_CMD chmod 600 $HOME/.ssh/github
         $DRY_RUN_CMD chmod 644 $HOME/.ssh/github.pub
+        $DRY_RUN_CMD cd ${config.flakePath} && git remote set-url origin git@github.com:Enkre7/nixos-config.git
       fi
       
       if [ -f $HOME/.ssh/github.pub ]; then
