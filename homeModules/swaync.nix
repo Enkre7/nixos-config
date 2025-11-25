@@ -102,19 +102,22 @@ in
       }
 
       .notification {
-        background: transparent;
-        padding: 0;
-        margin: 0;
-      }
-
-      /* === NOTIFICATION CONTENT === */
-      .notification-content {
         background: #${stylix.base00};
         padding: 12px;
         border-radius: 8px;
         border: 2px solid #${stylix.base0D};
         margin: 0;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+       }
+
+      /* === NOTIFICATION CONTENT === */
+      .notification-content {
+        background: transparent;
+        padding: 0;
+        border-radius: 0;
+        border: none;
+        margin: 0;
+        box-shadow: none;
       }
 
       .notification-default-action {
@@ -132,17 +135,17 @@ in
         background: #${stylix.base08};
         color: #${stylix.base00};
         text-shadow: none;
-        padding: 4px 8px;
+        padding: 2px 4px;
         border-radius: 8px;
         margin-top: 8px;
         margin-right: 8px;
-        min-width: 24px;
-        min-height: 24px;
+        min-width: 12px;
+        min-height: 12px;
+        font-size: 10px;
       }
 
       .close-button:hover {
         background: #${stylix.base09};
-        transform: scale(1.1);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
 
@@ -327,6 +330,7 @@ in
         padding: 12px;
         margin: 8px 12px;
         border-radius: 10px;
+        border: 2px solid #${stylix.base03};
       }
 
       .widget-mpris > box > button {
@@ -334,6 +338,7 @@ in
         background: #${stylix.base02};
         padding: 8px;
         margin: 2px;
+        color: #${stylix.base05};
       }
 
       .widget-mpris > box > button:hover {
@@ -345,13 +350,16 @@ in
       .widget-mpris-player {
         padding: 8px;
         margin: 4px;
+        background: #${stylix.base02};
+        border-radius: 8px;        
       }
 
       .widget-mpris-title {
         font-weight: 700;
-        font-size: 0.95rem;
+        font-size: 0.85rem;
         color: #${stylix.base0D};
         margin-bottom: 4px;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
       }
 
       .widget-mpris-subtitle {
