@@ -13,10 +13,7 @@ in
   stylix.targets.firefox.colorTheme.enable = true;
   programs.firefox = {
     enable = true;
-    languagePacks = [
-      "fr"
-      "en-US"
-    ];
+    languagePacks = [ "fr" "en-US" ];
     policies = {
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
@@ -119,6 +116,9 @@ in
       ];
       extensions.force = true;
       settings = {
+        # Force French language
+        "intl.accept_languages" = "fr-FR, fr, en-US, en";
+        "intl.locale.requested" = "fr";
 
         # DDNS
         "network.trr.mode" = 2;

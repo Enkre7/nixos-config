@@ -320,5 +320,11 @@ in
       entityColors = [];
       showOnboarding = false;
     })}"
+    "d /root/.config/org.coolercontrol.CoolerControl 0755 root root -"
+    "C /root/.config/org.coolercontrol.CoolerControl/CoolerControl.conf 0644 root root - ${pkgs.writeText "CoolerControl.conf" ''
+      [General]
+      closeToTray=true
+      startInTray=true
+    ''}"
   ];
 }
