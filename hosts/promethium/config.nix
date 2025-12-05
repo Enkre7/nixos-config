@@ -67,5 +67,9 @@
   environment.sessionVariables = {
     STEAM_FORCE_DESKTOPUI_SCALING = "1.6";
   };
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "ciscoPacketTracer8-8.2.2"
+  ];
 }
 
