@@ -77,4 +77,7 @@
     #picard
     #powershell
   ];
+  nixpkgs.config.permittedInsecurePackages = [
+    "ciscoPacketTracer8-8.2.2"
+  ];
 }
