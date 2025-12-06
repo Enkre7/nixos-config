@@ -5,6 +5,7 @@
 #### You need the NixOS custom ISO to proceed:
 See [INSTALL.md](INSTALL.md)
 
+## O. Keyboard layout
 Boot the NixOS ISO and set keyboard layout:
 ```bash
 sudo loadkeys fr
