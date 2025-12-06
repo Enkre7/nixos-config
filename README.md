@@ -32,10 +32,10 @@ NixOS configuration with Flakes, Home-manager, Lanzaboot, nixos-hardware, nh, im
 
 ## Documentation
 
+- **[BUILD_CUSTOM_ISO.md](BUILD_CUSTOM_ISO.md)** - Custom ISO creation
 - **[INSTALL.md](INSTALL.md)** - Installation guide
 - **[POST-INSTALL.md](POST-INSTALL.md)** - Post-installation setup
 - **[CONFIGURATION.md](CONFIGURATION.md)** - Configuration guide
-- **[Build_custom_ISO.md](Build_custom_ISO.md)** - Custom ISO creation
 
 ## Quick Start
 
