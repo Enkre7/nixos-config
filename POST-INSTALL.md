@@ -1,64 +1,138 @@
 # Post-Installation Guide
 
-## Essential Setup
+## 1. Essential Setup
 
-### Configure flakePath
+### 1.1 Configure flakePath
 
 Edit `hosts/[hostname]/variables.nix`:
 
-**Standard:**
 ```nix
+# Standard installation
 flakePath = "/etc/nixos";
-```
 
-**Impermanence:**
-```nix
+# Impermanence installation
 flakePath = "/persist/system/nixos";
 ```
 
-This configures all aliases and paths automatically.
+### 1.2 Setup Git
 
-### Setup Git
+Home Manager automatically generates SSH keys on first boot at `~/.ssh/github` and `~/.ssh/github.pub`. A notification will prompt you to add the key to GitHub.
 
 ```bash
-# Copy SSH keys
-chmod 600 ~/.ssh/id_*
-chmod 644 ~/.ssh/*.pub
+# Display public key
+cat ~/.ssh/github.pub
 
+# Add to GitHub: Settings → SSH and GPG keys → New SSH key
 # Configure remote (use your flakePath)
 cd /etc/nixos  # or /persist/system/nixos
 git remote set-url origin git@github.com:Enkre7/nixos-config.git
+
+# Test connection
+ssh -T git@github.com
 ```
 
-## Optional Setup
+**Note:** Permissions are set automatically. With impermanence, ensure SSH keys persist in `/persist/home/[user]/.ssh`.
 
-### Secure Boot (Lanzaboot)
+---
 
+## 2. Optional Setup
+
+### 2.1 Secure Boot (Lanzaboot)
+
+Lanzaboot enables Secure Boot on NixOS by automatically signing the kernel and initramfs. Secure Boot ensures only digitally signed software can boot, protecting against rootkits and malicious bootloaders.
+
+**Prerequisites:**
+- Lanzaboot enabled in configuration before installation
+- `../../configModules/lanzaboote.nix` imported in `config.nix`
+- UEFI system (not Legacy BIOS)
+
+#### Setup Process
+
+**Step 1: Create Secure Boot keys**
 ```bash
 sudo sbctl create-keys
+```
+Generates PK, KEK, and db keys in `/etc/secureboot/`.
+
+**Step 2: Rebuild system**
+```bash
 sudo nixos-rebuild switch
-sudo reboot  # Delete old keys in BIOS
+```
+Automatically signs kernel, initramfs, and configures bootloader.
+
+**Step 3: Clear old keys in BIOS**
+```bash
+sudo reboot
+```
+In BIOS/UEFI (F2/Del/F12):
+- Navigate to Security → Secure Boot
+- Select "Clear All Secure Boot Keys"
+- Save and exit
+
+**Step 4: Enroll your keys**
+```bash
 sudo sbctl enroll-keys --microsoft
-sudo reboot  # Enable Secure Boot in BIOS
+```
+Flag `--microsoft` keeps Microsoft keys for firmware compatibility and Windows dual-boot.
+
+**Step 5: Enable Secure Boot**
+```bash
+sudo reboot
+```
+In BIOS/UEFI:
+- Security → Secure Boot → Enabled
+- Save and exit
+
+#### Verification
+
+```bash
+sudo sbctl status
 ```
 
-### Yubikey Authentication
+Expected output:
+```
+Installed:      ✓ sbctl is installed
+Setup Mode:     ✓ Disabled
+Secure Boot:    ✓ Enabled
+Vendor Keys:    microsoft
+```
+
+#### Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| System won't boot | Disable Secure Boot in BIOS → `sudo sbctl verify` → `sudo sbctl sign-all` → Re-enable |
+| "Setup Mode: Enabled" | Run `sudo sbctl enroll-keys --microsoft` |
+| Windows dual-boot | Use `--microsoft` flag (required) |
+
+**Notes:**
+- Lanzaboot auto-signs new kernels during updates
+- Backup keys in `/etc/secureboot/`
+- Reinstallation requires repeating all steps
+
+---
+
+### 2.2 Yubikey Authentication
 
 ```bash
 mkdir -p ~/.config/Yubico
 pamu2fcfg > ~/.config/Yubico/u2f_keys
 ```
 
-### Fingerprint (Framework Laptop)
+---
+
+### 2.3 Fingerprint (Framework Laptop)
 
 ```bash
 sudo fprintd-enroll $USER
 fprintd-verify
 ```
 
-## Impermanence Only
+---
 
-For impermanence installation, uncomment these imports:
+## 3. Impermanence Configuration
+
+**Only for impermanence installations.** Uncomment these imports:
 
 **In `config.nix`:**
 ```nix
@@ -70,17 +144,14 @@ For impermanence installation, uncomment these imports:
 ../../homeModules/impermanence.nix
 ```
 
-**In `flake.nix`:**
-```nix
-inputs.impermanence.nixosModules.impermanence
-```
-
-Then rebuild:
+**Apply changes:**
 ```bash
 sudo nixos-rebuild switch
 ```
 
-## Verify Installation
+---
+
+## 4. System Verification
 
 ```bash
 # Check mount points
