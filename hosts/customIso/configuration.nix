@@ -11,11 +11,12 @@
   ];
   environment.shellAliases = {
     setup-wifi = ''
-      ifconfig && \
+      ip link show && \
+      echo "" && \
       read -p "Enter wifi interface: " INTERFACE && \
       read -p "Enter wifi SSID: " WIFI_SSID && \
       read -p "Enter wifi password: " WIFI_PASSWORD && \
-      wpa_passphrase '$WIFI_SSID' '$WIFI_PASSWORD' | sudo wpa_supplicant -B -i $INTERFACE -c /dev/stdin
+      wpa_passphrase "$WIFI_SSID" "$WIFI_PASSWORD" | sudo wpa_supplicant -B -i "$INTERFACE" -c /dev/stdin
     '';
     
     setup-repo = "git clone https://github.com/Enkre7/nixos-config /tmp/nixos";
