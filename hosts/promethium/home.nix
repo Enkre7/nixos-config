@@ -67,7 +67,7 @@
   # Host specific settings
   programs.yt-dlp.enable = true;
   home.packages = with pkgs; [
-    ciscoPacketTracer8
+    #ciscoPacketTracer8
     prusa-slicer
     drawio
     vesktop # discord
@@ -77,7 +77,7 @@
     #picard
     #powershell
   ];
-  nixpkgs.config.permittedInsecurePackages = [
-    "ciscoPacketTracer8-8.2.2"
-  ];
+  #nixpkgs.config.permittedInsecurePackages = [
+  #  "ciscoPacketTracer8-8.2.2"
+  #];
 }

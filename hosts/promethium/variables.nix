@@ -39,7 +39,7 @@
     stateVersion = "25.05";
     hostname = "promethium";
     user = "enkre";
-    flakePath = "/persist/system/nixos";
+    flakePath = "/etc/nixos";
     dotfilesPath = "${config.flakePath}/dotfiles";
     wallpaper = "${config.dotfilesPath}/wallpapers/gruvbox-light-kojiro.png"; # only png
     styleTheme = "gruvbox-light"; 
