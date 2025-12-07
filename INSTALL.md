@@ -2,109 +2,110 @@
 
 ## Prerequisites
 
-#### You need the NixOS custom ISO to proceed:
-See [BUILD_CUSTOM_ISO.md](BUILD_CUSTOM_ISO.md)
+You need the NixOS custom ISO. See [BUILD_CUSTOM_ISO.md](BUILD_CUSTOM_ISO.md)
 
-## 0. Keyboard layout
-Boot the NixOS ISO and set keyboard layout:
+## Installation Steps
+
+### 1. Boot ISO
+
+Boot from the custom ISO and set keyboard layout if needed:
+
 ```bash
 sudo loadkeys fr
 ```
 
-## 1. Network Setup
+### 2. Network
 
-**Ethernet:** Plug cable
+**Ethernet:** Plug cable (automatic)
 
 **WiFi:**
 ```bash
-read -p "Interface: " INTERFACE
-read -p "SSID: " WIFI_SSID
-read -p "Password: " WIFI_PASSWORD
-wpa_passphrase "$WIFI_SSID" "$WIFI_PASSWORD" | sudo wpa_supplicant -B -i $INTERFACE -c /dev/stdin
+setup-wifi
 ```
 
-## 2. Clone Repository
+### 3. Clone Repository
 
 ```bash
-nix-shell -p git --command "git clone https://github.com/Enkre7/nixos-config /tmp/nixos"
+setup-repo
 ```
 
-## 3. Partition Disk
+### 4. Partition Disk
 
 ⚠️ **This ERASES ALL DATA!**
 
-Identify disk:
 ```bash
-lsblk
+setup-disk
 ```
 
-### Standard Installation (disko.nix)
+Choose installation type and enter disk name (e.g., `nvme0n1`, `sda`)
 
-Persistent root - recommended for most users.
-
-```bash
-read -p "Disk name (e.g., nvme0n1): " DISKNAME
-sudo nix --experimental-features "nix-command flakes" \
-  run github:nix-community/disko -- \
-  --mode disko /tmp/nixos/tools/disko.nix \
-  --argstr device "/dev/$DISKNAME"
-```
-
-**Subvolumes:** `/`, `/home`, `/nix`, `/var/log`, `/.snapshots`
-
-### Impermanence Installation (disko-persist.nix)
-
-Ephemeral root - wiped on each boot.
+### 5. Copy Configuration
 
 ```bash
-read -p "Disk name (e.g., nvme0n1): " DISKNAME
-sudo nix --experimental-features "nix-command flakes" \
-  run github:nix-community/disko -- \
-  --mode disko /tmp/nixos/tools/disko-persist.nix \
-  --argstr device "/dev/$DISKNAME"
+setup-dir
 ```
 
-**Subvolumes:** `/`, `/persist`, `/nix`, `/var/log`, `/.snapshots`
+### 6. Edit Configuration
 
-## 4. Copy Configuration
-
-**Standard:**
+**Standard installation:**
 ```bash
-sudo mkdir -p /mnt/etc
-sudo cp -r /tmp/nixos /mnt/etc/nixos
+nano /mnt/etc/nixos/hosts/[hostname]/variables.nix
 ```
 
-**Impermanence:**
+Set:
+```nix
+flakePath = "/etc/nixos";
+dotfilesPath = "/etc/nixos/dotfiles";
+```
+
+Comment out impermanence imports in `config.nix`, `home.nix`, and `flake.nix`
+
+**Impermanence installation:**
 ```bash
-sudo mkdir -p /mnt/persist/system /mnt/persist/home
-sudo cp -r /tmp/nixos /mnt/persist/system/
+nano /mnt/persist/system/nixos/hosts/[hostname]/variables.nix
 ```
 
-## 5. Install
+Set:
+```nix
+flakePath = "/persist/system/nixos";
+dotfilesPath = "/persist/system/nixos/dotfiles";
+```
+
+Uncomment impermanence imports in `config.nix`, `home.nix`, and `flake.nix`
+
+### 7. Install
 
 ```bash
-read -p "Hostname (zirconium/promethium): " HOSTNAME
-read -p "Username: " USERNAME
+setup-nixos
 ```
 
-**Standard:**
-```bash
-sudo nixos-install --flake /mnt/etc/nixos#$HOSTNAME
-sudo nixos-enter --root /mnt -c "passwd $USERNAME"
-```
+Choose installation type, hostname (`zirconium` or `promethium`), and username.
 
-**Impermanence:**
-```bash
-sudo nixos-install --flake /mnt/persist/system/nixos#$HOSTNAME
-sudo nixos-enter --root /mnt -c "passwd $USERNAME"
-```
-
-## 6. Reboot
+### 8. Reboot
 
 ```bash
 sudo reboot
 ```
 
+## Quick Reference
+
+```bash
+setup-help       # Show all commands
+setup-wifi       # Configure WiFi
+setup-repo       # Clone repository
+setup-disk       # Partition disk
+setup-dir        # Copy configuration
+setup-nixos      # Install NixOS
+```
+
+## Installation Types
+
+**Standard:** Persistent root (recommended)
+- Subvolumes: `/`, `/home`, `/nix`, `/var/log`, `/.snapshots`
+
+**Impermanence:** Ephemeral root (wiped on boot)
+- Subvolumes: `/`, `/persist`, `/nix`, `/var/log`, `/.snapshots`
+
 ## Next Steps
 
-See [POST-INSTALL.md](POST-INSTALL.md) for post-installation configuration.
+After installation: [POST-INSTALL.md](POST-INSTALL.md)
