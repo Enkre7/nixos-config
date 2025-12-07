@@ -3,7 +3,7 @@
 ## Prerequisites
 
 #### You need the NixOS custom ISO to proceed:
-See [INSTALL.md](INSTALL.md)
+See [BUILD_CUSTOM_ISO.md](BUILD_CUSTOM_ISO.md)
 
 ## 0. Keyboard layout
 Boot the NixOS ISO and set keyboard layout:
