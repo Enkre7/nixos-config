@@ -3,7 +3,7 @@
 {
   services.printing = {
     enable = true;
-    drivers = with pkgs; [ brgenml1cupswrapper ];
+    drivers = with pkgs; [ brgenml1cupswrapper gutenprint ];
   };
   programs.system-config-printer.enable = true;
   
@@ -26,13 +26,19 @@
     openFirewall = true;
     publish = {
       enable = true;
-      addresses = true;
-      workstation = true;
+      userServices = true;
     };
+  };
+  services.printing = {
+    listenAddresses = [ "*:631" ];
+    allowFrom = [ "all" ];
+    browsing = true;
+    defaultShared = true;
+    openFirewall = true;
   };
   
   services.ipp-usb.enable = true;
   users.users.${config.user}.extraGroups = [ "scanner" "lp" ];
 
-  environment.systemPackages = with pkgs; [ simple-scan ];
+  environment.systemPackages = with pkgs; [ simple-scan system-config-printer ];
 }
