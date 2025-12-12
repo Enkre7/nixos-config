@@ -40,5 +40,5 @@
   services.ipp-usb.enable = true;
   users.users.${config.user}.extraGroups = [ "scanner" "lp" ];
 
-  environment.systemPackages = with pkgs; [ simple-scan system-config-printer ];
+  environment.systemPackages = with pkgs; [ simple-scan system-config-printer gscan2pdf ];
 }

@@ -30,7 +30,7 @@
  
   # Nvidia GPU
   hardware.enableRedistributableFirmware = true;
-  hardware.nvidia.open = true;
+  hardware.nvidia.open = false;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;  
   hardware.nvidia.powerManagement.enable = true;
 
