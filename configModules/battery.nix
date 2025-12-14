@@ -77,23 +77,39 @@ with lib;
     cpuFreqGovernor = mkIf (!config.isLaptop) "performance";
   };
   
-  # Hybrid sleep configuration
+  # Disable suspend-then-hibernate to prevent automatic hibernation after suspend
+  systemd.services."systemd-suspend-then-hibernate" = mkIf config.isLaptop {
+    enable = false;
+  };
+  
+  systemd.targets."suspend-then-hibernate" = mkIf config.isLaptop {
+    enable = false;
+  };
+  
+  # Sleep configuration - allow suspend and hibernate separately, disable hybrid modes
   systemd.sleep.extraConfig = mkIf config.isLaptop ''
     [Sleep]
-    HibernateDelaySec=120m
-    SuspendEstimationSec=15
-    HibernateEstimationSec=30
+    AllowSuspend=yes
+    AllowHibernation=yes
+    AllowSuspendThenHibernate=no
+    AllowHybridSleep=no
   '';
   
-  services.logind = {
-    settings.Login = {
-      HandleLidSwitch = mkIf config.isLaptop "suspend-then-hibernate";
-      HandleLidSwitchExternalPower = mkIf config.isLaptop "lock";
-      IdleAction = "lock";
-      IdleActionSec = 300;
-      HandlePowerKey = "suspend";
-      HandlePowerKeyLongPress = "poweroff";
-    };
+  # Logind configuration for lid switch and power management
+  services.logind = mkIf config.isLaptop {
+    lidSwitch = "suspend";
+    lidSwitchExternalPower = "lock";
+    lidSwitchDocked = "ignore";
+    extraConfig = ''
+      HandleLidSwitch=suspend
+      HandleLidSwitchExternalPower=lock
+      HandleLidSwitchDocked=ignore
+      IdleAction=lock
+      IdleActionSec=600
+      HandlePowerKey=suspend
+      HandlePowerKeyLongPress=poweroff
+      InhibitDelayMaxSec=5
+    '';
   };
 
   # Battery management utilities

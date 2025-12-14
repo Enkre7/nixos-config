@@ -62,8 +62,8 @@ in
       exec-once = ''${startupScript}/bin/start'';
 
       general = {
-        gaps_in = 3;
-        gaps_out = 5;
+        gaps_in = 2;
+        gaps_out = 2;
         border_size = 2;
         "col.active_border" = lib.mkForce "rgb(${stylix.base0D})";
         "col.inactive_border" = lib.mkForce "rgb(${stylix.base03})";

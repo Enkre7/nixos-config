@@ -44,7 +44,7 @@ let
                 hyprlock
                 ;;
             "$suspend")
-                hyprlock && systemctl suspend
+                systemctl suspend
                 ;;
             "$logout")
                 ${logoutCommand}

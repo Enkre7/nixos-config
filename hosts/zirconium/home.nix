@@ -12,6 +12,7 @@
     #../../homeModules/sway.nix
     #../../homeModules/niri.nix
     ../../homeModules/hyprlock.nix
+    ../../homeModules/swayidle.nix
     ../../homeModules/waybar.nix
     #../../homeModules/wlogout.nix
     #../../homeModules/wofi.nix
