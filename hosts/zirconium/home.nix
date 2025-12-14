@@ -58,8 +58,6 @@
   # Host specific settings
   wayland.windowManager.hyprland.settings = {
     monitor = lib.mkForce ",preferred,auto,1.3334";
-    general.gaps_in = lib.mkForce 4;
-    general.gaps_out = lib.mkForce 7;
   }; 
   
   xsession.numlock.enable = true;
