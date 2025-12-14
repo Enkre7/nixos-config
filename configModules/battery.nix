@@ -9,11 +9,9 @@ with lib;
       isAMD = config.cpuVendor == "AMD";
       isIntel = config.cpuVendor == "Intel";
     in {
-      # General settings
       TLP_DEFAULT_MODE = "BAT";
       TLP_PERSISTENT_DEFAULT = 1;
       
-      # CPU settings - these are safe for both Intel and AMD
       CPU_BOOST_ON_AC = 1;
       CPU_BOOST_ON_BAT = 0;
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
@@ -25,22 +23,18 @@ with lib;
       CPU_MIN_PERF_ON_BAT = 0;
       CPU_MAX_PERF_ON_BAT = 50;
       
-      # Vendor-specific platform profiles
       PLATFORM_PROFILE_ON_AC = mkIf isAMD "performance";
       PLATFORM_PROFILE_ON_BAT = mkIf isAMD "low-power";
       
-      # Power management for PCI devices
       RUNTIME_PM_ON_AC = "auto";
       RUNTIME_PM_ON_BAT = "auto";
       PCIE_ASPM_ON_AC = "default";
       PCIE_ASPM_ON_BAT = "powersupersave";
       
-      # USB power management
       USB_AUTOSUSPEND = 1;
       USB_EXCLUDE_AUDIO = 1;
       USB_EXCLUDE_BTUSB = 1;
       
-      # Disk settings
       DISK_IOSCHED = "bfq";
       DISK_IDLE_SECS_ON_AC = 0;
       DISK_IDLE_SECS_ON_BAT = 2;
@@ -49,13 +43,11 @@ with lib;
       DISK_SPINDOWN_TIMEOUT_ON_AC = "0 0";
       DISK_SPINDOWN_TIMEOUT_ON_BAT = "1 1";
       
-      # AMD-specific GPU settings
       RADEON_DPM_PERF_LEVEL_ON_AC = mkIf isAMD "auto";
       RADEON_DPM_PERF_LEVEL_ON_BAT = mkIf isAMD "low";
       RADEON_POWER_PROFILE_ON_AC = mkIf isAMD "high";
       RADEON_POWER_PROFILE_ON_BAT = mkIf isAMD "low";
       
-      # Intel-specific GPU settings - only applied on Intel systems
       INTEL_GPU_MIN_FREQ_ON_AC = mkIf isIntel "100";
       INTEL_GPU_MIN_FREQ_ON_BAT = mkIf isIntel "100";
       INTEL_GPU_MAX_FREQ_ON_AC = mkIf isIntel "1300";
@@ -65,10 +57,7 @@ with lib;
     };
   };
 
-  # Thermald service (especially useful for Intel CPUs)
   services.thermald.enable = config.cpuVendor == "Intel";
-  
-  # Power profiles daemon is handled by nixos-hardware, disable to avoid conflicts
   services.power-profiles-daemon.enable = mkForce false;
   
   powerManagement = {
@@ -77,33 +66,24 @@ with lib;
     cpuFreqGovernor = mkIf (!config.isLaptop) "performance";
   };
   
-  # Disable suspend-then-hibernate to prevent automatic hibernation after suspend
-  systemd.services."systemd-suspend-then-hibernate" = mkIf config.isLaptop {
-    enable = false;
-  };
+  # Disable suspend-then-hibernate
+  systemd.services."systemd-suspend-then-hibernate".enable = mkIf config.isLaptop false;
+  systemd.targets."suspend-then-hibernate".enable = mkIf config.isLaptop false;
   
-  systemd.targets."suspend-then-hibernate" = mkIf config.isLaptop {
-    enable = false;
-  };
-  
-  # Sleep configuration - allow suspend and hibernate separately, disable hybrid modes
+  # Sleep configuration
   systemd.sleep.extraConfig = mkIf config.isLaptop ''
-    [Sleep]
     AllowSuspend=yes
     AllowHibernation=yes
     AllowSuspendThenHibernate=no
     AllowHybridSleep=no
   '';
   
-  # Logind configuration for lid switch and power management
+  # Logind configuration
   services.logind = mkIf config.isLaptop {
     lidSwitch = "suspend";
     lidSwitchExternalPower = "lock";
     lidSwitchDocked = "ignore";
     extraConfig = ''
-      HandleLidSwitch=suspend
-      HandleLidSwitchExternalPower=lock
-      HandleLidSwitchDocked=ignore
       IdleAction=lock
       IdleActionSec=600
       HandlePowerKey=suspend
@@ -112,7 +92,6 @@ with lib;
     '';
   };
 
-  # Battery management utilities
   environment.systemPackages = with pkgs; mkIf config.isLaptop [
     powertop
     acpi
@@ -122,6 +101,5 @@ with lib;
     nvtopPackages.full
   ];
   
-  # Enable the scheduler profiles, which is especially useful on Ryzen systems
   services.system76-scheduler.settings.cfsProfiles.enable = true;
 }
