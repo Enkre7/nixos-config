@@ -5,7 +5,6 @@
 ### 1.1 Configure flakePath
 
 Edit `hosts/[hostname]/variables.nix`:
-
 ```nix
 # Standard installation
 flakePath = "/etc/nixos";
@@ -17,7 +16,6 @@ flakePath = "/persist/system/nixos";
 ### 1.2 Setup Git
 
 Home Manager automatically generates SSH keys on first boot at `~/.ssh/github` and `~/.ssh/github.pub`. A notification will prompt you to add the key to GitHub.
-
 ```bash
 # Display public key
 cat ~/.ssh/github.pub
@@ -84,7 +82,6 @@ In BIOS/UEFI:
 - Save and exit
 
 #### Verification
-
 ```bash
 sudo sbctl status
 ```
@@ -112,8 +109,81 @@ Vendor Keys:    microsoft
 
 ---
 
-### 2.2 Yubikey Authentication
+### 2.2 Firmware Updates (fwupd)
 
+Keep your hardware firmware up to date for better security, stability, and performance. This is especially important for Framework laptops and other modern hardware.
+
+#### Check for Updates
+```bash
+# Refresh firmware metadata
+fwupdmgr refresh --force
+
+# Check available updates
+fwupdmgr get-updates
+```
+
+#### Install Updates
+```bash
+# Install all available firmware updates
+fwupdmgr update
+
+# System will reboot if required
+```
+
+#### Verify Installation
+```bash
+# Check firmware versions
+fwupdmgr get-devices
+
+# View update history
+fwupdmgr get-history
+```
+
+#### Automated Updates
+
+To enable automatic firmware updates, edit your configuration:
+```nix
+# In configModules/hardware.nix or config.nix
+services.fwupd.enable = true;
+```
+
+Then rebuild:
+```bash
+rebuild
+```
+
+#### Using the Alias
+
+For convenience, use the pre-configured alias:
+```bash
+# Refresh, check, and install updates in one command
+update-firmware
+```
+
+This alias is defined in `homeModules/shell.nix` and runs:
+- `fwupdmgr refresh --force` - Updates firmware database
+- `fwupdmgr get-updates` - Shows available updates
+- `fwupdmgr update` - Installs updates
+
+#### Notes
+
+- **Framework Laptop users:** Firmware updates are critical for BIOS, embedded controller, and expansion card functionality
+- Updates may require a reboot to apply
+- Some updates can only be installed once per boot cycle
+- Keep your system plugged in during firmware updates
+- Review release notes before major firmware updates
+
+#### Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| "No devices found" | Ensure fwupd service is running: `systemctl status fwupd` |
+| Update fails | Check logs: `journalctl -u fwupd -b` |
+| Device not listed | Some devices require specific LVFS (Linux Vendor Firmware Service) support |
+
+---
+
+### 2.3 Yubikey Authentication
 ```bash
 mkdir -p ~/.config/Yubico
 pamu2fcfg > ~/.config/Yubico/u2f_keys
@@ -121,8 +191,7 @@ pamu2fcfg > ~/.config/Yubico/u2f_keys
 
 ---
 
-### 2.3 Fingerprint (Framework Laptop)
-
+### 2.4 Fingerprint (Framework Laptop)
 ```bash
 sudo fprintd-enroll $USER
 fprintd-verify
@@ -152,7 +221,6 @@ sudo nixos-rebuild switch
 ---
 
 ## 4. System Verification
-
 ```bash
 # Check mount points
 lsblk -f
@@ -160,6 +228,38 @@ lsblk -f
 # Verify Secure Boot (if enabled)
 sudo sbctl status
 
+# Check firmware status
+fwupdmgr get-devices
+
 # Test rebuild alias
+rebuild
+```
+
+---
+
+## 5. Recommended Post-Installation Steps
+
+1. **Update firmware** (see section 2.2)
+2. **Configure Git** for your NixOS config repository
+3. **Setup Secure Boot** if using compatible hardware
+4. **Enable fingerprint** on supported laptops
+5. **Test all hardware** (WiFi, Bluetooth, audio, etc.)
+6. **Create initial system backup** or snapshot
+7. **Document any hardware-specific tweaks** needed
+
+---
+
+## 6. Regular Maintenance
+```bash
+# Update system packages
+update
+
+# Update firmware
+update-firmware
+
+# Clean old generations
+clean-gen +7  # Keep last 7 generations
+
+# Check system health
 rebuild
 ```
