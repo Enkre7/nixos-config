@@ -12,13 +12,13 @@
       dns = "systemd-resolved";
       wifi = {
         powersave = false;
-        backend = "iwd";
+        backend = "wpa_supplicant";
         macAddress = "stable";
       };
     };
 
     wireless.iwd = {
-      enable = true;
+      enable = false;
       settings = {
         General = {
           EnableNetworkConfiguration = false;
