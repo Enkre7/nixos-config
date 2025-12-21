@@ -79,17 +79,15 @@ with lib;
   '';
   
   # Logind configuration
-  services.logind = mkIf config.isLaptop {
+  services.logind.settings.Login = mkIf config.isLaptop {
     lidSwitch = "suspend";
     lidSwitchExternalPower = "lock";
     lidSwitchDocked = "ignore";
-    extraConfig = ''
-      IdleAction=lock
-      IdleActionSec=600
-      HandlePowerKey=suspend
-      HandlePowerKeyLongPress=poweroff
-      InhibitDelayMaxSec=5
-    '';
+    IdleAction = "lock";
+    IdleActionSec = 600;
+    HandlePowerKey = "suspend";
+    HandlePowerKeyLongPress = "poweroff";
+    InhibitDelayMaxSec = 5;
   };
 
   environment.systemPackages = with pkgs; mkIf config.isLaptop [
