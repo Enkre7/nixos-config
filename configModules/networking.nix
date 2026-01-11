@@ -3,31 +3,25 @@
 {
   networking = {
     hostName = config.hostname;
-
     useDHCP = lib.mkDefault true;
     wireless.enable = lib.mkForce false;
 
     networkmanager = {
       enable = true;
       dns = "systemd-resolved";
-      wifi = {
-        powersave = false;
-        backend = "wpa_supplicant";
-        macAddress = "stable";
-      };
+      wifi.backend = "iwd";
     };
 
     wireless.iwd = {
-      enable = false;
+      enable = true;
       settings = {
         General = {
           EnableNetworkConfiguration = false;
-          AddressRandomization = "once";
         };
-        Settings.AutoConnect = true;
       };
     };
   };
+  
   services.resolved.enable = true;
 
   # Network discovery
