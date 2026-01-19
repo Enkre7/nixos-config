@@ -70,6 +70,7 @@
   home.packages = with pkgs; [
     #ciscoPacketTracer8
     prusa-slicer
+    gparted
     drawio
     vesktop # discord
     gnome-calculator
