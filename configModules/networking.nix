@@ -17,6 +17,8 @@
       settings = {
         General = {
           EnableNetworkConfiguration = false;
+          AddressRandomization = "network";
+          ControlPortOverNL80211 = false;
         };
       };
     };

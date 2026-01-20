@@ -6,7 +6,7 @@
   stylix.targets.rofi.enable = false; 
   stylix.targets.hyprlock.enable = false;
   stylix.targets.waybar.addCss = false;
-  stylix.iconTheme = {
+  stylix.icons = {
     enable = true;
     package = pkgs.papirus-icon-theme;
     #package = pkgs.papirus-icon-theme.override { color = "green"; };

@@ -66,17 +66,6 @@ with lib;
     cpuFreqGovernor = mkIf (!config.isLaptop) "performance";
   };
   
-  # Wifi
-  powerManagement.powerUpCommands = lib.mkIf config.isFrameworkDevice ''
-    ${pkgs.iw}/bin/iw dev wlan0 set power_save off || true
-  '';
-
-  boot.extraModprobeConfig = lib.mkIf config.isFrameworkDevice ''
-    # MediaTek MT7921 (Framework 13 AMD)
-    options mt7921e disable_aspm=1
-    options mt7921e enable_msi=1
-  '';
-   
   # Disable suspend-then-hibernate
   systemd.services."systemd-suspend-then-hibernate".enable = mkIf config.isLaptop false;
   systemd.targets."suspend-then-hibernate".enable = mkIf config.isLaptop false;
