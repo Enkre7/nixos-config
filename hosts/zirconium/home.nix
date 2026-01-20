@@ -31,6 +31,7 @@
     #../../homeModules/tex.nix
   # Media & Files
     ../../homeModules/xdg.nix
+    ../../homeModules/file-templates.nix
     ../../homeModules/mpv.nix
     ../../homeModules/qimgv.nix
     ../../homeModules/lf.nix

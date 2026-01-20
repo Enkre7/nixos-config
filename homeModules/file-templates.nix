@@ -3,14 +3,12 @@
 let
   templatesDir = "${config.home.homeDirectory}/Templates";
   
-  # Template DOCX vide (document Word)
   docxTemplate = pkgs.runCommand "template.docx" {
     buildInputs = [ pkgs.zip ];
   } ''
-    mkdir -p temp/_rels temp/docProps temp/word/_rels temp/word/theme
+    mkdir -p temp/_rels temp/docProps temp/word/_rels
     
-    # [Content_Types].xml
-    cat > temp/[Content_Types].xml << 'EOF'
+    cat > 'temp/[Content_Types].xml' << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
   <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
@@ -22,7 +20,6 @@ let
 </Types>
 EOF
 
-    # _rels/.rels
     cat > temp/_rels/.rels << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
@@ -32,7 +29,6 @@ EOF
 </Relationships>
 EOF
 
-    # word/document.xml
     cat > temp/word/document.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
@@ -42,7 +38,6 @@ EOF
 </w:document>
 EOF
 
-    # word/_rels/document.xml.rels
     cat > temp/word/_rels/document.xml.rels << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
@@ -50,7 +45,6 @@ EOF
 </Relationships>
 EOF
 
-    # word/styles.xml
     cat > temp/word/styles.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
@@ -58,16 +52,13 @@ EOF
 </w:styles>
 EOF
 
-    # docProps/core.xml
     cat > temp/docProps/core.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <dc:creator>NixOS Template</dc:creator>
-  <dcterms:created xsi:type="dcterms:W3CDTF">2025-01-20T00:00:00Z</dcterms:created>
+<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <dc:creator>NixOS</dc:creator>
 </cp:coreProperties>
 EOF
 
-    # docProps/app.xml
     cat > temp/docProps/app.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties">
@@ -76,17 +67,15 @@ EOF
 EOF
 
     cd temp
-    zip -r $out * [Content_Types].xml
+    zip -q -r $out .
   '';
 
-  # Template XLSX vide (tableur Excel)
   xlsxTemplate = pkgs.runCommand "template.xlsx" {
     buildInputs = [ pkgs.zip ];
   } ''
     mkdir -p temp/_rels temp/docProps temp/xl/_rels temp/xl/worksheets
     
-    # [Content_Types].xml
-    cat > temp/[Content_Types].xml << 'EOF'
+    cat > 'temp/[Content_Types].xml' << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
   <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
@@ -100,7 +89,6 @@ EOF
 </Types>
 EOF
 
-    # _rels/.rels
     cat > temp/_rels/.rels << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
@@ -110,7 +98,6 @@ EOF
 </Relationships>
 EOF
 
-    # xl/workbook.xml
     cat > temp/xl/workbook.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
@@ -120,7 +107,6 @@ EOF
 </workbook>
 EOF
 
-    # xl/_rels/workbook.xml.rels
     cat > temp/xl/_rels/workbook.xml.rels << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
@@ -130,7 +116,6 @@ EOF
 </Relationships>
 EOF
 
-    # xl/worksheets/sheet1.xml
     cat > temp/xl/worksheets/sheet1.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
@@ -138,28 +123,23 @@ EOF
 </worksheet>
 EOF
 
-    # xl/sharedStrings.xml
     cat > temp/xl/sharedStrings.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="0" uniqueCount="0"/>
 EOF
 
-    # xl/styles.xml
     cat > temp/xl/styles.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"/>
 EOF
 
-    # docProps/core.xml
     cat > temp/docProps/core.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <dc:creator>NixOS Template</dc:creator>
-  <dcterms:created xsi:type="dcterms:W3CDTF">2025-01-20T00:00:00Z</dcterms:created>
+<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <dc:creator>NixOS</dc:creator>
 </cp:coreProperties>
 EOF
 
-    # docProps/app.xml
     cat > temp/docProps/app.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties">
@@ -168,29 +148,28 @@ EOF
 EOF
 
     cd temp
-    zip -r $out * [Content_Types].xml
+    zip -q -r $out .
   '';
 
-  # Template PPTX vide (présentation PowerPoint)
   pptxTemplate = pkgs.runCommand "template.pptx" {
     buildInputs = [ pkgs.zip ];
   } ''
-    mkdir -p temp/_rels temp/docProps temp/ppt temp/ppt/_rels temp/ppt/slides temp/ppt/slides/_rels temp/ppt/slideLayouts temp/ppt/slideMasters
+    mkdir -p temp/_rels temp/docProps temp/ppt temp/ppt/_rels temp/ppt/slides temp/ppt/slides/_rels temp/ppt/slideLayouts temp/ppt/slideLayouts/_rels temp/ppt/slideMasters temp/ppt/slideMasters/_rels
     
-    # [Content_Types].xml
-    cat > temp/[Content_Types].xml << 'EOF'
+    cat > 'temp/[Content_Types].xml' << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
   <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
   <Default Extension="xml" ContentType="application/xml"/>
   <Override PartName="/ppt/presentation.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"/>
   <Override PartName="/ppt/slides/slide1.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>
+  <Override PartName="/ppt/slideMasters/slideMaster1.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slideMaster+xml"/>
+  <Override PartName="/ppt/slideLayouts/slideLayout1.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slideLayout+xml"/>
   <Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>
   <Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/>
 </Types>
 EOF
 
-    # _rels/.rels
     cat > temp/_rels/.rels << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
@@ -200,29 +179,31 @@ EOF
 </Relationships>
 EOF
 
-    # ppt/presentation.xml
     cat > temp/ppt/presentation.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<p:presentation xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+<p:presentation xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <p:sldMasterIdLst>
+    <p:sldMasterId id="2147483648" r:id="rId1"/>
+  </p:sldMasterIdLst>
   <p:sldIdLst>
-    <p:sldId id="256" r:id="rId1"/>
+    <p:sldId id="256" r:id="rId2"/>
   </p:sldIdLst>
   <p:sldSz cx="9144000" cy="6858000"/>
+  <p:notesSz cx="6858000" cy="9144000"/>
 </p:presentation>
 EOF
 
-    # ppt/_rels/presentation.xml.rels
     cat > temp/ppt/_rels/presentation.xml.rels << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slides/slide1.xml"/>
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideMaster" Target="slideMasters/slideMaster1.xml"/>
+  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slides/slide1.xml"/>
 </Relationships>
 EOF
 
-    # ppt/slides/slide1.xml
     cat > temp/ppt/slides/slide1.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<p:sld xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">
+<p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
   <p:cSld>
     <p:spTree>
       <p:nvGrpSpPr>
@@ -230,22 +211,103 @@ EOF
         <p:cNvGrpSpPr/>
         <p:nvPr/>
       </p:nvGrpSpPr>
-      <p:grpSpPr/>
+      <p:grpSpPr>
+        <a:xfrm>
+          <a:off x="0" y="0"/>
+          <a:ext cx="0" cy="0"/>
+          <a:chOff x="0" y="0"/>
+          <a:chExt cx="0" cy="0"/>
+        </a:xfrm>
+      </p:grpSpPr>
     </p:spTree>
   </p:cSld>
+  <p:clrMapOvr>
+    <a:masterClrMapping/>
+  </p:clrMapOvr>
 </p:sld>
 EOF
 
-    # docProps/core.xml
+    cat > temp/ppt/slides/_rels/slide1.xml.rels << 'EOF'
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout" Target="../slideLayouts/slideLayout1.xml"/>
+</Relationships>
+EOF
+
+    cat > temp/ppt/slideMasters/slideMaster1.xml << 'EOF'
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<p:sldMaster xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <p:cSld>
+    <p:spTree>
+      <p:nvGrpSpPr>
+        <p:cNvPr id="1" name=""/>
+        <p:cNvGrpSpPr/>
+        <p:nvPr/>
+      </p:nvGrpSpPr>
+      <p:grpSpPr>
+        <a:xfrm>
+          <a:off x="0" y="0"/>
+          <a:ext cx="0" cy="0"/>
+          <a:chOff x="0" y="0"/>
+          <a:chExt cx="0" cy="0"/>
+        </a:xfrm>
+      </p:grpSpPr>
+    </p:spTree>
+  </p:cSld>
+  <p:clrMap bg1="lt1" tx1="dk1" bg2="lt2" tx2="dk2" accent1="accent1" accent2="accent2" accent3="accent3" accent4="accent4" accent5="accent5" accent6="accent6" hlink="hlink" folHlink="folHlink"/>
+  <p:sldLayoutIdLst>
+    <p:sldLayoutId id="2147483649" r:id="rId1"/>
+  </p:sldLayoutIdLst>
+</p:sldMaster>
+EOF
+
+    cat > temp/ppt/slideMasters/_rels/slideMaster1.xml.rels << 'EOF'
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout" Target="../slideLayouts/slideLayout1.xml"/>
+</Relationships>
+EOF
+
+    cat > temp/ppt/slideLayouts/slideLayout1.xml << 'EOF'
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<p:sldLayout xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" type="blank">
+  <p:cSld name="Blank">
+    <p:spTree>
+      <p:nvGrpSpPr>
+        <p:cNvPr id="1" name=""/>
+        <p:cNvGrpSpPr/>
+        <p:nvPr/>
+      </p:nvGrpSpPr>
+      <p:grpSpPr>
+        <a:xfrm>
+          <a:off x="0" y="0"/>
+          <a:ext cx="0" cy="0"/>
+          <a:chOff x="0" y="0"/>
+          <a:chExt cx="0" cy="0"/>
+        </a:xfrm>
+      </p:grpSpPr>
+    </p:spTree>
+  </p:cSld>
+  <p:clrMapOvr>
+    <a:masterClrMapping/>
+  </p:clrMapOvr>
+</p:sldLayout>
+EOF
+
+    cat > temp/ppt/slideLayouts/_rels/slideLayout1.xml.rels << 'EOF'
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideMaster" Target="../slideMasters/slideMaster1.xml"/>
+</Relationships>
+EOF
+
     cat > temp/docProps/core.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <dc:creator>NixOS Template</dc:creator>
-  <dcterms:created xsi:type="dcterms:W3CDTF">2025-01-20T00:00:00Z</dcterms:created>
+<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <dc:creator>NixOS</dc:creator>
 </cp:coreProperties>
 EOF
 
-    # docProps/app.xml
     cat > temp/docProps/app.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties">
@@ -254,14 +316,13 @@ EOF
 EOF
 
     cd temp
-    zip -r $out * [Content_Types].xml
+    zip -q -r $out .
   '';
 
-  # Template Draw.io vide
   drawioTemplate = pkgs.writeText "template.drawio" ''
-    <mxfile host="app.diagrams.net" modified="2025-01-20T00:00:00.000Z" agent="NixOS" version="24.0.0" etag="" type="device">
+    <mxfile host="app.diagrams.net">
       <diagram id="template" name="Page-1">
-        <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169">
           <root>
             <mxCell id="0"/>
             <mxCell id="1" parent="0"/>
@@ -283,6 +344,4 @@ in
     
     $DRY_RUN_CMD chmod 644 ${templatesDir}/*
   '';
-
-  xdg.userDirs.templates = templatesDir;
 }
