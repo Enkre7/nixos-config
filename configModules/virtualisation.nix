@@ -23,5 +23,6 @@
     spice-protocol
     win-spice
     virtio-win
+    virtiofsd
   ];
 }
