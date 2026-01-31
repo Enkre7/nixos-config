@@ -12,6 +12,7 @@
     dust
     smartmontools
     file
+    parted
   ];
   services.glances.enable = true;
 }
