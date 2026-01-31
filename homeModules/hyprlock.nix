@@ -30,7 +30,7 @@ in
       background = [
         {
           monitor = "";
-          path = config.wallpaper;
+          path = toString config.wallpaper;
           color = stylix.base00;
           blur_size = 6;
           blur_passes = 2;

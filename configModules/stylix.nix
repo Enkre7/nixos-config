@@ -5,9 +5,7 @@
     enable = true;
     autoEnable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.styleTheme}.yaml";
-    image = pkgs.runCommand "wallpaper.png" {} ''
-      cp ${config.wallpaper} $out
-    '';
+    image = config.wallpaper;
     polarity = config.stylePolarity;
     cursor = {
       package = pkgs.bibata-cursors;

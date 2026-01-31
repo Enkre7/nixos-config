@@ -112,7 +112,7 @@
         "identity.fxaccounts.account.device.name" = "${config.hostname}'s Floorp";
 
         # Floorp specific
-        "browser.newtabpage.activity-stream.floorp.background.image.path" = "${config.wallpaper}";
+        "browser.newtabpage.activity-stream.floorp.background.image.path" = toString config.wallpaper;
         "browser.newtabpage.activity-stream.floorp.background.type" = 4;
         "browser.display.use_system_colors" = true;
         "floorp.browser.sidebar.enable" = false;

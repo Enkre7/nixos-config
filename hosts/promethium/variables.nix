@@ -7,7 +7,7 @@
     user = mkOption { type = str; };
     flakePath = mkOption { type = str; };
     dotfilesPath = mkOption { type = str; };
-    wallpaper = mkOption { type = str; };
+    wallpaper = mkOption { type = path; };
     styleTheme = mkOption { type = str; };
     stylePolarity = mkOption { type = str; };
     gitUsername = mkOption { type = str; };
@@ -41,7 +41,7 @@
     user = "enkre";
     flakePath = "/etc/nixos";
     dotfilesPath = "${config.flakePath}/dotfiles";
-    wallpaper = "${config.dotfilesPath}/wallpapers/gruvbox-light-kojiro.png"; # only png
+    wallpaper = ../../dotfiles/wallpapers/gruvbox-light-kojiro.png; # only png
     styleTheme = "gruvbox-light"; 
     stylePolarity = "light";
     gitUsername = "Enkre7";
