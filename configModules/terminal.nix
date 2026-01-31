@@ -10,6 +10,8 @@
     psmisc
     duf
     dust
+    smartmontools
+    file
   ];
   services.glances.enable = true;
 }
