@@ -58,7 +58,7 @@
 
   # Host specific settings
   wayland.windowManager.hyprland.settings = {
-    monitor = lib.mkForce ",preferred,auto,auto";
+    monitor = lib.mkForce ",preferred,auto,1.67";
   }; 
   
   xsession.numlock.enable = true;

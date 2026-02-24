@@ -247,6 +247,9 @@ in
       windowrule = float on, match:title ^(Steam Guard|Paramètres Steam|Liste de contacts|Offres spéciales)$
       windowrule = size 480 480, center on, match:title ^(Liste de contacts)$
 
+      # Steam - client (deja flottant, centrage uniquement)
+      windowrule = center on, match:class ^(steam)$
+
       # Steam - jeux uniquement
       windowrule = fullscreen on, immediate on, idle_inhibit fullscreen, match:class ^(steam_app_.+)$
 
@@ -258,4 +261,3 @@ in
     '';
   };
 }
-
