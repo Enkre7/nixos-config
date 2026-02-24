@@ -10,14 +10,14 @@ let
     sleep 0.5
     ${pkgs.waybar}/bin/waybar &
 
-    pkill -x swaync || true
-    sleep 0.5
-    ${pkgs.swaynotificationcenter}/bin/swaync &
+    #pkill -x swaync || true
+    #sleep 0.5
+    #${pkgs.swaynotificationcenter}/bin/swaync &
     
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
     ${pkgs.blueman}/bin/blueman-applet &
     ${pkgs.udiskie}/bin/udiskie &
-    ${pkgs.gammastep}/bin/gammastep &
+    #${pkgs.gammastep}/bin/gammastep &
     command -v thunar >/dev/null 2>&1 && thunar --daemon &
     command -v coolercontrol >/dev/null 2>&1 && coolercontrol &
     command -v openrgb >/dev/null 2>&1 && openrgb --server --startminimized -m static -c 00FF00 -b 100 &
@@ -28,23 +28,24 @@ let
     command -v mullvad-vpn >/dev/null 2>&1 && mullvad-vpn &
     command -v protonvpn-app >/dev/null 2>&1 && protonvpn-app &
     
-    wl-paste --watch cliphist store &
+    #wl-paste --watch cliphist store &
   '';
 in
 {
-  imports = [ inputs.hyprland.homeManagerModules.default ];
-
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
     portalPackage = null;
-    systemd.variables = [ "--all" ];
-
+    systemd.enable = false;
+  
     settings = {
       monitor = [
         ",preferred,auto,1.6"
       ];
-      xwayland.force_zero_scaling = true;
+      
+      xwayland = {
+        force_zero_scaling = true;
+      };
 
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";

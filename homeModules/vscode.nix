@@ -4,7 +4,7 @@
   stylix.targets.vscode.profileNames = [ "${config.user}" ];
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium; #pkgs.vscode;
+    package = pkgs.vscodium;
     profiles.default.extensions = with pkgs.vscode-extensions; [
       ms-vscode.cpptools-extension-pack
       esbenp.prettier-vscode
@@ -18,12 +18,9 @@
       redhat.vscode-yaml
       redhat.vscode-xml
       zainchen.json
-      #redhat.ansible
       pkief.material-icon-theme
       ms-vscode.powershell
       ms-vscode-remote.remote-containers
-      #ms-python.python
-      #ms-kubernetes-tools.vscode-kubernetes-tools
       eamodio.gitlens
       yzhang.markdown-all-in-one
       james-yu.latex-workshop
@@ -32,18 +29,13 @@
       github.codespaces
     ];
     profiles.default.userSettings = {
-      # Interface and appearance - automatic adaptation to system preferences
       "window.zoomLevel" = 0;
       "workbench.startupEditor" = "newUntitledFile";
       "workbench.editor.enablePreview" = false;
       "workbench.preferredDarkColorTheme" = "Default Dark+";
       "workbench.preferredLightColorTheme" = "Default Light+";
-      "window.autoDetectColorScheme" = true; # Adapts theme to system preferences
-      
-      # Material icons configuration
+      "window.autoDetectColorScheme" = true;
       "workbench.iconTheme" = "material-icon-theme";
-      
-      # Editor
       "editor.tabSize" = 2;
       "editor.insertSpaces" = true;
       "editor.detectIndentation" = true;
@@ -59,17 +51,11 @@
       "editor.suggest.showKeywords" = true;
       "editor.suggestSelection" = "first";
       "editor.inlineSuggest.enabled" = true;
-      
-      # Other settings
       "redhat.telemetry.enabled" = false;
       "files.autoSave" = "off";
       "cSpell.language" = "en;fr";
-      
-      # Security 
       "security.allowedUNCHosts" = [];
       "git.terminalAuthentication" = true;
-      
-      # Nix configuration
       "nix.serverPath" = "nixd";
       "nix.enableLanguageServer" = true;
       "nix.serverSettings.nixd" = {
@@ -79,12 +65,8 @@
         "nixos.expr" = "(builtins.getFlake ${config.flakePath}).nixosConfigurations.${config.hostname}.options";
         "home_manager.expr" = "(builtins.getFlake ${config.flakePath}).homeConfigurations.${config.hostname}.options";
       };
-      
-      # Terminal
       "terminal.integrated.defaultProfile.linux" = "bash";
       "terminal.integrated.cursorBlinking" = true;
-      
-      # File explorer
       "explorer.confirmDelete" = false;
       "explorer.confirmDragAndDrop" = false;
       "files.trimTrailingWhitespace" = true;
@@ -96,39 +78,26 @@
         "**/.direnv" = true;
         "**/result" = true;
       };
-      
-      # Search
       "search.exclude" = {
         "**/node_modules" = true;
         "**/bower_components" = true;
         "**/.direnv" = true;
         "**/result" = true;
       };
-      
-      # Git
       "git.enableSmartCommit" = true;
       "git.confirmSync" = false;
       "git.autofetch" = true;
-      
-      # Telemetry and updates
       "telemetry.telemetryLevel" = "off";
-      "update.mode" = "none"; # Managed by Nix
-      
-      # Extension management
-      "extensions.autoCheckUpdates" = false; # Managed by Nix
-      "extensions.autoUpdate" = false; # Managed by Nix
-      
-      # Language-specific settings
+      "update.mode" = "none";
+      "extensions.autoCheckUpdates" = false;
+      "extensions.autoUpdate" = false;
       "[nix]" = {
         "editor.tabSize" = 2;
         "editor.formatOnSave" = true;
       };
-      
       "[javascript]" = {
         "editor.defaultFormatter" = "vscode.typescript-language-features";
       };
-      
-      # Other improvements
       "breadcrumbs.enabled" = true;
       "workbench.list.smoothScrolling" = true;
       "editor.smoothScrolling" = true;
@@ -157,4 +126,3 @@
     GNOME_KEYRING_CONTROL = "/run/user/1000/keyring";
   };
 }
-

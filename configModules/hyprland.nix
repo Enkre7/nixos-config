@@ -8,23 +8,8 @@
 
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages."${pkgs.stdenv.hostPlatform.system}".hyprland;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
   };
-  
-  xdg.portal.config = {
-    common = {
-      "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
-      "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
-      "org.freedesktop.impl.portal.Wallpaper" = [ "hyprland" ];
-    };
-    hyprland.default = [ "hyprland" "gtk" ];
-  };
-  
-  environment.sessionVariables = {
-    XDG_CURRENT_DESKTOP = "Hyprland";
-    XDG_SESSION_DESKTOP = "Hyprland";
-  };  
-
-  networking.firewall.allowedTCPPorts = [ 5900 5901 ]; # Hyprland portals
 }
