@@ -65,7 +65,9 @@
   ];
 
   environment.sessionVariables = {
-    STEAM_FORCE_DESKTOPUI_SCALING = "1.6";
+    STEAM_FORCE_DESKTOPUI_SCALING = "4.0";
+    LC_ALL = "fr_FR.UTF-8";
+    LANG = "fr_FR.UTF-8";
   };
 }
 
