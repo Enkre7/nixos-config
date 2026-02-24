@@ -47,11 +47,11 @@ in
       "$termFileManager" = "lf";
       "$menu" = "rofi-launcher";
       "$systman" = "btop";
-      "$screenshot" = "grim -g \"$(slurp)\" - | swappy -f -";
+      "$screenshot" = ''grim -g "$(slurp)" - | swappy -f -'';
       "$clipboard" = "cliphist list | wofi --dmenu | cliphist decode | wl-copy";
       "$powermenu" = "rofi-powermenu";
       "$lockscreen" = "hyprlock";
-      exec-once = [ "${startupScript}/bin/start" ];
+      exec-once = "${startupScript}/bin/start";
       general = {
         gaps_in = 2;
         gaps_out = 2;
@@ -64,26 +64,26 @@ in
       };
       decoration = {
         rounding = 5;
-        active_opacity = 1.0;
-        inactive_opacity = 1.0;
+        active_opacity = "1.0";
+        inactive_opacity = "1.0";
         blur = {
           enabled = true;
           size = 7;
           passes = 1;
-          vibrancy = 0.1696;
+          vibrancy = "0.1696";
           popups = true;
         };
       };
       animations = {
         enabled = true;
-        bezier = [ "myBezier,0.05,0.9,0.1,1.05" ];
+        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
         animation = [
-          "windows,1,7,myBezier"
-          "windowsOut,1,7,default,popin 80%"
-          "border,1,10,default"
-          "borderangle,1,8,default"
-          "fade,1,7,default"
-          "workspaces,1,6,default"
+          "windows, 1, 7, myBezier"
+          "windowsOut, 1, 7, default, popin 80%"
+          "border, 1, 10, default"
+          "borderangle, 1, 8, default"
+          "fade, 1, 7, default"
+          "workspaces, 1, 6, default"
         ];
       };
       dwindle = {
@@ -187,7 +187,10 @@ in
       windowrule = float on, size 873 586, center on, match:class ^(com\.nextcloud\.desktopclient\.nextcloud)$
 
       # Blueman Bluetooth Manager
-      windowrule = float on, size 700 500, center on, match:class ^(blueman-manager)$
+      windowrule = float on, size 700 500, center on, match:class ^(\.blueman-manager-wrapped)$
+
+      # Thunar
+      windowrule = float on, size 1000 700, center on, match:class ^(thunar)$
 
       # Network Manager
       windowrule = float on, size 800 600, center on, match:class ^(nm-connection-editor)$
@@ -199,9 +202,14 @@ in
       # CoolerControl
       windowrule = float on, size 908 678, center on, match:class ^(org\.coolercontrol\.CoolerControl)$
 
-      # VPN
-      windowrule = pin on, match:class ^(Mullvad VPN)$
+      # Mullvad VPN (top-right)
+      windowrule = float on, size 320 568, move 2232 50, pin on, match:class ^(Mullvad VPN)$
+
+      # Proton VPN
       windowrule = float on, size 403 600, center on, pin on, match:title ^(Proton VPN)$
+
+      # KDE Connect
+      windowrule = float on, size 762 687, center on, match:class ^(org\.kde\.kdeconnect\.app)$
 
       # Firefox PiP
       windowrule = float on, pin on, size 35% 35%, move 64% 4%, no_blur on, no_shadow on, no_anim on, match:title ^(Incrustation vidéo)$
@@ -220,20 +228,33 @@ in
       windowrule = float on, size 1200 800, center on, match:class ^(disk-monitor)$
       windowrule = float on, size 1200 800, center on, match:class ^(system-monitor)$
 
-      # Steam
+      # Virt-manager
+      windowrule = float on, size 800 600, center on, match:class ^(virt-manager)$
+
+      # System config printer
+      windowrule = float on, size 700 500, center on, match:class ^(system-config-printer)$
+
+      # PrismLauncher
+      windowrule = float on, size 1100 700, center on, match:class ^(org\.prismlauncher\.PrismLauncher)$
+
+      # Vesktop (Discord)
+      windowrule = float on, size 900 600, center on, match:class ^(vesktop)$
+
+      # mpv
+      windowrule = idle_inhibit fullscreen, match:class ^(mpv)$
+
+      # Steam - fenetres flottantes
       windowrule = float on, match:title ^(Steam Guard|Paramètres Steam|Liste de contacts|Offres spéciales)$
       windowrule = size 480 480, center on, match:title ^(Liste de contacts)$
-      windowrule = fullscreen on, immediate on, idle_inhibit fullscreen, match:class ^(steam_app_.*)$
+
+      # Steam - jeux uniquement
+      windowrule = fullscreen on, immediate on, idle_inhibit fullscreen, match:class ^(steam_app_.+)$
 
       # Wine / Lutris
       windowrule = fullscreen on, immediate on, idle_inhibit fullscreen, workspace special:games, match:class ^(wine|lutris)$
 
-      # Other games
-      windowrule = fullscreen on, match:class ^(minecraft-launcher|gamemoderun|heroic|legendary|bottles|retroarch|dolphin-emu|pcsx2-qt|rpcs3|yuzu|citra)$
-      windowrule = fullscreen on, match:title .*[Gg]ame.*
-      windowrule = fullscreen on, match:class .*[Gg]ame.*
-      windowrule = fullscreen on, match:title .*[Ff]ullscreen.*
-      windowrule = fullscreen on, match:class ^(com\.valvesoftware\.Steam|hl2_linux|csgo_linux64|dota2)$
+      # Autres emulateurs et lanceurs
+      windowrule = fullscreen on, match:class ^(minecraft-launcher|gamemoderun|heroic|legendary|bottles|retroarch|dolphin-emu|pcsx2-qt|rpcs3|yuzu|citra|hl2_linux|csgo_linux64|dota2)$
     '';
   };
 }
