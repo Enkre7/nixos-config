@@ -1,47 +1,35 @@
 { config, lib, pkgs, inputs, ... }:
-
 let
   stylix = config.lib.stylix.colors;
-
   startupScript = pkgs.writeShellScriptBin "start" ''
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
     export SSH_AUTH_SOCK
-
     ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &
-
     pkill -x waybar || true
     ${pkgs.waybar}/bin/waybar &
-
     pkill -x swaync || true
     ${pkgs.swaynotificationcenter}/bin/swaync &
-
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
     ${pkgs.blueman}/bin/blueman-applet &
     ${pkgs.udiskie}/bin/udiskie &
     ${pkgs.gammastep}/bin/gammastep &
-
     command -v thunar >/dev/null 2>&1 && thunar --daemon &
     command -v coolercontrol >/dev/null 2>&1 && coolercontrol &
     command -v openrgb >/dev/null 2>&1 && openrgb --server --startminimized -m static -c 00FF00 -b 100 &
-
     command -v vesktop >/dev/null 2>&1 && vesktop --start-minimized &
     command -v mullvad-vpn >/dev/null 2>&1 && mullvad-vpn &
     command -v protonvpn-app >/dev/null 2>&1 && protonvpn-app &
-
     wl-paste --watch cliphist store &
   '';
 in
 {
   imports = [ inputs.hyprland.homeManagerModules.default ];
-
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.variables = [ "--all" ];
-
     settings = {
       monitor = [ ",preferred,auto,1.6" ];
       xwayland.force_zero_scaling = true;
-
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$fileManager" = "thunar";
@@ -54,9 +42,7 @@ in
       "$clipboard" = "cliphist list | wofi --dmenu | cliphist decode | wl-copy";
       "$powermenu" = "rofi-powermenu";
       "$lockscreen" = "hyprlock";
-
       exec-once = [ "${startupScript}/bin/start" ];
-
       general = {
         gaps_in = 3;
         gaps_out = 5;
@@ -67,12 +53,10 @@ in
         "col.active_border" = lib.mkForce "rgb(${stylix.base0D})";
         "col.inactive_border" = lib.mkForce "rgb(${stylix.base03})";
       };
-
       decoration = {
         rounding = 5;
         active_opacity = 1.0;
         inactive_opacity = 1.0;
-
         blur = {
           enabled = true;
           size = 7;
@@ -80,7 +64,6 @@ in
           vibrancy = 0.1696;
           popups = true;
         };
-
         shadow = {
           enabled = true;
           range = 20;
@@ -90,12 +73,9 @@ in
           color_inactive = lib.mkForce "rgba(00000033)";
         };
       };
-
       animations = {
         enabled = true;
-        bezier = [
-          "myBezier,0.05,0.9,0.1,1.05"
-        ];
+        bezier = [ "myBezier,0.05,0.9,0.1,1.05" ];
         animation = [
           "windows,1,7,myBezier"
           "windowsOut,1,7,default,popin 80%"
@@ -104,18 +84,15 @@ in
           "workspaces,1,6,default"
         ];
       };
-
       dwindle = {
         pseudotile = true;
         preserve_split = true;
       };
-
       misc = {
         force_default_wallpaper = 0;
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
       };
-
       input = {
         kb_layout = "fr";
         follow_mouse = 1;
@@ -127,7 +104,6 @@ in
           disable_while_typing = false;
         };
       };
-
       bind = [
         "$mainMod, A, exec, $powermenu"
         "$mainMod, Q, exec, $terminal"
@@ -142,12 +118,10 @@ in
         "$mainMod, F, exec, $browser"
         "$mainMod, B, fullscreen"
         "$mainMod SHIFT, F, exec, $browserPrivate"
-
         "$mainMod, Left, movefocus, l"
         "$mainMod, Right, movefocus, r"
         "$mainMod, Up, movefocus, u"
         "$mainMod, Down, movefocus, d"
-
         "$mainMod, code:10, workspace, 1"
         "$mainMod, code:11, workspace, 2"
         "$mainMod, code:12, workspace, 3"
@@ -158,7 +132,6 @@ in
         "$mainMod, code:17, workspace, 8"
         "$mainMod, code:18, workspace, 9"
         "$mainMod, code:19, workspace, 10"
-
         "$mainMod SHIFT, code:10, movetoworkspace, 1"
         "$mainMod SHIFT, code:11, movetoworkspace, 2"
         "$mainMod SHIFT, code:12, movetoworkspace, 3"
@@ -169,126 +142,92 @@ in
         "$mainMod SHIFT, code:17, movetoworkspace, 8"
         "$mainMod SHIFT, code:18, movetoworkspace, 9"
         "$mainMod SHIFT, code:19, movetoworkspace, 10"
-
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
-
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
         "$mainMod, Right, workspace, e+1"
         "$mainMod, Left, workspace, e-1"
-
         ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ",XF86AudioPlay, exec, playerctl play-pause"
         ",XF86AudioPause, exec, playerctl play-pause"
         ",XF86AudioNext, exec, playerctl next"
         ",XF86AudioPrev, exec, playerctl previous"
         ",XF86AudioMedia, exec, $lockscreen"
-
         ",Print, exec, $screenshot"
         "Control_L Alt_L, V, exec, $clipboard"
       ];
-
       binde = [
         ",XF86AudioRaiseVolume, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 | wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
         ",XF86AudioLowerVolume, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 | wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"
         ",XF86MonBrightnessDown, exec, brightnessctl set 5%-"
         ",XF86MonBrightnessUP, exec, brightnessctl set +5%"
       ];
-
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
-
       bindl = [
         ",switch:Lid Switch, exec, hyprlock"
       ];
-
-      windowrulev2 = [
-        # PulseAudio Volume Control
-        "float, class:^(org.pulseaudio.pavucontrol)$"
-        "size 800 600, class:^(org.pulseaudio.pavucontrol)$"
-        "center, class:^(org.pulseaudio.pavucontrol)$"
-
-        # Nextcloud Client
-        "float, class:^(com.nextcloud.desktopclient.nextcloud)$"
-        "size 873 586, class:^(com.nextcloud.desktopclient.nextcloud)$"
-        "center, class:^(com.nextcloud.desktopclient.nextcloud)$"
-
-        # Blueman Bluetooth Manager
-        "float, class:^(blueman-manager)$"
-        "size 700 500, class:^(blueman-manager)$"
-        "center, class:^(blueman-manager)$"
-
-        # Network Manager
-        "float, class:^(nm-connection-editor|nm-applet)$"
-        "size 800 600, class:^(nm-connection-editor)$"
-        "size 400 300, class:^(nm-applet)$"
-        "center, class:^(nm-connection-editor|nm-applet)$"
-
-        # OpenRGB
-        "float, class:^(openrgb)$"
-        "size 1000 700, class:^(openrgb)$"
-        "center, class:^(openrgb)$"
-
-        # CoolerControl
-        "float, class:^(org.coolercontrol.CoolerControl)$"
-        "size 908 678, class:^(org.coolercontrol.CoolerControl)$"
-        "center, class:^(org.coolercontrol.CoolerControl)$"
-
-        # VPN
-        "pin, class:^(Mullvad VPN)$"
-        "float, title:^(Proton VPN)$"
-        "size 403 600, title:^(Proton VPN)$"
-        "center, title:^(Proton VPN)$"
-        "pin, title:^(Proton VPN)$"
-
-        # Firefox PiP et extensions
-        "float, title:^(Incrustation vidéo)$"
-        "pin, title:^(Incrustation vidéo)$"
-        "size 35% 35%, title:^(Incrustation vidéo)$"
-        "move 64% 4%, title:^(Incrustation vidéo)$"
-        "noblur, title:^(Incrustation vidéo)$"
-        "noshadow, title:^(Incrustation vidéo)$"
-        "noanim, title:^(Incrustation vidéo)$"
-
-        "float, title:^(Suppression des cookies.*)$"
-        "size 490 154, title:^(Suppression des cookies.*)$"
-        "center, title:^(Suppression des cookies.*)$"
-
-        "float, title:^(Extension:.*)$"
-
-        # Gnome calculator
-        "float, class:^(org.gnome.Calculator)$"
-        "size 360 616, class:^(org.gnome.Calculator)$"
-
-        # Keyring manager
-        "float, class:^(gcr-prompter)$"
-        "center, class:^(gcr-prompter)$"
-        "pin, class:^(gcr-prompter)$"
-
-        # Steam
-        "float, title:^(Steam Guard|Paramètres Steam|Liste de contacts|Offres spéciales)$"
-        "size 480 480, title:^(Liste de contacts)$"
-        "center, title:^(Liste de contacts)$"
-        "fullscreen, class:^(steam_app_.*)$"
-        "immediate, class:^(steam_app_.*)$"
-        "idleinhibit fullscreen, class:^(steam_app_.*)$"
-
-        # Wine / Lutris Games
-        "fullscreen, class:^(wine|lutris)$"
-        "workspace special:games, class:^(wine|lutris)$"
-        "immediate, class:^(wine|lutris)$"
-        "idleinhibit fullscreen, class:^(wine|lutris)$"
-
-        # Minecraft & other games
-        "fullscreen, class:^(minecraft-launcher|gamemoderun|heroic|legendary|bottles|retroarch|dolphin-emu|pcsx2-qt|rpcs3|yuzu|citra)$"
-        "fullscreen, title:.*[Gg]ame.*$"
-        "fullscreen, class:.*[Gg]ame.*$"
-        "fullscreen, title:.*[Ff]ullscreen.*$"
-        "fullscreen, class:^(com.valvesoftware.Steam|hl2_linux|csgo_linux64|dota2)$"
-      ];
     };
+
+    extraConfig = ''
+      # PulseAudio Volume Control
+      windowrule = float on, size 800 600, center on, match:class ^(org\.pulseaudio\.pavucontrol)$
+
+      # Nextcloud Client
+      windowrule = float on, size 873 586, center on, match:class ^(com\.nextcloud\.desktopclient\.nextcloud)$
+
+      # Blueman Bluetooth Manager
+      windowrule = float on, size 700 500, center on, match:class ^(blueman-manager)$
+
+      # Network Manager
+      windowrule = float on, size 800 600, center on, match:class ^(nm-connection-editor)$
+      windowrule = float on, size 400 300, center on, match:class ^(nm-applet)$
+
+      # OpenRGB
+      windowrule = float on, size 1000 700, center on, match:class ^(openrgb)$
+
+      # CoolerControl
+      windowrule = float on, size 908 678, center on, match:class ^(org\.coolercontrol\.CoolerControl)$
+
+      # VPN
+      windowrule = pin on, match:class ^(Mullvad VPN)$
+      windowrule = float on, size 403 600, center on, pin on, match:title ^(Proton VPN)$
+
+      # Firefox PiP
+      windowrule = float on, pin on, size 35% 35%, move 64% 4%, no_blur on, no_shadow on, no_anim on, match:title ^(Incrustation vidéo)$
+
+      # Firefox extensions / cookies
+      windowrule = float on, size 490 154, center on, match:title ^(Suppression des cookies.*)$
+      windowrule = float on, match:title ^(Extension:.*)$
+
+      # Gnome Calculator
+      windowrule = float on, size 360 616, match:class ^(org\.gnome\.Calculator)$
+
+      # Keyring manager
+      windowrule = float on, center on, pin on, match:class ^(gcr-prompter)$
+
+      # Waybar monitors
+      windowrule = float on, size 1200 800, center on, match:class ^(disk-monitor)$
+      windowrule = float on, size 1200 800, center on, match:class ^(system-monitor)$
+
+      # Steam
+      windowrule = float on, match:title ^(Steam Guard|Paramètres Steam|Liste de contacts|Offres spéciales)$
+      windowrule = size 480 480, center on, match:title ^(Liste de contacts)$
+      windowrule = fullscreen on, immediate on, idle_inhibit fullscreen, match:class ^(steam_app_.*)$
+
+      # Wine / Lutris
+      windowrule = fullscreen on, immediate on, idle_inhibit fullscreen, workspace special:games, match:class ^(wine|lutris)$
+
+      # Other games
+      windowrule = fullscreen on, match:class ^(minecraft-launcher|gamemoderun|heroic|legendary|bottles|retroarch|dolphin-emu|pcsx2-qt|rpcs3|yuzu|citra)$
+      windowrule = fullscreen on, match:title .*[Gg]ame.*
+      windowrule = fullscreen on, match:class .*[Gg]ame.*
+      windowrule = fullscreen on, match:title .*[Ff]ullscreen.*
+      windowrule = fullscreen on, match:class ^(com\.valvesoftware\.Steam|hl2_linux|csgo_linux64|dota2)$
+    '';
   };
 }
+
