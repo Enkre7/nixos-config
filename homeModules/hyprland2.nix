@@ -114,7 +114,7 @@ in
         "$mainMod, V, togglefloating"
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo"
-        "$mainMod, J, togglesplit"
+        "$mainMod, J, layoutmsg, togglesplit"
         "$mainMod, F, exec, $browser"
         "$mainMod, B, fullscreen"
         "$mainMod SHIFT, F, exec, $browserPrivate"
