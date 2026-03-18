@@ -2,7 +2,7 @@
 
 {
   stylix.targets.vscode = {
-    profileNames = [ "${config.user}" ];
+    profileNames = [ "default" ];
     colors.enable = true;
     enable = true;
     fonts.enable = true;
@@ -40,7 +40,7 @@
       "workbench.editor.enablePreview" = false;
       #"workbench.preferredDarkColorTheme" = "Gruvbox Dark Hard";
       #"workbench.preferredLightColorTheme" = "Gruvbox Light Hard";
-      "window.autoDetectColorScheme" = true;
+      "window.autoDetectColorScheme" = false;
       "workbench.iconTheme" = "material-icon-theme";
       "editor.tabSize" = 2;
       "editor.insertSpaces" = true;
