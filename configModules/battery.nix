@@ -71,12 +71,12 @@ with lib;
   systemd.targets."suspend-then-hibernate".enable = mkIf config.isLaptop false;
   
   # Sleep configuration
-  systemd.sleep.extraConfig = mkIf config.isLaptop ''
-    AllowSuspend=yes
-    AllowHibernation=yes
-    AllowSuspendThenHibernate=no
-    AllowHybridSleep=no
-  '';
+  systemd.sleep.settings.Sleep = mkIf config.isLaptop {
+    AllowSuspend = true;
+    AllowHibernation = true;
+    AllowSuspendThenHibernate = false;
+    AllowHybridSleep = false;
+  };
   
   # Logind configuration
   services.logind.settings.Login = mkIf config.isLaptop {
