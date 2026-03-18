@@ -1,11 +1,17 @@
 { pkgs, config, ... }:
 
 {
-  stylix.targets.vscode.profileNames = [ "${config.user}" ];
+  stylix.targets.vscode = {
+    profileNames = [ "${config.user}" ];
+    colors.enable = true;
+    enable = true;
+    fonts.enable = true;
+  }; 
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
     profiles.default.extensions = with pkgs.vscode-extensions; [
+      jdinhlife.gruvbox
       ms-vscode.cpptools-extension-pack
       esbenp.prettier-vscode
       davidanson.vscode-markdownlint
@@ -32,8 +38,8 @@
       "window.zoomLevel" = 0;
       "workbench.startupEditor" = "newUntitledFile";
       "workbench.editor.enablePreview" = false;
-      "workbench.preferredDarkColorTheme" = "Default Dark+";
-      "workbench.preferredLightColorTheme" = "Default Light+";
+      #"workbench.preferredDarkColorTheme" = "Gruvbox Dark Hard";
+      #"workbench.preferredLightColorTheme" = "Gruvbox Light Hard";
       "window.autoDetectColorScheme" = true;
       "workbench.iconTheme" = "material-icon-theme";
       "editor.tabSize" = 2;
