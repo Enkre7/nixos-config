@@ -47,6 +47,25 @@
         "history"
       ];
     };
+    initExtra = ''
+      reboot() {
+        echo -n "Reboot? [y/N] "
+        read answer
+        case "$answer" in
+         [yY]) sudo systemctl reboot ;;
+         *) echo "Annulé" ;;
+        esac
+      }
+
+      poweroff() {
+        echo -n "Poweroff? [y/N] "
+        read answer
+        case "$answer" in
+         [yY]) sudo systemctl poweroff ;;
+         *) echo "Annulé" ;;
+        esac
+      }
+    '';
   };
 
   programs.bash = {

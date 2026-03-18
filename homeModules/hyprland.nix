@@ -258,6 +258,9 @@ in
 
       # Autres emulateurs et lanceurs
       windowrule = fullscreen on, match:class ^(minecraft-launcher|gamemoderun|heroic|legendary|bottles|retroarch|dolphin-emu|pcsx2-qt|rpcs3|yuzu|citra|hl2_linux|csgo_linux64|dota2)$
+
+      # VScode
+      windowrule = opacity 0.90 0.85, match:class ^(codium)$
     '';
   };
 }
