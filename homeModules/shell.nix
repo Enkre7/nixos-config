@@ -47,7 +47,7 @@
         "history"
       ];
     };
-    initExtra = ''
+    initContent = ''
       reboot() {
         echo -n "Reboot? [y/N] "
         read answer

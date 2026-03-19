@@ -63,6 +63,12 @@
     "usb_storage"
     "sd_mod"
   ];
+ 
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+  };
+  users.users.${config.user}.extraGroups = [ "wireshark" ];
 
   environment.sessionVariables = {
     STEAM_FORCE_DESKTOPUI_SCALING = "4.0";
