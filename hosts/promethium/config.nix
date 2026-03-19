@@ -19,6 +19,7 @@
     ../../configModules/networking.nix
     ../../configModules/tailscale.nix
     ../../configModules/mullvad-vpn.nix
+    ../../configModules/wireshark.nix
   # Hardware management
     ../../configModules/battery.nix
     ../../configModules/audio.nix
@@ -64,12 +65,6 @@
     "sd_mod"
   ];
  
-  programs.wireshark = {
-    enable = true;
-    package = pkgs.wireshark;
-  };
-  users.users.${config.user}.extraGroups = [ "wireshark" ];
-
   environment.sessionVariables = {
     STEAM_FORCE_DESKTOPUI_SCALING = "4.0";
     LC_ALL = "fr_FR.UTF-8";
