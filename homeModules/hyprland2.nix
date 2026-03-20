@@ -195,8 +195,8 @@ in
       # CoolerControl
       windowrule = float on, size 908 678, center on, match:class ^(org\.coolercontrol\.CoolerControl)$
 
-      # Mullvad VPN (top-right)
-      windowrule = float on, size 320 568, move 2232 50, pin on, match:class ^(Mullvad VPN)$
+      # Mullvad VPN
+      windowrule = float on, size 320 568, center on, match:class ^(Mullvad VPN)$
 
       # Proton VPN
       windowrule = float on, size 403 600, center on, pin on, match:title ^(Proton VPN)$
