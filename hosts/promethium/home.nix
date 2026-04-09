@@ -75,6 +75,7 @@
     vesktop # discord
     gnome-calculator
     obsidian
+    lmstudio
     #ffmpeg-full
     #picard
     #powershell

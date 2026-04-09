@@ -12,6 +12,7 @@
     package = pkgs.vscodium;
     mutableExtensionsDir = false;
     profiles.default.extensions = with pkgs.vscode-extensions; [
+      continue.continue
       jdinhlife.gruvbox
       ms-vscode.cpptools-extension-pack
       esbenp.prettier-vscode
@@ -127,6 +128,24 @@
     "text/x-nix" = "codium.desktop";
     "application/xhtml+xml" = "codium.desktop";
     "application/x-sh" = "codium.desktop";
+    "text/x-yaml" = "codium.desktop";
+    "application/x-yaml" = "codium.desktop";
+    "text/x-dockerfile" = "codium.desktop";
+    "text/x-makefile" = "codium.desktop";
+    "text/x-script.python" = "codium.desktop";
+    "text/x-java" = "codium.desktop";
+    "text/x-go" = "codium.desktop";
+    "text/x-rust" = "codium.desktop";
+    "text/x-toml" = "codium.desktop";
+    "text/x-ini" = "codium.desktop";
+    "text/x-lua" = "codium.desktop";
+    "text/x-php" = "codium.desktop";
+    "text/x-ruby" = "codium.desktop";
+    "text/x-tex" = "codium.desktop";
+    "text/csv" = "codium.desktop";
+    "text/x-log" = "codium.desktop";
+    "text/x-patch" = "codium.desktop";
+    "application/x-perl" = "codium.desktop";
   };
 
   home.sessionVariables = {

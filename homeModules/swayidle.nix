@@ -4,7 +4,7 @@
   services.swayidle = {
     enable = true;
     package = pkgs.swayidle;
-    systemdTarget = "graphical-session.target";
+    systemdTargets = ["graphical-session.target"];
     
     events = {
       before-sleep = "${pkgs.hyprlock}/bin/hyprlock";

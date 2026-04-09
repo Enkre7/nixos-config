@@ -29,7 +29,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    swww
+    awww
     hyprcursor
     papirus-icon-theme
     adwaita-icon-theme
