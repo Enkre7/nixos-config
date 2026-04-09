@@ -19,7 +19,7 @@
     initrd.services.lvm.enable = true;
     
     kernelPackages = config.kernelPackage;
-    kernelParams = [ ];
+    kernelParams = [ "resume=PARTLABEL=disk-main-swap" ];
     extraModulePackages = [ ];
     consoleLogLevel = 3;
     tmp.cleanOnBoot = true;

@@ -66,14 +66,10 @@ with lib;
     cpuFreqGovernor = mkIf (!config.isLaptop) "performance";
   };
   
-  # Disable suspend-then-hibernate
-  systemd.services."systemd-suspend-then-hibernate".enable = mkIf config.isLaptop false;
-  systemd.targets."suspend-then-hibernate".enable = mkIf config.isLaptop false;
-  
   # Sleep configuration
   systemd.sleep.settings.Sleep = mkIf config.isLaptop {
     AllowSuspend = true;
-    AllowHibernation = true;
+    AllowHibernation = false;
     AllowSuspendThenHibernate = false;
     AllowHybridSleep = false;
   };
@@ -87,6 +83,8 @@ with lib;
     IdleActionSec = 600;
     HandlePowerKey = "suspend";
     HandlePowerKeyLongPress = "poweroff";
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchExternalPower = "lock";
     InhibitDelayMaxSec = 5;
   };
 
