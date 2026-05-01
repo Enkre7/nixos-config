@@ -48,6 +48,5 @@
     system-config-printer
     # Scanner
     simple-scan
-    gscan2pdf
   ];
 }
