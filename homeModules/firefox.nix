@@ -28,6 +28,7 @@ in
     };
 
     profiles.${config.user} = {
+      isDefault = true;
       search.engines = {
         "Nix Packages" = {
           urls = [
