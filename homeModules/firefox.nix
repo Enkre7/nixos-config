@@ -376,7 +376,6 @@ in
         #contentAreaContextMenu menuseparator:first-child,
         #contentAreaContextMenu menuseparator + menuseparator,
         #contentAreaContextMenu menuseparator:last-child {display: none !important;}
-        }
       '';
     };
   };
