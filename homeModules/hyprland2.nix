@@ -32,7 +32,7 @@ in
     settings = {
       monitor = [ ",preferred,auto,1.6" ];
       xwayland.force_zero_scaling = true;
-      "$mainMod" = "ALT";
+      "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$fileManager" = "thunar";
       "$browser" = "firefox";

@@ -138,6 +138,7 @@ in
         "media.navigator.audio.enabled" = true;
         "media.getusermedia.screensharing.enabled" = true;
         "media.getusermedia.audiocapture.enabled" = true;
+        "browser.toolbars.bookmarks.visibility" = "always"; # newtab
 
         # Disable first-run stuff
         "extensions.screenshots.disabled" = true;

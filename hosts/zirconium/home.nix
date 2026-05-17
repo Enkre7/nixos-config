@@ -62,6 +62,9 @@
   }; 
   
   xsession.numlock.enable = true;
+  programs.firefox.profiles.${config.user}.settings = {
+    "layout.css.devPixelsPerPx" = "1.6";
+  };
 
   home.packages = with pkgs; [
     drawio
