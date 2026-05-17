@@ -25,6 +25,9 @@ in
       PasswordManagerEnabled = false;
       AutofillCreditCardEnabled = false;
       FirefoxSuggest.SponsoredSuggestions = false;
+      ExtensionSettings = {
+        "*" = { private_browsing = true; };
+      };
     };
 
     profiles.${config.user} = {
