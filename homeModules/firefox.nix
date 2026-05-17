@@ -26,7 +26,14 @@ in
       AutofillCreditCardEnabled = false;
       FirefoxSuggest.SponsoredSuggestions = false;
       ExtensionSettings = {
-        "*" = { private_browsing = true; };
+        "uBlock0@raymondhill.net".private_browsing = true;
+        "CookieAutoDelete@kennydo.com".private_browsing = true;
+        "CanvasBlocker@kkapsner.de".private_browsing = true;
+        "jid1-MnnxcxisBPnSXQ@jetpack".private_browsing = true;
+        "{96ef5869-e3ba-4d21-b86e-21b163096400}".private_browsing = true;
+        "{2cf5dbed-78fe-4bd5-9524-38fdf837be98}".private_browsing = true;
+        "{762f9885-5a13-4abd-9c77-433dcd38b8fd}".private_browsing = true;
+        "{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}".private_browsing = true;
       };
     };
 
