@@ -213,8 +213,11 @@ in
 
       # Firefox extensions / cookies
       windowrule = float on, size 490 154, center on, match:title ^(Suppression des cookies.*)$
-      windowrule = float on, match:title ^(Extension:.*)$
+      windowrule = float on, size 1000 700, center on, match:title ^(Extension.*)$
 
+      # File Roller
+      windowrule = float on, size 1000 700, center on, match:class ^(org\.gnome\.FileRoller)$
+      
       # Gnome Calculator
       windowrule = float on, size 360 616, match:class ^(org\.gnome\.Calculator)$
 

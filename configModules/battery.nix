@@ -79,8 +79,6 @@ with lib;
     lidSwitch = "suspend";
     lidSwitchExternalPower = "lock";
     lidSwitchDocked = "ignore";
-    IdleAction = "lock";
-    IdleActionSec = 600;
     HandlePowerKey = "suspend";
     HandlePowerKeyLongPress = "poweroff";
     HandleLidSwitch = "suspend";
