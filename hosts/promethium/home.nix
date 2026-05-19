@@ -69,7 +69,7 @@
   # Host specific settings
   programs.yt-dlp.enable = true;
   home.packages = with pkgs; [
-    #ciscoPacketTracer8
+    cisco-packet-tracer_9
     prusa-slicer
     drawio
     vesktop # discord

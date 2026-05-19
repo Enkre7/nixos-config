@@ -168,9 +168,6 @@ in
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
-      bindl = [
-        ",switch:Lid Switch, exec, hyprlock"
-      ];
     };
 
     extraConfig = ''
@@ -185,6 +182,7 @@ in
 
       # Thunar
       windowrule = float on, size 1000 700, center on, match:class ^(thunar)$
+      windowrule = float on, size 1000 700, center on, match:class ^(xdg-desktop-portal-gtk)$
 
       # Network Manager
       windowrule = float on, size 800 600, center on, match:class ^(nm-connection-editor)$
