@@ -11,6 +11,9 @@ with lib;
     in {
       TLP_DEFAULT_MODE = "BAT";
       TLP_PERSISTENT_DEFAULT = 1;
+
+      WIFI_PWR_ON_AC = "off";
+      WIFI_PWR_ON_BAT = "off";
       
       CPU_BOOST_ON_AC = 1;
       CPU_BOOST_ON_BAT = 0;
