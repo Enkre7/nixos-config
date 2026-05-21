@@ -41,7 +41,7 @@
     user = "enkre";
     flakePath = "/etc/nixos";
     dotfilesPath = "${config.flakePath}/dotfiles";
-    wallpaper = ../../dotfiles/wallpapers/gruvbox-light-kojiro.png; # only png
+    wallpaper = ../../dotfiles/wallpapers/gruvbox-light-orbit.png; # only png
     styleTheme = "gruvbox-light"; 
     stylePolarity = "light";
     gitUsername = "Enkre7";

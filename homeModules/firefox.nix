@@ -142,6 +142,12 @@ in
         "identity.sync.useOAuthForSyncToken" = false; # Change to true on account login
         "identity.fxaccounts.account.device.name" = "${config.hostname}'s Firefox";
 
+        # GPU
+        "media.ffmpeg.vaapi.enabled" = true;
+        "media.rdd-ffmpeg.enabled" = true;
+        "media.av1.enabled" = true;
+        "gfx.x11-egl.force-enabled" = true;
+
         # Other
         "extensions.autoDisableScopes" = 0;
         "media.navigator.video.enabled" = true;
