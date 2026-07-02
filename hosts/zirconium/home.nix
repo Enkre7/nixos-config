@@ -55,6 +55,9 @@
 
   # Debug
   #stylix.enable = lib.mkForce false;
+  nixpkgs.config.permittedInsecurePackages = [
+    "pnpm-10.29.2"
+  ];
 
   # Host specific settings
   wayland.windowManager.hyprland.settings = {

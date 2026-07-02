@@ -55,6 +55,9 @@
  
   # Debug
   #stylix.enable = lib.mkForce true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "pnpm-10.29.2"
+  ];
 
   wayland.windowManager.hyprland.settings = {
     monitor = lib.mkForce "eDP-1,highrr,auto,1.6";

@@ -29,6 +29,7 @@ in
     package = null;
     portalPackage = null;
     systemd.variables = [ "--all" ];
+    configType = "hyprlang";
     settings = {
       monitor = [ ",preferred,auto,1.6" ];
       xwayland.force_zero_scaling = true;
