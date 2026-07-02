@@ -5,7 +5,7 @@
     enable = true;
     enableDefaultConfig = false;
     includes = [ "~/.ssh/config.d/*" ];
-    matchBlocks = {
+    settings = {
       "*" = {
         controlMaster = "auto";
         controlPath = "~/.ssh/sockets/S.%r@%h:%p";
