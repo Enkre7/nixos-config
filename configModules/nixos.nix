@@ -10,6 +10,7 @@
         "https://hyprland.cachix.org"
         "https://nixpkgs-wayland.cachix.org"
         "https://lanzaboote.cachix.org"
+        "https://noctalia.cachix.org"
       ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -17,6 +18,7 @@
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
         "lanzaboote.cachix.org-1:Nt8f5XMgn5LnvLPiJWKI5h7wtS7xwY6LyflCtlKHPeY="
+        "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       ];
       auto-optimise-store = true;
       builders-use-substitutes = true;

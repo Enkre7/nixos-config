@@ -9,15 +9,16 @@
     ../../homeModules/nix-index.nix  
   # Desktop Environment
     ../../homeModules/hyprland.nix
+    ../../homeModules/noctalia.nix
     #../../homeModules/sway.nix
     #../../homeModules/niri.nix
     ../../homeModules/hyprlock.nix
     ../../homeModules/swayidle.nix
-    ../../homeModules/waybar2.nix
+    #noctalia ../../homeModules/waybar2.nix
     #../../homeModules/wofi.nix
     #../../homeModules/wlogout.nix
-    ../../homeModules/rofi.nix
-    ../../homeModules/swaync.nix
+    #noctalia ../../homeModules/rofi.nix
+    #noctalia ../../homeModules/swaync.nix
     ../../homeModules/light.nix
   # Terminal & Shell
     ../../homeModules/terminal.nix
@@ -40,7 +41,7 @@
     ../../homeModules/nextcloud-client.nix
     #../../homeModules/floorp.nix
     ../../homeModules/firefox.nix
-    #../../homeModules/chromium.nix
+    ../../homeModules/chromium.nix
     #../../homeModules/libreoffice.nix
     ../../homeModules/onlyoffice.nix
     ../../homeModules/minecraft.nix
@@ -83,7 +84,4 @@
     #picard
     #powershell
   ];
-  #nixpkgs.config.permittedInsecurePackages = [
-  #  "ciscoPacketTracer8-8.2.2"
-  #];
 }
