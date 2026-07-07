@@ -8,7 +8,8 @@
     #../../homeModules/impermanence.nix
     ../../homeModules/nix-index.nix  
   # Desktop Environment
-    ../../homeModules/hyprland.nix
+    #../../homeModules/hyprland.nix
+    #../../homeModules/hyprland-noctalia.nix
     ../../homeModules/noctalia.nix
     #../../homeModules/sway.nix
     #../../homeModules/niri.nix
