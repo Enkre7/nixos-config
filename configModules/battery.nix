@@ -62,7 +62,8 @@ with lib;
 
   services.thermald.enable = config.cpuVendor == "Intel";
   services.power-profiles-daemon.enable = mkForce false;
-  
+ 
+  services.upower.enable = mkIf config.isLaptop true; 
   powerManagement = {
     enable = true;
     powertop.enable = true;
