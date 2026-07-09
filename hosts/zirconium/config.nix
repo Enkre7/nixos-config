@@ -11,6 +11,7 @@
   # Boot & security
     #../../configModules/lanzaboote.nix
     ../../configModules/security.nix
+    ../../configModules/polkit-gnome-agent.nix
     ../../configModules/sops.nix
     ../../configModules/yubikey.nix
     #../../configModules/impermanence.nix

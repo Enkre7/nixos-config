@@ -11,6 +11,7 @@
   # Boot & security
     #../../configModules/lanzaboote.nix
     ../../configModules/security.nix
+    #noctalia ../../configModules/polkit-gnome-agent.nix
     ../../configModules/sops.nix
     ../../configModules/yubikey.nix
     ../../configModules/fingerprint.nix

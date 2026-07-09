@@ -41,9 +41,9 @@
     user = "enkre";
     flakePath = "/etc/nixos";
     dotfilesPath = "${config.flakePath}/dotfiles";
-    wallpaper = ../../dotfiles/wallpapers/light/gruvbox-light-orbit.png; # only png
-    styleTheme = "gruvbox-light"; 
-    stylePolarity = "light";
+    wallpaper = ../../dotfiles/wallpapers/dark/nord-dark-heracles.png; # only png
+    styleTheme = "nord"; #gruvbox-light
+    stylePolarity = "dark";
     gitUsername = "Enkre7";
     gitEmail = "victor.mairot@proton.me";
     searxngURL = "searxng.7mairot.com";

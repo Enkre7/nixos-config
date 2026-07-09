@@ -85,7 +85,7 @@ with lib;
     lidSwitchDocked = "ignore";
     HandlePowerKey = "suspend";
     HandlePowerKeyLongPress = "poweroff";
-    HandleLidSwitch = "suspend";
+    HandleLidSwitch = "lock";
     HandleLidSwitchExternalPower = "lock";
     InhibitDelayMaxSec = 5;
   };
