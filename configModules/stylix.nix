@@ -30,13 +30,16 @@
 
   environment.systemPackages = with pkgs; [
     awww
-    hyprcursor
+    #hyprcursor
     papirus-icon-theme
     adwaita-icon-theme
+    bibata-cursors
   ];
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = 1;
-    HYPRCURSOR_THEME = "Bibata-Modern-Ice";
-    HYPRCURSOR_SIZE = 56;
+    #HYPRCURSOR_THEME = "Bibata-Modern-Ice";
+    #HYPRCURSOR_SIZE = 26;
+    XCURSOR_THEME = "Bibata-Modern-Ice";
+    XCURSOR_SIZE = 26;
   }; 
 }

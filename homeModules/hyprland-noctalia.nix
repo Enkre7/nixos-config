@@ -4,12 +4,10 @@ let
   startupScript = pkgs.writeShellScriptBin "start" ''
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
     export SSH_AUTH_SOCK
-    ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &
 
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
     ${pkgs.blueman}/bin/blueman-applet &
     ${pkgs.udiskie}/bin/udiskie &
-    ${pkgs.gammastep}/bin/gammastep &
     command -v thunar >/dev/null 2>&1 && thunar --daemon &
     command -v coolercontrol >/dev/null 2>&1 && coolercontrol &
     command -v openrgb >/dev/null 2>&1 && openrgb --server --startminimized -m static -c 00FF00 -b 100 &
@@ -45,7 +43,7 @@ in
       "$clipboard" = "noctalia msg panel-toggle clipboard";
       "$powermenu" = "noctalia msg panel-toggle session";
       "$controlcenter" = "noctalia msg panel-toggle control-center";
-      "$lockscreen" = "hyprlock";
+      "$lockscreen" = "noctalia msg session lock";
       exec-once = "${startupScript}/bin/start";
       general = {
         gaps_in = 2;
@@ -121,6 +119,7 @@ in
         "$mainMod, F, exec, $browser"
         "$mainMod, B, fullscreen"
         "$mainMod SHIFT, F, exec, $browserPrivate"
+        "$mainMod, L, exec, $lockscreen"
         "$mainMod, Left, movefocus, l"
         "$mainMod, Right, movefocus, r"
         "$mainMod, Up, movefocus, u"

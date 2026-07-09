@@ -47,7 +47,8 @@
   
   # Polkit
   security.polkit.enable = true;
-  systemd = {
+/*
+   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
       wantedBy = [ "graphical-session.target" ];
@@ -62,6 +63,7 @@
       };
     };
   };
+*/
 
   security.polkit.extraConfig = ''
     polkit.addRule(function(action, subject) {
@@ -82,6 +84,6 @@
 
   environment.systemPackages = with pkgs; [
     libsecret
-    polkit_gnome
+    #polkit_gnome
   ];
 }
