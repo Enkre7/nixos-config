@@ -114,12 +114,12 @@ in
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, $menu"
         "$mainMod, N, exec, $controlcenter"
+        "$mainMod, L, exec, $lockscreen"
         "$mainMod, P, pseudo,"
         "$mainMod, J, layoutmsg, togglesplit,"
         "$mainMod, F, exec, $browser"
         "$mainMod, B, fullscreen"
         "$mainMod SHIFT, F, exec, $browserPrivate"
-        "$mainMod, L, exec, $lockscreen"
         "$mainMod, Left, movefocus, l"
         "$mainMod, Right, movefocus, r"
         "$mainMod, Up, movefocus, u"
@@ -168,6 +168,10 @@ in
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
+      ];
+      bindl = [
+        ", switch:on:Lid Switch, exec, hyprctl dispatch dpms off"
+        ", switch:off:Lid Switch, exec, hyprctl dispatch dpms on"
       ];
     };
 
@@ -260,3 +264,4 @@ in
     '';
   };
 }
+
