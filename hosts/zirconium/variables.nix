@@ -14,6 +14,7 @@
     gitEmail = mkOption { type = str; };
     searxngURL = mkOption { type = str; };    
     firefoxSyncURL = mkOption { type = str; };
+    protonCalendarUrl = mkOption { type = str; };
     
     # Options for battery.nix
     isLaptop = mkOption {
@@ -48,6 +49,7 @@
     gitEmail = "victor.mairot@proton.me";
     searxngURL = "searxng.7mairot.com";
     firefoxSyncURL = "firefoxsyncserver.7mairot.com";
+    protonCalendarUrl = "https://calendar.proton.me/api/calendar/v1/url/tw9unwlYgWjJrPhfWEDLiHkT8B0XP2MSJEY1jx9Pk18BlLgUI1n2oIWrSWOGC1-Em2nrTeo4qicLSpZu_zN87A==/calendar.ics?CacheKey=CInFC25Kbi7pfheWUP78KA%3D%3D&PassphraseKey=vNYxf0PgsLlzISbS4LkFsntI6f94AEPL9VUbUT3V8cw%3D";
     isLaptop = false;
     cpuVendor = "AMD";
     isFrameworkDevice = false;

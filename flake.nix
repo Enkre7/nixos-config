@@ -18,8 +18,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    sops-nix.url = "github:Mic92/sops-nix";
-    
+    agenix.url = "github:ryantm/agenix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,7 +53,7 @@
           inputs.nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
           inputs.nixos-hardware.nixosModules.common-pc-ssd
 
-          inputs.sops-nix.nixosModules.sops
+          inputs.agenix.nixosModules.default
           inputs.lanzaboote.nixosModules.lanzaboote
           inputs.home-manager.nixosModules.default
           inputs.stylix.nixosModules.stylix
@@ -72,7 +71,7 @@
           (import ./tools/disko.nix { device = "/dev/nvme0n1"; })
           inputs.nixos-hardware.nixosModules.framework-13-7040-amd
 
-          inputs.sops-nix.nixosModules.sops
+          inputs.agenix.nixosModules.default
           inputs.lanzaboote.nixosModules.lanzaboote
           inputs.home-manager.nixosModules.default
           inputs.stylix.nixosModules.stylix

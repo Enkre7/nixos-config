@@ -1,7 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  protonCalendarUrl = "https://calendar.proton.me/api/calendar/v1/url/tw9unwlYgWjJrPhfWEDLiHkT8B0XP2MSJEY1jx9Pk18BlLgUI1n2oIWrSWOGC1-Em2nrTeo4qicLSpZu_zN87A==/calendar.ics?CacheKey=CInFC25Kbi7pfheWUP78KA%3D%3D&PassphraseKey=vNYxf0PgsLlzISbS4LkFsntI6f94AEPL9VUbUT3V8cw%3D";
+  protonCalendarUrl = config.protonCalendarUrl;
+  protonCalendarUrlParts = lib.splitString "?" protonCalendarUrl;
+  protonCalendarFullPath = builtins.head protonCalendarUrlParts;
+  protonCalendarQuery = builtins.elemAt protonCalendarUrlParts 1;
+  protonCalendarResourcePath = lib.removePrefix "https://calendar.proton.me" protonCalendarFullPath;
 in
 {
   services.gnome.evolution-data-server.enable = true;
@@ -85,8 +89,8 @@ in
       Color=
       DisplayName=
       EmailAddress=
-      ResourcePath=/api/calendar/v1/url/tw9unwlYgWjJrPhfWEDLiHkT8B0XP2MSJEY1jx9Pk18BlLgUI1n2oIWrSWOGC1-Em2nrTeo4qicLSpZu_zN87A==/calendar.ics
-      ResourceQuery=CacheKey=CInFC25Kbi7pfheWUP78KA%3D%3D&PassphraseKey=vNYxf0PgsLlzISbS4LkFsntI6f94AEPL9VUbUT3V8cw%3D
+      ResourcePath=${protonCalendarResourcePath}
+      ResourceQuery=${protonCalendarQuery}
       SslTrust=
       Order=4294967295
       Timeout=30
@@ -108,3 +112,4 @@ in
     '';
   };
 }
+
