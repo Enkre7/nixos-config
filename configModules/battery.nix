@@ -4,7 +4,7 @@ with lib;
 
 {
   services.tlp = {
-    enable = config.isLaptop;
+    enable = config.isLaptop && !config.isFrameworkDevice;
     settings = let
       isAMD = config.cpuVendor == "AMD";
       isIntel = config.cpuVendor == "Intel";
@@ -61,7 +61,7 @@ with lib;
   };
 
   services.thermald.enable = config.cpuVendor == "Intel";
-  services.power-profiles-daemon.enable = mkForce false;
+  services.power-profiles-daemon.enable = mkIf (config.isLaptop && config.isFrameworkDevice) true;
  
   services.upower.enable = mkIf config.isLaptop true; 
   powerManagement = {
