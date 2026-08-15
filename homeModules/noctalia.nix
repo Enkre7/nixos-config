@@ -102,7 +102,7 @@
 
       dock = {
         auto_hide = true;
-        enabled = true;
+        enabled = false;
         icon_size = 32;
         launcher_position = "start";
         pinned = [ "Firefox" "Steam" "VSCodium" "Kitty" ];
@@ -152,7 +152,6 @@
             show_caps_lock = true;
             show_keyboard_layout = true;
             show_login_button = true;
-            show_password_hint = true;
           };
         };
         widget."lockscreen-widget-0000000000000001" = {
@@ -191,13 +190,22 @@
       plugins.enabled = [ "noctalia/notes" ];
 
       shell = {
-        avatar_path = "/home/enkre/Nextcloud/MEDIAS/Famille memoji/victor_memoji.png";
+        avatar_path = "~/Nextcloud/MEDIAS/Famille memoji/victor_memoji.png";
         font_family = lib.mkForce "JetBrainsMono Nerd Font Propo";
         launch_apps_as_systemd_services = true;
         polkit_agent = true;
         screen_time_enabled = true;
         panel.transparency_mode = "soft";
         screen_corners.size = 41;
+        screenshot = {
+          save_to_file = true;
+          directory = "~/Pictures/screenshots";
+          copy_to_clipboard = true;
+          freeze_screen = true;
+          show_cursor = false;
+          pipe_to_command = true;
+          pipe_command = "swappy -f -";
+        };
       };
 
       widget = {

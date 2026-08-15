@@ -47,6 +47,7 @@
     ../../homeModules/onlyoffice.nix
     ../../homeModules/minecraft.nix
     #../../homeModules/lutris.nix
+    ../../homeModules/packettracer.nix
   ];
 
   programs.home-manager.enable = true; 
@@ -61,10 +62,16 @@
     "pnpm-10.29.2"
   ];
 
-  wayland.windowManager.hyprland.settings = {
-    monitor = lib.mkForce "eDP-1,highrr,auto,1.6";
-  };
-   
+  #wayland.windowManager.hyprland.settings = {
+  #  monitor = lib.mkForce "eDP-1,highrr,auto,1.6";
+  #};
+  wayland.windowManager.hyprland.settings.monitor = lib.mkForce {
+    output = "eDP-1";
+    mode = "highrr";
+    position = "auto";
+    scale = 1.6;
+  };   
+
   xdg.configFile."niri/config.kdl".text = lib.mkAfter ''
     output "eDP-1" {
       scale 1.6
@@ -74,13 +81,12 @@
   # Host specific settings
   programs.yt-dlp.enable = true;
   home.packages = with pkgs; [
-    cisco-packet-tracer_9
     prusa-slicer
     drawio
     vesktop # discord
     gnome-calculator
     obsidian
-    lmstudio
+    #lmstudio
     plex-desktop
     #ffmpeg-full
     #picard

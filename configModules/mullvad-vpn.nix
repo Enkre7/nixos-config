@@ -3,7 +3,7 @@
 {
   services.mullvad-vpn = { 
     enable = true;
-    package = pkgs.mullvad-vpn;
+    #package = pkgs.mullvad-vpn;
   };
   services.resolved.enable = true;
 }
