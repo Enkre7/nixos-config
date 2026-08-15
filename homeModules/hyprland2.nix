@@ -28,7 +28,8 @@ in
     enable = true;
     package = null;
     portalPackage = null;
-    systemd.variables = [ "--all" ];
+    #systemd.variables = [ "--all" ];
+    systemd.enable = false;
     configType = "hyprlang";
     settings = {
       monitor = [ ",preferred,auto,1.6" ];

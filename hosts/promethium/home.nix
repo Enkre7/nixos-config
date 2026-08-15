@@ -81,6 +81,7 @@
     gnome-calculator
     obsidian
     lmstudio
+    plex-desktop
     #ffmpeg-full
     #picard
     #powershell

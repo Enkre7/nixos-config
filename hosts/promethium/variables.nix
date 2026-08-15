@@ -37,7 +37,7 @@
   };
   
   config = {
-    stateVersion = "26.05";
+    stateVersion = "26.11";
     hostname = "promethium";
     user = "enkre";
     flakePath = "/etc/nixos";
