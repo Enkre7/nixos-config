@@ -17,7 +17,7 @@ in
   environment.systemPackages = with pkgs; [
     yubikey-personalization
     gnupg
-    pinentry-gtk2
+    pinentry-gnome3
     sops
     ssh-to-pgp
     pam_u2f
