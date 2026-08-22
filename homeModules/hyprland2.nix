@@ -192,7 +192,7 @@ in
         { _args = [ "XF86AudioNext" (inline ''hl.exec_cmd("playerctl next")'') ]; }
         { _args = [ "XF86AudioPrev" (inline ''hl.exec_cmd("playerctl previous")'') ]; }
         { _args = [ "XF86AudioMedia" (inline ''hl.exec_cmd("hyprlock")'') ]; }
-        { _args = [ "Print" (inline ''hl.exec_cmd("grim -g \\"$(slurp)\\" - | swappy -f -")'') ]; }
+        { _args = [ "Print" (inline ''hl.exec_cmd('grim -g "$(slurp)" - | swappy -f -')'') ]; }
         { _args = [ "CTRL + ALT + V" (inline ''hl.exec_cmd("cliphist list | wofi --dmenu | cliphist decode | wl-copy")'') ]; }
 
         { _args = [ "SUPER + mouse:272" (inline "hl.dsp.window.drag()") { mouse = true; } ]; }
