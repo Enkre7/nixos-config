@@ -175,92 +175,92 @@ in
         "$mainMod, mouse:273, resizewindow"
       ];
 
-      window_rule = [
+      windowrule = [
         # PulseAudio Volume Control
-        { match.class = "^(org\\.pulseaudio\\.pavucontrol)$"; float = true; size = [ 800 600 ]; center = true; }
+        "float on, size 800 600, center on, match:class ^(org\\.pulseaudio\\.pavucontrol)$"
 
         # Nextcloud Client
-        { match.class = "^(com\\.nextcloud\\.desktopclient\\.nextcloud)$"; float = true; size = [ 873 586 ]; center = true; }
+        "float on, size 873 586, center on, match:class ^(com\\.nextcloud\\.desktopclient\\.nextcloud)$"
 
         # Blueman Bluetooth Manager
-        { match.class = "^(\\.blueman-manager-wrapped)$"; float = true; size = [ 700 500 ]; center = true; }
+        "float on, size 700 500, center on, match:class ^(\\.blueman-manager-wrapped)$"
 
         # Thunar
-        { match.class = "^(thunar)$"; float = true; size = [ 1000 700 ]; center = true; }
-        { match.class = "^(xdg-desktop-portal-gtk)$"; float = true; size = [ 1000 700 ]; center = true; }
+        "float on, size 1000 700, center on, match:class ^(thunar)$"
+        "float on, size 1000 700, center on, match:class ^(xdg-desktop-portal-gtk)$"
 
         # Network Manager
-        { match.class = "^(nm-connection-editor)$"; float = true; size = [ 800 600 ]; center = true; }
-        { match.class = "^(nm-applet)$"; float = true; size = [ 400 300 ]; center = true; }
+        "float on, size 800 600, center on, match:class ^(nm-connection-editor)$"
+        "float on, size 400 300, center on, match:class ^(nm-applet)$"
 
         # OpenRGB
-        { match.class = "^(openrgb)$"; float = true; size = [ 1000 700 ]; center = true; }
+        "float on, size 1000 700, center on, match:class ^(openrgb)$"
 
         # CoolerControl
-        { match.class = "^(org\\.coolercontrol\\.CoolerControl)$"; float = true; size = [ 908 678 ]; center = true; }
+        "float on, size 908 678, center on, match:class ^(org\\.coolercontrol\\.CoolerControl)$"
 
-        # Mullvad VPN
-        { match.class = "^(Mullvad VPN)$"; float = true; size = [ 320 568 ]; center = true; }
+        # Mullvad VPN (top-right)
+        "float on, size 320 568, center on, match:class ^(Mullvad VPN)$"
 
         # Proton VPN
-        { match.title = "^(Proton VPN)$"; float = true; size = [ 403 600 ]; center = true; pin = true; }
+        "float on, size 403 600, center on, pin on, match:title ^(Proton VPN)$"
 
         # KDE Connect
-        { match.class = "^(org\\.kde\\.kdeconnect\\.app)$"; float = true; size = [ 762 687 ]; center = true; }
+        "float on, size 762 687, center on, match:class ^(org\\.kde\\.kdeconnect\\.app)$"
 
         # Firefox PiP
-        { match.title = "^(Incrustation vidéo)$"; float = true; pin = true; size = [ "35%" "35%" ]; move = [ "64%" "4%" ]; no_blur = true; no_shadow = true; no_anim = true; }
+        "float on, pin on, size 35% 35%, move 64% 4%, no_blur on, no_shadow on, no_anim on, match:title ^(Incrustation vidéo)$"
 
         # Firefox extensions / cookies
-        { match.title = "^(Suppression des cookies.*)$"; float = true; size = [ 490 154 ]; center = true; }
-        { match.title = "^(Extension.*)$"; float = true; size = [ 1000 700 ]; center = true; }
+        "float on, size 490 154, center on, match:title ^(Suppression des cookies.*)$"
+        "float on, size 1000 700, center on, match:title ^(Extension.*)$"
 
         # File Roller
-        { match.class = "^(org\\.gnome\\.FileRoller)$"; float = true; size = [ 1000 700 ]; center = true; }
+        "float on, size 1000 700, center on, match:class ^(org\\.gnome\\.FileRoller)$"
 
         # Gnome Calculator
-        { match.class = "^(org\\.gnome\\.Calculator)$"; float = true; size = [ 360 616 ]; }
+        "float on, size 360 616, match:class ^(org\\.gnome\\.Calculator)$"
 
         # Keyring manager
-        { match.class = "^(gcr-prompter)$"; float = true; center = true; pin = true; }
+        "float on, center on, pin on, match:class ^(gcr-prompter)$"
 
         # Waybar monitors
-        { match.class = "^(disk-monitor)$"; float = true; size = [ 1200 800 ]; center = true; }
-        { match.class = "^(system-monitor)$"; float = true; size = [ 1200 800 ]; center = true; }
+        "float on, size 1200 800, center on, match:class ^(disk-monitor)$"
+        "float on, size 1200 800, center on, match:class ^(system-monitor)$"
 
         # Virt-manager
-        { match.class = "^(virt-manager)$"; float = true; size = [ 800 600 ]; center = true; }
+        "float on, size 800 600, center on, match:class ^(virt-manager)$"
 
         # System config printer
-        { match.class = "^(system-config-printer)$"; float = true; size = [ 700 500 ]; center = true; }
+        "float on, size 700 500, center on, match:class ^(system-config-printer)$"
 
         # PrismLauncher
-        { match.class = "^(org\\.prismlauncher\\.PrismLauncher)$"; float = true; size = [ 1100 700 ]; center = true; }
+        "float on, size 1100 700, center on, match:class ^(org\\.prismlauncher\\.PrismLauncher)$"
 
         # Vesktop (Discord)
-        { match.class = "^(vesktop)$"; float = true; size = [ 900 600 ]; center = true; }
+        "float on, size 900 600, center on, match:class ^(vesktop)$"
 
         # mpv
-        { match.class = "^(mpv)$"; idle_inhibit = "fullscreen"; }
+        "idle_inhibit fullscreen, match:class ^(mpv)$"
 
         # Steam - fenetres flottantes
-        { match.title = "^(Steam Guard|Paramètres Steam|Liste de contacts|Offres spéciales)$"; float = true; }
-        { match.title = "^(Liste de contacts)$"; size = [ 480 480 ]; center = true; }
+        "float on, match:title ^(Steam Guard|Paramètres Steam|Liste de contacts|Offres spéciales)$"
+        "size 480 480, center on, match:title ^(Liste de contacts)$"
 
         # Steam - client (deja flottant, centrage uniquement)
-        { match.class = "^(steam)$"; center = true; }
+        "center on, match:class ^(steam)$"
 
         # Steam - jeux uniquement
-        { match.class = "^(steam_app_.+)$"; fullscreen = true; immediate = true; idle_inhibit = "fullscreen"; }
+        "fullscreen on, immediate on, idle_inhibit fullscreen, match:class ^(steam_app_.+)$"
 
         # Wine / Lutris
-        { match.class = "^(wine|lutris)$"; fullscreen = true; immediate = true; idle_inhibit = "fullscreen"; workspace = "special:games"; }
+        "fullscreen on, immediate on, idle_inhibit fullscreen, workspace special:games, match:class ^(wine|lutris)$"
 
         # Autres emulateurs et lanceurs
-        { match.class = "^(minecraft-launcher|gamemoderun|heroic|legendary|bottles|retroarch|dolphin-emu|pcsx2-qt|rpcs3|yuzu|citra|hl2_linux|csgo_linux64|dota2)$"; fullscreen = true; }
+        "fullscreen on, match:class ^(minecraft-launcher|gamemoderun|heroic|legendary|bottles|retroarch|dolphin-emu|pcsx2-qt|rpcs3|yuzu|citra|hl2_linux|csgo_linux64|dota2)$"
 
         # VScode
-        { match.class = "^(codium)$"; opacity = "0.90 0.85"; }
+        "opacity 0.90 0.85, match:class ^(codium)$"
       ];
     };
   };
