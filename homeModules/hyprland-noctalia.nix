@@ -3,8 +3,8 @@ let
   stylix = config.lib.stylix.colors;
   inline = lib.generators.mkLuaInline;
   startupScript = pkgs.writeShellScriptBin "start" ''
-    eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-    export SSH_AUTH_SOCK
+    eval $(gnome-keyring-daemon --start --components=pkcs11,secrets)
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
 
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
     ${pkgs.blueman}/bin/blueman-applet &
