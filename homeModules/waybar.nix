@@ -18,6 +18,7 @@ with lib;
 {
   programs.waybar = {
     enable = true;
+    systemd.enable = true;
     package = pkgs.waybar;
     settings = [
       {
