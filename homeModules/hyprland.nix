@@ -7,8 +7,13 @@ let
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
 
     ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &
+    pkill -x waybar || true
+    ${pkgs.waybar}/bin/waybar &
+    pkill -x swaync || true
+    ${pkgs.swaynotificationcenter}/bin/swaync &
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
     ${pkgs.blueman}/bin/blueman-applet &
+    command -v kdeconnect-indicator >/dev/null 2>&1 && kdeconnect-indicator &
     ${pkgs.udiskie}/bin/udiskie &
     ${pkgs.gammastep}/bin/gammastep &
     command -v thunar >/dev/null 2>&1 && thunar --daemon &
@@ -34,12 +39,9 @@ in
     configType = "lua";
 
     settings = {
-      monitor = {
-        output = "";
-        mode = "preferred";
-        position = "auto";
-        scale = 1.6;
-      };
+      monitor = [
+        { output = ""; mode = "preferred"; position = "auto"; scale = 1.6; }
+      ];
 
       config = {
         xwayland.force_zero_scaling = true;
@@ -134,19 +136,19 @@ in
       };
 
       bind = [
-        { _args = [ "SUPER + A" (inline ''hl.exec_cmd("rofi-powermenu")'') ]; }
-        { _args = [ "SUPER + Q" (inline ''hl.exec_cmd("kitty")'') ]; }
+        { _args = [ "SUPER + A" (inline ''hl.dsp.exec_cmd("rofi-powermenu")'') ]; }
+        { _args = [ "SUPER + Q" (inline ''hl.dsp.exec_cmd("kitty")'') ]; }
         { _args = [ "SUPER + C" (inline "hl.dsp.window.close()") ]; }
-        { _args = [ "SUPER + E" (inline ''hl.exec_cmd("kitty -e btop")'') ]; }
-        { _args = [ "SUPER + T" (inline ''hl.exec_cmd("thunar")'') ]; }
-        { _args = [ "SUPER + G" (inline ''hl.exec_cmd("kitty -e lf")'') ]; }
+        { _args = [ "SUPER + E" (inline ''hl.dsp.exec_cmd("kitty -e btop")'') ]; }
+        { _args = [ "SUPER + T" (inline ''hl.dsp.exec_cmd("thunar")'') ]; }
+        { _args = [ "SUPER + G" (inline ''hl.dsp.exec_cmd("kitty -e lf")'') ]; }
         { _args = [ "SUPER + V" (inline ''hl.dsp.window.float({ action = "toggle" })'') ]; }
-        { _args = [ "SUPER + R" (inline ''hl.exec_cmd("rofi-launcher")'') ]; }
+        { _args = [ "SUPER + R" (inline ''hl.dsp.exec_cmd("rofi-launcher")'') ]; }
         { _args = [ "SUPER + P" (inline "hl.dsp.window.pseudo()") ]; }
         { _args = [ "SUPER + J" (inline ''hl.dsp.layout("togglesplit")'') ]; }
-        { _args = [ "SUPER + F" (inline ''hl.exec_cmd("firefox")'') ]; }
+        { _args = [ "SUPER + F" (inline ''hl.dsp.exec_cmd("firefox")'') ]; }
         { _args = [ "SUPER + B" (inline "hl.dsp.window.fullscreen()") ]; }
-        { _args = [ "SUPER + SHIFT + F" (inline ''hl.exec_cmd("firefox --private-window")'') ]; }
+        { _args = [ "SUPER + SHIFT + F" (inline ''hl.dsp.exec_cmd("firefox --private-window")'') ]; }
 
         { _args = [ "SUPER + left" (inline ''hl.dsp.focus({ direction = "left" })'') ]; }
         { _args = [ "SUPER + right" (inline ''hl.dsp.focus({ direction = "right" })'') ]; }
@@ -183,22 +185,22 @@ in
         { _args = [ "SUPER + right" (inline ''hl.dsp.focus({ workspace = "e+1" })'') ]; }
         { _args = [ "SUPER + left" (inline ''hl.dsp.focus({ workspace = "e-1" })'') ]; }
 
-        { _args = [ "XF86AudioMute" (inline ''hl.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")'') ]; }
-        { _args = [ "XF86AudioPlay" (inline ''hl.exec_cmd("playerctl play-pause")'') ]; }
-        { _args = [ "XF86AudioPause" (inline ''hl.exec_cmd("playerctl play-pause")'') ]; }
-        { _args = [ "XF86AudioNext" (inline ''hl.exec_cmd("playerctl next")'') ]; }
-        { _args = [ "XF86AudioPrev" (inline ''hl.exec_cmd("playerctl previous")'') ]; }
-        { _args = [ "XF86AudioMedia" (inline ''hl.exec_cmd("hyprlock")'') ]; }
-        { _args = [ "Print" (inline ''hl.exec_cmd("grim -g \\"$(slurp)\\" - | swappy -f -")'') ]; }
-        { _args = [ "CTRL + ALT + V" (inline ''hl.exec_cmd("cliphist list | wofi --dmenu | cliphist decode | wl-copy")'') ]; }
+        { _args = [ "XF86AudioMute" (inline ''hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")'') ]; }
+        { _args = [ "XF86AudioPlay" (inline ''hl.dsp.exec_cmd("playerctl play-pause")'') ]; }
+        { _args = [ "XF86AudioPause" (inline ''hl.dsp.exec_cmd("playerctl play-pause")'') ]; }
+        { _args = [ "XF86AudioNext" (inline ''hl.dsp.exec_cmd("playerctl next")'') ]; }
+        { _args = [ "XF86AudioPrev" (inline ''hl.dsp.exec_cmd("playerctl previous")'') ]; }
+        { _args = [ "XF86AudioMedia" (inline ''hl.dsp.exec_cmd("hyprlock")'') ]; }
+        { _args = [ "Print" (inline ''hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -')'') ]; }
+        { _args = [ "CTRL + ALT + V" (inline ''hl.dsp.exec_cmd("cliphist list | wofi --dmenu | cliphist decode | wl-copy")'') ]; }
 
         { _args = [ "SUPER + mouse:272" (inline "hl.dsp.window.drag()") { mouse = true; } ]; }
         { _args = [ "SUPER + mouse:273" (inline "hl.dsp.window.resize()") { mouse = true; } ]; }
 
-        { _args = [ "XF86AudioRaiseVolume" (inline ''hl.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+")'') { repeating = true; } ]; }
-        { _args = [ "XF86AudioLowerVolume" (inline ''hl.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-")'') { repeating = true; } ]; }
-        { _args = [ "XF86MonBrightnessDown" (inline ''hl.exec_cmd("brightnessctl set 5%-")'') { repeating = true; } ]; }
-        { _args = [ "XF86MonBrightnessUp" (inline ''hl.exec_cmd("brightnessctl set +5%")'') { repeating = true; } ]; }
+        { _args = [ "XF86AudioRaiseVolume" (inline ''hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+")'') { repeating = true; } ]; }
+        { _args = [ "XF86AudioLowerVolume" (inline ''hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-")'') { repeating = true; } ]; }
+        { _args = [ "XF86MonBrightnessDown" (inline ''hl.dsp.exec_cmd("brightnessctl set 5%-")'') { repeating = true; } ]; }
+        { _args = [ "XF86MonBrightnessUp" (inline ''hl.dsp.exec_cmd("brightnessctl set +5%")'') { repeating = true; } ]; }
       ];
 
       window_rule = [

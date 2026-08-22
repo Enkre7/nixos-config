@@ -61,9 +61,11 @@
 
   # Host specific settings
   wayland.windowManager.hyprland.settings = {
-    monitor = lib.mkForce ",preferred,auto,1.67";
+    monitor = lib.mkForce [
+      { output = ""; mode = "preferred"; position = "auto"; scale = 1.67; }
+    ];
   }; 
-  
+ 
   xsession.numlock.enable = true;
   programs.firefox.profiles.${config.user}.settings = {
     "layout.css.devPixelsPerPx" = "1.6";

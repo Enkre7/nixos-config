@@ -13,6 +13,7 @@ let
     ${pkgs.swaynotificationcenter}/bin/swaync &
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
     ${pkgs.blueman}/bin/blueman-applet &
+    command -v kdeconnect-indicator >/dev/null 2>&1 && kdeconnect-indicator &
     ${pkgs.udiskie}/bin/udiskie &
     ${pkgs.gammastep}/bin/gammastep &
     command -v thunar >/dev/null 2>&1 && thunar --daemon &

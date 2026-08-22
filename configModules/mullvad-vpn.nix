@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
-  services.mullvad-vpn = { 
+  services.mullvad-vpn = {
     enable = true;
-    #package = pkgs.mullvad-vpn;
+    gui.enable = true;
   };
   services.resolved.enable = true;
 }
