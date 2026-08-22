@@ -7,6 +7,10 @@ let
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
 
     ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &
+    pkill -x waybar || true
+    ${pkgs.waybar}/bin/waybar &
+    pkill -x swaync || true
+    ${pkgs.swaynotificationcenter}/bin/swaync &
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
     ${pkgs.blueman}/bin/blueman-applet &
     ${pkgs.udiskie}/bin/udiskie &
@@ -31,12 +35,9 @@ in
     configType = "lua";
 
     settings = {
-      monitor = {
-        output = "";
-        mode = "preferred";
-        position = "auto";
-        scale = 1.6;
-      };
+      monitor = [
+        { output = ""; mode = "preferred"; position = "auto"; scale = 1.6; }
+      ];
 
       config = {
         xwayland.force_zero_scaling = true;
