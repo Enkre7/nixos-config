@@ -7,8 +7,6 @@ let
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
 
     ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &
-    pkill -x waybar || true
-    ${pkgs.waybar}/bin/waybar &
     pkill -x swaync || true
     ${pkgs.swaynotificationcenter}/bin/swaync &
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
