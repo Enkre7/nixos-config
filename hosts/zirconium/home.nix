@@ -8,17 +8,19 @@
     #../../homeModules/impermanence.nix
     ../../homeModules/nix-index.nix  
   # Desktop Environment
-    ../../homeModules/hyprland2.nix
+    #../../homeModules/hyprland2.nix
+    ../../homeModules/hyprland-noctalia.nix
+    ../../homeModules/noctalia.nix
     #../../homeModules/sway.nix
     #../../homeModules/niri.nix
-    ../../homeModules/hyprlock.nix
-    ../../homeModules/swayidle.nix
-    ../../homeModules/waybar.nix
+    #../../homeModules/hyprlock.nix
+    #../../homeModules/swayidle.nix
+    #../../homeModules/waybar.nix
     #../../homeModules/wlogout.nix
     #../../homeModules/wofi.nix
-    ../../homeModules/rofi.nix
-    ../../homeModules/swaync.nix
-    ../../homeModules/light.nix
+    #../../homeModules/rofi.nix
+    #../../homeModules/swaync.nix
+    #../../homeModules/light.nix
   # Terminal & Shell
     ../../homeModules/terminal.nix
     ../../homeModules/shell.nix
