@@ -62,21 +62,13 @@
     "pnpm-10.29.2"
   ];
 
-  #wayland.windowManager.hyprland.settings = {
-  #  monitor = lib.mkForce "eDP-1,highrr,auto,1.6";
-  #};
-  wayland.windowManager.hyprland.settings.monitor = lib.mkForce {
-    output = "eDP-1";
-    mode = "highrr";
-    position = "auto";
-    scale = 1.6;
-  };   
-
-  xdg.configFile."niri/config.kdl".text = lib.mkAfter ''
-    output "eDP-1" {
-      scale 1.6
-    }
-  '';
+  wayland.windowManager.hyprland.settings.monitor = lib.mkForce [
+    { output = "eDP-1"; mode = "highrr"; position = "0x0"; scale = 1.6; }
+    { output = "DP-1"; mode = "preferred"; position = "auto"; scale = 1.0; }
+    { output = "DP-2"; mode = "preferred"; position = "auto"; scale = 1.0; }
+    { output = "DP-3"; mode = "preferred"; position = "auto"; scale = 1.0; }
+    { output = "DP-4"; mode = "preferred"; position = "auto"; scale = 1.0; }
+  ];
    
   # Host specific settings
   programs.yt-dlp.enable = true;

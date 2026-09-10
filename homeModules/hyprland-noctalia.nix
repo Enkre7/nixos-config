@@ -1,7 +1,9 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, osConfig, ... }:
 let
   stylix = config.lib.stylix.colors;
   inline = lib.generators.mkLuaInline;
+  hasHomePackage = name:
+    lib.any (p: (p.pname or p.name or "") == name) config.home.packages;
   startupScript = pkgs.writeShellScriptBin "start" ''
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets)
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
@@ -9,16 +11,16 @@ let
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
     ${pkgs.blueman}/bin/blueman-applet &
     ${pkgs.udiskie}/bin/udiskie &
-    command -v thunar >/dev/null 2>&1 && thunar --daemon &
-    command -v coolercontrol >/dev/null 2>&1 && coolercontrol &
-    command -v openrgb >/dev/null 2>&1 && openrgb --server --startminimized -m static -c 00FF00 -b 100 &
+    ${lib.optionalString osConfig.programs.thunar.enable "${pkgs.xfce.thunar}/bin/thunar --daemon &"}
+    ${lib.optionalString osConfig.programs.coolercontrol.enable "${pkgs.coolercontrol.coolercontrol-gui}/bin/coolercontrol &"}
+    ${lib.optionalString osConfig.services.hardware.openrgb.enable "${osConfig.services.hardware.openrgb.package}/bin/openrgb --server --startminimized -m static -c 00FF00 -b 100 &"}
     sleep 1
-    command -v vesktop >/dev/null 2>&1 && vesktop --start-minimized &
+    ${lib.optionalString (hasHomePackage "vesktop") "${pkgs.vesktop}/bin/vesktop --start-minimized &"}
     sleep 0.5
-    command -v mullvad-vpn >/dev/null 2>&1 && mullvad-vpn &
-    command -v protonvpn-app >/dev/null 2>&1 && protonvpn-app &
+    ${lib.optionalString osConfig.services.mullvad-vpn.gui.enable "${pkgs.mullvad-vpn}/bin/mullvad-vpn &"}
+    ${lib.optionalString (hasHomePackage "protonvpn-gui") "${pkgs.protonvpn-gui}/bin/protonvpn-app &"}
 
-    wl-paste --watch cliphist store &
+    ${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store &
   '';
 in
 {
@@ -105,6 +107,14 @@ in
         { leaf = "workspaces"; enabled = true; speed = 6; bezier = "default"; }
         { leaf = "layers"; enabled = false; }
       ];
+
+      workspace_rule =
+        (map (id: { workspace = toString id; monitor = "eDP-1"; default = id == 1; })
+          [ 1 2 3 4 5 ])
+        ++ (lib.concatMap (output:
+              map (id: { workspace = toString id; monitor = output; default = id == 6; })
+                [ 6 7 8 9 10 ]
+            ) [ "DP-1" "DP-2" "DP-3" "DP-4" ]);
 
       on = {
         _args = [
