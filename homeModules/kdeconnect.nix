@@ -24,4 +24,9 @@
       settings.NoDisplay = "true";
     };
   };
+
+  systemd.user.services.kdeconnect-indicator = {
+    Unit.After = [ "noctalia.service" ];
+    Unit.Requires = [ "noctalia.service" ];
+  };
 }

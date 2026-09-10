@@ -1,43 +1,42 @@
 { inputs, lib, ... }:
 
 let
-  capsuleGroups = [
-    {
-      accordion = false;
-      accordion_direction = "end";
-      enabled = true;
-      fill = "surface_variant";
-      id = "g1";
-      members = [ "notes" "clipboard" ];
-      opacity = 1.0;
-      padding = 6.0;
-    }
-    {
-      accordion = false;
-      accordion_direction = "end";
-      enabled = true;
-      fill = "surface_variant";
-      id = "g2";
-      members = [ "network" "bluetooth" ];
-      opacity = 1.0;
-      padding = 6.0;
-    }
-    {
-      accordion = false;
-      accordion_direction = "end";
-      enabled = true;
-      fill = "surface_variant";
-      id = "g3";
-      members = [ "volume" "notifications" ];
-      opacity = 1.0;
-      padding = 6.0;
-    }
-  ];
+  groupNotes = {
+    accordion = false;
+    accordion_direction = "end";
+    enabled = true;
+    fill = "surface_variant";
+    id = "g1";
+    members = [ "notes" "clipboard" ];
+    opacity = 1.0;
+    padding = 6.0;
+  };
+
+  groupNetwork = {
+    accordion = false;
+    accordion_direction = "end";
+    enabled = true;
+    fill = "surface_variant";
+    id = "g2";
+    members = [ "network" "bluetooth" ];
+    opacity = 1.0;
+    padding = 6.0;
+  };
+
+  groupVolume = {
+    accordion = false;
+    accordion_direction = "end";
+    enabled = true;
+    fill = "surface_variant";
+    id = "g3";
+    members = [ "volume" "notifications" ];
+    opacity = 1.0;
+    padding = 6.0;
+  };
 
   topBarBase = {
     center = [ "date" "clock" ];
     concave_edge_corners = true;
-    end = [ "media" "group:g1" "tray" "group:g3" "group:g2" "battery" ];
     margin_edge = 6;
     margin_ends = 119;
     margin_opposite_edge = 7;
@@ -46,14 +45,18 @@ let
     start = [ "control-center" "spacer_2" "workspaces" ];
     thickness = 32;
     widget_spacing = 5;
-    capsule_group = capsuleGroups;
+  };
+
+  monitorBar = topBarBase // {
+    end = [ "media" "group:g1" "tray" "group:g3" "group:g2" "battery" ];
+    capsule_group = [ groupNotes groupNetwork groupVolume ];
   };
 
   externalOutputs = [ "DP-1" "DP-2" "DP-3" "DP-4" ];
 
   externalBar = output: {
     name = output;
-    value = topBarBase // {
+    value = monitorBar // {
       match = output;
       reserve_space = false;
       smart_auto_hide = true;
@@ -76,10 +79,12 @@ in
           font_weight = 500;
           reserve_space = true;
           smart_auto_hide = false;
+          end = [ "media" "tray" "group:g3" "group:g2" "battery" ];
+          capsule_group = [ groupNetwork groupVolume ];
           monitor =
             (builtins.listToAttrs (map externalBar externalOutputs))
             // {
-              "eDP-1" = topBarBase // {
+              "eDP-1" = monitorBar // {
                 match = "eDP-1";
                 reserve_space = true;
                 smart_auto_hide = false;
@@ -89,11 +94,11 @@ in
 
         side = {
           enabled = true;
-          position = "right";
+          position = "left";
           font_family = "JetBrainsMono Nerd Font Propo";
           font_weight = 500;
-          margin_edge = 8;
-          margin_ends = 328;
+          margin_edge = 9;
+          margin_ends = 350;
           margin_opposite_edge = 0;
           padding = 14;
           reserve_space = false;
@@ -101,7 +106,7 @@ in
           thickness = 34;
           widget_spacing = 6;
           start = [ ];
-          center = [ "screenshot" "ocr" "bar" "status" "bar_2" "nix-monitor" "mini-docker" ];
+          center = [ "clipboard" "screenshot" "ocr" "bar" "status" "bar_2" "nix-monitor" "mini-docker" ];
           end = [ ];
         };
       };
@@ -512,13 +517,10 @@ in
       plugins = {
         auto_update = "all";
         enabled = [
-          "noctalia/notes"
           "yuuto/calculator"
-          "noctalia/bitwarden"
           "8bury/mini-docker"
           "kenn/keybind-cheatsheet"
           "avivbintangaringga/nix-monitor"
-          "icefish/phone-connect"
           "cleboost/ssh-launcher"
           "davemhammer/obsidian"
           "fel/ocr"

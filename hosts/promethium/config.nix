@@ -27,6 +27,7 @@
     ../../configModules/printing.nix
   # Virtualization
     ../../configModules/virtualisation.nix
+    ../../configModules/docker.nix
   # Desktop environment
     ../../configModules/locale.nix
     ../../configModules/shell.nix

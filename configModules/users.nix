@@ -12,7 +12,6 @@
   };
   systemd.tmpfiles.rules = [
     "d /home/${config.user} 0755 ${config.user} users -"
-    "Z /home/${config.user} 0755 ${config.user} users -"
   ];
 
   users.users.root = {
