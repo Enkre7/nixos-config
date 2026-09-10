@@ -41,8 +41,9 @@ with lib;
 
         "hyprland/workspaces" = mkIf isHyprland {
           format = "{icon}";
-          on-scroll-up = "hyprctl dispatch workspace e+1";
-          on-scroll-down = "hyprctl dispatch workspace e-1";
+          on-click = "activate";
+          on-scroll-up = "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'";
+          on-scroll-down = "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'";
         };
 
         "sway/workspaces" = mkIf isSway {
