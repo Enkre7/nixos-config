@@ -1,5 +1,65 @@
 { inputs, lib, ... }:
 
+let
+  capsuleGroups = [
+    {
+      accordion = false;
+      accordion_direction = "end";
+      enabled = true;
+      fill = "surface_variant";
+      id = "g1";
+      members = [ "notes" "clipboard" ];
+      opacity = 1.0;
+      padding = 6.0;
+    }
+    {
+      accordion = false;
+      accordion_direction = "end";
+      enabled = true;
+      fill = "surface_variant";
+      id = "g2";
+      members = [ "network" "bluetooth" ];
+      opacity = 1.0;
+      padding = 6.0;
+    }
+    {
+      accordion = false;
+      accordion_direction = "end";
+      enabled = true;
+      fill = "surface_variant";
+      id = "g3";
+      members = [ "volume" "notifications" ];
+      opacity = 1.0;
+      padding = 6.0;
+    }
+  ];
+
+  topBarBase = {
+    center = [ "date" "clock" ];
+    concave_edge_corners = true;
+    end = [ "media" "group:g1" "tray" "group:g3" "group:g2" "battery" ];
+    margin_edge = 6;
+    margin_ends = 119;
+    margin_opposite_edge = 7;
+    padding = 14;
+    scale = 1.1;
+    start = [ "control-center" "spacer_2" "workspaces" ];
+    thickness = 32;
+    widget_spacing = 5;
+    capsule_group = capsuleGroups;
+  };
+
+  externalOutputs = [ "DP-1" "DP-2" "DP-3" "DP-4" ];
+
+  externalBar = output: {
+    name = output;
+    value = topBarBase // {
+      match = output;
+      reserve_space = false;
+      smart_auto_hide = true;
+    };
+  };
+in
 {
   imports = [ inputs.noctalia.homeModules.default ];
 
@@ -9,18 +69,40 @@
 
     settings = {
       bar = {
-        order = [ "widgets" ];
-        widgets = {
+        order = [ "widgets" "side" ];
+
+        widgets = topBarBase // {
           position = "top";
-          thickness = 32;
-          scale = 1.1;
-          margin_edge = 6;
-          margin_ends = 119;
-          margin_opposite_edge = 7;
-          widget_spacing = 5;
-          start = [ "control-center" "session" "launcher" "clipboard" "notes" "workspaces" ];
-          center = [ "date" "clock" ];
-          end = [ "media" "tray" "volume" "notifications" "network" "bluetooth" "battery" ];
+          font_weight = 500;
+          reserve_space = true;
+          smart_auto_hide = false;
+          monitor =
+            (builtins.listToAttrs (map externalBar externalOutputs))
+            // {
+              "eDP-1" = topBarBase // {
+                match = "eDP-1";
+                reserve_space = true;
+                smart_auto_hide = false;
+              };
+            };
+        };
+
+        side = {
+          enabled = true;
+          position = "right";
+          font_family = "JetBrainsMono Nerd Font Propo";
+          font_weight = 500;
+          margin_edge = 8;
+          margin_ends = 328;
+          margin_opposite_edge = 0;
+          padding = 14;
+          reserve_space = false;
+          smart_auto_hide = true;
+          thickness = 34;
+          widget_spacing = 6;
+          start = [ ];
+          center = [ "screenshot" "ocr" "bar" "status" "bar_2" "nix-monitor" "mini-docker" ];
+          end = [ ];
         };
       };
 
@@ -28,15 +110,41 @@
 
       calendar.enabled = true;
 
+      control_center = {
+        show_session_button = true;
+        show_shortcut_labels = true;
+        sidebar = "compact";
+        sidebar_section = "compact";
+        width = 700;
+        calendar = {
+          event_date_format = "%A %e %B";
+          event_time_format = "%H:%M";
+          show_events_card = true;
+          show_week_numbers = false;
+        };
+        shortcuts = [
+          { type = "wifi"; }
+          { type = "bluetooth"; }
+          { type = "caffeine"; }
+          { type = "nightlight"; }
+          { type = "notification"; }
+          { type = "power_profile"; }
+        ];
+      };
+
       desktop_widgets = {
+        enabled = true;
         schema_version = 2;
         widget_order = [
           "desktop-widget-0000000000000001"
           "desktop-widget-0000000000000002"
           "desktop-widget-0000000000000004"
+          "desktop-widget-0000000000000005"
+          "desktop-widget-0000000000000006"
+          "desktop-widget-0000000000000007"
         ];
         grid = {
-          cell_size = 16;
+          cell_size = 8;
           major_interval = 4;
           visible = true;
         };
@@ -45,7 +153,10 @@
           box_width = 208.0;
           cx = 705.0;
           cy = 470.0;
+          enabled = true;
           output = "eDP-1";
+          placement_height = 940.0;
+          placement_width = 1410.0;
           rotation = 0.0;
           type = "clock";
           settings = {
@@ -63,9 +174,12 @@
         widget."desktop-widget-0000000000000002" = {
           box_height = 32.0;
           box_width = 48.0;
-          cx = 1377.0;
-          cy = 22.0;
+          cx = 737.0;
+          cy = 526.0;
+          enabled = true;
           output = "eDP-1";
+          placement_height = 940.0;
+          placement_width = 1410.0;
           rotation = 0.0;
           type = "sysmon";
           settings = {
@@ -82,9 +196,12 @@
         widget."desktop-widget-0000000000000004" = {
           box_height = 32.0;
           box_width = 48.0;
-          cx = 1321.0;
-          cy = 22.0;
+          cx = 673.0;
+          cy = 526.0;
+          enabled = true;
           output = "eDP-1";
+          placement_height = 940.0;
+          placement_width = 1410.0;
           rotation = 0.0;
           type = "sysmon";
           settings = {
@@ -95,6 +212,73 @@
             gauge_layout = "horizontal";
             label_min_width = 0;
             stat = "ram_pct";
+            stat2 = "cpu_temp";
+          };
+        };
+        widget."desktop-widget-0000000000000005" = {
+          box_height = 112.0;
+          box_width = 208.0;
+          cx = 960.0;
+          cy = 540.0;
+          enabled = true;
+          output = "DP-3";
+          placement_height = 1080.0;
+          placement_width = 1920.0;
+          rotation = 0.0;
+          type = "clock";
+          settings = {
+            background = false;
+            background_color = "on_surface_variant";
+            background_opacity = 0.0;
+            background_padding = 0;
+            background_radius = 0;
+            center_text = false;
+            clock_style = "digital";
+            format = "{:%H:%M}";
+            shadow = false;
+          };
+        };
+        widget."desktop-widget-0000000000000006" = {
+          box_height = 32.0;
+          box_width = 48.0;
+          cx = 928.0;
+          cy = 596.0;
+          enabled = true;
+          output = "DP-3";
+          placement_height = 1080.0;
+          placement_width = 1920.0;
+          rotation = 0.0;
+          type = "sysmon";
+          settings = {
+            background = false;
+            background_opacity = 0.52;
+            color = "on_surface";
+            display = "gauge";
+            gauge_layout = "horizontal";
+            label_min_width = 0;
+            stat = "ram_pct";
+            stat2 = "cpu_temp";
+          };
+        };
+        widget."desktop-widget-0000000000000007" = {
+          box_height = 32.0;
+          box_width = 48.0;
+          cx = 992.0;
+          cy = 596.0;
+          enabled = true;
+          output = "DP-3";
+          placement_height = 1080.0;
+          placement_width = 1920.0;
+          rotation = 0.0;
+          type = "sysmon";
+          settings = {
+            background = false;
+            background_opacity = 0.52;
+            color = "on_surface";
+            display = "gauge";
+            gauge_layout = "horizontal";
+            label_min_width = 0;
+            stat = "cpu_usage";
             stat2 = "cpu_temp";
           };
         };
@@ -125,41 +309,150 @@
         longitude = 4.8357;
       };
 
-      lockscreen.blurred_desktop = true;
+      lockscreen = {
+        blurred_desktop = true;
+        fingerprint = true;
+        lock_before_suspend = true;
+      };
 
       lockscreen_widgets = {
         enabled = true;
         schema_version = 2;
         widget_order = [
+          "lockscreen-login-box@DP-4"
+          "lockscreen-login-box@DP-2"
+          "lockscreen-login-box@DP-3"
           "lockscreen-login-box@eDP-1"
           "lockscreen-widget-0000000000000001"
           "lockscreen-widget-0000000000000002"
+          "lockscreen-widget-0000000000000003"
         ];
+        grid = {
+          cell_size = 16;
+          major_interval = 4;
+          visible = true;
+        };
+        widget."lockscreen-login-box@DP-2" = {
+          box_height = 196.0;
+          box_width = 810.0;
+          cx = 960.0;
+          cy = 898.0;
+          enabled = true;
+          output = "DP-2";
+          placement_height = 1080.0;
+          placement_width = 1920.0;
+          rotation = 0.0;
+          type = "login_box";
+          settings = {
+            background_color = "surface_variant";
+            background_opacity = 0.88;
+            background_radius = 12.0;
+            center_password_text = false;
+            input_opacity = 1.0;
+            input_radius = 6.0;
+            layout = "regular";
+            show_caps_lock = true;
+            show_keyboard_layout = true;
+            show_login_button = true;
+            show_media = true;
+            show_session_buttons = true;
+            show_unlock_hint = true;
+            show_weather = true;
+          };
+        };
+        widget."lockscreen-login-box@DP-3" = {
+          box_height = 70.0;
+          box_width = 400.0;
+          cx = 960.0;
+          cy = 575.0;
+          enabled = true;
+          output = "DP-3";
+          placement_height = 1080.0;
+          placement_width = 1920.0;
+          rotation = 0.0;
+          type = "login_box";
+          settings = {
+            background_color = "surface_variant";
+            background_opacity = 0.88;
+            background_radius = 32.0;
+            center_password_text = false;
+            input_opacity = 1.0;
+            input_radius = 32.0;
+            layout = "compact";
+            show_caps_lock = true;
+            show_keyboard_layout = true;
+            show_login_button = true;
+            show_media = false;
+            show_session_buttons = true;
+            show_unlock_hint = true;
+            show_weather = false;
+          };
+        };
+        widget."lockscreen-login-box@DP-4" = {
+          box_height = 196.0;
+          box_width = 810.0;
+          cx = 960.0;
+          cy = 898.0;
+          enabled = true;
+          output = "DP-4";
+          placement_height = 1080.0;
+          placement_width = 1920.0;
+          rotation = 0.0;
+          type = "login_box";
+          settings = {
+            background_color = "surface_variant";
+            background_opacity = 0.88;
+            background_radius = 12.0;
+            center_password_text = false;
+            input_opacity = 1.0;
+            input_radius = 6.0;
+            layout = "regular";
+            show_caps_lock = true;
+            show_keyboard_layout = true;
+            show_login_button = true;
+            show_media = true;
+            show_session_buttons = true;
+            show_unlock_hint = true;
+            show_weather = true;
+          };
+        };
         widget."lockscreen-login-box@eDP-1" = {
           box_height = 70.0;
           box_width = 400.0;
           cx = 705.0;
-          cy = 547.0;
+          cy = 520.0;
+          enabled = true;
           output = "eDP-1";
+          placement_height = 940.0;
+          placement_width = 1410.0;
           rotation = 0.0;
           type = "login_box";
           settings = {
             background_color = "surface_variant";
             background_opacity = 0.61;
             background_radius = 32.0;
+            center_password_text = false;
             input_opacity = 1.0;
             input_radius = 32.0;
+            layout = "compact";
             show_caps_lock = true;
             show_keyboard_layout = true;
             show_login_button = true;
+            show_media = true;
+            show_session_buttons = true;
+            show_unlock_hint = true;
+            show_weather = false;
           };
         };
         widget."lockscreen-widget-0000000000000001" = {
           box_height = 192.0;
           box_width = 416.0;
           cx = 705.0;
-          cy = 310.0;
+          cy = 278.0;
+          enabled = true;
           output = "eDP-1";
+          placement_height = 940.0;
+          placement_width = 1410.0;
           rotation = 0.0;
           type = "clock";
           settings = {
@@ -171,15 +464,40 @@
           };
         };
         widget."lockscreen-widget-0000000000000002" = {
-          box_height = 48.0;
-          box_width = 112.0;
-          cx = 705.0;
-          cy = 390.0;
+          box_height = 112.0;
+          box_width = 1392.0;
+          cx = 711.0;
+          cy = 884.0;
+          enabled = true;
           output = "eDP-1";
+          placement_height = 940.0;
+          placement_width = 1410.0;
           rotation = 0.0;
-          type = "weather";
+          type = "audio_visualizer";
           settings = {
             background = false;
+            bands = 32;
+            centered = true;
+            reversed = false;
+            show_when_idle = false;
+          };
+        };
+        widget."lockscreen-widget-0000000000000003" = {
+          box_height = 192.0;
+          box_width = 416.0;
+          cx = 960.0;
+          cy = 316.0;
+          enabled = true;
+          output = "DP-3";
+          placement_height = 1080.0;
+          placement_width = 1920.0;
+          rotation = 0.0;
+          type = "clock";
+          settings = {
+            background = false;
+            center_text = false;
+            clock_style = "digital";
+            format = "{:%H:%M}";
             shadow = false;
           };
         };
@@ -187,16 +505,62 @@
 
       nightlight.enabled = true;
 
-      plugins.enabled = [ "noctalia/notes" ];
+      notification.background_opacity = 0.7;
+
+      osd.background_opacity = 0.7;
+
+      plugins = {
+        auto_update = "all";
+        enabled = [
+          "noctalia/notes"
+          "yuuto/calculator"
+          "noctalia/bitwarden"
+          "8bury/mini-docker"
+          "kenn/keybind-cheatsheet"
+          "avivbintangaringga/nix-monitor"
+          "icefish/phone-connect"
+          "cleboost/ssh-launcher"
+          "davemhammer/obsidian"
+          "fel/ocr"
+        ];
+      };
+
+      plugin_settings = {
+        "avivbintangaringga/nix-monitor".update_command = "nh os switch --update --hostname hostname";
+        "davemhammer/obsidian".vault_path = "/home/enkre/Nextcloud/Obsidian";
+        "noctalia/bitwarden".server_url = "https://bitwarden.7mairot.com";
+        "yuuto/calculator".angle_unit = "deg";
+      };
 
       shell = {
         avatar_path = "~/Nextcloud/MEDIAS/Famille memoji/victor_memoji.png";
+        date_format = "%A, %x";
         font_family = lib.mkForce "JetBrainsMono Nerd Font Propo";
         launch_apps_as_systemd_services = true;
         polkit_agent = true;
         screen_time_enabled = true;
-        panel.transparency_mode = "soft";
-        screen_corners.size = 41;
+        settings_show_advanced = true;
+        show_location = true;
+        time_format = "{:%H:%M}";
+        panel = {
+          clipboard_placement = "floating";
+          clipboard_position = "center";
+          control_center_placement = "attached";
+          control_center_position = "auto";
+          launcher_placement = "floating";
+          launcher_position = "center";
+          polkit_placement = "floating";
+          polkit_position = "center";
+          session_placement = "attached";
+          session_position = "auto";
+          transparency_mode = "soft";
+          wallpaper_placement = "attached";
+          wallpaper_position = "auto";
+        };
+        screen_corners = {
+          enabled = false;
+          size = 41;
+        };
         screenshot = {
           save_to_file = true;
           directory = "~/Pictures/screenshots";
@@ -208,15 +572,67 @@
         };
       };
 
-      widget = {
-        media = {
-          hide_when_no_media = true;
-          scale = 0.9;
+      wallpaper = {
+        directory = "/etc/nixos/dotfiles/wallpapers";
+        directory_dark = "/etc/nixos/dotfiles/wallpapers/dark";
+        directory_light = "/etc/nixos/dotfiles/wallpapers/light";
+        enabled = true;
+        fill_mode = "stretch";
+        per_monitor_directories = false;
+        transition = [ "honeycomb" ];
+        transition_duration = 1500.0;
+        transition_on_startup = false;
+        automation = {
+          enabled = false;
+          interval_seconds = 1800;
+          order = "random";
+          recursive = true;
         };
-        network.show_label = false;
-        tray = { drawer = true; hidden = [ "Blueman" "Réseau" ]; };
-        volume.show_label = false;
+      };
+
+      weather = {
+        effects = true;
+        enabled = true;
+        refresh_minutes = 30;
+        unit = "metric";
+      };
+
+      widget = {
+        bar.type = "yuuto/calculator:bar";
+        bar_2.type = "icefish/phone-connect:bar";
+        battery = { capsule = true; type = "battery"; };
+        control-center = { scale = 1.25; type = "control-center"; };
+        date = { format = "{:%a %d %b}"; type = "clock"; };
+        media = {
+          art_size = 16.0;
+          hide_when_no_media = true;
+          max_length = 220.0;
+          min_length = 80.0;
+          scale = 0.9;
+          title_scroll = "none";
+          type = "media";
+        };
+        mini-docker.type = "8bury/mini-docker:mini-docker";
+        network = { show_label = false; type = "network"; };
+        nix-monitor = { show_text = false; type = "avivbintangaringga/nix-monitor:nix-monitor"; };
         notes.type = "noctalia/notes:notes";
+        ocr.type = "fel/ocr:ocr";
+        session = { enabled = false; type = "session"; };
+        spacer_2.type = "spacer";
+        status.type = "davemhammer/obsidian:status";
+        tray = {
+          capsule = true;
+          drawer = false;
+          hidden = [ "Blueman" "Réseau" ];
+          type = "tray";
+        };
+        volume = {
+          mute_color = "secondary";
+          scale = 0.95;
+          show_label = false;
+          type = "volume";
+        };
+        workspaces = { show_all_outputs = true; type = "workspaces"; };
       };
     };
   };
