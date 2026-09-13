@@ -39,6 +39,7 @@
     ../../homeModules/lf.nix
     ../../homeModules/capture.nix  
   # Applications
+    ../../homeModules/vesktop.nix 
     ../../homeModules/nextcloud-client.nix
     #../../homeModules/floorp.nix
     ../../homeModules/firefox.nix
@@ -85,7 +86,6 @@
   home.packages = with pkgs; [
     prusa-slicer
     drawio
-    vesktop # discord
     gnome-calculator
     obsidian
     #lmstudio
