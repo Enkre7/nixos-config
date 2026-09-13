@@ -18,7 +18,7 @@ let
     enabled = true;
     fill = "surface_variant";
     id = "g2";
-    members = [ "network" "bluetooth" ];
+    members = [ "network" "bar_3" "bluetooth" ];
     opacity = 1.0;
     padding = 6.0;
   };
@@ -50,6 +50,23 @@ let
   monitorBar = topBarBase // {
     end = [ "media" "group:g1" "tray" "group:g3" "group:g2" "battery" ];
     capsule_group = [ groupNotes groupNetwork groupVolume ];
+  };
+
+  sideBarBase = {
+    enabled = true;
+    concave_edge_corners = true;
+    font_family = "JetBrainsMono Nerd Font Propo";
+    font_weight = 500;
+    margin_edge = 9;
+    margin_opposite_edge = 0;
+    padding = 14;
+    reserve_space = false;
+    smart_auto_hide = false;
+    thickness = 68;
+    widget_spacing = 6;
+    start = [ ];
+    center = [ "clipboard" "screenshot" "ocr" "bar" "status" "bar_2" "nix-monitor" "mini-docker" ];
+    end = [ ];
   };
 
   externalOutputs = [ "DP-1" "DP-2" "DP-3" "DP-4" ];
@@ -89,25 +106,30 @@ in
                 reserve_space = true;
                 smart_auto_hide = false;
               };
+              "HDMI-A-1" = topBarBase // {
+                match = "HDMI-A-1";
+                end = [ "media" "tray" "group:g3" "group:g2" "battery" ];
+                capsule_group = [ groupNetwork groupVolume ];
+                margin_edge = 10;
+                margin_ends = 263;
+                scale = 1.2;
+                reserve_space = true;
+                smart_auto_hide = false;
+              };
             };
         };
 
-        side = {
-          enabled = true;
+        side = sideBarBase // {
           position = "left";
-          font_family = "JetBrainsMono Nerd Font Propo";
-          font_weight = 500;
-          margin_edge = 9;
+          auto_hide = true;
           margin_ends = 350;
-          margin_opposite_edge = 0;
-          padding = 14;
-          reserve_space = false;
-          smart_auto_hide = true;
-          thickness = 34;
-          widget_spacing = 6;
-          start = [ ];
-          center = [ "clipboard" "screenshot" "ocr" "bar" "status" "bar_2" "nix-monitor" "mini-docker" ];
-          end = [ ];
+          scale = 1.0;
+          monitor."HDMI-A-1" = sideBarBase // {
+            match = "HDMI-A-1";
+            auto_hide = true;
+            margin_ends = 526;
+            scale = 1.05;
+          };
         };
       };
 
@@ -324,6 +346,8 @@ in
         enabled = true;
         schema_version = 2;
         widget_order = [
+          "lockscreen-login-box@FALLBACK"
+          "lockscreen-login-box@HDMI-A-1"
           "lockscreen-login-box@DP-4"
           "lockscreen-login-box@DP-2"
           "lockscreen-login-box@DP-3"
@@ -331,11 +355,68 @@ in
           "lockscreen-widget-0000000000000001"
           "lockscreen-widget-0000000000000002"
           "lockscreen-widget-0000000000000003"
+          "lockscreen-widget-0000000000000008"
         ];
         grid = {
           cell_size = 16;
           major_interval = 4;
           visible = true;
+        };
+        widget."lockscreen-login-box@FALLBACK" = {
+          box_height = 196.0;
+          box_width = 810.0;
+          cx = 960.0;
+          cy = 898.0;
+          enabled = true;
+          output = "FALLBACK";
+          placement_height = 1080.0;
+          placement_width = 1920.0;
+          rotation = 0.0;
+          type = "login_box";
+          settings = {
+            background_color = "surface_variant";
+            background_opacity = 0.88;
+            background_radius = 12.0;
+            center_password_text = false;
+            input_opacity = 1.0;
+            input_radius = 6.0;
+            layout = "regular";
+            show_caps_lock = true;
+            show_keyboard_layout = true;
+            show_login_button = true;
+            show_media = true;
+            show_session_buttons = true;
+            show_unlock_hint = true;
+            show_weather = true;
+          };
+        };
+        widget."lockscreen-login-box@HDMI-A-1" = {
+          box_height = 70.0;
+          box_width = 400.0;
+          cx = 1152.0;
+          cy = 683.0;
+          enabled = true;
+          output = "HDMI-A-1";
+          placement_height = 1296.0;
+          placement_width = 2304.0;
+          rotation = 0.0;
+          type = "login_box";
+          settings = {
+            background_color = "surface_variant";
+            background_opacity = 0.88;
+            background_radius = 32.0;
+            center_password_text = false;
+            input_opacity = 1.0;
+            input_radius = 32.0;
+            layout = "compact";
+            show_caps_lock = true;
+            show_keyboard_layout = true;
+            show_login_button = true;
+            show_media = true;
+            show_session_buttons = true;
+            show_unlock_hint = true;
+            show_weather = true;
+          };
         };
         widget."lockscreen-login-box@DP-2" = {
           box_height = 196.0;
@@ -506,6 +587,25 @@ in
             shadow = false;
           };
         };
+        widget."lockscreen-widget-0000000000000008" = {
+          box_height = 128.0;
+          box_width = 240.0;
+          cx = 1152.0;
+          cy = 520.0;
+          enabled = true;
+          output = "HDMI-A-1";
+          placement_height = 1296.0;
+          placement_width = 2304.0;
+          rotation = 0.0;
+          type = "clock";
+          settings = {
+            background = false;
+            center_text = false;
+            clock_style = "digital";
+            format = "{:%H:%M}";
+            shadow = false;
+          };
+        };
       };
 
       nightlight.enabled = true;
@@ -524,10 +624,12 @@ in
           "cleboost/ssh-launcher"
           "davemhammer/obsidian"
           "fel/ocr"
+          "andrewdems/vpn-manager"
         ];
       };
 
       plugin_settings = {
+        "andrewdems/vpn-manager".auto_connect_enabled = true;
         "avivbintangaringga/nix-monitor".update_command = "nh os switch --update --hostname hostname";
         "davemhammer/obsidian".vault_path = "/home/enkre/Nextcloud/Obsidian";
         "noctalia/bitwarden".server_url = "https://bitwarden.7mairot.com";
@@ -602,6 +704,7 @@ in
       widget = {
         bar.type = "yuuto/calculator:bar";
         bar_2.type = "icefish/phone-connect:bar";
+        bar_3.type = "andrewdems/vpn-manager:bar";
         battery = { capsule = true; type = "battery"; };
         control-center = { scale = 1.25; type = "control-center"; };
         date = { format = "{:%a %d %b}"; type = "clock"; };

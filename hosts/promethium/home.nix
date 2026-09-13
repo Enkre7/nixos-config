@@ -69,7 +69,17 @@
     { output = "DP-3"; mode = "preferred"; position = "auto"; scale = 1.0; }
     { output = "DP-4"; mode = "preferred"; position = "auto"; scale = 1.0; }
   ];
-   
+
+  wayland.windowManager.hyprland.settings.workspace_rule =
+  (map (id: { workspace = toString id; monitor = "eDP-1"; })
+    [ 2 3 4 5 ])
+  ++ (map (id: { workspace = toString id; monitor = "DP-3"; })
+    [ 7 8 9 10 ])
+  ++ [
+    { workspace = "1"; monitor = "eDP-1"; default = true; }
+    { workspace = "6"; monitor = "DP-3"; default = true; }
+  ]; 
+  
   # Host specific settings
   programs.yt-dlp.enable = true;
   home.packages = with pkgs; [

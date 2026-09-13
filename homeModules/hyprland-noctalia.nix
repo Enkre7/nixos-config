@@ -50,6 +50,8 @@ in
           allow_tearing = false;
           layout = "dwindle";
         };
+        
+        cursor.no_hardware_cursors = true;
 
         decoration = {
           rounding = 5;
@@ -105,21 +107,13 @@ in
         { leaf = "workspaces"; enabled = true; speed = 6; bezier = "default"; }
         { leaf = "layers"; enabled = false; }
       ];
-
-      workspace_rule =
-        (map (id: { workspace = toString id; monitor = "eDP-1"; default = id == 1; })
-          [ 1 2 3 4 5 ])
-        ++ (lib.concatMap (output:
-              map (id: { workspace = toString id; monitor = output; default = id == 6; })
-                [ 6 7 8 9 10 ]
-            ) [ "DP-1" "DP-2" "DP-3" "DP-4" ]);
-
+      
       on = {
         _args = [
           "hyprland.start"
           (inline ''function()
-  hl.exec_cmd("${startupScript}/bin/start")
-end'')
+             hl.exec_cmd("${startupScript}/bin/start")
+          end'')
         ];
       };
 
