@@ -73,7 +73,26 @@ dotfilesPath = "/persist/system/nixos/dotfiles";
 
 Uncomment impermanence imports in `config.nix`, `home.nix`, and `flake.nix`
 
-### 7. Install
+### 7. Provide Secrets
+
+The ISO has no SSH key, so the private `secrets` input cannot be fetched over SSH. Clone it over HTTPS:
+
+```bash
+setup-secrets
+```
+
+Username: your GitHub username. Password: a fine-grained personal access token (GitHub → Settings → Developer settings), read-only on `nixos-secrets`, with a short expiration. Revoke it after installation.
+
+Fallback: copy `secrets.nix` manually (USB stick, Nextcloud...):
+
+```bash
+mkdir -p /tmp/nixos-secrets
+cp /path/to/secrets.nix /tmp/nixos-secrets/
+```
+
+`setup-nixos` uses `/tmp/nixos-secrets` automatically when it exists.
+
+### 8. Install
 
 ```bash
 setup-nixos
@@ -81,7 +100,7 @@ setup-nixos
 
 Choose installation type, hostname (`zirconium` or `promethium`), and username.
 
-### 8. Reboot
+### 9. Reboot
 
 ```bash
 sudo reboot
@@ -93,6 +112,7 @@ sudo reboot
 setup-help       # Show all commands
 setup-wifi       # Configure WiFi
 setup-repo       # Clone repository
+setup-secrets    # Clone private secrets (HTTPS + token)
 setup-disk       # Partition disk
 setup-dir        # Copy configuration
 setup-nixos      # Install NixOS
