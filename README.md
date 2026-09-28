@@ -30,6 +30,23 @@ NixOS configuration with Flakes, Home-manager, Lanzaboot, nixos-hardware, nh, im
 | **Font**                 | NerdFonts (JetBrainsMono)          | NerdFonts (JetBrainsMono)          |
 | **Cursor**               | Bibata cursors (Bibata-Modern-Ice) | Bibata cursors (Bibata-Modern-Ice) |
 
+## Secrets
+
+Personal values (user, email, URLs, password hash, paths) live in the private repository `Enkre7/nixos-secrets`, used as the `secrets` flake input. See [CONFIGURATION.md](CONFIGURATION.md) and `secrets.example.nix`.
+
+To update a value:
+
+```bash
+cd ~/nixos-secrets
+$EDITOR secrets.nix
+git commit -am "Update secrets" && git push
+
+cd /etc/nixos
+nix flake update secrets
+nh os switch
+git commit -am "flake.lock: update secrets" && git push
+```
+
 ## Documentation
 
 - **[BUILD_CUSTOM_ISO.md](BUILD_CUSTOM_ISO.md)** - Custom ISO creation
