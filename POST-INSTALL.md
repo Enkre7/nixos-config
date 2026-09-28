@@ -50,7 +50,7 @@ Lanzaboot enables Secure Boot on NixOS by automatically signing the kernel and i
 ```bash
 sudo sbctl create-keys
 ```
-Generates PK, KEK, and db keys in `/etc/secureboot/`.
+Generates PK, KEK, and db keys in `/var/lib/sbctl/` (persisted by impermanence).
 
 **Step 2: Rebuild system**
 ```bash
@@ -104,7 +104,8 @@ Vendor Keys:    microsoft
 
 **Notes:**
 - Lanzaboot auto-signs new kernels during updates
-- Backup keys in `/etc/secureboot/`
+- Backup keys in `/var/lib/sbctl/`
+- Existing keys in `/etc/secureboot/` can be moved with `sudo mv /etc/secureboot /var/lib/sbctl`
 - Reinstallation requires repeating all steps
 
 ---

@@ -57,6 +57,9 @@
       # Printing
       { directory = "/var/lib/cups"; user = "root"; group = "root"; mode = "0755"; }
 
+      # Secure Boot keys
+      { directory = "/var/lib/sbctl"; user = "root"; group = "root"; mode = "0700"; }
+
       # Sudo
       { directory = "/var/db/sudo/lectured"; user = "root"; group = "root"; mode = "0700"; }
     ];
