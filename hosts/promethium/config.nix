@@ -9,7 +9,7 @@
     ../../configModules/hardware.nix
     ../../configModules/users.nix
   # Boot & security
-    #../../configModules/lanzaboote.nix
+    ../../configModules/lanzaboote.nix
     ../../configModules/security.nix
     #noctalia ../../configModules/polkit-gnome-agent.nix
     ../../configModules/yubikey.nix
