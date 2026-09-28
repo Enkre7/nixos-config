@@ -65,7 +65,7 @@ let
     thickness = 68;
     widget_spacing = 6;
     start = [ ];
-    center = [ "clipboard" "screenshot" "ocr" "bar" "status" "bar_2" "nix-monitor" "mini-docker" ];
+    center = [ "clipboard" "screenshot" "ocr" "bar" "status" ];
     end = [ ];
   };
 
@@ -135,7 +135,11 @@ in
 
       brightness.sync_all_monitors = true;
 
-      calendar.enabled = true;
+      calendar = {
+        enabled = true;
+        event_date_format = "%A %e %B";
+        event_time_format = "%H:%M";
+      };
 
       control_center = {
         show_session_button = true;
@@ -144,8 +148,6 @@ in
         sidebar_section = "compact";
         width = 700;
         calendar = {
-          event_date_format = "%A %e %B";
-          event_time_format = "%H:%M";
           show_events_card = true;
           show_week_numbers = false;
         };
@@ -618,9 +620,7 @@ in
         auto_update = "all";
         enabled = [
           "yuuto/calculator"
-          "8bury/mini-docker"
           "kenn/keybind-cheatsheet"
-          "avivbintangaringga/nix-monitor"
           "cleboost/ssh-launcher"
           "davemhammer/obsidian"
           "fel/ocr"
@@ -630,7 +630,6 @@ in
 
       plugin_settings = {
         "andrewdems/vpn-manager".auto_connect_enabled = true;
-        "avivbintangaringga/nix-monitor".update_command = "nh os switch --update --hostname hostname";
         "davemhammer/obsidian".vault_path = "${config.nextcloudPath}/Obsidian";
         "noctalia/bitwarden".server_url = config.bitwardenURL;
         "yuuto/calculator".angle_unit = "deg";
@@ -703,7 +702,6 @@ in
 
       widget = {
         bar.type = "yuuto/calculator:bar";
-        bar_2.type = "icefish/phone-connect:bar";
         bar_3.type = "andrewdems/vpn-manager:bar";
         battery = { capsule = true; type = "battery"; };
         control-center = { scale = 1.25; type = "control-center"; };
@@ -717,9 +715,7 @@ in
           title_scroll = "none";
           type = "media";
         };
-        mini-docker.type = "8bury/mini-docker:mini-docker";
         network = { show_label = false; type = "network"; };
-        nix-monitor = { show_text = false; type = "avivbintangaringga/nix-monitor:nix-monitor"; };
         notes.type = "noctalia/notes:notes";
         ocr.type = "fel/ocr:ocr";
         session = { enabled = false; type = "session"; };
