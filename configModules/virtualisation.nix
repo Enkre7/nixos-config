@@ -30,7 +30,7 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${pkgs.virtiofsd}/bin/virtiofsd --socket-path=/var/lib/libvirt/virtiofsd-downloads.sock --shared-dir=/home/enkre/Downloads --cache=auto";
+      ExecStart = "${pkgs.virtiofsd}/bin/virtiofsd --socket-path=/var/lib/libvirt/virtiofsd-downloads.sock --shared-dir=/home/${config.user}/Downloads --cache=auto";
       Restart = "always";
       User = "root";
     };
@@ -48,11 +48,11 @@
         "security" = "user";
       };
       downloads = {
-        path = "/home/enkre/Downloads";
+        path = "/home/${config.user}/Downloads";
         browseable = "yes";
         "read only" = "no";
         "guest ok" = "no";
-        "valid users" = "enkre";
+        "valid users" = config.user;
         "create mask" = "0644";
         "directory mask" = "0755";
       };

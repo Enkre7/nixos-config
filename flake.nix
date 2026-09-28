@@ -18,7 +18,10 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    agenix.url = "github:ryantm/agenix";
+    secrets = {
+      url = "git+ssh://git@github.com/Enkre7/nixos-secrets";
+      flake = false;
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -52,7 +55,6 @@
           inputs.nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
           inputs.nixos-hardware.nixosModules.common-pc-ssd
 
-          inputs.agenix.nixosModules.default
           inputs.lanzaboote.nixosModules.lanzaboote
           inputs.home-manager.nixosModules.default
           inputs.stylix.nixosModules.stylix
@@ -70,7 +72,6 @@
           (import ./tools/disko.nix { device = "/dev/nvme0n1"; })
           inputs.nixos-hardware.nixosModules.framework-13-7040-amd
 
-          inputs.agenix.nixosModules.default
           inputs.lanzaboote.nixosModules.lanzaboote
           inputs.home-manager.nixosModules.default
           inputs.stylix.nixosModules.stylix

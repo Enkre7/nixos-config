@@ -1,4 +1,4 @@
-{ inputs, lib, ... }:
+{ config, inputs, lib, ... }:
 
 let
   groupNotes = {
@@ -631,13 +631,13 @@ in
       plugin_settings = {
         "andrewdems/vpn-manager".auto_connect_enabled = true;
         "avivbintangaringga/nix-monitor".update_command = "nh os switch --update --hostname hostname";
-        "davemhammer/obsidian".vault_path = "/home/enkre/Nextcloud/Obsidian";
-        "noctalia/bitwarden".server_url = "https://bitwarden.7mairot.com";
+        "davemhammer/obsidian".vault_path = "${config.nextcloudPath}/Obsidian";
+        "noctalia/bitwarden".server_url = config.bitwardenURL;
         "yuuto/calculator".angle_unit = "deg";
       };
 
       shell = {
-        avatar_path = "~/Nextcloud/MEDIAS/Famille memoji/victor_memoji.png";
+        avatar_path = config.avatarPath;
         date_format = "%A, %x";
         font_family = lib.mkForce "JetBrainsMono Nerd Font Propo";
         launch_apps_as_systemd_services = true;

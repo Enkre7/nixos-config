@@ -6,7 +6,7 @@
     isNormalUser = true;
     description = config.user;
     extraGroups = [ "networkmanager" "audio" "video" "wheel" "input" "camera" "dialout" ];
-    hashedPassword = "$y$j9T$MRfXTPEQAKtLXnT/pPbV00$c9aKUJ6lvABT8bmH3jb9V3JaDZUJqXfZgkaZavGTPgC";
+    hashedPassword = config.hashedPassword;
     openssh.authorizedKeys.keyFiles = lib.filter (path: lib.hasSuffix ".pub" path) (lib.filesystem.listFilesRecursive ../keys);
     home = "/home/${config.user}";
   };
@@ -15,7 +15,7 @@
   ];
 
   users.users.root = {
-    hashedPassword = "$y$j9T$MRfXTPEQAKtLXnT/pPbV00$c9aKUJ6lvABT8bmH3jb9V3JaDZUJqXfZgkaZavGTPgC";
+    hashedPassword = config.hashedPassword;
     openssh.authorizedKeys.keyFiles = config.users.users.${config.user}.openssh.authorizedKeys.keyFiles;
   };
 }

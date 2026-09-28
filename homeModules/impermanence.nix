@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 
 {
   imports = [ inputs.impermanence.nixosModules.home-manager.impermanence ]; 
@@ -27,10 +27,10 @@
     ];
     files = [
       ".screenrc"
-      ".mozilla/firefox/enkre/formhistory.sqlite" # Autocomplete history
-      ".mozilla/firefox/enkre/cookies.sqlite" # Cookies
-      ".mozilla/firefox/enkre/webappsstore.sqlite" # DOM storage
-      ".mozilla/firefox/enkre/chromeappsstore.sqlite" # DOM storage
+      ".mozilla/firefox/${config.user}/formhistory.sqlite" # Autocomplete history
+      ".mozilla/firefox/${config.user}/cookies.sqlite" # Cookies
+      ".mozilla/firefox/${config.user}/webappsstore.sqlite" # DOM storage
+      ".mozilla/firefox/${config.user}/chromeappsstore.sqlite" # DOM storage
     ];
     allowOther = true;
   };

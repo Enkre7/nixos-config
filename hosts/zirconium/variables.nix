@@ -1,5 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
+let
+  secrets = import "${inputs.secrets}/secrets.nix";
+in
 {
   options = with lib; with types; {
     stateVersion = mkOption { type = str; };
@@ -15,6 +18,10 @@
     searxngURL = mkOption { type = str; };    
     firefoxSyncURL = mkOption { type = str; };
     protonCalendarUrl = mkOption { type = str; };
+    hashedPassword = mkOption { type = str; };
+    bitwardenURL = mkOption { type = str; };
+    nextcloudPath = mkOption { type = str; };
+    avatarPath = mkOption { type = str; };
     
     # Options for battery.nix
     isLaptop = mkOption {
@@ -39,17 +46,21 @@
   config = {
     stateVersion = "26.11";
     hostname = "zirconium";
-    user = "enkre";
+    user = secrets.user;
     flakePath = "/etc/nixos";
     dotfilesPath = "${config.flakePath}/dotfiles";
     wallpaper = ../../dotfiles/wallpapers/dark/everforest-dark-mist_forest.png; # only png
     styleTheme = "everforest";
     stylePolarity = "dark";
-    gitUsername = "Enkre7";
-    gitEmail = "victor.mairot@proton.me";
-    searxngURL = "searxng.7mairot.com";
-    firefoxSyncURL = "firefoxsyncserver.7mairot.com";
-    protonCalendarUrl = "https://calendar.proton.me/api/calendar/v1/url/tw9unwlYgWjJrPhfWEDLiHkT8B0XP2MSJEY1jx9Pk18BlLgUI1n2oIWrSWOGC1-Em2nrTeo4qicLSpZu_zN87A==/calendar.ics?CacheKey=CInFC25Kbi7pfheWUP78KA%3D%3D&PassphraseKey=vNYxf0PgsLlzISbS4LkFsntI6f94AEPL9VUbUT3V8cw%3D";
+    gitUsername = secrets.gitUsername;
+    gitEmail = secrets.gitEmail;
+    searxngURL = secrets.searxngURL;
+    firefoxSyncURL = secrets.firefoxSyncURL;
+    protonCalendarUrl = secrets.protonCalendarUrl;
+    hashedPassword = secrets.hashedPassword;
+    bitwardenURL = secrets.bitwardenURL;
+    nextcloudPath = secrets.nextcloudPath;
+    avatarPath = secrets.avatarPath;
     isLaptop = false;
     cpuVendor = "AMD";
     isFrameworkDevice = false;

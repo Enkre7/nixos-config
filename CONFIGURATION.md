@@ -26,6 +26,12 @@ dotfilesPath = "/persist/system/nixos/dotfiles";
 - VSCode/VSCodium Nix language server
 - Wallpaper and dotfiles paths
 
+## Personal Values
+
+Personal values (user, email, URLs, password hash, paths) are not stored in this repository. They come from the private flake input `secrets`, a repository containing a single `secrets.nix` file.
+
+To use this configuration, create your own private repository from `secrets.example.nix` and point the `secrets` input of `flake.nix` to it.
+
 ## Variables Template
 
 Edit `hosts/[hostname]/variables.nix`:
