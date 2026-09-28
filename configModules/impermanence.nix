@@ -68,7 +68,6 @@
       "/etc/adjtime"
       #{ file = "/etc/machine-id"; parentDirectory = { mode = "u=r,g=r,o=r"; }; }
       #{ file = "/etc/adjtime"; parentDirectory = { mode = "u=rw,g=r,o=r"; }; }
-      { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
   };
 }

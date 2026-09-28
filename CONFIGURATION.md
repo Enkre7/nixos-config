@@ -34,31 +34,34 @@ To use this configuration, create your own private repository from `secrets.exam
 
 ## Variables Template
 
-Edit `hosts/[hostname]/variables.nix`:
+Edit `hosts/[hostname]/variables.nix` for host-specific values. Personal values are read from `secrets.nix` (see `secrets.example.nix`):
 
 ```nix
 config = {
   stateVersion = "25.05";
   hostname = "zirconium";
-  user = "enkre";
-  
+
   # Set based on installation type
   flakePath = "/etc/nixos";  # or "/persist/system/nixos"
   dotfilesPath = "${config.flakePath}/dotfiles";
-  
+
   # Styling
-  wallpaper = "${config.dotfilesPath}/wallpapers/image.png";
+  wallpaper = ../../dotfiles/wallpapers/dark/image.png;
   styleTheme = "everforest";
   stylePolarity = "dark";
-  
-  # Git
-  gitUsername = "YourUsername";
-  gitEmail = "your@email.com";
-  
-  # Services
-  searxngURL = "searxng.example.com";
-  firefoxSyncURL = "sync.example.com";
-  
+
+  # Personal values from secrets.nix
+  user = secrets.user;
+  gitUsername = secrets.gitUsername;
+  gitEmail = secrets.gitEmail;
+  hashedPassword = secrets.hashedPassword;
+  searxngURL = secrets.searxngURL;
+  firefoxSyncURL = secrets.firefoxSyncURL;
+  bitwardenURL = secrets.bitwardenURL;
+  protonCalendarUrl = secrets.protonCalendarUrl;
+  nextcloudPath = secrets.nextcloudPath;
+  avatarPath = secrets.avatarPath;
+
   # Hardware
   isLaptop = false;
   cpuVendor = "AMD";
