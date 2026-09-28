@@ -104,6 +104,7 @@ Vendor Keys:    microsoft
 
 **Notes:**
 - Lanzaboot auto-signs new kernels during updates
+- `sbctl verify` reports `/boot/EFI/nixos/kernel-*.efi` as not signed: this is expected, the signed stubs in `/boot/EFI/Linux/` verify them by hash. Never delete `/boot/EFI/nixos/`
 - Backup keys in `/var/lib/sbctl/`
 - Existing keys in `/etc/secureboot/` can be moved with `sudo mv /etc/secureboot /var/lib/sbctl`
 - Reinstallation requires repeating all steps
