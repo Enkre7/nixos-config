@@ -24,9 +24,9 @@
       builders-use-substitutes = true;
       keep-going = true;
       warn-dirty = false;
+      nix-path = [ "nixpkgs=${inputs.nixpkgs}" ];
     };
     optimise.automatic = true;
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
   };
 
   nixpkgs.config.allowUnfree = true;
