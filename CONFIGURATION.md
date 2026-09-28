@@ -60,6 +60,7 @@ config = {
   bitwardenURL = secrets.bitwardenURL;
   nextcloudPath = secrets.nextcloudPath;
   avatarPath = secrets.avatarPath;
+  protonCalendarUrl = secrets.protonCalendarUrl;
 
   # Hardware
   isLaptop = false;

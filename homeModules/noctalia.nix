@@ -139,6 +139,18 @@ in
         enabled = true;
         event_date_format = "%A %e %B";
         event_time_format = "%H:%M";
+        refresh_minutes = 15;
+        account.subscription = {
+          name = "Proton";
+          type = "ics";
+          server_url = config.protonCalendarUrl;
+        };
+        reminders = {
+          enabled = true;
+          all_day_digest_time = "09:00";
+          default_lead_minutes = 10;
+          use_event_reminders = true;
+        };
       };
 
       control_center = {
@@ -643,6 +655,7 @@ in
         polkit_agent = true;
         screen_time_enabled = true;
         settings_show_advanced = true;
+        telemetry_enabled = false;
         show_location = true;
         time_format = "{:%H:%M}";
         panel = {

@@ -21,6 +21,7 @@ in
     bitwardenURL = mkOption { type = str; };
     nextcloudPath = mkOption { type = str; };
     avatarPath = mkOption { type = str; };
+    protonCalendarUrl = mkOption { type = str; };
     
     # Options for battery.nix
     isLaptop = mkOption {
@@ -59,6 +60,7 @@ in
     bitwardenURL = secrets.bitwardenURL;
     nextcloudPath = secrets.nextcloudPath;
     avatarPath = secrets.avatarPath;
+    protonCalendarUrl = secrets.protonCalendarUrl;
     isLaptop = false;
     cpuVendor = "AMD";
     isFrameworkDevice = false;
