@@ -17,7 +17,6 @@ in
     gitEmail = mkOption { type = str; };
     searxngURL = mkOption { type = str; };    
     firefoxSyncURL = mkOption { type = str; };
-    protonCalendarUrl = mkOption { type = str; };
     hashedPassword = mkOption { type = str; };
     bitwardenURL = mkOption { type = str; };
     nextcloudPath = mkOption { type = str; };
@@ -56,7 +55,6 @@ in
     gitEmail = secrets.gitEmail;
     searxngURL = secrets.searxngURL;
     firefoxSyncURL = secrets.firefoxSyncURL;
-    protonCalendarUrl = secrets.protonCalendarUrl;
     hashedPassword = secrets.hashedPassword;
     bitwardenURL = secrets.bitwardenURL;
     nextcloudPath = secrets.nextcloudPath;

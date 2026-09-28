@@ -58,7 +58,6 @@ config = {
   searxngURL = secrets.searxngURL;
   firefoxSyncURL = secrets.firefoxSyncURL;
   bitwardenURL = secrets.bitwardenURL;
-  protonCalendarUrl = secrets.protonCalendarUrl;
   nextcloudPath = secrets.nextcloudPath;
   avatarPath = secrets.avatarPath;
 

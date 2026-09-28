@@ -44,7 +44,6 @@
     ../../configModules/games.nix
     #../../configModules/adb.nix
     #../../configModules/lamp.nix
-    ../../configModules/calendar-sync.nix
 ];
 
   home-manager = {
