@@ -5,11 +5,12 @@
   services.printing = {
     enable = true;
     drivers = with pkgs; [ brgenml1cupswrapper gutenprint ];
-    listenAddresses = [ "*:631" ];
-    allowFrom = [ "all" ];
-    browsing = true;
-    defaultShared = true;
-    openFirewall = true;
+    listenAddresses = [ "localhost:631" ];
+    allowFrom = [ "localhost" ];
+    browsing = false;
+    defaultShared = false;
+    openFirewall = false;
+    browsed.enable = false;
   };
   
   programs.system-config-printer.enable = true;

@@ -3,8 +3,11 @@
 {
   # Docker
   virtualisation.docker = {
-    enable = true;
+    enable = false;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
   };
-  users.extraGroups.docker.members = [ config.user ];
   environment.systemPackages = with pkgs; [ docker-compose ];
 }
