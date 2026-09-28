@@ -20,21 +20,21 @@ cd nixos-config
 ### 2. Build the ISO
 
 ```bash
-nix build .#nixosConfigurations.customIso.config.system.build.isoImage
+nix build .#nixosConfigurations.customIso.config.system.build.isoImage --out-link /tmp/iso
 ```
 
 The build process will take several minutes. Once complete, the ISO will be located at:
 
 ```bash
-./result/iso/nixos-*.iso
+/tmp/iso/iso/nixos-*.iso
 ```
 
-### 3. Copy the ISO (Optional)
+### 3. Write the ISO to a USB Stick
 
-Copy the ISO to a convenient location:
+⚠️ **This ERASES ALL DATA on the USB stick!** Identify it with `lsblk`, then replace `sdX` with the whole disk (e.g. `sda`, no partition number):
 
 ```bash
-cp ./result/iso/nixos-*.iso ~/nixos-custom.iso
+sudo dd if=/tmp/iso/iso/nixos-*.iso of=/dev/sdX bs=4M status=progress oflag=sync
 ```
 
 ## Customizing the ISO
@@ -67,7 +67,7 @@ To modify the ISO configuration, edit `hosts/customIso/configuration.nix`:
 After making changes, rebuild the ISO:
 
 ```bash
-nix build .#nixosConfigurations.customIso.config.system.build.isoImage
+nix build .#nixosConfigurations.customIso.config.system.build.isoImage --out-link /tmp/iso
 ```
 
 ## Troubleshooting
@@ -81,7 +81,7 @@ If the build fails, try:
 nix-collect-garbage -d
 
 # Rebuild
-nix build .#nixosConfigurations.customIso.config.system.build.isoImage
+nix build .#nixosConfigurations.customIso.config.system.build.isoImage --out-link /tmp/iso
 ```
 
 ## Next Steps
