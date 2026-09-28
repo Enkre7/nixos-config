@@ -20,6 +20,8 @@
     '';
     
     setup-repo = "git clone https://github.com/Enkre7/nixos-config /tmp/nixos";
+
+    setup-secrets = "git clone https://github.com/Enkre7/nixos-secrets /tmp/nixos-secrets";
     
     setup-disk = ''
       lsblk && \
@@ -113,7 +115,11 @@
         echo "Invalid choice, using standard installation" && \
         FLAKE_PATH="/mnt/etc/nixos"
       fi && \
-      sudo nixos-install --flake $FLAKE_PATH#$HOSTNAME && \
+      SECRETS_FLAGS="" && \
+      if [ -f /tmp/nixos-secrets/secrets.nix ]; then
+        SECRETS_FLAGS="--override-input secrets path:/tmp/nixos-secrets"
+      fi && \
+      sudo nixos-install --flake $FLAKE_PATH#$HOSTNAME $SECRETS_FLAGS && \
       sudo nixos-enter --root /mnt -c "passwd $USERNAME"
     '';    
   }; 

@@ -31,6 +31,13 @@ ssh -T git@github.com
 
 **Note:** Permissions are set automatically. With impermanence, ensure SSH keys persist in `/persist/home/[user]/.ssh`.
 
+### 1.3 Secrets
+
+Rebuilds fetch the private `secrets` input over SSH, so `ssh -T git@github.com` must work on the machine. Clone it only to edit secrets from this machine:
+```bash
+git clone git@github.com:Enkre7/nixos-secrets.git ~/nixos-secrets
+```
+
 ---
 
 ## 2. Optional Setup
