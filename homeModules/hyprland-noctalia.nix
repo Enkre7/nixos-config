@@ -14,12 +14,16 @@ let
           addr=''${data%%,*}
           rest=''${data#*,}
           rest=''${rest#*,}
-          [ "''${rest%%,*}" = firefox ] && new[$addr]=$SECONDS
-          ;;
+          [ "''${rest%%,*}" = firefox ] || continue
+          new[$addr]=$SECONDS
+          title=''${rest#*,}
+          ;;&
         "windowtitlev2>>"*)
           data=''${line#windowtitlev2>>}
           addr=''${data%%,*}
           title=''${data#*,}
+          ;;&
+        "openwindow>>"* | "windowtitlev2>>"*)
           [ -n "''${new[$addr]:-}" ] || continue
           if (( SECONDS - new[$addr] > 10 )); then
             unset "new[$addr]"
