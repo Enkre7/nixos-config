@@ -31,7 +31,10 @@ let
           fi
           if [[ $title =~ ^Extension:|Bitwarden ]]; then
             unset "new[$addr]"
-            hyprctl --batch "dispatch setfloating address:0x$addr; dispatch resizewindowpixel exact 500 700,address:0x$addr; dispatch centerwindow"
+            win="address:0x$addr"
+            hyprctl dispatch "hl.dsp.window.float({ action = \"enable\", window = \"$win\" })"
+            hyprctl dispatch "hl.dsp.window.resize({ x = 500, y = 700, window = \"$win\" })"
+            hyprctl dispatch "hl.dsp.window.center({ window = \"$win\" })"
           fi
           ;;
         "closewindow>>"*)
@@ -212,8 +215,8 @@ in
         { _args = [ "XF86AudioLowerVolume" (inline ''hl.dsp.exec_cmd("noctalia msg volume-down")'') { repeating = true; } ]; }
         { _args = [ "XF86MonBrightnessDown" (inline ''hl.dsp.exec_cmd("noctalia msg brightness-down")'') { repeating = true; } ]; }
         { _args = [ "XF86MonBrightnessUp" (inline ''hl.dsp.exec_cmd("noctalia msg brightness-up")'') { repeating = true; } ]; }
-        { _args = [ "switch:on:Lid Switch" (inline ''hl.dsp.exec_cmd("hyprctl dispatch dpms off")'') { locked = true; } ]; }
-        { _args = [ "switch:off:Lid Switch" (inline ''hl.dsp.exec_cmd("hyprctl dispatch dpms on")'') { locked = true; } ]; }
+        { _args = [ "switch:on:Lid Switch" (inline ''hl.dsp.dpms({ action = "off" })'') { locked = true; } ]; }
+        { _args = [ "switch:off:Lid Switch" (inline ''hl.dsp.dpms({ action = "on" })'') { locked = true; } ]; }
       ];
 
       window_rule = [
