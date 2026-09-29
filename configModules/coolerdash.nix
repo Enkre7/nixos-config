@@ -33,8 +33,7 @@ let
 
       substituteInPlace $plugin/manifest.toml $plugin/ui/index.html \
         --replace-quiet "{{VERSION}}" "${finalAttrs.version}"
-      substituteInPlace $plugin/manifest.toml \
-        --replace-fail "/usr/libexec/coolerdash/coolerdash" "$out/libexec/coolerdash/coolerdash"
+      sed -i '/^executable = /d' $plugin/manifest.toml
 
       runHook postInstall
     '';
@@ -42,13 +41,14 @@ let
 
   plugin = "${coolerdash}/share/coolerdash/plugin";
   pluginDir = "/var/lib/coolercontrol/plugins/coolerdash";
+  pluginUser = "cc-plugin-user";
 in
 {
   environment.systemPackages = [ coolerdash ];
 
   systemd.tmpfiles.rules = [
     "d /var/lib/coolercontrol/plugins 0755 root root -"
-    "d ${pluginDir} 0755 root root -"
+    "d ${pluginDir} 0755 ${pluginUser} ${pluginUser} -"
     "L+ ${pluginDir}/manifest.toml - - - - ${plugin}/manifest.toml"
     "L+ ${pluginDir}/ui - - - - ${plugin}/ui"
     "L+ ${pluginDir}/shutdown.png - - - - ${plugin}/shutdown.png"
@@ -56,8 +56,35 @@ in
     "L+ ${pluginDir}/CHANGELOG.md - - - - ${plugin}/CHANGELOG.md"
     "L+ ${pluginDir}/VERSION - - - - ${plugin}/VERSION"
     "C ${pluginDir}/config.json - - - - ${plugin}/config.json"
-    "z ${pluginDir}/config.json 0600 root root -"
+    "z ${pluginDir}/config.json 0600 ${pluginUser} ${pluginUser} -"
   ];
 
+  users.users.${pluginUser} = {
+    isSystemUser = true;
+    group = pluginUser;
+    description = "CoolerControl unprivileged plugin user";
+  };
+  users.groups.${pluginUser} = { };
+
   systemd.services.coolercontrold.restartTriggers = [ coolerdash ];
+
+  systemd.services.cc-plugin-coolerdash = {
+    description = "CoolerDash plugin for CoolerControl";
+    after = [ "coolercontrold.service" ];
+    partOf = [ "coolercontrold.service" ];
+    wantedBy = [ "coolercontrold.service" ];
+    environment.CC_LOG = "INFO";
+    startLimitIntervalSec = 60;
+    startLimitBurst = 10;
+    serviceConfig = {
+      Type = "simple";
+      User = pluginUser;
+      Group = pluginUser;
+      NoNewPrivileges = true;
+      ExecStart = "${coolerdash}/libexec/coolerdash/coolerdash";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 3;
+    };
+  };
 }
