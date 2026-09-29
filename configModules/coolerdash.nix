@@ -74,17 +74,32 @@ in
     partOf = [ "coolercontrold.service" ];
     wantedBy = [ "coolercontrold.service" ];
     environment.CC_LOG = "INFO";
-    startLimitIntervalSec = 60;
-    startLimitBurst = 10;
+    startLimitIntervalSec = 0;
     serviceConfig = {
       Type = "simple";
       User = pluginUser;
       Group = pluginUser;
       NoNewPrivileges = true;
       ExecStart = "${coolerdash}/libexec/coolerdash/coolerdash";
-      Restart = "on-failure";
-      RestartSec = 1;
+      Restart = "always";
+      RestartSec = 5;
       TimeoutStopSec = 3;
+    };
+  };
+
+  # CoolerControl only restarts plugins it manages itself, so restart on config changes
+  systemd.paths.cc-plugin-coolerdash-reload = {
+    wantedBy = [ "multi-user.target" ];
+    pathConfig.PathChanged = "${pluginDir}/config.json";
+  };
+
+  systemd.services.cc-plugin-coolerdash-reload = {
+    description = "Restart CoolerDash after a configuration change";
+    startLimitIntervalSec = 60;
+    startLimitBurst = 5;
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.systemd}/bin/systemctl try-restart cc-plugin-coolerdash.service";
     };
   };
 }

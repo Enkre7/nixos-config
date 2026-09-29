@@ -15,6 +15,10 @@ in
   programs.coolercontrol.enable = true;
   environment.systemPackages = [ pkgs.i2c-tools ] ++ lib.optional (!config.isLaptop) pkgs.liquidctl;
 
+  # Nuvoton NCT6687D motherboard fan controller (MSI)
+  boot.extraModulePackages = lib.optional (!config.isLaptop) config.boot.kernelPackages.nct6687d;
+  boot.kernelModules = lib.optional (!config.isLaptop) "nct6687";
+
   systemd.tmpfiles.rules = [
     "d /etc/coolercontrol 0755 root root -"
   ]
