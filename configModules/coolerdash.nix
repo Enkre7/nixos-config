@@ -55,8 +55,10 @@ in
     "L+ ${pluginDir}/README.md - - - - ${plugin}/README.md"
     "L+ ${pluginDir}/CHANGELOG.md - - - - ${plugin}/CHANGELOG.md"
     "L+ ${pluginDir}/VERSION - - - - ${plugin}/VERSION"
-    "C ${pluginDir}/config.json - - - - ${plugin}/config.json"
+    "C+ ${pluginDir}/config.json - - - - ${../dotfiles/coolerdash/config.json}"
     "z ${pluginDir}/config.json 0600 ${pluginUser} ${pluginUser} -"
+    "L+ ${pluginDir}/user-background-image - - - - ${../dotfiles/coolerdash/user-background-image.png}"
+    "L+ ${pluginDir}/user-shutdown-image - - - - ${../dotfiles/coolerdash/user-shutdown-image.png}"
   ];
 
   users.users.${pluginUser} = {
