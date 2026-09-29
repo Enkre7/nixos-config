@@ -6,7 +6,7 @@
     indicator = true;
   };
 
-  # Hide all .desktop, except for org.kde.kdeconnect.settings
+  # Hide all .desktop, except for the main app and settings
   xdg.desktopEntries = {
     "org.kde.kdeconnect.sms" = {
       exec = "";
@@ -16,11 +16,6 @@
     "org.kde.kdeconnect.nonplasma" = {
       exec = "";
       name = "KDE Connect Indicator";
-      settings.NoDisplay = "true";
-    };
-    "org.kde.kdeconnect.app" = {
-      exec = "";
-      name = "KDE Connect";
       settings.NoDisplay = "true";
     };
   };
