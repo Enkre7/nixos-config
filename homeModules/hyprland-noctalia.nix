@@ -4,6 +4,38 @@ let
   inline = lib.generators.mkLuaInline;
   hasHomePackage = name:
     lib.any (p: (p.pname or p.name or "") == name) config.home.packages;
+  firefoxPopups = pkgs.writeShellScriptBin "firefox-popups" ''
+    declare -A new
+    ${pkgs.socat}/bin/socat -U - "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" |
+    while IFS= read -r line; do
+      case "$line" in
+        "openwindow>>"*)
+          data=''${line#openwindow>>}
+          addr=''${data%%,*}
+          rest=''${data#*,}
+          rest=''${rest#*,}
+          [ "''${rest%%,*}" = firefox ] && new[$addr]=$SECONDS
+          ;;
+        "windowtitlev2>>"*)
+          data=''${line#windowtitlev2>>}
+          addr=''${data%%,*}
+          title=''${data#*,}
+          [ -n "''${new[$addr]:-}" ] || continue
+          if (( SECONDS - new[$addr] > 10 )); then
+            unset "new[$addr]"
+            continue
+          fi
+          if [[ $title =~ ^Extension:|Bitwarden ]]; then
+            unset "new[$addr]"
+            hyprctl --batch "dispatch setfloating address:0x$addr; dispatch resizewindowpixel exact 500 700,address:0x$addr; dispatch centerwindow"
+          fi
+          ;;
+        "closewindow>>"*)
+          unset "new[''${line#closewindow>>}]"
+          ;;
+      esac
+    done
+  '';
   startupScript = pkgs.writeShellScriptBin "start" ''
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets)
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
@@ -18,6 +50,7 @@ let
     ${lib.optionalString osConfig.services.mullvad-vpn.gui.enable "${pkgs.mullvad-vpn}/bin/mullvad-vpn &"}
     ${lib.optionalString (hasHomePackage "protonvpn-gui") "${pkgs.protonvpn-gui}/bin/protonvpn-app &"}
 
+    ${firefoxPopups}/bin/firefox-popups &
     ${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store &
   '';
 in

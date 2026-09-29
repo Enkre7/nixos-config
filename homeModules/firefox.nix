@@ -128,6 +128,10 @@ in
       ];
       extensions.force = true;
       settings = {
+        # Open site pop-ups in new tabs instead of windows
+        "browser.link.open_newwindow" = 3;
+        "browser.link.open_newwindow.restriction" = 0;
+
         # Force French language
         "intl.accept_languages" = "fr-FR, fr, en-US, en";
         "intl.locale.requested" = "fr";
