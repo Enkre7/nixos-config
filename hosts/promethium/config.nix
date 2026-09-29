@@ -25,6 +25,8 @@
     ../../configModules/audio.nix
     ../../configModules/graphics.nix
     ../../configModules/printing.nix
+    ../../configModules/coolercontrol.nix
+    ../../configModules/fw-fanctrl.nix
   # Virtualization
     ../../configModules/virtualisation.nix
     ../../configModules/docker.nix

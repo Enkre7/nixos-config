@@ -1,16 +1,34 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   stylix = config.lib.stylix.colors;
+  customTheme = {
+    accent = "${stylix.base0B-rgb-r} ${stylix.base0B-rgb-g} ${stylix.base0B-rgb-b}";
+    bgOne = "${stylix.base00-rgb-r} ${stylix.base00-rgb-g} ${stylix.base00-rgb-b}";
+    bgTwo = "${stylix.base01-rgb-r} ${stylix.base01-rgb-g} ${stylix.base01-rgb-b}";
+    borderOne = "${stylix.base03-rgb-r} ${stylix.base03-rgb-g} ${stylix.base03-rgb-b} 0.25";
+    textColor = "${stylix.base05-rgb-r} ${stylix.base05-rgb-g} ${stylix.base05-rgb-b}";
+    textColorSecondary = "${stylix.base04-rgb-r} ${stylix.base04-rgb-g} ${stylix.base04-rgb-b}";
+  };
 in
 {
   programs.coolercontrol.enable = true;
-  environment.systemPackages = with pkgs; [ i2c-tools liquidctl ];
+  environment.systemPackages = [ pkgs.i2c-tools ] ++ lib.optional (!config.isLaptop) pkgs.liquidctl;
 
   systemd.tmpfiles.rules = [
-    # Create config directory if it doesn't exist
     "d /etc/coolercontrol 0755 root root -"
-    
+  ]
+  ++ lib.optionals config.isLaptop [
+    # Monitoring only: fans are driven by fw-fanctrl
+    "C /etc/coolercontrol/config-ui.json 0644 root root - ${pkgs.writeText "config-ui.json" (builtins.toJSON {
+      themeMode = "custom theme";
+      inherit customTheme;
+      chartLineScale = 1.5;
+      time24 = true;
+      showOnboarding = false;
+    })}"
+  ]
+  ++ lib.optionals (!config.isLaptop) [
     # Main daemon config
     "C /etc/coolercontrol/config.toml 0644 root root - ${pkgs.writeText "config.toml" ''
       [devices]
@@ -42,23 +60,42 @@ in
 
       [[profiles]]
       uid = "0840dd7f-04cb-4c72-9303-4d78f0e92a55"
-      name = "CPU"
+      name = "Radiator fans"
+      p_type = "Mix"
+      member_profile_uids = ["5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c01", "5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c02"]
+      mix_function_type = "Max"
+      function_uid = "0"
+
+      [[profiles]]
+      uid = "5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c01"
+      name = "Fans - liquid"
       p_type = "Graph"
-      speed_profile = [[35.0, 0], [80.0, 0], [85.0, 100], [100.0, 100]]
+      speed_profile = [[25.0, 25], [30.0, 28], [33.0, 35], [36.0, 50], [40.0, 75], [44.0, 100], [50.0, 100]]
+      temp_source = { temp_name = "liquid", device_uid = "8ed002dbd21ab359b02a7e48d0f9ba2db1809d6f5698aeb3b30283d1cbfd841f" }
+      temp_min = 20.0
+      temp_max = 50.0
       function_uid = "02ba5ea0-89cc-4085-808f-c3b1cc97963b"
+      offset_profile = []
+
+      [[profiles]]
+      uid = "5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c02"
+      name = "Fans - CPU safety"
+      p_type = "Graph"
+      speed_profile = [[20.0, 0], [75.0, 0], [85.0, 60], [92.0, 100], [100.0, 100]]
       temp_source = { temp_name = "temp1", device_uid = "1205d09aeafc8a21acccd3984d470b0077af137ccef4670d27f872edc872c094" }
-      temp_min = 35.0
+      temp_min = 20.0
       temp_max = 100.0
+      function_uid = "02ba5ea0-89cc-4085-808f-c3b1cc97963b"
       offset_profile = []
 
       [[profiles]]
       uid = "26c279a2-dee2-4fca-8eff-a6f51a7cdea0"
       name = "Pump"
       p_type = "Graph"
-      speed_profile = [[35.0, 20], [80.0, 21], [85.0, 100], [100.0, 100]]
-      temp_source = { temp_name = "temp1", device_uid = "1205d09aeafc8a21acccd3984d470b0077af137ccef4670d27f872edc872c094" }
-      temp_min = 35.0
-      temp_max = 100.0
+      speed_profile = [[25.0, 50], [32.0, 55], [36.0, 70], [40.0, 90], [44.0, 100], [50.0, 100]]
+      temp_source = { temp_name = "liquid", device_uid = "8ed002dbd21ab359b02a7e48d0f9ba2db1809d6f5698aeb3b30283d1cbfd841f" }
+      temp_min = 20.0
+      temp_max = 50.0
       function_uid = "0b8845ee-d627-4286-93d2-8c47fcc45cdf"
       offset_profile = []
 
@@ -66,9 +103,9 @@ in
       uid = "b7ca4f9a-a1c3-42d9-b16c-a2dd531e4890"
       name = "GPU"
       p_type = "Graph"
-      speed_profile = [[0.0, 0], [80.0, 0], [100.0, 100]]
+      speed_profile = [[20.0, 0], [52.0, 0], [58.0, 30], [66.0, 45], [74.0, 65], [82.0, 100], [100.0, 100]]
       temp_source = { temp_name = "GPU Temp", device_uid = "e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2" }
-      temp_min = 0.0
+      temp_min = 20.0
       temp_max = 100.0
       function_uid = "d80d71a5-43df-4730-82e5-04fcf0186263"
       offset_profile = []
@@ -80,24 +117,41 @@ in
 
       [[functions]]
       uid = "02ba5ea0-89cc-4085-808f-c3b1cc97963b"
-      name = "CPU"
-      f_type = "Identity"
-      duty_minimum = 2
-      duty_maximum = 100
+      name = "Fans - smooth"
+      f_type = "Standard"
+      deviance = 1.0
+      only_downward = true
+      response_delay = 3
+      duty_minimum = 1
+      duty_maximum = 8
+      step_size_min_decreasing = 1
+      step_size_max_decreasing = 3
+      bypass_min_at_extremes = true
 
       [[functions]]
       uid = "0b8845ee-d627-4286-93d2-8c47fcc45cdf"
-      name = "Pump"
-      f_type = "Identity"
-      duty_minimum = 2
-      duty_maximum = 100
+      name = "Pump - smooth"
+      f_type = "Standard"
+      deviance = 1.0
+      only_downward = true
+      response_delay = 5
+      duty_minimum = 1
+      duty_maximum = 5
+      step_size_min_decreasing = 1
+      step_size_max_decreasing = 2
 
       [[functions]]
       uid = "d80d71a5-43df-4730-82e5-04fcf0186263"
-      name = "GPU"
-      f_type = "Identity"
-      duty_minimum = 2
-      duty_maximum = 100
+      name = "GPU - zero RPM"
+      f_type = "Standard"
+      deviance = 4.0
+      only_downward = true
+      response_delay = 5
+      duty_minimum = 1
+      duty_maximum = 10
+      step_size_min_decreasing = 1
+      step_size_max_decreasing = 3
+      bypass_min_at_extremes = true
 
       [settings]
       apply_on_boot = true
@@ -309,17 +363,12 @@ in
       hideMenuCollapseIcon = false;
       mainMenuWidthRem = 24;
       frequencyPrecision = 1000;
-      customTheme = {
-        accent = "${stylix.base0B-rgb-r} ${stylix.base0B-rgb-g} ${stylix.base0B-rgb-b}";
-        bgOne = "${stylix.base00-rgb-r} ${stylix.base00-rgb-g} ${stylix.base00-rgb-b}";
-        bgTwo = "${stylix.base01-rgb-r} ${stylix.base01-rgb-g} ${stylix.base01-rgb-b}";
-        borderOne = "${stylix.base03-rgb-r} ${stylix.base03-rgb-g} ${stylix.base03-rgb-b} 0.25";
-        textColor = "${stylix.base05-rgb-r} ${stylix.base05-rgb-g} ${stylix.base05-rgb-b}";
-        textColorSecondary = "${stylix.base04-rgb-r} ${stylix.base04-rgb-g} ${stylix.base04-rgb-b}";
-      };
+      inherit customTheme;
       entityColors = [];
       showOnboarding = false;
     })}"
+  ]
+  ++ [
     "d /root/.config/org.coolercontrol.CoolerControl 0755 root root -"
     "C /root/.config/org.coolercontrol.CoolerControl/CoolerControl.conf 0644 root root - ${pkgs.writeText "CoolerControl.conf" ''
       [General]
