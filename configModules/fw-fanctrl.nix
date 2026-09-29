@@ -7,6 +7,30 @@
       defaultStrategy = "quiet-performance";
       strategyOnDischarging = "quiet-battery";
       strategies = {
+        silent = {
+          fanSpeedUpdateFrequency = 5;
+          movingAverageInterval = 40;
+          speedCurve = [
+            { temp = 0; speed = 0; }
+            { temp = 62; speed = 0; }
+            { temp = 70; speed = 15; }
+            { temp = 78; speed = 30; }
+            { temp = 86; speed = 55; }
+            { temp = 94; speed = 100; }
+          ];
+        };
+        performance = {
+          fanSpeedUpdateFrequency = 3;
+          movingAverageInterval = 10;
+          speedCurve = [
+            { temp = 0; speed = 15; }
+            { temp = 45; speed = 20; }
+            { temp = 55; speed = 35; }
+            { temp = 65; speed = 55; }
+            { temp = 75; speed = 80; }
+            { temp = 82; speed = 100; }
+          ];
+        };
         quiet-performance = {
           fanSpeedUpdateFrequency = 5;
           movingAverageInterval = 20;

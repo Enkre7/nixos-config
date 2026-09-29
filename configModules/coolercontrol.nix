@@ -34,7 +34,7 @@ in
   ]
   ++ lib.optionals (!config.isLaptop) [
     # Main daemon config
-    "C /etc/coolercontrol/config.toml 0644 root root - ${pkgs.writeText "config.toml" ''
+    "C+ /etc/coolercontrol/config.toml 0644 root root - ${pkgs.writeText "config.toml" ''
       [devices]
       e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2 = "NVIDIA GeForce RTX 3080"
       1205d09aeafc8a21acccd3984d470b0077af137ccef4670d27f872edc872c094 = "AMD Ryzen 9 3900X 12-Core Processor"
@@ -114,6 +114,88 @@ in
       function_uid = "d80d71a5-43df-4730-82e5-04fcf0186263"
       offset_profile = []
 
+      [[profiles]]
+      uid = "5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c11"
+      name = "Fans - liquid (silent)"
+      p_type = "Graph"
+      speed_profile = [[25.0, 20], [32.0, 25], [36.0, 35], [40.0, 55], [44.0, 80], [48.0, 100], [50.0, 100]]
+      temp_source = { temp_name = "liquid", device_uid = "8ed002dbd21ab359b02a7e48d0f9ba2db1809d6f5698aeb3b30283d1cbfd841f" }
+      temp_min = 20.0
+      temp_max = 50.0
+      function_uid = "02ba5ea0-89cc-4085-808f-c3b1cc97963b"
+      offset_profile = []
+
+      [[profiles]]
+      uid = "5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c10"
+      name = "Radiator fans (silent)"
+      p_type = "Mix"
+      member_profile_uids = ["5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c11", "5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c02"]
+      mix_function_type = "Max"
+      function_uid = "0"
+
+      [[profiles]]
+      uid = "5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c12"
+      name = "Pump (silent)"
+      p_type = "Graph"
+      speed_profile = [[25.0, 40], [33.0, 45], [37.0, 60], [41.0, 80], [45.0, 100], [50.0, 100]]
+      temp_source = { temp_name = "liquid", device_uid = "8ed002dbd21ab359b02a7e48d0f9ba2db1809d6f5698aeb3b30283d1cbfd841f" }
+      temp_min = 20.0
+      temp_max = 50.0
+      function_uid = "0b8845ee-d627-4286-93d2-8c47fcc45cdf"
+      offset_profile = []
+
+      [[profiles]]
+      uid = "5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c13"
+      name = "GPU (silent)"
+      p_type = "Graph"
+      speed_profile = [[20.0, 0], [58.0, 0], [62.0, 30], [70.0, 40], [78.0, 60], [86.0, 100], [100.0, 100]]
+      temp_source = { temp_name = "GPU Temp", device_uid = "e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2" }
+      temp_min = 20.0
+      temp_max = 100.0
+      function_uid = "d80d71a5-43df-4730-82e5-04fcf0186263"
+      offset_profile = []
+
+      [[profiles]]
+      uid = "5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c21"
+      name = "Fans - liquid (performance)"
+      p_type = "Graph"
+      speed_profile = [[25.0, 35], [30.0, 45], [34.0, 60], [38.0, 80], [42.0, 100], [50.0, 100]]
+      temp_source = { temp_name = "liquid", device_uid = "8ed002dbd21ab359b02a7e48d0f9ba2db1809d6f5698aeb3b30283d1cbfd841f" }
+      temp_min = 20.0
+      temp_max = 50.0
+      function_uid = "02ba5ea0-89cc-4085-808f-c3b1cc97963b"
+      offset_profile = []
+
+      [[profiles]]
+      uid = "5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c20"
+      name = "Radiator fans (performance)"
+      p_type = "Mix"
+      member_profile_uids = ["5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c21", "5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c02"]
+      mix_function_type = "Max"
+      function_uid = "0"
+
+      [[profiles]]
+      uid = "5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c22"
+      name = "Pump (performance)"
+      p_type = "Graph"
+      speed_profile = [[25.0, 70], [32.0, 80], [38.0, 100], [50.0, 100]]
+      temp_source = { temp_name = "liquid", device_uid = "8ed002dbd21ab359b02a7e48d0f9ba2db1809d6f5698aeb3b30283d1cbfd841f" }
+      temp_min = 20.0
+      temp_max = 50.0
+      function_uid = "0b8845ee-d627-4286-93d2-8c47fcc45cdf"
+      offset_profile = []
+
+      [[profiles]]
+      uid = "5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c23"
+      name = "GPU (performance)"
+      p_type = "Graph"
+      speed_profile = [[20.0, 30], [50.0, 30], [60.0, 45], [68.0, 65], [75.0, 85], [80.0, 100], [100.0, 100]]
+      temp_source = { temp_name = "GPU Temp", device_uid = "e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2" }
+      temp_min = 20.0
+      temp_max = 100.0
+      function_uid = "d80d71a5-43df-4730-82e5-04fcf0186263"
+      offset_profile = []
+
       [[functions]]
       uid = "0"
       name = "Default Function"
@@ -170,13 +252,13 @@ in
     ''}"
     
     # Temperature alerts
-    "C /etc/coolercontrol/alerts.json 0644 root root - ${pkgs.writeText "alerts.json" ''
+    "C+ /etc/coolercontrol/alerts.json 0644 root root - ${pkgs.writeText "alerts.json" ''
       {"alerts":[{"uid":"936b6904-90ef-4ac3-a8f2-f5e82ef2930f","name":"CPU to hot","channel_source":{"device_uid":"1205d09aeafc8a21acccd3984d470b0077af137ccef4670d27f872edc872c094","channel_name":"temp1","channel_metric":"Temp"},"min":0.0,"max":85.0,"state":"Inactive","warmup_duration":10.0},{"uid":"673fc641-c8af-423d-af54-9413323620b4","name":"GPU to hot","channel_source":{"device_uid":"e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2","channel_name":"GPU Temp","channel_metric":"Temp"},"min":0.0,"max":90.0,"state":"Inactive","warmup_duration":10.0}],"logs":[]}
     ''}"
     
     # Cooling modes
-    "C /etc/coolercontrol/modes.json 0644 root root - ${pkgs.writeText "modes.json" ''
-      {"modes":[],"order":[],"current_active_mode":null,"previous_active_mode":null}
+    "C+ /etc/coolercontrol/modes.json 0644 root root - ${pkgs.writeText "modes.json" ''
+      {"modes":[{"uid":"7d3e9a10-0000-4000-8000-000000000001","name":"Silencieux","all_device_settings":{"8ed002dbd21ab359b02a7e48d0f9ba2db1809d6f5698aeb3b30283d1cbfd841f":{"fan":{"channel_name":"fan","profile_uid":"5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c10"},"pump":{"channel_name":"pump","profile_uid":"5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c12"}},"e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2":{"fan1":{"channel_name":"fan1","profile_uid":"5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c13"}}}},{"uid":"7d3e9a10-0000-4000-8000-000000000002","name":"Équilibré","all_device_settings":{"8ed002dbd21ab359b02a7e48d0f9ba2db1809d6f5698aeb3b30283d1cbfd841f":{"fan":{"channel_name":"fan","profile_uid":"0840dd7f-04cb-4c72-9303-4d78f0e92a55"},"pump":{"channel_name":"pump","profile_uid":"26c279a2-dee2-4fca-8eff-a6f51a7cdea0"}},"e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2":{"fan1":{"channel_name":"fan1","profile_uid":"b7ca4f9a-a1c3-42d9-b16c-a2dd531e4890"}}}},{"uid":"7d3e9a10-0000-4000-8000-000000000003","name":"Performance","all_device_settings":{"8ed002dbd21ab359b02a7e48d0f9ba2db1809d6f5698aeb3b30283d1cbfd841f":{"fan":{"channel_name":"fan","profile_uid":"5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c20"},"pump":{"channel_name":"pump","profile_uid":"5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c22"}},"e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2":{"fan1":{"channel_name":"fan1","profile_uid":"5a1d6c1e-3b0f-4b53-9d2e-7f0c1a2b3c23"}}}}],"order":["7d3e9a10-0000-4000-8000-000000000001","7d3e9a10-0000-4000-8000-000000000002","7d3e9a10-0000-4000-8000-000000000003"],"current_active_mode":"7d3e9a10-0000-4000-8000-000000000002","previous_active_mode":null}
     ''}"
     
     # UI config with Stylix theme
