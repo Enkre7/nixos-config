@@ -1,0 +1,1065 @@
+{
+  "daemon": {
+    "address": "http://localhost:11987",
+    "access_token": "***"
+  },
+  "device_detection": {
+    "mode": "strict",
+    "allowlist": "",
+    "blocklist": "mainboard\nmotherboard\nchipset"
+  },
+  "paths": {
+    "images": "/var/lib/coolercontrol/plugins/coolerdash",
+    "image_coolerdash": "/var/lib/coolercontrol/plugins/coolerdash/coolerdash.png",
+    "image_background": "/var/lib/coolercontrol/plugins/coolerdash/user-background-image",
+    "image_shutdown": "/var/lib/coolercontrol/plugins/coolerdash/user-shutdown-image"
+  },
+  "display": {
+    "mode": "split",
+    "circle_switch_interval": 8,
+    "circle_layout": "classic",
+    "circle_show_load": true,
+    "circle_show_rpm": true,
+    "circle_show_watts": true,
+    "circle_show_frequency": true,
+    "circle_show_bar": true,
+    "dual_show_bars": true,
+    "split_show_load": true,
+    "split_show_watts": true,
+    "split_show_rpm": false,
+    "split_ring_by_sensor": false,
+    "sensor_ring_enabled": false,
+    "sensor_ring_sensor": "liquid",
+    "refresh_interval": 2.5,
+    "brightness": 80,
+    "orientation": 60,
+    "background_image_fit": "cover",
+    "background_image_scale_factor": 0,
+    "background_overlay_opacity": 0.35,
+    "width": 0,
+    "height": 0,
+    "content_scale_factor": 0.98,
+    "sensor_slot_1": "cpu",
+    "sensor_slot_2": "gpu",
+    "sensor_slot_3": "none"
+  },
+  "layout": {
+    "bar_height": 20,
+    "bar_width": 98,
+    "bar_gap": 10,
+    "bar_border": 0.6,
+    "bar_opacity": 1,
+    "ring_width": 0,
+    "ring_opacity": 1,
+    "ring_rounded_corners": true,
+    "bar_border_enabled": 1,
+    "label_margin_left": 1,
+    "label_margin_bar": 1,
+    "bar_height_1": 0,
+    "bar_height_2": 0,
+    "bar_height_3": 0
+  },
+  "colors": {
+    "display_background": {
+      "r": 0,
+      "g": 0,
+      "b": 0
+    },
+    "bar_background": {
+      "r": 52,
+      "g": 52,
+      "b": 52
+    },
+    "bar_border": {
+      "r": 192,
+      "g": 192,
+      "b": 192
+    },
+    "font_temp": {
+      "r": 19,
+      "g": 251,
+      "b": 255
+    },
+    "font_label": {
+      "r": 19,
+      "g": 251,
+      "b": 255
+    }
+  },
+  "font": {
+    "face": "JetBrainsMono NF ExtraBold",
+    "size_temp": 0,
+    "size_labels": 0,
+    "size_duty": 0,
+    "size_watts": 0
+  },
+  "sensors": {
+    "cpu": {
+      "threshold_1": 55,
+      "threshold_2": 65,
+      "threshold_3": 75,
+      "max_scale": 115,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "gpu": {
+      "threshold_1": 55,
+      "threshold_2": 65,
+      "threshold_3": 75,
+      "max_scale": 115,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "liquid": {
+      "threshold_1": 30,
+      "threshold_2": 35,
+      "threshold_3": 40,
+      "max_scale": 60,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "1205d09aeafc8a21acccd3984d470b0077af137ccef4670d27f872edc872c094:CPU Freq Avg Freq": {
+      "threshold_1": 1000,
+      "threshold_2": 2000,
+      "threshold_3": 3000,
+      "max_scale": 6000,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "1205d09aeafc8a21acccd3984d470b0077af137ccef4670d27f872edc872c094:CPU Freq Max Freq": {
+      "threshold_1": 1000,
+      "threshold_2": 2000,
+      "threshold_3": 3000,
+      "max_scale": 6000,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "1205d09aeafc8a21acccd3984d470b0077af137ccef4670d27f872edc872c094:CPU Freq Min Freq": {
+      "threshold_1": 1000,
+      "threshold_2": 2000,
+      "threshold_3": 3000,
+      "max_scale": 6000,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "1205d09aeafc8a21acccd3984d470b0077af137ccef4670d27f872edc872c094:CPU Load Duty": {
+      "threshold_1": 25,
+      "threshold_2": 50,
+      "threshold_3": 75,
+      "max_scale": 100,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "1205d09aeafc8a21acccd3984d470b0077af137ccef4670d27f872edc872c094:power0 Watts": {
+      "threshold_1": 50,
+      "threshold_2": 100,
+      "threshold_3": 200,
+      "max_scale": 500,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "1205d09aeafc8a21acccd3984d470b0077af137ccef4670d27f872edc872c094:temp1": {
+      "threshold_1": 55,
+      "threshold_2": 65,
+      "threshold_3": 75,
+      "max_scale": 115,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "1205d09aeafc8a21acccd3984d470b0077af137ccef4670d27f872edc872c094:temp3": {
+      "threshold_1": 55,
+      "threshold_2": 65,
+      "threshold_3": 75,
+      "max_scale": 115,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "1205d09aeafc8a21acccd3984d470b0077af137ccef4670d27f872edc872c094:temp4": {
+      "threshold_1": 55,
+      "threshold_2": 65,
+      "threshold_3": 75,
+      "max_scale": 115,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "257f51093553e2b66f029c53e7335a60a6d593228d2020ca47d4931b60dd976f:temp1": {
+      "threshold_1": 55,
+      "threshold_2": 65,
+      "threshold_3": 75,
+      "max_scale": 115,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "257f51093553e2b66f029c53e7335a60a6d593228d2020ca47d4931b60dd976f:temp2": {
+      "threshold_1": 55,
+      "threshold_2": 65,
+      "threshold_3": 75,
+      "max_scale": 115,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2:fan1 Duty": {
+      "threshold_1": 25,
+      "threshold_2": 50,
+      "threshold_3": 75,
+      "max_scale": 100,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2:fan1 RPM": {
+      "threshold_1": 500,
+      "threshold_2": 1000,
+      "threshold_3": 1500,
+      "max_scale": 3000,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2:freq_graphics Freq": {
+      "threshold_1": 1000,
+      "threshold_2": 2000,
+      "threshold_3": 3000,
+      "max_scale": 6000,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2:freq_memory Freq": {
+      "threshold_1": 1000,
+      "threshold_2": 2000,
+      "threshold_3": 3000,
+      "max_scale": 6000,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2:freq_sm Freq": {
+      "threshold_1": 1000,
+      "threshold_2": 2000,
+      "threshold_3": 3000,
+      "max_scale": 6000,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2:freq_video Freq": {
+      "threshold_1": 1000,
+      "threshold_2": 2000,
+      "threshold_3": 3000,
+      "max_scale": 6000,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2:GPU Load Duty": {
+      "threshold_1": 25,
+      "threshold_2": 50,
+      "threshold_3": 75,
+      "max_scale": 100,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2:GPU Power Watts": {
+      "threshold_1": 50,
+      "threshold_2": 100,
+      "threshold_3": 200,
+      "max_scale": 500,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2:GPU Temp": {
+      "threshold_1": 55,
+      "threshold_2": 65,
+      "threshold_3": 75,
+      "max_scale": 115,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "e58087daad95f0f3b56c8b50a213331a7d256dd37aff9c0d1d560a27b7fbaeb2:GPU Temp Hotspot": {
+      "threshold_1": 55,
+      "threshold_2": 65,
+      "threshold_3": 75,
+      "max_scale": 115,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "bf1ee4390dedadd8a3f52c284a497e8bd94dc8e3b82dcb8c201abc60ca996ee9:temp1": {
+      "threshold_1": 55,
+      "threshold_2": 65,
+      "threshold_3": 75,
+      "max_scale": 115,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "bf1ee4390dedadd8a3f52c284a497e8bd94dc8e3b82dcb8c201abc60ca996ee9:temp2": {
+      "threshold_1": 55,
+      "threshold_2": 65,
+      "threshold_3": 75,
+      "max_scale": 115,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "bf1ee4390dedadd8a3f52c284a497e8bd94dc8e3b82dcb8c201abc60ca996ee9:temp3": {
+      "threshold_1": 55,
+      "threshold_2": 65,
+      "threshold_3": 75,
+      "max_scale": 115,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "8ed002dbd21ab359b02a7e48d0f9ba2db1809d6f5698aeb3b30283d1cbfd841f:fan Duty": {
+      "threshold_1": 25,
+      "threshold_2": 50,
+      "threshold_3": 75,
+      "max_scale": 100,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "8ed002dbd21ab359b02a7e48d0f9ba2db1809d6f5698aeb3b30283d1cbfd841f:fan RPM": {
+      "threshold_1": 500,
+      "threshold_2": 1000,
+      "threshold_3": 1500,
+      "max_scale": 3000,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "8ed002dbd21ab359b02a7e48d0f9ba2db1809d6f5698aeb3b30283d1cbfd841f:pump Duty": {
+      "threshold_1": 25,
+      "threshold_2": 50,
+      "threshold_3": 75,
+      "max_scale": 100,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    },
+    "8ed002dbd21ab359b02a7e48d0f9ba2db1809d6f5698aeb3b30283d1cbfd841f:pump RPM": {
+      "threshold_1": 500,
+      "threshold_2": 1000,
+      "threshold_3": 1500,
+      "max_scale": 3000,
+      "font_size_temp": 0,
+      "label": "",
+      "threshold_1_color": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "threshold_2_color": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "threshold_3_color": {
+        "r": 255,
+        "g": 70,
+        "b": 0
+      },
+      "threshold_4_color": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "value_to_bar_gap": 0,
+      "label_to_bar_gap": 0
+    }
+  },
+  "positioning": {
+    "degree_spacing": 12,
+    "label_offset_x": 0,
+    "label_offset_y": 0,
+    "margin_top": 0,
+    "margin_bottom": 0
+  }
+}
