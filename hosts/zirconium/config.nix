@@ -25,6 +25,7 @@
     ../../configModules/printing.nix
     ../../configModules/rgb.nix
     ../../configModules/coolercontrol.nix
+    ../../configModules/coolerdash.nix
   # Virtualization
     ../../configModules/virtualisation.nix
     ../../configModules/docker.nix
