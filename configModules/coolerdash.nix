@@ -48,7 +48,7 @@ in
 
   systemd.tmpfiles.rules = [
     "d /var/lib/coolercontrol/plugins 0755 root root -"
-    "d ${pluginDir} 0755 ${pluginUser} ${pluginUser} -"
+    "d ${pluginDir} 0770 root ${pluginUser} -"
     "L+ ${pluginDir}/manifest.toml - - - - ${plugin}/manifest.toml"
     "L+ ${pluginDir}/ui - - - - ${plugin}/ui"
     "L+ ${pluginDir}/shutdown.png - - - - ${plugin}/shutdown.png"
