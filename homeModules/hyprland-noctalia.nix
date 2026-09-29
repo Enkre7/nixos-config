@@ -180,6 +180,7 @@ in
       ];
 
       window_rule = [
+        { match.class = ".*"; suppress_event = "maximize"; }
         { match.class = "^(org\\.pulseaudio\\.pavucontrol)$"; float = true; size = [ 800 600 ]; center = true; }
         { match.class = "^(com\\.nextcloud\\.desktopclient\\.nextcloud)$"; float = true; size = [ 873 586 ]; center = true; }
         { match.class = "^(\\.blueman-manager-wrapped)$"; float = true; size = [ 700 500 ]; center = true; }
