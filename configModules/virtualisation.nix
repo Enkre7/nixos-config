@@ -14,6 +14,11 @@
   services.spice-vdagentd.enable = true;
   users.extraGroups.libvirtd.members = [ config.user ];
   programs.virt-manager.enable = true;
+  environment.sessionVariables.LIBVIRT_DEFAULT_URI = "qemu:///system";
+  home-manager.users.${config.user}.dconf.settings."org/virt-manager/virt-manager/connections" = {
+    autoconnect = [ "qemu:///system" ];
+    uris = [ "qemu:///system" ];
+  };
   environment.systemPackages = with pkgs; [
     virt-viewer
     spice
