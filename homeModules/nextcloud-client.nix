@@ -7,6 +7,11 @@
     startInBackground = true;
   };
 
+  systemd.user.services.nextcloud-client.Unit = {
+    After = [ "noctalia.service" ];
+    Wants = [ "noctalia.service" ];
+  };
+
   home.packages = with pkgs; [
     nextcloud-client
   ];
