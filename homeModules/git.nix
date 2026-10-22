@@ -64,5 +64,11 @@
       AddKeysToAgent yes
   '';
   
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = true;
+    settings.git_protocol = "https";
+  };
+
   home.packages = with pkgs; [ meld ];
 }
