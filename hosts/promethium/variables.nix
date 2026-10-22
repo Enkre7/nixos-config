@@ -50,7 +50,7 @@ in
     flakePath = "/etc/nixos";
     dotfilesPath = "${config.flakePath}/dotfiles";
     wallpaper = ../../dotfiles/wallpapers/dark/nord-dark-cyberpunk_mask.png; # only png
-    styleTheme = "nord"; #gruvbox-light
+    styleTheme = "everforest"; #gruvbox-light
     stylePolarity = "dark";
     gitUsername = secrets.gitUsername;
     gitEmail = secrets.gitEmail;
