@@ -910,11 +910,11 @@
         "rev": "f78ece39f151c3c293bbe27a574bef3173d76666",
         "revCount": 2,
         "type": "git",
-        "url": "ssh://git@github.com/Enkre7/nixos-secrets"
+        "url": "https://github.com/Enkre7/nixos-secrets"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@github.com/Enkre7/nixos-secrets"
+        "url": "https://github.com/Enkre7/nixos-secrets"
       }
     },
     "stylix": {
