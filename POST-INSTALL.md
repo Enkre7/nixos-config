@@ -15,27 +15,23 @@ flakePath = "/persist/system/nixos";
 
 ### 1.2 Setup Git
 
-Home Manager automatically generates SSH keys on first boot at `~/.ssh/github` and `~/.ssh/github.pub`. A notification will prompt you to add the key to GitHub.
+Git talks to GitHub over HTTPS, which works on networks that block SSH. Credentials are handled by the GitHub CLI and stored in the keyring:
 ```bash
-# Display public key
-cat ~/.ssh/github.pub
+gh auth login        # GitHub.com, HTTPS, login with a web browser
 
-# Add to GitHub: Settings → SSH and GPG keys → New SSH key
-# Configure remote (use your flakePath)
+# Use HTTPS remotes (use your flakePath)
 cd /etc/nixos  # or /persist/system/nixos
-git remote set-url origin git@github.com:Enkre7/nixos-config.git
-
-# Test connection
-ssh -T git@github.com
+git remote set-url origin https://github.com/Enkre7/nixos-config.git
+git push
 ```
 
-**Note:** Permissions are set automatically. With impermanence, ensure SSH keys persist in `/persist/home/[user]/.ssh`.
+**Note:** With impermanence, persist `~/.config/gh` and the keyring (`~/.local/share/keyrings`).
 
 ### 1.3 Secrets
 
-Rebuilds fetch the private `secrets` input over SSH, so `ssh -T git@github.com` must work on the machine. Clone it only to edit secrets from this machine:
+Rebuilds fetch the private `secrets` input over HTTPS with the same credentials. Clone it only to edit secrets from this machine:
 ```bash
-git clone git@github.com:Enkre7/nixos-secrets.git ~/nixos-secrets
+git clone https://github.com/Enkre7/nixos-secrets.git ~/nixos-secrets
 ```
 
 ---

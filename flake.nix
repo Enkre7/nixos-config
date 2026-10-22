@@ -19,7 +19,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     secrets = {
-      url = "git+ssh://git@github.com/Enkre7/nixos-secrets";
+      url = "git+https://github.com/Enkre7/nixos-secrets";
       flake = false;
     };
     home-manager = {
