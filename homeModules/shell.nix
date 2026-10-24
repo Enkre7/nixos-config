@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     fzf
     exfat
+    python3
   ];
   
   programs.zsh = {
