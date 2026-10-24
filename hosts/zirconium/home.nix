@@ -79,6 +79,7 @@
     prusa-slicer
     r2modman
     obsidian
+    portfolio
     gnome-calculator
     #protonvpn-gui
   ];

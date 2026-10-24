@@ -88,6 +88,7 @@
     drawio
     gnome-calculator
     obsidian
+    portfolio
     #lmstudio
     plex-desktop
     #ffmpeg-full
