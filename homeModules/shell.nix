@@ -5,6 +5,7 @@
     fzf
     exfat
     python3
+    claude-code
   ];
   
   programs.zsh = {
