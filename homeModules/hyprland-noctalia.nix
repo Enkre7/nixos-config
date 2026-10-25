@@ -249,6 +249,8 @@ in
         { match.class = "^(system-monitor)$"; float = true; size = [ 1200 800 ]; center = true; }
         { match.class = "^(virt-manager)$"; float = true; size = [ 800 600 ]; center = true; }
         { match.class = "^(system-config-printer)$"; float = true; size = [ 700 500 ]; center = true; }
+        { match.class = "^(Portfolio Performance)$"; float = true; center = true; min_size = [ 500 250 ]; }
+        { match.class = "^(Portfolio Performance)$"; match.initial_title = "^(Portfolio Performance\\s*)$"; tile = true; }
         { match.class = "^(org\\.prismlauncher\\.PrismLauncher)$"; float = true; size = [ 1100 700 ]; center = true; }
         { match.class = "^(vesktop)$"; float = true; size = [ 900 600 ]; center = true; }
         { match.class = "^(mpv)$"; idle_inhibit = "fullscreen"; }
