@@ -3,11 +3,7 @@
 {
   gtk.enable = true;
   gtk.gtk3.bookmarks = map (dir: "file://${dir}") [
-    config.xdg.userDirs.documents
     config.xdg.userDirs.download
-    config.xdg.userDirs.pictures
-    config.xdg.userDirs.music
-    config.xdg.userDirs.videos
     config.nextcloudPath
   ];
 
