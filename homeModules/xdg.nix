@@ -7,6 +7,8 @@
     config.nextcloudPath
   ];
 
+  xfconf.settings.thunar."misc-expandable-folders" = true;
+
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
