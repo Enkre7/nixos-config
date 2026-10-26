@@ -58,7 +58,7 @@ let
     ${pkgs.udiskie}/bin/udiskie &
     ${lib.optionalString osConfig.programs.thunar.enable "${pkgs.thunar}/bin/thunar --daemon &"}
     ${lib.optionalString osConfig.programs.coolercontrol.enable "${pkgs.coolercontrol.coolercontrol-gui}/bin/coolercontrol &"}
-    ${lib.optionalString osConfig.services.hardware.openrgb.enable "${osConfig.services.hardware.openrgb.package}/bin/openrgb --server --startminimized -m static -c 00FF00 -b 100 &"}
+    ${lib.optionalString osConfig.services.hardware.openrgb.enable "${osConfig.services.hardware.openrgb.package}/bin/openrgb --client 127.0.0.1:${toString osConfig.services.hardware.openrgb.server.port} --startminimized -m static -c 00FF00 -b 100 &"}
     ${lib.optionalString (hasHomePackage "vesktop") "${pkgs.vesktop}/bin/vesktop --start-minimized &"}
     ${lib.optionalString osConfig.services.mullvad-vpn.gui.enable "${pkgs.mullvad-vpn}/bin/mullvad-vpn &"}
     ${lib.optionalString (hasHomePackage "protonvpn-gui") "${pkgs.protonvpn-gui}/bin/protonvpn-app &"}
