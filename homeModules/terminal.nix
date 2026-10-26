@@ -24,4 +24,21 @@
     rsclock
     figlet
   ];
+
+  # Terminal used by Thunar "Open terminal here"
+  xdg.configFile."xfce4/helpers.rc".text = ''
+    TerminalEmulator=kitty
+  '';
+  xdg.dataFile."xfce4/helpers/kitty.desktop".text = ''
+    [Desktop Entry]
+    NoDisplay=true
+    Version=1.0
+    Encoding=UTF-8
+    Type=X-XFCE-Helper
+    X-XFCE-Category=TerminalEmulator
+    X-XFCE-Commands=kitty
+    X-XFCE-CommandsWithParameter=kitty "%s"
+    Icon=kitty
+    Name=kitty
+  '';
 }
