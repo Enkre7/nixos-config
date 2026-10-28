@@ -10,6 +10,7 @@
       enable = true;
       dns = "systemd-resolved";
       wifi.backend = "iwd";
+      wifi.powersave = false;
     };
 
     wireless.iwd = {
@@ -25,6 +26,11 @@
   };
   
   services.resolved.enable = true;
+
+  # MediaTek MT7922 (Framework) drops the link after suspend with ASPM enabled
+  boot.extraModprobeConfig = lib.mkIf config.isFrameworkDevice ''
+    options mt7921e disable_aspm=1
+  '';
 
   # Network discovery
   services.avahi = {
