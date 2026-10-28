@@ -27,9 +27,8 @@
   
   services.resolved.enable = true;
 
-  # MediaTek MT7922 (Framework) drops the link after suspend with ASPM enabled
-  boot.extraModprobeConfig = lib.mkIf config.isFrameworkDevice ''
-    options mt7921e disable_aspm=1
+  powerManagement.resumeCommands = lib.mkIf config.isLaptop ''
+    ${pkgs.systemd}/bin/systemctl restart iwd.service
   '';
 
   # Network discovery
