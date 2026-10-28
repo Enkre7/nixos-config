@@ -53,6 +53,7 @@
     allowedTCPPorts = [
       27036 # Steam
       27037 # Steam
+      3000
     ];
     allowedUDPPorts = [
       27031 # Steam
