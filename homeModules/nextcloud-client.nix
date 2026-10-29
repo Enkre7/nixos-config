@@ -7,9 +7,28 @@
     startInBackground = true;
   };
 
-  systemd.user.services.nextcloud-client.Unit = {
-    After = [ "noctalia.service" ];
-    Wants = [ "noctalia.service" ];
+  systemd.user.services.nextcloud-client = {
+    Unit = {
+      After = [ "noctalia.service" ];
+      Wants = [ "noctalia.service" ];
+    };
+    Service.ExecStartPre = "${pkgs.writeShellScript "wait-tray" ''
+      for _ in $(seq 1 60); do
+        ${pkgs.systemd}/bin/busctl --user status org.kde.StatusNotifierWatcher >/dev/null 2>&1 && exit 0
+        sleep 0.5
+      done
+    ''}";
+  };
+
+  # The systemd service starts the client, block its own UWSM autostart entry
+  xdg.configFile."autostart/Nextcloud.desktop" = {
+    force = true;
+    text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=Nextcloud
+      Hidden=true
+    '';
   };
 
   home.packages = with pkgs; [

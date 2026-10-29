@@ -69,6 +69,21 @@ let
 in
 {
   imports = [ inputs.hyprland.homeManagerModules.default ];
+
+  # Apps started by the startup script, block their own UWSM autostart entries
+  xdg.configFile = lib.mapAttrs' (name: enable: lib.nameValuePair "autostart/${name}.desktop" (lib.mkIf enable {
+    force = true;
+    text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=${name}
+      Hidden=true
+    '';
+  })) {
+    OpenRGB = osConfig.services.hardware.openrgb.enable;
+    vesktop = hasHomePackage "vesktop";
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
