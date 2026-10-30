@@ -25,6 +25,11 @@
     tmp.cleanOnBoot = true;
   };
   
+  # External monitor brightness over DDC/CI
+  hardware.i2c.enable = true;
+  users.users.${config.user}.extraGroups = [ "i2c" ];
+  environment.systemPackages = [ pkgs.ddcutil ];
+
   # Bios upgrade
   services.fwupd.enable = true;
  

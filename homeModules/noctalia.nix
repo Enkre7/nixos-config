@@ -133,7 +133,10 @@ in
         };
       };
 
-      brightness.sync_all_monitors = true;
+      brightness = {
+        sync_all_monitors = true;
+        enable_ddcutil = true;
+      };
 
       calendar = {
         enabled = true;
