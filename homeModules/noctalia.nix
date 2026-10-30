@@ -1,4 +1,4 @@
-{ config, inputs, lib, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 let
   groupNotes = {
@@ -82,6 +82,8 @@ let
 in
 {
   imports = [ inputs.noctalia.homeModules.default ];
+
+  home.packages = [ pkgs.bitwarden-cli ];
 
   programs.noctalia = {
     enable = true;
@@ -640,6 +642,8 @@ in
           "davemhammer/obsidian"
           "fel/ocr"
           "andrewdems/vpn-manager"
+          "noctalia/notes"
+          "noctalia/bitwarden"
         ];
       };
 
