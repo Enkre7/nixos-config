@@ -5,7 +5,7 @@ let
     accordion = false;
     accordion_direction = "end";
     enabled = true;
-    fill = "surface_variant";
+    fill = "surface_container";
     id = "g1";
     members = [ "notes" "clipboard" ];
     opacity = 1.0;
@@ -16,7 +16,7 @@ let
     accordion = false;
     accordion_direction = "end";
     enabled = true;
-    fill = "surface_variant";
+    fill = "surface_container";
     id = "g2";
     members = [ "network" "bar_3" "bluetooth" ];
     opacity = 1.0;
@@ -27,7 +27,7 @@ let
     accordion = false;
     accordion_direction = "end";
     enabled = true;
-    fill = "surface_variant";
+    fill = "surface_container";
     id = "g3";
     members = [ "volume" "notifications" ];
     opacity = 1.0;
@@ -391,7 +391,7 @@ in
           rotation = 0.0;
           type = "login_box";
           settings = {
-            background_color = "surface_variant";
+            background_color = "surface_container";
             background_opacity = 0.88;
             background_radius = 12.0;
             center_password_text = false;
@@ -419,7 +419,7 @@ in
           rotation = 0.0;
           type = "login_box";
           settings = {
-            background_color = "surface_variant";
+            background_color = "surface_container";
             background_opacity = 0.88;
             background_radius = 32.0;
             center_password_text = false;
@@ -447,7 +447,7 @@ in
           rotation = 0.0;
           type = "login_box";
           settings = {
-            background_color = "surface_variant";
+            background_color = "surface_container";
             background_opacity = 0.88;
             background_radius = 12.0;
             center_password_text = false;
@@ -475,7 +475,7 @@ in
           rotation = 0.0;
           type = "login_box";
           settings = {
-            background_color = "surface_variant";
+            background_color = "surface_container";
             background_opacity = 0.88;
             background_radius = 32.0;
             center_password_text = false;
@@ -503,7 +503,7 @@ in
           rotation = 0.0;
           type = "login_box";
           settings = {
-            background_color = "surface_variant";
+            background_color = "surface_container";
             background_opacity = 0.88;
             background_radius = 12.0;
             center_password_text = false;
@@ -531,7 +531,7 @@ in
           rotation = 0.0;
           type = "login_box";
           settings = {
-            background_color = "surface_variant";
+            background_color = "surface_container";
             background_opacity = 0.61;
             background_radius = 32.0;
             center_password_text = false;
