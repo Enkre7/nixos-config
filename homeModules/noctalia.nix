@@ -124,7 +124,7 @@ in
           auto_hide = true;
           margin_ends = 350;
           scale = 1.0;
-          monitor."HDMI-A-1" = sideBarBase // {
+          monitor."HDMI-A-1" = removeAttrs sideBarBase [ "font_weight" ] // {
             match = "HDMI-A-1";
             auto_hide = true;
             margin_ends = 526;
