@@ -18,7 +18,7 @@ let
     enabled = true;
     fill = "surface_container";
     id = "g2";
-    members = [ "network" "bar_3" "bluetooth" ];
+    members = [ "network" "bluetooth" ];
     opacity = 1.0;
     padding = 6.0;
   };
@@ -641,14 +641,12 @@ in
           "cleboost/ssh-launcher"
           "davemhammer/obsidian"
           "fel/ocr"
-          "andrewdems/vpn-manager"
           "noctalia/notes"
           "noctalia/bitwarden"
         ];
       };
 
       plugin_settings = {
-        "andrewdems/vpn-manager".auto_connect_enabled = true;
         "davemhammer/obsidian".vault_path = "${config.nextcloudPath}/Obsidian";
         "noctalia/bitwarden".server_url = config.bitwardenURL;
         "yuuto/calculator".angle_unit = "deg";
@@ -722,7 +720,6 @@ in
 
       widget = {
         bar.type = "yuuto/calculator:bar";
-        bar_3.type = "andrewdems/vpn-manager:bar";
         battery = { capsule = true; type = "battery"; };
         control-center = { scale = 1.25; type = "control-center"; };
         date = { format = "{:%a %d %b}"; type = "clock"; };
