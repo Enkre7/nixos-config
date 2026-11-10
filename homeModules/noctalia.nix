@@ -753,7 +753,7 @@ in
           show_label = false;
           type = "volume";
         };
-        workspaces = { show_all_outputs = true; type = "workspaces"; };
+        workspaces = { monitors = [ "*" ]; type = "workspaces"; };
       };
     };
   };
