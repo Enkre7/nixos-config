@@ -83,7 +83,7 @@ in
 {
   imports = [ inputs.noctalia.homeModules.default ];
 
-  home.packages = [ pkgs.bitwarden-cli ];
+  home.packages = [ pkgs.bitwarden-cli pkgs.jq ];
 
   programs.noctalia = {
     enable = true;
@@ -175,7 +175,6 @@ in
           { type = "nightlight"; }
           { type = "notification"; }
           { type = "power_profile"; }
-          { type = "rylos/tailnet:toggle"; }
         ];
       };
 
@@ -644,8 +643,8 @@ in
           "fel/ocr"
           "noctalia/notes"
           "noctalia/bitwarden"
-          "rylos/tailnet"
           "3dprogramin/mullvad"
+          "davemhammer/tailscale"
         ];
       };
 
@@ -742,7 +741,7 @@ in
         session = { enabled = false; type = "session"; };
         spacer_2.type = "spacer";
         status.type = "davemhammer/obsidian:status";
-        tailscale.type = "rylos/tailnet:bar";
+        tailscale.type = "davemhammer/tailscale:status";
         tray = {
           capsule = true;
           drawer = false;
