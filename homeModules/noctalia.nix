@@ -53,7 +53,7 @@ let
     margin_opposite_edge = 7;
     padding = 14;
     scale = 1.1;
-    start = [ "control-center" "spacer_2" "workspaces" "media" ];
+    start = [ "control-center" "spacer_2" "workspaces" "media_gap" "media" ];
     thickness = 32;
     widget_spacing = 5;
   };
@@ -769,6 +769,7 @@ in
         ocr.type = "fel/ocr:ocr";
         session = { enabled = false; type = "session"; };
         spacer_2.type = "spacer";
+        media_gap = { length = 12; type = "spacer"; };
         status.type = "davemhammer/obsidian:status";
         tailscale = { show_counts = false; type = "davemhammer/tailscale:status"; };
         tray = {
