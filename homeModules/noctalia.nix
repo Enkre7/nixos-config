@@ -637,8 +637,6 @@ in
         auto_update = "all";
         enabled = [
           "yuuto/calculator"
-          "kenn/keybind-cheatsheet"
-          "cleboost/ssh-launcher"
           "davemhammer/obsidian"
           "fel/ocr"
           "noctalia/notes"
