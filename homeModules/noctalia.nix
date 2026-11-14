@@ -46,14 +46,14 @@ let
   };
 
   topBarBase = {
-    center = [ "media" "date" "clock" ];
+    center = [ "date" "clock" ];
     concave_edge_corners = true;
     margin_edge = 6;
     margin_ends = 119;
     margin_opposite_edge = 7;
     padding = 14;
     scale = 1.1;
-    start = [ "control-center" "spacer_2" "workspaces" ];
+    start = [ "control-center" "spacer_2" "workspaces" "media" ];
     thickness = 32;
     widget_spacing = 5;
   };
