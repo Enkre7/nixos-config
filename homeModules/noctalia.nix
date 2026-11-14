@@ -676,6 +676,8 @@ in
       };
 
       plugin_settings = {
+        "3dprogramin/mullvad" = { panel_placement = "attached"; panel_position = "top_right"; };
+        "davemhammer/tailscale" = { manager_placement = "attached"; manager_position = "top_right"; };
         "davemhammer/obsidian".vault_path = "${config.nextcloudPath}/Obsidian";
         "noctalia/bitwarden".server_url = config.bitwardenURL;
         "yuuto/calculator".angle_unit = "deg";
