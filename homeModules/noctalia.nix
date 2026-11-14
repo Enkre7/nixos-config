@@ -96,6 +96,24 @@ in
 
   home.packages = [ pkgs.bitwarden-cli pkgs.jq ];
 
+  # Plugins are managed here: drop the GUI [plugins] override before each start
+  systemd.user.services.noctalia.Service.ExecStartPre = "${pkgs.writers.writePython3 "noctalia-drop-plugin-override" {
+    libraries = [ pkgs.python3Packages.tomlkit ];
+  } ''
+    import os
+    import tomlkit
+
+    base = os.environ.get("XDG_STATE_HOME", os.path.expanduser("~/.local/state"))
+    path = os.path.join(base, "noctalia", "settings.toml")
+    if os.path.exists(path):
+        with open(path) as f:
+            doc = tomlkit.load(f)
+        if "plugins" in doc:
+            del doc["plugins"]
+            with open(path, "w") as f:
+                tomlkit.dump(doc, f)
+  ''}";
+
   programs.noctalia = {
     enable = true;
     systemd.enable = true;
