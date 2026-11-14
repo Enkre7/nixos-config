@@ -120,9 +120,9 @@ in
 
     settings = {
       bar = {
-        order = [ "widgets" "side" ];
+        order = [ "top" "side" ];
 
-        widgets = topBarBase // {
+        top = topBarBase // {
           position = "top";
           font_weight = 500;
           reserve_space = true;
