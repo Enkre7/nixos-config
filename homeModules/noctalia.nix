@@ -18,7 +18,7 @@ let
     enabled = true;
     fill = "surface_container";
     id = "g2";
-    members = [ "network" "tailscale" "mullvad" "bluetooth" ];
+    members = [ "network" "bluetooth" ];
     opacity = 1.0;
     padding = 6.0;
   };
@@ -30,6 +30,17 @@ let
     fill = "surface_container";
     id = "g3";
     members = [ "volume" "notifications" ];
+    opacity = 1.0;
+    padding = 6.0;
+  };
+
+  groupVpn = {
+    accordion = false;
+    accordion_direction = "end";
+    enabled = true;
+    fill = "surface_container";
+    id = "g4";
+    members = [ "tailscale" "mullvad" ];
     opacity = 1.0;
     padding = 6.0;
   };
@@ -48,8 +59,8 @@ let
   };
 
   monitorBar = topBarBase // {
-    end = [ "media" "group:g1" "tray" "group:g3" "group:g2" "battery" ];
-    capsule_group = [ groupNotes groupNetwork groupVolume ];
+    end = [ "media" "group:g1" "tray" "group:g3" "group:g2" "battery" "group:g4" ];
+    capsule_group = [ groupNotes groupNetwork groupVolume groupVpn ];
   };
 
   sideBarBase = {
@@ -98,8 +109,8 @@ in
           font_weight = 500;
           reserve_space = true;
           smart_auto_hide = false;
-          end = [ "media" "tray" "group:g3" "group:g2" "battery" ];
-          capsule_group = [ groupNetwork groupVolume ];
+          end = [ "media" "tray" "group:g3" "group:g2" "battery" "group:g4" ];
+          capsule_group = [ groupNetwork groupVolume groupVpn ];
           monitor =
             (builtins.listToAttrs (map externalBar externalOutputs))
             // {
@@ -110,8 +121,8 @@ in
               };
               "HDMI-A-1" = topBarBase // {
                 match = "HDMI-A-1";
-                end = [ "media" "tray" "group:g3" "group:g2" "battery" ];
-                capsule_group = [ groupNetwork groupVolume ];
+                end = [ "media" "tray" "group:g3" "group:g2" "battery" "group:g4" ];
+                capsule_group = [ groupNetwork groupVolume groupVpn ];
                 margin_edge = 10;
                 margin_ends = 263;
                 scale = 1.2;
@@ -723,7 +734,7 @@ in
         battery = { capsule = true; type = "battery"; };
         control-center = { scale = 1.25; type = "control-center"; };
         date = { format = "{:%a %d %b}"; type = "clock"; };
-        mullvad.type = "3dprogramin/mullvad:status";
+        mullvad = { show_label = false; type = "3dprogramin/mullvad:status"; };
         media = {
           art_size = 16.0;
           hide_when_no_media = true;
@@ -739,7 +750,7 @@ in
         session = { enabled = false; type = "session"; };
         spacer_2.type = "spacer";
         status.type = "davemhammer/obsidian:status";
-        tailscale.type = "davemhammer/tailscale:status";
+        tailscale = { show_counts = false; type = "davemhammer/tailscale:status"; };
         tray = {
           capsule = true;
           drawer = false;
