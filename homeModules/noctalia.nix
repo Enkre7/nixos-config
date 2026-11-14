@@ -46,7 +46,7 @@ let
   };
 
   topBarBase = {
-    center = [ "date" "clock" ];
+    center = [ "media" "date" "clock" ];
     concave_edge_corners = true;
     margin_edge = 6;
     margin_ends = 119;
@@ -59,7 +59,7 @@ let
   };
 
   monitorBar = topBarBase // {
-    end = [ "media" "group:g1" "tray" "group:g3" "group:g2" "battery" "group:g4" ];
+    end = [ "group:g1" "tray" "group:g3" "group:g2" "battery" "group:g4" ];
     capsule_group = [ groupNotes groupNetwork groupVolume groupVpn ];
   };
 
@@ -127,7 +127,7 @@ in
           font_weight = 500;
           reserve_space = true;
           smart_auto_hide = false;
-          end = [ "media" "tray" "group:g3" "group:g2" "battery" "group:g4" ];
+          end = [ "tray" "group:g3" "group:g2" "battery" "group:g4" ];
           capsule_group = [ groupNetwork groupVolume groupVpn ];
           monitor =
             (builtins.listToAttrs (map externalBar externalOutputs))
@@ -139,7 +139,7 @@ in
               };
               "HDMI-A-1" = topBarBase // {
                 match = "HDMI-A-1";
-                end = [ "media" "tray" "group:g3" "group:g2" "battery" "group:g4" ];
+                end = [ "tray" "group:g3" "group:g2" "battery" "group:g4" ];
                 capsule_group = [ groupNetwork groupVolume groupVpn ];
                 margin_edge = 10;
                 margin_ends = 263;
