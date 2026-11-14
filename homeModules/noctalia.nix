@@ -18,7 +18,7 @@ let
     enabled = true;
     fill = "surface_container";
     id = "g2";
-    members = [ "network" "tailscale" "bluetooth" ];
+    members = [ "network" "tailscale" "mullvad" "bluetooth" ];
     opacity = 1.0;
     padding = 6.0;
   };
@@ -83,7 +83,7 @@ in
 {
   imports = [ inputs.noctalia.homeModules.default ];
 
-  home.packages = [ pkgs.bitwarden-cli pkgs.jq ];
+  home.packages = [ pkgs.bitwarden-cli ];
 
   programs.noctalia = {
     enable = true;
@@ -175,6 +175,7 @@ in
           { type = "nightlight"; }
           { type = "notification"; }
           { type = "power_profile"; }
+          { type = "rylos/tailnet:toggle"; }
         ];
       };
 
@@ -643,7 +644,8 @@ in
           "fel/ocr"
           "noctalia/notes"
           "noctalia/bitwarden"
-          "davemhammer/tailscale"
+          "rylos/tailnet"
+          "3dprogramin/mullvad"
         ];
       };
 
@@ -724,6 +726,7 @@ in
         battery = { capsule = true; type = "battery"; };
         control-center = { scale = 1.25; type = "control-center"; };
         date = { format = "{:%a %d %b}"; type = "clock"; };
+        mullvad.type = "3dprogramin/mullvad:status";
         media = {
           art_size = 16.0;
           hide_when_no_media = true;
@@ -739,7 +742,7 @@ in
         session = { enabled = false; type = "session"; };
         spacer_2.type = "spacer";
         status.type = "davemhammer/obsidian:status";
-        tailscale = { flag_problem = true; type = "davemhammer/tailscale:status"; };
+        tailscale.type = "rylos/tailnet:bar";
         tray = {
           capsule = true;
           drawer = false;
