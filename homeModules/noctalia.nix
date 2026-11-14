@@ -18,7 +18,7 @@ let
     enabled = true;
     fill = "surface_container";
     id = "g2";
-    members = [ "network" "bluetooth" ];
+    members = [ "network" "tailscale" "bluetooth" ];
     opacity = 1.0;
     padding = 6.0;
   };
@@ -83,7 +83,7 @@ in
 {
   imports = [ inputs.noctalia.homeModules.default ];
 
-  home.packages = [ pkgs.bitwarden-cli ];
+  home.packages = [ pkgs.bitwarden-cli pkgs.jq ];
 
   programs.noctalia = {
     enable = true;
@@ -643,6 +643,7 @@ in
           "fel/ocr"
           "noctalia/notes"
           "noctalia/bitwarden"
+          "davemhammer/tailscale"
         ];
       };
 
@@ -738,6 +739,7 @@ in
         session = { enabled = false; type = "session"; };
         spacer_2.type = "spacer";
         status.type = "davemhammer/obsidian:status";
+        tailscale = { flag_problem = true; type = "davemhammer/tailscale:status"; };
         tray = {
           capsule = true;
           drawer = false;

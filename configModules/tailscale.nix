@@ -1,11 +1,11 @@
-{ ... }:
+{ config, ... }:
 
 {
   services.tailscale = {
     enable = true;
     openFirewall = true;     
     useRoutingFeatures = "both";
-    extraUpFlags = ["--advertise-exit-node"];
+    extraSetFlags = [ "--advertise-exit-node" "--operator=${config.user}" ];
   };  
     
   networking.firewall = {

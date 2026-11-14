@@ -14,5 +14,4 @@
     file
     parted
   ];
-  services.glances.enable = true;
 }
