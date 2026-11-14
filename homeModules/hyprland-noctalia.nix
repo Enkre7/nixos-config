@@ -60,7 +60,6 @@ let
     ${lib.optionalString osConfig.programs.coolercontrol.enable "${pkgs.coolercontrol.coolercontrol-gui}/bin/coolercontrol &"}
     ${lib.optionalString osConfig.services.hardware.openrgb.enable "${osConfig.services.hardware.openrgb.package}/bin/openrgb --client 127.0.0.1:${toString osConfig.services.hardware.openrgb.server.port} --startminimized -m static -c 00FF00 -b 100 &"}
     ${lib.optionalString (hasHomePackage "vesktop") "${pkgs.vesktop}/bin/vesktop --start-minimized &"}
-    ${lib.optionalString osConfig.services.mullvad-vpn.gui.enable "${pkgs.mullvad-vpn}/bin/mullvad-vpn &"}
     ${lib.optionalString (hasHomePackage "protonvpn-gui") "${pkgs.protonvpn-gui}/bin/protonvpn-app &"}
 
     ${firefoxPopups}/bin/firefox-popups &
@@ -251,7 +250,6 @@ in
         { match.class = "^(nm-applet)$"; float = true; size = [ 400 300 ]; center = true; }
         { match.class = "^(openrgb)$"; float = true; size = [ 1000 700 ]; center = true; }
         { match.class = "^(org\\.coolercontrol\\.CoolerControl)$"; float = true; size = [ 908 678 ]; center = true; }
-        { match.class = "^(Mullvad VPN)$"; float = true; size = [ 320 568 ]; center = true; }
         { match.title = "^(Proton VPN)$"; float = true; size = [ 403 600 ]; center = true; pin = true; }
         { match.class = "^(org\\.kde\\.kdeconnect\\.app)$"; float = true; size = [ 762 687 ]; center = true; }
         { match.title = "^(Incrustation vidéo)$"; float = true; pin = true; size = [ "35%" "35%" ]; move = [ "64%" "4%" ]; no_blur = true; no_shadow = true; no_anim = true; }
