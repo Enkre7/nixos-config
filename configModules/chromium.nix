@@ -1,6 +1,8 @@
 { config, pkgs, inputs, ... }:
 
 {
+  environment.systemPackages = [ pkgs.google-chrome ];
+
   programs.chromium = {
     enable = true;
     extensions = [
@@ -12,6 +14,8 @@
       "eimadpbcbfnmbkopoojfekhnkhdbieeh"
       # Privacy Badger
       "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"
+      # Claude (Anthropic)
+      "fcoeoabgfenejglbffodgkkbkcdhcgfn"
     ];
     extraOpts = {
       # Disable telemetry
