@@ -22,6 +22,8 @@ let
       Port = host.port or 22;
       IdentityFile = homelabIdentities;
       IdentitiesOnly = "yes";
+      # Pas d'agent : il ne sait pas demander le PIN de la YubiKey (verify-required) et refuse de signer.
+      AddKeysToAgent = "no";
       ForwardAgent = "no";
       StrictHostKeyChecking = "ask";
     }
