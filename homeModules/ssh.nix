@@ -59,6 +59,15 @@ in
   };
 
   home.file = {
+    # gpg (carte OpenPGP de la YubiKey, clé SSH du téléphone) doit passer par pcscd, activé dans
+    # configModules/yubikey.nix ; sinon scdaemon ne voit pas la carte (« Aucun périphérique »).
+    ".gnupg/scdaemon.conf" = {
+      text = ''
+        disable-ccid
+        pcsc-shared
+      '';
+      force = true;
+    };
     ".ssh/sockets/.keep".text = "# Managed by Home Manager";
     ".ssh/config.d/.keep".text = "# SSH config includes";
   }
