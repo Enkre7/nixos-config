@@ -28,11 +28,9 @@
     after = [ "openrgb.service" ];
     requires = [ "openrgb.service" ];
     wantedBy = [ "multi-user.target" ];
-    environment.HOME = "/tmp";
     serviceConfig = {
       Type = "oneshot";
-      DynamicUser = true;
-      PrivateTmp = true;
+      User = config.user;
     };
     path = [ config.services.hardware.openrgb.package ];
     script = ''
