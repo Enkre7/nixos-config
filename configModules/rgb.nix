@@ -34,7 +34,7 @@
     };
     path = [ config.services.hardware.openrgb.package ];
     script = ''
-      client="--client 127.0.0.1:${toString config.services.hardware.openrgb.server.port} --nodetect --noautoconnect"
+      client="--client 127.0.0.1:${toString config.services.hardware.openrgb.server.port} --nodetect"
       for _ in $(seq 1 30); do
         openrgb $client --list-devices 2>/dev/null | grep -q Razer && break
         sleep 1
