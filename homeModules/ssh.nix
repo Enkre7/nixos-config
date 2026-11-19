@@ -3,16 +3,17 @@
 # Accès SSH unifié au homelab.
 # - Les adresses et utilisateurs des serveurs viennent du dépôt PRIVÉ (inputs.secrets → sshHosts) :
 #   ce dépôt public ne contient ni topologie réseau ni clé privée.
-# - Clé principale : ed25519-sk résidente sur la YubiKey (appui + PIN à chaque connexion).
-#   Clé de secours : ed25519 logicielle avec phrase de passe, jamais versionnée.
-#   Seules les clés publiques sont dans keys/.
+# - Clé principale : ed25519-sk résidente sur la YubiKey (PIN + appui à chaque connexion).
+# - Clé de secours : élément « Clé SSH » du coffre Bitwarden, servie par l'agent SSH de
+#   Bitwarden desktop (validation demandée à chaque usage). Aucun fichier privé sur le disque.
+#   Seules les clés publiques sont dans keys/ ; la .pub de secours sert à choisir la clé dans l'agent.
 let
   secrets = import "${inputs.secrets}/secrets.nix";
   homelabHosts = secrets.sshHosts or { };
 
   homelabIdentities = [
-    "~/.ssh/id_homelab_sk"      # YubiKey
-    "~/.ssh/id_homelab_secours" # secours, protégée par phrase de passe
+    "~/.ssh/id_homelab_sk"          # YubiKey (fichier « handle », inutilisable sans la YubiKey)
+    "~/.ssh/id_homelab_secours.pub" # secours : clé privée dans Bitwarden, signée via son agent
   ];
 
   mkHost = name: host:
@@ -22,7 +23,8 @@ let
       Port = host.port or 22;
       IdentityFile = homelabIdentities;
       IdentitiesOnly = "yes";
-      # Pas d'agent : il ne sait pas demander le PIN de la YubiKey (verify-required) et refuse de signer.
+      IdentityAgent = "~/.bitwarden-ssh-agent.sock";
+      # Ne rien ajouter à un agent : il ne sait pas demander le PIN de la YubiKey (verify-required).
       AddKeysToAgent = "no";
       ForwardAgent = "no";
       StrictHostKeyChecking = "ask";
@@ -35,6 +37,9 @@ let
 in
 {
   services.ssh-agent.enable = true;
+
+  # Bitwarden desktop : agent SSH pour la clé de secours (Réglages → « Activer l'agent SSH »).
+  home.packages = [ pkgs.bitwarden-desktop ];
 
   programs.ssh = {
     enable = true;
