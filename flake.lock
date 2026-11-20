@@ -905,11 +905,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1795126667,
-        "narHash": "sha256-NhPiu/FLf0svIeWt3t+/736NgYCpsFY1rSblaciAhYc=",
+        "lastModified": 1795199124,
+        "narHash": "sha256-U+frXlKPz+CVvItknNIfAgAsw8sYNZPB4tj9PohIQSg=",
         "ref": "refs/heads/main",
-        "rev": "20fc427043256e00137e0ad772a1082adacedbb2",
-        "revCount": 5,
+        "rev": "722d479599a2b786aa1a6dee168bbe4620befda7",
+        "revCount": 6,
         "type": "git",
         "url": "https://github.com/Enkre7/nixos-secrets"
       },
