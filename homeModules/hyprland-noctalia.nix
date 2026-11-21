@@ -44,6 +44,10 @@ let
     done
   '';
   startupScript = pkgs.writeShellScriptBin "start" ''
+    # Hyprland no longer exports its env under systemd (MANAGERPID set by UWSM):
+    # hand WAYLAND_DISPLAY and the instance signature to UWSM so the session units start
+    ${lib.optionalString osConfig.programs.uwsm.enable "${lib.getExe osConfig.programs.uwsm.package} finalize HYPRLAND_INSTANCE_SIGNATURE XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME"}
+
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets)
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
 
