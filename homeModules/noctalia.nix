@@ -689,7 +689,6 @@ in
       };
 
       shell = {
-        greeter_sync.auto_sync = true;
         avatar_path = config.avatarPath;
         date_format = "%A, %x";
         font_family = lib.mkForce "JetBrainsMono Nerd Font Propo";

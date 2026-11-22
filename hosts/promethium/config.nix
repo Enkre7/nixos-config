@@ -35,7 +35,6 @@
     ../../configModules/shell.nix
     ../../configModules/terminal.nix
     ../../configModules/greetd.nix
-    ../../configModules/noctalia-greeter.nix
     ../../configModules/wayland.nix    
     ../../configModules/hyprland.nix
     #../../configModules/sway.nix

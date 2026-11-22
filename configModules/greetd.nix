@@ -20,14 +20,10 @@ in
   services.greetd = {
     enable = true;
     settings.default_session = {
-      command = lib.mkIf (!config.services.displayManager.noctalia-greeter.enable)
-        "${pkgs.tuigreet}/bin/tuigreet --time --remember --remember-session --sessions ${hyprlandUwsmSession}/share/wayland-sessions";
+      command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --remember-session --sessions ${hyprlandUwsmSession}/share/wayland-sessions";
       user = "greeter";
     };
   };
-
-  environment.systemPackages = [ hyprlandUwsmSession ];
-  environment.pathsToLink = [ "/share/wayland-sessions" ];
 
   systemd.services.greetd.serviceConfig = {
     Type = "idle";
