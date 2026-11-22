@@ -16,6 +16,21 @@
     };
   };
 
+  systemd.user.services.trash-autoclean = {
+    Unit.Description = "Remove items trashed more than 30 days ago";
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.trash-cli}/bin/trash-empty -f 30";
+    };
+  };
+  systemd.user.timers.trash-autoclean = {
+    Timer = {
+      OnCalendar = "daily";
+      Persistent = true;
+    };
+    Install.WantedBy = [ "timers.target" ];
+  };
+
   xdg.dataFile."luciole/scripts/Print" = {
     executable = true;
     text = ''

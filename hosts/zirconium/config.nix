@@ -39,7 +39,7 @@
     #../../configModules/sway.nix
     #../../configModules/niri.nix
     ../../configModules/stylix.nix
-    ../../configModules/thunar.nix
+    ../../configModules/file-manager.nix
   # Applications & services
     ../../configModules/chromium.nix
     ../../configModules/games.nix

@@ -60,7 +60,6 @@ let
     ${pkgs.networkmanagerapplet}/bin/nm-applet &
     ${pkgs.blueman}/bin/blueman-applet &
     ${pkgs.udiskie}/bin/udiskie &
-    ${lib.optionalString osConfig.programs.thunar.enable "${pkgs.thunar}/bin/thunar --daemon &"}
     ${lib.optionalString osConfig.programs.coolercontrol.enable "${pkgs.coolercontrol.coolercontrol-gui}/bin/coolercontrol &"}
     ${lib.optionalString osConfig.services.hardware.openrgb.enable "${osConfig.services.hardware.openrgb.package}/bin/openrgb --client 127.0.0.1:${toString osConfig.services.hardware.openrgb.server.port} --nodetect --startminimized &"}
     ${lib.optionalString (hasHomePackage "vesktop") "${pkgs.vesktop}/bin/vesktop --start-minimized &"}
@@ -186,7 +185,7 @@ in
         { _args = [ "SUPER + Q" (inline ''hl.dsp.exec_cmd("kitty")'') ]; }
         { _args = [ "SUPER + C" (inline "hl.dsp.window.close()") ]; }
         { _args = [ "SUPER + E" (inline ''hl.dsp.exec_cmd("kitty -e btop")'') ]; }
-        { _args = [ "SUPER + T" (inline ''hl.dsp.exec_cmd("thunar")'') ]; }
+        { _args = [ "SUPER + T" (inline ''hl.dsp.exec_cmd("luciole")'') ]; }
         { _args = [ "SUPER + G" (inline ''hl.dsp.exec_cmd("kitty -e lf")'') ]; }
         { _args = [ "SUPER + V" (inline ''hl.dsp.window.float({ action = "toggle" })'') ]; }
         { _args = [ "SUPER + R" (inline ''hl.dsp.exec_cmd("noctalia msg panel-toggle launcher")'') ]; }
@@ -248,7 +247,7 @@ in
         { match.class = "^(org\\.pulseaudio\\.pavucontrol)$"; float = true; size = [ 800 600 ]; center = true; }
         { match.class = "^(com\\.nextcloud\\.desktopclient\\.nextcloud)$"; float = true; size = [ 873 586 ]; center = true; }
         { match.class = "^(\\.blueman-manager-wrapped)$"; float = true; size = [ 700 500 ]; center = true; }
-        { match.class = "^(thunar)$"; float = true; size = [ 1000 700 ]; center = true; }
+        { match.class = "^(dev\\.noctalia\\.luciole)$"; float = true; size = [ 1000 700 ]; center = true; }
         { match.class = "^(xdg-desktop-portal-gtk)$"; float = true; size = [ 1000 700 ]; center = true; }
         { match.class = "^(nm-connection-editor)$"; float = true; size = [ 800 600 ]; center = true; }
         { match.class = "^(nm-applet)$"; float = true; size = [ 400 300 ]; center = true; }

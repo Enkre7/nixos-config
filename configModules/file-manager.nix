@@ -2,7 +2,7 @@
  
 {
   xdg.mime.defaultApplications = {
-    "inode/directory" = "thunar";
+    "inode/directory" = "dev.noctalia.luciole.desktop";
     "application/x-zip" = "org.gnome.FileRoller.desktop";
     "application/x-gzip" = "org.gnome.FileRoller.desktop";
     "application/x-bzip" = "org.gnome.FileRoller.desktop";
@@ -15,12 +15,6 @@
     "application/x-tar" = "org.gnome.FileRoller.desktop";
   };
 
-  programs.thunar.enable = true;
-  programs.thunar.plugins = with pkgs; [
-    thunar-archive-plugin
-    thunar-volman
-    thunar-media-tags-plugin
-  ];
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.gvfs.package = pkgs.gnome.gvfs;
   services.tumbler.enable = true; # Thumbnail support for images

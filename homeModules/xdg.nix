@@ -7,8 +7,6 @@
     config.nextcloudPath
   ];
 
-  xfconf.settings.thunar."misc-expandable-folders" = true;
-
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
@@ -20,6 +18,8 @@
   xdg.configFile."mimeapps.list".force = true;
 
   xdg.mimeApps.defaultApplications = {
+    "inode/directory" = "dev.noctalia.luciole.desktop";
+
     "application/x-drawio" = "drawio.desktop";
     "application/vnd.jgraph.mxfile" = "drawio.desktop";
 
