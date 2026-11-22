@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   colors = config.lib.stylix.colors.withHashtag;
 in
@@ -12,6 +12,10 @@ in
       session.default = "Hyprland (UWSM)";
       user.default = config.user;
       keyboard.layout = "fr";
+      auth = {
+        allow_empty_password = true;
+        request_timeout = 0;
+      };
       appearance = {
         scheme = "Synced";
         theme_mode = config.stylePolarity;
@@ -19,6 +23,8 @@ in
         wallpaper = {
           path = "${config.stylix.image}";
           fill_mode = "crop";
+          blur = 0.5;
+          tint = 0.3;
         };
         palette = with colors; {
           primary = base0D;
@@ -43,4 +49,14 @@ in
   };
 
   security.polkit.enablePkexecWrapper = false;
+
+  security.pam.services.greetd.rules.auth = lib.mkIf config.security.pam.services.greetd.fprintAuth {
+    fprintd = {
+      order = 10000;
+      settings = {
+        timeout = 10;
+        max-tries = 2;
+      };
+    };
+  };
 }
