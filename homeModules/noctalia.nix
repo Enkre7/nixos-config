@@ -164,6 +164,11 @@ in
         };
       };
 
+      theme.templates = {
+        enable_builtin_templates = true;
+        builtin_ids = [ "luciole" ];
+      };
+
       brightness = {
         sync_all_monitors = true;
         enable_ddcutil = true;

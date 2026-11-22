@@ -41,6 +41,7 @@
   # Applications
     ../../homeModules/vesktop.nix
     ../../homeModules/nextcloud-client.nix
+    ../../homeModules/luciole.nix
     #../../homeModules/floorp.nix
     ../../homeModules/firefox.nix
     #../../homeModules/chromium.nix
