@@ -3,7 +3,7 @@
 {
   hardware.fw-fanctrl = {
     enable = true;
-    config = {
+    settings = {
       defaultStrategy = "quiet-performance";
       strategyOnDischarging = "quiet-battery";
       strategies = {

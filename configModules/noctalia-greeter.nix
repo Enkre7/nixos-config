@@ -22,7 +22,7 @@
     };
   };
 
-  security.pam.services.greetd.rules.auth = lib.mkIf config.security.pam.services.greetd.fprintAuth {
+  security.pam.services.login.rules.auth = lib.mkIf config.security.pam.services.login.fprintAuth {
     fprintd = {
       order = 10000;
       settings = {
