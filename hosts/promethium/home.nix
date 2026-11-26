@@ -29,6 +29,7 @@
     ../../homeModules/kdeconnect.nix
   # Development
     ../../homeModules/git.nix
+    ../../homeModules/keyring.nix
     ../../homeModules/vscode.nix
     #../../homeModules/tex.nix
   # Media & Files
@@ -41,6 +42,7 @@
   # Applications
     ../../homeModules/vesktop.nix 
     ../../homeModules/nextcloud-client.nix
+    ../../homeModules/obsidian.nix
     ../../homeModules/luciole.nix
     #../../homeModules/floorp.nix
     ../../homeModules/firefox.nix
@@ -83,12 +85,12 @@
   ]; 
   
   # Host specific settings
+  obsidian.scale = "1.6";
   programs.yt-dlp.enable = true;
   home.packages = with pkgs; [
     prusa-slicer
     drawio
     gnome-calculator
-    obsidian
     portfolio
     #lmstudio
     plex-desktop
