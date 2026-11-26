@@ -67,6 +67,31 @@
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
 
+  # Local AI (~/ia-locale): GPU access from rootless Docker containers through CDI
+  # (docker run --device nvidia.com/gpu=all)
+  hardware.nvidia-container-toolkit.enable = true;
+
+  # Remote access (from promethium or the phone)
+  # - power-on: Wake-on-LAN magic packet on the 10 GbE card (BIOS: ErP off, "Resume by PCI-E device" on)
+  # - Claude Code: session started at boot in tmux « claude » with Remote Control
+  #   (claude.ai/code or the Claude app), or over SSH: ssh zirconium -t tmux attach -t claude
+  networking.interfaces.enp4s0.wakeOnLan.enable = true;
+  environment.systemPackages = [ pkgs.tmux ];
+  users.users.${config.user}.linger = true;
+  systemd.user.services.claude-remote = {
+    description = "Claude Code with Remote Control (tmux session « claude »)";
+    wantedBy = [ "default.target" ];
+    wants = [ "network-online.target" ];
+    after = [ "network-online.target" ];
+    unitConfig.ConditionUser = config.user;
+    serviceConfig = {
+      Type = "forking";
+      ExecStart = "${pkgs.tmux}/bin/tmux new-session -d -s claude -c %h \"/run/current-system/sw/bin/zsh -lc 'claude --remote-control zirconium; exec zsh -l'\"";
+      ExecStop = "${pkgs.tmux}/bin/tmux kill-session -t claude";
+      RemainAfterExit = true;
+    };
+  };
+
   environment.sessionVariables = {
     LC_ALL = "fr_FR.UTF-8";
     LANG = "fr_FR.UTF-8";
