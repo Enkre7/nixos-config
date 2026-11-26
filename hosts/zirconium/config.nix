@@ -84,11 +84,12 @@
     wants = [ "network-online.target" ];
     after = [ "network-online.target" ];
     unitConfig.ConditionUser = config.user;
-    # tmux server in the foreground (-D) as the main process: with Type=forking the server died at once
+    # tmux server in the foreground (-D) as the main process: with Type=forking the server died at once.
+    # PATH is set explicitly: the user manager's minimal PATH is not fixed by zsh -l (__NIXOS_SET_ENVIRONMENT_DONE).
     serviceConfig = {
       Type = "simple";
       ExecStart = "${pkgs.tmux}/bin/tmux -D";
-      ExecStartPost = "${pkgs.bash}/bin/bash -c \"sleep 1; ${pkgs.tmux}/bin/tmux new-session -d -s claude -c %h/claude-distant \\\"/run/current-system/sw/bin/zsh -lc 'claude --remote-control zirconium; exec zsh -l'\\\"\"";
+      ExecStartPost = "${pkgs.bash}/bin/bash -c \"sleep 1; ${pkgs.tmux}/bin/tmux new-session -d -s claude -c %h/claude-distant \\\"/run/current-system/sw/bin/zsh -lc 'export PATH=%h/.nix-profile/bin:/etc/profiles/per-user/%u/bin:/run/wrappers/bin:/run/current-system/sw/bin:$PATH; claude --remote-control zirconium; exec zsh -l'\\\"\"";
       ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
       Restart = "on-failure";
     };
