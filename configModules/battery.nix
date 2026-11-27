@@ -80,12 +80,10 @@ with lib;
   
   # Logind configuration
   services.logind.settings.Login = mkIf config.isLaptop {
-    lidSwitch = "suspend";
-    lidSwitchExternalPower = "lock";
-    lidSwitchDocked = "ignore";
+    HandleLidSwitchDocked = "ignore";
     HandlePowerKey = "suspend";
     HandlePowerKeyLongPress = "poweroff";
-    HandleLidSwitch = "lock";
+    HandleLidSwitch = "suspend";
     HandleLidSwitchExternalPower = "lock";
     InhibitDelayMaxSec = 5;
   };

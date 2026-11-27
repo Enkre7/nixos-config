@@ -92,7 +92,7 @@ let
   };
 in
 {
-  imports = [ inputs.noctalia.homeModules.default ];
+  imports = [ inputs.noctalia.homeModules.default ./noctalia-lock-logind.nix ];
 
   home.packages = [ pkgs.bitwarden-cli pkgs.jq ];
 
