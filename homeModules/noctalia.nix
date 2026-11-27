@@ -379,7 +379,7 @@ in
         behavior = {
           lock = { action = "lock"; enabled = true; timeout = if config.isLaptop then 600.0 else 1800.0; };
           "screen-off" = { action = "screen_off"; enabled = true; timeout = if config.isLaptop then 660.0 else 1860.0; };
-          "lock-and-suspend" = { action = "lock_and_suspend"; enabled = true; timeout = if config.isLaptop then 900.0 else 3600.0; };
+          "lock-and-suspend" = { action = "lock_and_suspend"; enabled = config.isLaptop; timeout = if config.isLaptop then 900.0 else 3600.0; };
         };
       };
 

@@ -76,6 +76,14 @@
   # - Claude Code: session started at boot in tmux « claude » with Remote Control
   #   (claude.ai/code or the Claude app), in ~/claude-distant (trusted once), or over SSH: ssh zirconium -t tmux attach -t claude
   networking.interfaces.enp4s0.wakeOnLan.enable = true;
+  # - no sleep: a suspended machine is unreachable remotely (power-on is done from off by WoL)
+  systemd.targets = {
+    sleep.enable = false;
+    suspend.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
+    suspend-then-hibernate.enable = false;
+  };
   environment.systemPackages = [ pkgs.tmux ];
   users.users.${config.user}.linger = true;
   systemd.user.services.claude-remote = {
